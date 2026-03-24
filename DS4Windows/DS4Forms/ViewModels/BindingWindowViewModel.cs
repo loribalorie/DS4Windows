@@ -685,8 +685,20 @@ namespace DS4WinWPF.DS4Forms.ViewModels
                     settings.extras = string.Empty;
                 }
 
+                //if (LightbarMacro is not null && LightbarMacro.Macro.Count > 0)
+                //    settings.LightbarMacroString = LightbarMacro.Compile();
                 if (LightbarMacro is not null && LightbarMacro.Macro.Count > 0)
+                {
                     settings.LightbarMacroString = LightbarMacro.Compile();
+                }
+                else
+                {
+                    //scenario: If for the first time ever the user only enabled Solid Colour: Change light option.
+                    //it means not lightbar macro recording.
+                    //return string: False/R,G,B:time/trigger/cancellable
+                    //settings.LightbarMacroString = "False/255,255,255:100/Press/False";
+                    settings.LightbarMacroString = "False//Release/False";
+                }
 
                 Global.RefreshActionAlias(settings, shiftBind);
             }
