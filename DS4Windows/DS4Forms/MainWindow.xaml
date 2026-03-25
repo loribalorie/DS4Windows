@@ -14,7 +14,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xml:lang="en-US"
         mc:Ignorable="d"
-        Title="DS4Windows" Height="500" Width="800" Closing="MainDS4Window_Closing" Closed="MainDS4Window_Closed" StateChanged="MainDS4Window_StateChanged" SizeChanged="MainDS4Window_SizeChanged" LocationChanged="MainDS4Window_LocationChanged" MinWidth="600" MinHeight="250"
+        Title="DS4Windows" Height="694" Width="884" Closing="MainDS4Window_Closing" Closed="MainDS4Window_Closed" StateChanged="MainDS4Window_StateChanged" SizeChanged="MainDS4Window_SizeChanged" LocationChanged="MainDS4Window_LocationChanged" MinWidth="600" MinHeight="250"
         Style="{DynamicResource WindowStyle}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -248,10 +248,13 @@
             </TabItem>
             <TabItem x:Name="settingsTab" Header="{lex:Loc Settings}" IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="{DynamicResource BackgroundColor}">
-                    <WrapPanel Orientation="Vertical" Margin="8,16,8,8">
+                    <WrapPanel Orientation="Vertical">
                         <WrapPanel.Resources>
                             <Thickness x:Key="spaceMargin" Left="4" Right="0" Bottom="8" Top="0" />
                         </WrapPanel.Resources>
+
+                        
+                        
                         <CheckBox x:Name="hideDS4ContCk" Content="{lex:Loc HideDS4Controller}" x:Uid="hideDS4Checkbox"
                               Margin="{StaticResource spaceMargin}" IsChecked="{Binding HideDS4Controller}" Click="HideDS4ContCk_Click" >
                         </CheckBox>
@@ -261,28 +264,37 @@
                         <CheckBox x:Name="runAtStartCk" Content="{lex:Loc RunAtStartup}" Margin="{StaticResource spaceMargin}"
                               IsChecked="{Binding RunAtStartup}"
                               ToolTip="{lex:Loc Resources:RunAtStartup}" Click="RunAtStartCk_Click" />
+                        
                         <GroupBox x:Name="runAsGroupBox" Header="{lex:Loc RunAs}" BorderThickness="2" Visibility="{Binding ShowRunStartPanel}"
-                              Margin="{StaticResource spaceMargin}">
+                              Margin="{StaticResource spaceMargin}" Width="300" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel>
+                                <StackPanel Width="109" Margin="5,5,0,0">
                                     <RadioButton Content="{lex:Loc Program}" GroupName="RunAsOpt" Margin="{StaticResource spaceMargin}" IsChecked="{Binding RunStartProg}" />
-                                    <RadioButton Content="{lex:Loc Task}" GroupName="RunAsOpt" Margin="{StaticResource spaceMargin}"
+                                    <RadioButton Content="Task Scheduler" GroupName="RunAsOpt" Margin="{StaticResource spaceMargin}"
                                                  IsChecked="{Binding RunStartTask}" IsEnabled="{Binding CanWriteTask}" />
                                 </StackPanel>
                                 <Image x:Name="uacImg" Source="{Binding UACSource, Mode=OneTime}" Width="30" Height="30"
                                    ToolTip="{lex:Loc Resources:UACTask}" Margin="20,0,0,0" />
                             </StackPanel>
                         </GroupBox>
-                        <StackPanel Orientation="Horizontal" Margin="{StaticResource spaceMargin}">
-                            <Label Content="{lex:Loc ShowNotifications}" />
-                            <ComboBox MinWidth="100" SelectedIndex="{Binding ShowNotificationsIndex}" Margin="8,0,0,0">
-                                <ComboBoxItem Content="{lex:Loc None}" />
-                                <ComboBoxItem Content="{lex:Loc WarningsOnly}" />
-                                <ComboBoxItem Content="{lex:Loc All}" />
-                            </ComboBox>
-                        </StackPanel>
-                        <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}"
-                                  Visibility="{Binding IsProfileChangedCheckVisible}" Margin="16 0 0 10"/>
+
+                        <GroupBox x:Name="notificationsGroupBox" Header="Notifications" BorderThickness="2" Width="300" Margin="4,0,0,8" HorizontalAlignment="Left">
+                            <StackPanel Margin="5,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <Label Content="{lex:Loc ShowNotifications}" />
+                                    <ComboBox MinWidth="120" SelectedIndex="{Binding ShowNotificationsIndex}" Margin="8,0,0,0" Width="150">
+                                        <ComboBoxItem Content="{lex:Loc None}" />
+                                        <ComboBoxItem Content="{lex:Loc WarningsOnly}" />
+                                        <ComboBoxItem Content="{lex:Loc All}" />
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Margin="0,10,0,0">
+                                    <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}"
+                                    Visibility="{Binding IsProfileChangedCheckVisible}" Margin="4,0,0,8"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
                         <CheckBox Content="{lex:Loc DisconnectFromBtWhenStopping}" Margin="{StaticResource spaceMargin}"
                               IsChecked="{Binding DisconnectBTStop}" />
                         <StackPanel Orientation="Horizontal" Margin="{StaticResource spaceMargin}">
@@ -338,7 +350,7 @@
                                 <ComboBoxItem Content="{lex:Loc Days}" />
                             </ComboBox>
                         </StackPanel>
-                        <GroupBox Header="{lex:Loc OscServerHeading}" Padding="0,10,0,0" Margin="{StaticResource spaceMargin}">
+                        <GroupBox Header="{lex:Loc OscServerHeading}" Padding="0,10,0,0" Margin="{StaticResource spaceMargin}" HorizontalAlignment="Left">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" MinHeight="20">
                                     <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click" VerticalAlignment="Center" />
@@ -359,7 +371,7 @@
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="{lex:Loc UDPServer}" Padding="0,10,0,0" Margin="{StaticResource spaceMargin}">
+                        <GroupBox Header="{lex:Loc UDPServer}" Padding="0,10,0,0" Margin="{StaticResource spaceMargin}" HorizontalAlignment="Left">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" MinHeight="20">
                                     <CheckBox x:Name="useUdpServerCk" Content="{lex:Loc MainWin.EnableServer}" IsChecked="{Binding UseUDPServer}" Click="UseUdpServerCk_Click" VerticalAlignment="Center" />
@@ -463,6 +475,8 @@
                         </GroupBox>
 
                         <Button x:Name="deviceOptionSettingsBtn" MaxWidth="140" HorizontalAlignment="Center" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click" />
+                        
+                        
                     </WrapPanel>
                 </ScrollViewer>
 
