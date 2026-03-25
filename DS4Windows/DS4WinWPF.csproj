@@ -404,4 +404,8 @@
 	<ItemGroup>
 		<Folder Remove="extras\" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="loribalorie-changelog.txt" />
+	</ItemGroup>
 </Project>

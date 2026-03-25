@@ -1,0 +1,6 @@
+﻿3.9.9
+    - base
+
+3.9.10
+    - Fixed Lightbar's Solid Color-Change Light option doesn't work for the first time.
+      The user needs to add Lightbar Macro first and then change it back to Solid Color.
