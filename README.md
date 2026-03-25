@@ -1,6 +1,7 @@
 ## DS4Windows
 
-Another fork again
+Another fork, again. Based on schmaldeo's fork release 3.9.9
+My goal is to fix simple bugs, add quality of life improvements and **(maybe)** add new--not so advanced--feature/functionality
 
 ## Requirements
 
