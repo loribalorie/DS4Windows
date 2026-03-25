@@ -4,8 +4,8 @@ Another fork, again. Based on schmaldeo's fork [release 3.9.9](https://github.co
 My goal is to fix simple bugs, add quality of life improvements and **(maybe)** add new--not so advanced--feature/functionality.
 
 ## Tips
-- enabling **Hide DS4 Controller** in Settings tab enable **Exclusive Mode** insrtead of Shared Mode.
-- **FakerInput** enable inputs from gamepad when Task Mangaer is open and UAC popups.
+- Enabling **Hide DS4 Controller** in Settings tab enables **Exclusive Mode** instead of Shared Mode.
+- [**FakerInput**](https://github.com/Ryochan7/FakerInput) enable inputs from gamepad when Task Mangaer is open and UAC popups.
 
 ## Requirements
 - Windows 10 or newer (Thanks Microsoft)
