@@ -1,10 +1,13 @@
 ## DS4Windows
-Another fork, again. Based on schmaldeo's fork release 3.9.9
+Another fork, again. Based on schmaldeo's fork [release 3.9.9](https://github.com/schmaldeo/DS4Windows/releases)
 
-My goal is to fix simple bugs, add quality of life improvements and **(maybe)** add new--not so advanced--feature/functionality
+My goal is to fix simple bugs, add quality of life improvements and **(maybe)** add new--not so advanced--feature/functionality.
+
+## Tips
+- enabling **Hide DS4 Controller** in Settings tab enable **Exclusive Mode** insrtead of Shared Mode.
+- **FakerInput** enable inputs from gamepad when Task Mangaer is open and UAC popups.
 
 ## Requirements
-
 - Windows 10 or newer (Thanks Microsoft)
 - Microsoft .NET 8.0 Desktop Runtime. [x64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.0-windows-x64-installer) or [x86](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.0-windows-x86-installer)
 - Visual C++ 2015-2022 Redistributable. [x64](https://aka.ms/vs/17/release/vc_redist.x64.exe) or [x86](https://aka.ms/vs/17/release/vc_redist.x86.exe)
