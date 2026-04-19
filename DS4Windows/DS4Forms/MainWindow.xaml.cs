@@ -51,8 +51,8 @@ namespace DS4WinWPF.DS4Forms
     [System.Security.SuppressUnmanagedCodeSecurity]
     public partial class MainWindow : Window
     {
-        private const int DEFAULT_PROFILE_EDITOR_WIDTH = 1000;
-        private const int DEFAULT_PROFILE_EDITOR_HEIGHT = 650;
+        private const int DEFAULT_PROFILE_EDITOR_WIDTH = 945;
+        private const int DEFAULT_PROFILE_EDITOR_HEIGHT = 640;
 
         private const int POWER_RESUME = 7;
         private const int POWER_SUSPEND = 4;
@@ -453,8 +453,7 @@ namespace DS4WinWPF.DS4Forms
 
             if (!wmiConnected)
             {
-                AppLogger.LogToGui(@"Could not connect to Windows Management Instrumentation service.
-Suspend support not enabled.", true);
+                AppLogger.LogToGui(@"Could not connect to Windows Management Instrumentation service. Suspend support not enabled.", true);
             }
         }
 

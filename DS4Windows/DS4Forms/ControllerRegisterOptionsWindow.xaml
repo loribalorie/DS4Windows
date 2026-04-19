@@ -34,7 +34,11 @@
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Top" Margin="0,16,0,0">
-                <CheckBox Content="{lex:Loc EnableVerboseLog}" IsChecked="{Binding VerboseLogMessages}" ToolTip="{lex:Loc EnableVerboseLogTip}"/>
+                <CheckBox Content="{lex:Loc EnableVerboseLog}" IsChecked="{Binding VerboseLogMessages}">
+                    <CheckBox.ToolTip>
+                        <TextBlock Text="{lex:Loc EnableVerboseLogTip}"/>
+                    </CheckBox.ToolTip>
+                </CheckBox>
             </StackPanel>
             
             <DockPanel DockPanel.Dock="Bottom" Margin="0,20,0,0">
@@ -57,7 +61,11 @@
 
             <TabItem x:Name="ds4OptsTabItem" Header="DS4" Visibility="Collapsed">
                 <StackPanel Visibility="{Binding Visible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="4">
-                    <CheckBox Content="{lex:Loc Copycat}" IsChecked="{Binding Options.IsCopyCat, FallbackValue='False'}" ToolTip="{lex:Loc CopycatTip}" />
+                    <CheckBox Content="{lex:Loc Copycat}" IsChecked="{Binding Options.IsCopyCat, FallbackValue='False'}">
+                        <CheckBox.ToolTip>
+                            <TextBlock Text="{lex:Loc CopycatTip}"/>
+                        </CheckBox.ToolTip>
+                    </CheckBox>
                 </StackPanel>
             </TabItem>
             

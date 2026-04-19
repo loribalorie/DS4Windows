@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using DS4Windows;
+using DS4WinWPF.DS4Forms.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,14 +26,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DS4Windows;
-using DS4WinWPF.DS4Forms.ViewModels;
 
 namespace DS4WinWPF.DS4Forms
 {
@@ -121,7 +122,8 @@ namespace DS4WinWPF.DS4Forms
             Button button = sender as Button;
             //string name = button.Tag.ToString();
             string name = GetControlString(button);
-            highlightLb.Content = name;
+
+            //highlightLb.Content = name;
 
             double left = Canvas.GetLeft(button);
             double top = Canvas.GetTop(button);
@@ -129,11 +131,31 @@ namespace DS4WinWPF.DS4Forms
             Canvas.SetLeft(highlightImg, left + (button.Width / 2.0) - (highlightImg.Height / 2.0));
             Canvas.SetTop(highlightImg, top + (button.Height / 2.0) - (highlightImg.Height / 2.0));
 
-            Canvas.SetLeft(highlightLb, left + (button.Width / 2.0) - (highlightLb.ActualWidth / 2.0));
-            Canvas.SetTop(highlightLb, top - 30);
+            //Canvas.SetLeft(highlightLb, left + (button.Width / 2.0) - (highlightLb.ActualWidth / 2.0));
+            //Canvas.SetTop(highlightLb, top - 30);
 
             highlightImg.Visibility = Visibility.Visible;
-            highlightLb.Visibility = Visibility.Visible;
+            //highlightLb.Visibility = Visibility.Visible;
+
+
+            //Alternate Highlight Label
+            TextBlock tipText = new TextBlock();
+            tipText.Text = name;
+            tipText.TextWrapping = TextWrapping.Wrap;
+            tipText.HorizontalAlignment = HorizontalAlignment.Left;
+
+            ToolTip newPopup = new ToolTip();
+            newPopup.Content = tipText;
+
+            newPopup.Placement = PlacementMode.Center;
+            newPopup.HorizontalOffset = 0;
+            newPopup.VerticalOffset = -30;
+            //newPopup.HorizontalAlignment = HorizontalAlignment.Left;
+            
+
+            ToolTipService.SetInitialShowDelay(button, 0);
+            ToolTipService.SetBetweenShowDelay(button, 0);
+            button.ToolTip = newPopup;
         }
 
         private string GetControlString(Button button)
@@ -968,7 +990,6 @@ namespace DS4WinWPF.DS4Forms
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             bindingVM.WriteBinds();
-
             UnregisterDataContext();
         }
     }

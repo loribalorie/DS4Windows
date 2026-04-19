@@ -10,7 +10,8 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Title="{lex:Loc RecordBoxWin.WinTitle}" Height="450" Width="800"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterOwner">
     <DockPanel x:Name="mainPanel">
 
     </DockPanel>

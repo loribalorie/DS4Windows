@@ -36,6 +36,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
 {
     public class ProfileSettingsViewModel
     {
+
         private List<string> gyroTriggerItems = new List<string>()
         {
             "Cross", "Circle", "Square", "Triangle",
@@ -506,9 +507,13 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         public int RumbleAutostopTime
         {
             // RumbleAutostopTime value is in milliseconds in XML config file, but GUI uses just seconds
+            
+
             get => Global.getRumbleAutostopTime(device) / 1000;
             set => Global.setRumbleAutostopTime(device, value * 1000);
         }
+
+        
 
         private bool heavyRumbleActive;
         public bool HeavyRumbleActive
@@ -4241,5 +4246,10 @@ namespace DS4WinWPF.DS4Forms.ViewModels
             this.displayName = name;
             this.mode = mode;
         }
+
+
+
+
+
     }
 }
