@@ -10,7 +10,10 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="800" KeyDown="UserControl_KeyDown" KeyUp="UserControl_KeyUp" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp" Focusable="True" >
+             d:DesignHeight="400"
+             Background="{StaticResource BackgroundColor}"
+             d:DesignWidth="700"
+             KeyDown="UserControl_KeyDown" KeyUp="UserControl_KeyUp" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp" Focusable="True" >
     <UserControl.Resources>
         <DataTemplate x:Key="DisplayTemplate">
             <StackPanel Orientation="Horizontal">
@@ -32,7 +35,7 @@
         <local:RecordBoxResourcePaths x:Key="resourcePaths" />
     </UserControl.Resources>
     <DockPanel Margin="4">
-        <DockPanel DockPanel.Dock="Right" Width="200" LastChildFill="False" Margin="4,0">
+        <DockPanel DockPanel.Dock="Right" Width="250" LastChildFill="False" Margin="4,0">
             <StackPanel DockPanel.Dock="Top">
                 <UniformGrid Rows="1">
                     <Button x:Name="saveBtn" Content="{lex:Loc Save}" Click="SaveBtn_Click" Margin="0,0,5,0" />

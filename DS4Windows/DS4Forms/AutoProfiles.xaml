@@ -11,8 +11,10 @@
              xmlns:entity="clr-namespace:DS4WinWPF"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="800">
-    <DockPanel>
-            <ScrollViewer x:Name="sidebarScrollViewer" DockPanel.Dock="Right" Width="Auto" Margin="8" VerticalScrollBarVisibility="Auto">
+    <DockPanel Background="{StaticResource BackgroundColor}">
+            <ScrollViewer x:Name="sidebarScrollViewer"
+                          DockPanel.Dock="Right" Width="Auto"
+                          Margin="8" VerticalScrollBarVisibility="Auto">
                 <ScrollViewer.Resources>
                     <Thickness x:Key="spaceMargin" Bottom="8" />
                 </ScrollViewer.Resources>
@@ -207,10 +209,18 @@
 
                     <CheckBox Content="{lex:Loc TurnOffDS4WindowsTemporarily}" Margin="{StaticResource spaceMargin}"
                           IsChecked="{Binding Turnoff}" />
-                        <TextBox Text="{Binding Path}" Margin="{StaticResource spaceMargin}" ToolTip="{lex:Loc AutoProfPathTip}"/>
+                    <TextBox Text="{Binding Path}" Margin="{StaticResource spaceMargin}">
+                        <TextBox.ToolTip>
+                            <TextBlock Text="{lex:Loc AutoProfPathTip}"/>
+                        </TextBox.ToolTip>
+                    </TextBox>
 
                         <Grid>
-                            <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}" Margin="{StaticResource spaceMargin}" ToolTip="{lex:Loc AutoProfTitleTip}" />
+                        <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}" Margin="{StaticResource spaceMargin}">
+                            <TextBox.ToolTip>
+                                <TextBlock Text="{lex:Loc AutoProfTitleTip}"/>
+                            </TextBox.ToolTip>
+                        </TextBox>
 
                             <TextBlock Margin="5,2" MinWidth="50" Text="Window title..." Foreground="{DynamicResource ForegroundColor}" Opacity="0.7" IsHitTestVisible="False">
                                 <TextBlock.Style>

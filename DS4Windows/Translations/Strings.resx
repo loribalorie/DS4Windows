@@ -220,7 +220,7 @@
     <value>Left Stick</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Log</value>
+    <value>Logs</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -473,7 +473,8 @@ Example: whyme_DS4Windows</value>
     <value>Disable virtual controller</value>
   </data>
   <data name="DisableVirtualControllerTip" xml:space="preserve">
-    <value>Do not spawn/associate virtual controllers for connected controllers using this profile (Applies on profile save)</value>
+    <value>Do not spawn/associate virtual controllers for connected
+controllers using this profile (Applies on profile save)</value>
   </data>
   <data name="EmulatedController" xml:space="preserve">
     <value>Emulated Controller</value>
@@ -491,7 +492,9 @@ Example: whyme_DS4Windows</value>
     <value>Fuzz specifies the minimum number of units the analog stick moves, in active zone, before the output is registered as changed in the mapper. This setting can be useful for worn sticks that cannot maintain a constant position. The value is expressed in raw stick units.</value>
   </data>
   <data name="StickMaxOutputForceTooltip" xml:space="preserve">
-    <value>Always enforce max output setting. Useful for 100% Max Output and confining value to a circular output value</value>
+    <value>Always enforce max output setting.
+Useful for 100% Max Output and confining value
+to a circular output value</value>
   </data>
   <data name="StickMaxOutputTooltip" xml:space="preserve">
     <value>In some situations, it might be useful to limit the maximum value that is output by the output analog stick. Max Output allows throttling the final output value of the analog stick.</value>
@@ -698,7 +701,8 @@ Disabled:
     <value>Copycat</value>
   </data>
   <data name="CopycatTip" xml:space="preserve">
-    <value>Change some flags used for a non-Sony DS4 controller. It might fix rumble and lightbar support for some third party DS4 clones</value>
+    <value>Change some flags used for a non-Sony DS4 controller.
+It might fix rumble and lightbar support for some third party DS4 clones</value>
   </data>
   <data name="Dark" xml:space="preserve">
     <value>Dark</value>
@@ -977,7 +981,7 @@ Disabled:
     <value>Enabled</value>
   </data>
   <data name="EnableTouchpadToggle" xml:space="preserve">
-    <value>Enable Touchpad Toggle</value>
+    <value>Enable Touchpad Toggle (PS + Touchpad tap)</value>
   </data>
   <data name="Extra" xml:space="preserve">
     <value>Extra</value>
@@ -989,7 +993,7 @@ Disabled:
     <value>Flash Rate</value>
   </data>
   <data name="FullBtnPull" xml:space="preserve">
-    <value>Full Btn Pull</value>
+    <value>Full Trigger Pull</value>
   </data>
   <data name="Fuzz" xml:space="preserve">
     <value>Fuzz</value>
@@ -1416,7 +1420,7 @@ Please click OK to confirm that you have read the message. Press Cancel to be re
     <value>Advanced Support</value>
   </data>
   <data name="UseDs3PitchRollSim" xml:space="preserve">
-    <value>[EXPERIMENTAL] Use DS3 gyro simulation</value>
+    <value>Use DS3 gyro simulation [EXPERIMENTAL]</value>
   </data>
   <data name="StickCalibration" xml:space="preserve">
     <value>Stick Calibration</value>

@@ -11,6 +11,7 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterOwner"
         Title="Lightbar macro creator" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,7 +32,11 @@
             <ComboBox x:Name="TriggerCombo" SelectedItem="{Binding LightbarMacro.Trigger}" HorizontalAlignment="Stretch" Margin="3 0" />
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding LightbarMacro.CancelCurrent}" Margin="3 5 0 0" />
-                <Label Content="{lex:Loc CancelCurrentMacro}" ToolTip="{lex:Loc CancelCurrentMacroTooltip}" />
+                <Label Content="{lex:Loc CancelCurrentMacro}">
+                    <Label.ToolTip>
+                        <TextBlock Text="{lex:Loc CancelCurrentMacroTooltip}"/>
+                    </Label.ToolTip>
+                </Label>
             </StackPanel>
             <Button Content="{lex:Loc Add}" Click="AddColor_OnClick" Margin="3" />
             <Button Content="{lex:Loc Delete}" Click="DeleteColor_OnClick" Margin="3" />

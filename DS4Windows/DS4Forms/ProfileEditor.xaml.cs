@@ -73,6 +73,7 @@ namespace DS4WinWPF.DS4Forms
         private NonFormTimer inputTimer;
 
         private TouchButtonUserControl touchButtonUC;
+        
         private ContentControl activeTouchButtonDisplayControl;
 
         public ProfileEditor(int device)
@@ -185,29 +186,32 @@ namespace DS4WinWPF.DS4Forms
         {
             ResetTouchContentControls();
 
-            switch (profileSettingsVM.TouchpadOutputIndex)
-            {
-                case 1:
-                    touchContentControl2.Content = touchButtonUC;
-                    activeTouchButtonDisplayControl = touchContentControl2;
-                    break;
-                case 2:
-                    touchContentControl4.Content = touchButtonUC;
-                    activeTouchButtonDisplayControl = touchContentControl4;
-                    break;
-                case 3:
-                    touchContentControl3.Content = touchButtonUC;
-                    activeTouchButtonDisplayControl = touchContentControl3;
-                    break;
-                case 4:
-                    break;
+            touchContentControl1.Content = touchButtonUC;
+            activeTouchButtonDisplayControl = touchContentControl1;
+               
+            //switch (profileSettingsVM.TouchpadOutputIndex)
+            //{
+            //    case 1:
+            //        touchContentControl2.Content = touchButtonUC;
+            //        activeTouchButtonDisplayControl = touchContentControl2;
+            //        break;
+            //    case 2:
+            //        touchContentControl4.Content = touchButtonUC;
+            //        activeTouchButtonDisplayControl = touchContentControl4;
+            //        break;
+            //    case 3:
+            //        touchContentControl3.Content = touchButtonUC;
+            //        activeTouchButtonDisplayControl = touchContentControl3;
+            //        break;
+            //    case 4:
+            //        break;
 
-                case 0:
-                default:
-                    touchContentControl1.Content = touchButtonUC;
-                    activeTouchButtonDisplayControl = touchContentControl1;
-                    break;
-            }
+            //    case 0:
+            //    default:
+            //        touchContentControl1.Content = touchButtonUC;
+            //        activeTouchButtonDisplayControl = touchContentControl1;
+            //        break;
+            //}
         }
 
         private void ResetTouchContentControls()
@@ -862,7 +866,7 @@ namespace DS4WinWPF.DS4Forms
                 inputTimer.Start();
             }
         }
-
+        
         private void StopEditorBindings()
         {
             profileSettingsTabCon.DataContext = null;
@@ -971,10 +975,10 @@ namespace DS4WinWPF.DS4Forms
                 UpdateHighlightLabel(mapped);
             }
         }
-
+        
         private void UpdateHighlightLabel(MappedControl mapped)
         {
-            string display = $"{mapped.ControlName}: {mapped.MappingName}";
+            string display = $"{mapped.ControlName} : {mapped.MappingName}";
             if (mapped.HasShiftAction())
             {
                 display += "\nShift: ";
@@ -989,7 +993,7 @@ namespace DS4WinWPF.DS4Forms
             Button control = sender as Button;
             InputControlHighlight(control);
         }
-
+        
         private void ContBtn_MouseLeave(object sender, MouseEventArgs e)
         {
             //Button control = sender as Button;
@@ -1276,7 +1280,7 @@ namespace DS4WinWPF.DS4Forms
             }
         }
 
-    private void UpdateDualSenseRumble(DS4Windows.InputDevices.DualSenseDevice dualsense)
+        private void UpdateDualSenseRumble(DS4Windows.InputDevices.DualSenseDevice dualsense)
         {
                 switch ((DS4Windows.InputDevices.DualSenseDevice.RumbleEmulationMode)profileSettingsVM.DualSenseRumbleEmulationPerIndex)
                 {
@@ -1339,6 +1343,27 @@ namespace DS4WinWPF.DS4Forms
         }
 
         private void RainbowBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //bool active = profileSettingsVM.Rainbow != 0.0;
+            //if (active)
+            //{
+            //    profileSettingsVM.Rainbow = 0.0;
+            //    colorByBatteryPerCk.Content = Properties.Resources.ColorByBattery;
+            //    colorGB.IsEnabled = true;
+            //    emptyColorGB.IsEnabled = true;
+            //}
+            //else
+            //{
+            //    profileSettingsVM.Rainbow = 5.0;
+            //    colorByBatteryPerCk.Content = Properties.Resources.DimByBattery;
+            //    colorGB.IsEnabled = false;
+            //    emptyColorGB.IsEnabled = false;
+            //}
+            
+            RainbowColorMode();
+        }
+
+        private void RainbowColorMode()
         {
             bool active = profileSettingsVM.Rainbow != 0.0;
             if (active)
@@ -1638,6 +1663,7 @@ namespace DS4WinWPF.DS4Forms
                 inputTimer.Start();
             }
         }
+        
         private void ProfileEditor_Closed(object sender, EventArgs e)
         {
             profileSettingsVM.UseControllerReadout = false;
@@ -1794,17 +1820,34 @@ namespace DS4WinWPF.DS4Forms
 
         private void GyroCalibration_Click(object sender, RoutedEventArgs e)
         {
-            int deviceNum = profileSettingsVM.FuncDevNum;
-            if (deviceNum < ControlService.CURRENT_DS4_CONTROLLER_LIMIT)
+            try
             {
-                DS4Device d = App.rootHub.DS4Controllers[deviceNum];
-                d.SixAxis.ResetContinuousCalibration();
-                if (d.JointDeviceSlotNumber != DS4Device.DEFAULT_JOINT_SLOT_NUMBER)
+                //controller index
+                int deviceNum = profileSettingsVM.FuncDevNum;
+                if (deviceNum < ControlService.CURRENT_DS4_CONTROLLER_LIMIT)
                 {
-                    DS4Device tempDev = App.rootHub.DS4Controllers[d.JointDeviceSlotNumber];
-                    tempDev?.SixAxis.ResetContinuousCalibration();
+                    DS4Device d = App.rootHub.DS4Controllers[deviceNum];
+                    if (d != null)
+                    {
+                        d.SixAxis.ResetContinuousCalibration();
+                        if (d.JointDeviceSlotNumber != DS4Device.DEFAULT_JOINT_SLOT_NUMBER)
+                        {
+                            DS4Device tempDev = App.rootHub.DS4Controllers[d.JointDeviceSlotNumber];
+                            tempDev?.SixAxis.ResetContinuousCalibration();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No gamepad/controller found.", "DS4Windows",
+                            MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void GyroSwipeTrigBtn_Click(object sender, RoutedEventArgs e)
@@ -1909,12 +1952,28 @@ namespace DS4WinWPF.DS4Forms
                 dialogStream.Close();
             }
         }
+
+        private void btnMainColor_Click(object sender, RoutedEventArgs e)
+        {
+            ColorPickerWindow dialog = new ColorPickerWindow();
+            dialog.Owner = Application.Current.MainWindow;
+            Color tempcolor = profileSettingsVM.MainColor;
+            dialog.colorPicker.SelectedColor = tempcolor;
+            profileSettingsVM.StartForcedColor(tempcolor);
+            dialog.ColorChanged += (sender2, color) => { profileSettingsVM.UpdateForcedColor(color); };
+            dialog.ShowDialog();
+            profileSettingsVM.EndForcedColor();
+            profileSettingsVM.UpdateMainColor(dialog.colorPicker.SelectedColor.GetValueOrDefault());
+        }
     }
 
     public class ResourcePaths
     {
         public string SizePNG { get => $"{Global.RESOURCES_PREFIX}/size.png"; }
-        public string DS4ConfigPNG { get => $"{Global.RESOURCES_PREFIX}/DS4 Config.png"; }
+
+        //public string DS4ConfigPNG { get => $"{Global.RESOURCES_PREFIX}/DS4 Config.png"; }
+        //relocated to the Themes XAML so it can adapt
+
         public string DS4LightbarPNG { get => $"{Global.RESOURCES_PREFIX}/DS4 lightbar.png"; }
         public string DS4ConfigRSPNG { get => $"{Global.RESOURCES_PREFIX}/DS4-Config_RS.png"; }
         public string RainbowPNG { get => $"{Global.RESOURCES_PREFIX}/rainbow.png"; }
@@ -1926,17 +1985,14 @@ namespace DS4WinWPF.DS4Forms
         public int TiltDown { get => (int)DS4Controls.GyroZPos; }
         public int TiltLeft { get => (int)DS4Controls.GyroXPos; }
         public int TiltRight { get => (int)DS4Controls.GyroXNeg; }
-
         public int SwipeUp { get => (int)DS4Controls.SwipeUp; }
         public int SwipeDown { get => (int)DS4Controls.SwipeDown; }
         public int SwipeLeft { get => (int)DS4Controls.SwipeLeft; }
         public int SwipeRight { get => (int)DS4Controls.SwipeRight; }
         public int L2FullPull { get => (int)DS4Controls.L2FullPull; }
         public int R2FullPull { get => (int)DS4Controls.R2FullPull; }
-
         public int LSOuterBind { get => (int)DS4Controls.LSOuter; }
         public int RSOuterBind { get => (int)DS4Controls.RSOuter; }
-
         public int GyroSwipeLeft { get => (int)DS4Controls.GyroSwipeLeft; }
         public int GyroSwipeRight { get => (int)DS4Controls.GyroSwipeRight; }
         public int GyroSwipeUp { get => (int)DS4Controls.GyroSwipeUp; }
