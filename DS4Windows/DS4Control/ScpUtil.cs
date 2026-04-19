@@ -46,7 +46,6 @@ using WpfScreenHelper;
 using static DS4Windows.Mouse;
 using static DS4Windows.Util;
 using LightbarMacro = DS4WinWPF.DS4Forms.ViewModels.LightbarMacro;
-using System.Media;
 
 namespace DS4Windows
 {
@@ -1992,31 +1991,11 @@ namespace DS4Windows
 
         public static void setRumbleAutostopTime(int index, int value)
         {
+            m_Config.rumbleAutostopTime[index] = value;
 
-            if (Program.rootHub.activeControllers != 0)
-            {
-                try
-                {
-                    m_Config.rumbleAutostopTime[index] = value;
-                    DS4Device tempDev = Program.rootHub.DS4Controllers[index];
-
-                    if (tempDev != null && tempDev.isSynced())
-                        tempDev.RumbleAutostopTime = value;
-
-                }
-                catch (Exception ex)
-                {
-                    //Dont know how to catch this...
-                    MessageBox.Show("Close the Profile Editor first."
-                        + Environment.NewLine + Environment.NewLine +
-                        ex.Message, "DS4Windows", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-            }
-            else
-            {
-                SystemSounds.Exclamation.Play();
-                AppLogger.LogToGui("No Controller found.", true);
-            }  
+            DS4Device tempDev = Program.rootHub.DS4Controllers[index];
+            if (tempDev != null && tempDev.isSynced())
+                tempDev.RumbleAutostopTime = value;
         }
 
         public static int getRumbleAutostopTime(int index)

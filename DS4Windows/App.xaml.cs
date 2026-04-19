@@ -695,14 +695,16 @@ namespace DS4WinWPF
             catch (CultureNotFoundException) { /* Skip setting culture that we cannot set */ }
         }
 
-        public void ChangeTheme(DS4Windows.AppThemeChoice themeChoice, bool fireChanged = true)
+        public void ChangeTheme(DS4Windows.AppThemeChoice themeChoice,
+            bool fireChanged = true)
         {
             if (themeChoice == DS4Windows.AppThemeChoice.Default)
             {
                 Application.Current.Resources.MergedDictionaries.Clear();
 
                 // Attempt to switch theme based on currently selected Windows apps theme mode
-                DS4Windows.AppThemeChoice implicitTheme = DS4Windows.Util.SystemAppsUsingDarkTheme() ? DS4Windows.AppThemeChoice.Dark : DS4Windows.AppThemeChoice.Light;
+                DS4Windows.AppThemeChoice implicitTheme = DS4Windows.Util.SystemAppsUsingDarkTheme() ?
+                    DS4Windows.AppThemeChoice.Dark : DS4Windows.AppThemeChoice.Light;
                 themeLocs.TryGetValue(implicitTheme, out string loc);
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri(loc, uriKind: UriKind.Relative) });
 

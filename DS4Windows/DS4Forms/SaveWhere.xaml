@@ -9,21 +9,12 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        Title="{lex:Loc SaveWhere.WinTitle}"
-        Height="225" Width="453"
-        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
+        Title="{lex:Loc SaveWhere.WinTitle}" Height="184" Width="453" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowStyle}">
-    <StackPanel Margin="10">
-        <DockPanel x:Name="multipleSavesDockP"
-                   Margin="4,0">
-            <Label Content="{lex:Loc SaveWhere.MultipleSaves}"
-                   VerticalContentAlignment="Center"/>
-            <CheckBox x:Name="dontDeleteCk"
-                      Content="{lex:Loc SaveWhere.DontDelete}"
-                      DockPanel.Dock="Right"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Center" />
+    <StackPanel>
+        <DockPanel x:Name="multipleSavesDockP" Margin="4,0">
+            <Label Content="{lex:Loc SaveWhere.MultipleSaves}" />
+            <CheckBox x:Name="dontDeleteCk" Content="{lex:Loc SaveWhere.DontDelete}" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" />
         </DockPanel>
         <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}"
                    TextWrapping="Wrap" HorizontalAlignment="Center" Margin="4,10,4,0" TextAlignment="Center" />

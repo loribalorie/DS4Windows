@@ -11,8 +11,7 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:entity="clr-namespace:DS4WinWPF"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="420"
-             Background="{StaticResource BackgroundColor}">
+             d:DesignHeight="350" d:DesignWidth="420">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="4,8,4,8">
             <Label Content="Name:" DockPanel.Dock="Left" />
@@ -21,13 +20,11 @@
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom">
             <DockPanel DockPanel.Dock="Left">
-                <ListView x:Name="triggersListView"
-                          Tag="{Binding TriggerError, ValidatesOnNotifyDataErrors=True}"
-                          Width="150">
+                <ListView x:Name="triggersListView" Tag="{Binding TriggerError, ValidatesOnNotifyDataErrors=True}" Width="200">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Header="{lex:Loc Trigger}" Width="Auto">
+                                <GridViewColumn Header="{lex:Loc Trigger}" Width="170">
                                     <GridViewColumn.HeaderContainerStyle>
                                         <Style TargetType="{x:Type GridViewColumnHeader}">
                                             <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -369,10 +366,7 @@
                     <Thickness x:Key="spaceMargin" Bottom="8" />
                 </DockPanel.Resources>
                 <StackPanel>
-                    <ComboBox x:Name="actionTypeCombo"
-                              SelectedIndex="{Binding ActionTypeIndex,FallbackValue=0}"
-                              Width="170"
-                              Margin="0,8,0,8">
+                    <ComboBox x:Name="actionTypeCombo" SelectedIndex="{Binding ActionTypeIndex,FallbackValue=0}" Margin="0,0,0,8">
                         <ComboBoxItem Content="{lex:Loc SpecialActionEdit.SelectAction}" />
                         <ComboBoxItem Content="{lex:Loc SpecialActionEdit.RecordMacro}" />
                         <ComboBoxItem Content="{lex:Loc SpecialActionEdit.LaunchProgram}" />
@@ -385,9 +379,7 @@
                         <ComboBoxItem Content="{lex:Loc SpecialActionEdit.CalibrateGyro}" />
                     </ComboBox>
 
-                    <TabControl x:Name="actionTypeTabControl"
-                                SelectedIndex="{Binding ActionTypeIndex}"
-                                BorderBrush="{x:Null}">
+                    <TabControl x:Name="actionTypeTabControl" SelectedIndex="{Binding ActionTypeIndex}" BorderBrush="{x:Null}">
                         <TabItem x:Name="blankActTab" Header="">
 
                         </TabItem>
@@ -529,22 +521,22 @@
                         <TabItem x:Name="sixaxisWheelCalibrateTab" Header="Sixaxis Wheel">
                             <StackPanel Orientation="Horizontal" Margin="{StaticResource spaceMargin}">
                                 <Label Content="{lex:Loc HoldFor}" ContentStringFormat="{}{0} "></Label>
-                                <xctk:DecimalUpDown Value="{Binding HoldInterval}" Minimum="0" Maximum="60" FormatString= "F2" Increment="0.5" />
+                                <xctk:DecimalUpDown Value="{Binding HoldInterval}" Width="60" Minimum="0" Maximum="60" FormatString= "F2" Increment="0.5" />
                                 <Label Content="secs" />
                             </StackPanel>
                         </TabItem>
                         <TabItem x:Name="gyroCalibrateTab" Header="{lex:Loc SpecialActionEdit.CalibrateGyro}">
                             <StackPanel Orientation="Horizontal" Margin="{StaticResource spaceMargin}">
                                 <Label Content="{lex:Loc HoldFor}" ContentStringFormat="{}{0} "></Label>
-                                <xctk:DecimalUpDown Value="{Binding HoldInterval}" Minimum="0" Maximum="60" FormatString= "F2" Increment="0.5" />
+                                <xctk:DecimalUpDown Value="{Binding HoldInterval}" Width="60" Minimum="0" Maximum="60" FormatString= "F2" Increment="0.5" />
                                 <Label Content="secs" />
                             </StackPanel>
                         </TabItem>
                     </TabControl>
 
                     <UniformGrid Rows="1">
-                        <Button x:Name="saveBtn" Content="{lex:Loc Save}" Margin="0,0,3,0" Click="SaveBtn_Click" />
-                        <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Margin="3,0,0,0" Click="CancelBtn_Click" />
+                        <Button x:Name="saveBtn" Content="{lex:Loc Save}" Margin="0,0,5,0" Click="SaveBtn_Click" />
+                        <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Margin="5,0,0,0" Click="CancelBtn_Click" />
                     </UniformGrid>
                 </StackPanel>
             </DockPanel>

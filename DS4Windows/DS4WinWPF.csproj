@@ -75,7 +75,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="bloomtom.HttpProgress" Version="2.3.2" />
-		<PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
+		<PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.106" />
 		<PackageReference Include="H.NotifyIcon.Wpf" Version="2.0.74" />
 		<PackageReference Include="MdXaml" Version="1.27.0" />
 		<PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.106">
@@ -283,11 +283,6 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Settings.settings</DependentUpon>
 		</Compile>
-		<Compile Update="Translations\Strings.Designer.cs">
-		  <DesignTime>True</DesignTime>
-		  <AutoGen>True</AutoGen>
-		  <DependentUpon>Strings.resx</DependentUpon>
-		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -311,6 +306,12 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Strings.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
+
+		<Compile Update="Translations\Strings.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Strings.resx</DependentUpon>
+		</Compile>
 
 		<EmbeddedResource Update="Translations\Strings.ar.resx">
 			<DependentUpon>Strings.resx</DependentUpon>

@@ -478,7 +478,7 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow touchpad mouse function to get toggled with PS + Touchpad Tap.
+        ///   Looks up a localized string similar to Allow touchpad mouse function to get toggled with PS + Touchpad Click..
         /// </summary>
         public static string EnableTouchToggle {
             get {
@@ -1513,7 +1513,7 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type New Name Here.
+        ///   Looks up a localized string similar to type new name here.
         /// </summary>
         public static string TypeNewName {
             get {
@@ -1522,7 +1522,7 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type Profile Name Here.
+        ///   Looks up a localized string similar to type profile name here.
         /// </summary>
         public static string TypeProfileName {
             get {

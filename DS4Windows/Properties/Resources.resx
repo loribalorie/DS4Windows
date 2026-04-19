@@ -560,10 +560,10 @@
     <value>2 finger touchpad swipe left or right</value>
   </data>
   <data name="TypeNewName" xml:space="preserve">
-    <value>Type New Name Here</value>
+    <value>type new name here</value>
   </data>
   <data name="TypeProfileName" xml:space="preserve">
-    <value>Type Profile Name Here</value>
+    <value>type profile name here</value>
   </data>
   <data name="UACTask" xml:space="preserve">
     <value>You need to run DS4Windows as the Administrator in order to activate this mode.</value>
@@ -605,7 +605,7 @@
     <value>XML Files (*.xml)</value>
   </data>
   <data name="EnableTouchToggle" xml:space="preserve">
-    <value>Allow touchpad mouse function to get toggled with PS + Touchpad Tap</value>
+    <value>Allow touchpad mouse function to get toggled with PS + Touchpad Click.</value>
   </data>
   <data name="UdpServer" xml:space="preserve">
     <value>Enable UDP server. Server listen address and port. Address value options: 127.0.0.1 localhost only | 0.0.0.0 all addresses | Specific host name or IP address.</value>

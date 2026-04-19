@@ -49,11 +49,11 @@ namespace DS4WinWPF
 
         public event EventHandler WarningChanged;
 
-        public string StatusLogTextColor
+        public string Color
         {
             get
             {
-                return warning ? "Red" : "White";
+                return warning ? "Red" : "#FF696969";
             }
         }
 

@@ -6,27 +6,9 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         mc:Ignorable="d"
-        Title="Color Picker Window" Width="280" Height="360" ResizeMode="NoResize"
-        Style="{DynamicResource WindowStyle}"
-        WindowStartupLocation="CenterOwner">
-
-    <DockPanel HorizontalAlignment="Center"
-               VerticalAlignment="Top">
-        <StackPanel Margin="0,10,0,0"
-                    DockPanel.Dock="Top">
-            <xctk:ColorCanvas x:Name="colorPicker"
-                          BorderThickness="0"
-                          SelectedColorChanged="ColorPicker_SelectedColorChanged"
-                          Background="{DynamicResource BackgroundColor}"
-                          UsingAlphaChannel="False"  />
-
-        </StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="15"
-                    DockPanel.Dock="Top">
-            <Button Content="Close" Click="Button_Click"/>
-        </StackPanel>
+        Title="ColorPickerWindow" Height="400" Width="300"
+        Style="{DynamicResource WindowStyle}">
+    <DockPanel>
+        <xctk:ColorCanvas x:Name="colorPicker" SelectedColorChanged="ColorPicker_SelectedColorChanged" Background="{DynamicResource BackgroundColor}" UsingAlphaChannel="False" />
     </DockPanel>
 </Window>
