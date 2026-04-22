@@ -348,7 +348,10 @@ Changes to this option takes effect at the gamepad connection time.</value>
     <value>Custom Exe Name</value>
   </data>
   <data name="CustomExeNameInfo" xml:space="preserve">
-    <value>Some games implement a block that causes DS4 input to be ignored if a game detects either DS4Windows.exe or InputMapper.exe running at the time. A workaround to the block is to rename DS4Windows.exe so the check in the game fails. Specifying a custom exe name here allows DS4Updater to automatically update a custom copy of DS4Windows to the desired file name. Make sure to omit the extension.
+    <value>Some games implement a block that causes DS4 input to be ignored if a game detects either DS4Windows.exe or InputMapper.exe running at the time.
+A workaround to the block is to rename DS4Windows.exe so the check in the game fails.
+Specifying a custom exe name here allows DS4Updater to automatically update a custom copy of DS4Windows to the desired file name.
+Make sure to omit the extension.
 
 Example: whyme_DS4Windows</value>
   </data>
@@ -1344,16 +1347,16 @@ To setup Bluetooth (optional): Hold the PS Button and Share for 3 seconds. The l
     <value>Multi-action Button</value>
   </data>
   <data name="SpecialActionEdit.PressingUnloadTrigger" xml:space="preserve">
-    <value>pressing unload trigger</value>
+    <value>Pressing unload trigger</value>
   </data>
   <data name="SpecialActionEdit.PressKey" xml:space="preserve">
-    <value>Press/Toggle key</value>
+    <value>Key Press/Toggle</value>
   </data>
   <data name="SpecialActionEdit.RecordMacro" xml:space="preserve">
-    <value>Record a macro</value>
+    <value>Record a Macro</value>
   </data>
   <data name="SpecialActionEdit.ReleasingUnloadTrigger" xml:space="preserve">
-    <value>releasing unload trigger</value>
+    <value>Releasing unload trigger</value>
   </data>
   <data name="SpecialActionEdit.RepeatWhileHeld" xml:space="preserve">
     <value>Repeat while held</value>
@@ -1362,7 +1365,7 @@ To setup Bluetooth (optional): Hold the PS Button and Share for 3 seconds. The l
     <value>Run on Trigger Release</value>
   </data>
   <data name="SpecialActionEdit.SelectAction" xml:space="preserve">
-    <value>-Select an Action-</value>
+    <value>Select an Action</value>
   </data>
   <data name="SpecialActionEdit.SelectKey" xml:space="preserve">
     <value>Select a Key</value>
@@ -1374,7 +1377,7 @@ To setup Bluetooth (optional): Hold the PS Button and Share for 3 seconds. The l
     <value>Set Unload Trigger</value>
   </data>
   <data name="SpecialActionEdit.SixAxisWheelCalib" xml:space="preserve">
-    <value>Calibration of sixaxis wheel calibration</value>
+    <value>DS3 Sixaxis Calibration</value>
   </data>
   <data name="SpecialActionEdit.SyncRun" xml:space="preserve">
     <value>Synchronized Run</value>
@@ -1389,10 +1392,10 @@ To setup Bluetooth (optional): Hold the PS Button and Share for 3 seconds. The l
     <value>Untoggle key by</value>
   </data>
   <data name="SpecialActionEdit.ViaLightbar" xml:space="preserve">
-    <value>via lightbar</value>
+    <value>via Lightbar</value>
   </data>
   <data name="SpecialActionEdit.ViaNotification" xml:space="preserve">
-    <value>via notification</value>
+    <value>via Notification</value>
   </data>
   <data name="UnloadTrigger" xml:space="preserve">
     <value>Unload Trigger</value>
@@ -1462,7 +1465,7 @@ Please click OK to confirm that you have read the message. Press Cancel to be re
     <value>Colour and length</value>
   </data>
   <data name="SpecialActionEdit.CalibrateGyro" xml:space="preserve">
-    <value>Calibrate gyro</value>
+    <value>Gyro Calibration</value>
   </data>
   <data name="HoldFor" xml:space="preserve">
     <value>Hold for</value>

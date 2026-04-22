@@ -37,6 +37,7 @@ using System.Runtime.InteropServices;
 using System.ComponentModel;
 using HttpProgress;
 
+
 using DS4WinWPF.DS4Forms.ViewModels;
 using DS4Windows;
 using DS4WinWPF.DS4Control;
