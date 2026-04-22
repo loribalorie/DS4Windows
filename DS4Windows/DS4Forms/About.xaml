@@ -7,13 +7,29 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         mc:Ignorable="d"
         Title="{lex:LocExtension HotkeysAbout}" Height="450" Width="800"
-        Style="{DynamicResource WindowStyle}">
-    <DockPanel>
-        <Label x:Name="headerLb" Content="DS4Windows - schmaldeo Build (Version " DockPanel.Dock="Top" HorizontalAlignment="Center" />
+        Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        d:Height="Auto">
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
+            <Label x:Name="headerLb" Content="DS4Windows - loribalorie Build "
+               Margin="5,0"
+               HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="15"/>
+        </StackPanel>
 
-        <TabControl>
+        <Grid DockPanel.Dock="Bottom" Height="36">
+            <Button Content="Close" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        
+        <TabControl Background="{DynamicResource ContentBackgroundColor}" DockPanel.Dock="Top">
             <TabItem Header="Hotkeys">
-                <TextBlock TextWrapping="Wrap" xml:space="preserve">Hide DS4 Controller: Hides the DS4's regular input (Dinput) from other programs, check if you are getting double input in games or R2 pauses games
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <TextBlock TextWrapping="Wrap"
+                               Padding="10"
+                               Foreground="{DynamicResource ForegroundColor}"
+                               Background="{DynamicResource ContentBackgroundColor}"
+                           xml:space="preserve">Hide DS4 Controller: Hides the DS4's regular input (Dinput) from other programs, check if you are getting double input in games or R2 pauses games
 Click left side of touchpad: Left Touch
 Click right side of touchpad: Right Touch
 Click touchpad with 2 fingers: Multitouch
@@ -28,11 +44,18 @@ Shift Modifer: Hold an action to use another set of controls
 When mapping keyboard and mouse:
 Toggle: The key will remain in a "held down" state until pressed again
 Macro: Assign multiple keys to one input
-Scan Code: Keys are interpreted differently. May be needed for certain games
-*If enabled</TextBlock>
+Scan Code: Keys are interpreted differently.
+May be needed for certain games *If enabled
+                    </TextBlock>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="License">
-                <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True" VerticalScrollBarVisibility="Visible">GNU GENERAL PUBLIC LICENSE
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <Grid >
+                        <TextBox TextAlignment="Center" Background="{DynamicResource ContentBackgroundColor}"
+                                 xml:space="preserve"
+                                 IsReadOnly="True">
+GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 
 Copyright (C) 2007 Free Software Foundation, Inc. &lt;https://fsf.org/&gt;
@@ -707,29 +730,31 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;https://www.gnu.org/licenses/why-not-lgpl.html&gt;.
                 </TextBox>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Credits">
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Margin="10,0">
-                        <StackPanel Orientation="Horizontal">
+                    <StackPanel DockPanel.Dock="Top" Margin="30,10">
+
+                        <WrapPanel Orientation="Vertical" Height="50">
                             <!-- <TextBlock><Hyperlink x:Name="siteLink" Click="SiteLink_Click" Foreground="{DynamicResource AccentColor}">Site</Hyperlink></TextBlock> -->
-                            <TextBlock Margin="20,0,0,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click" Foreground="{DynamicResource AccentColor}">Source</Hyperlink></TextBlock>
-                            <TextBlock Margin="20,0,0,0"><Hyperlink Click="Ryochan7Link_Click" Foreground="{DynamicResource AccentColor}">Ryochan7</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" Foreground="{DynamicResource AccentColor}">Jays2Kings</Hyperlink></TextBlock>
-                            <TextBlock Margin="20,0,0,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" Foreground="{DynamicResource AccentColor}">InhexSTER (Starter of DS4Tool)</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink x:Name="electrobrainsLink" Click="ElectrobrainsLink_Click" Foreground="{DynamicResource AccentColor}">electrobrains (Branched off of)</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink Click="ContributorsLink_OnClick" Foreground="{DynamicResource AccentColor}">Contributors</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <Label Content="Translators:" Margin="0,20,0,0" />
+                            <TextBlock Margin="10,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click" Foreground="{DynamicResource AccentColor}">Source</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink Click="Ryochan7Link_Click" Foreground="{DynamicResource AccentColor}">Ryochan7</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" Foreground="{DynamicResource AccentColor}">Jays2Kings</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink x:Name="schmaldeoLink" Click="schmaldeoLink_Click" Foreground="{DynamicResource AccentColor}">schmaldeo</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" Foreground="{DynamicResource AccentColor}">InhexSTER (Starter of DS4Tool)</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink x:Name="electrobrainsLink" Click="ElectrobrainsLink_Click" Foreground="{DynamicResource AccentColor}">electrobrains (Branched off of)</Hyperlink></TextBlock>
+                            <TextBlock Margin="10,0"><Hyperlink Click="ContributorsLink_OnClick" Foreground="{DynamicResource AccentColor}">Contributors</Hyperlink></TextBlock>
+                        </WrapPanel>
+
                     </StackPanel>
-                    <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True"
-                             DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto" Margin="10,0,10,10">xLive - Arabic
+                    <GroupBox Header="Translators" Margin="20,5,20,0">
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True"
+                                 BorderThickness="0" Background="Transparent"
+                             DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">xLive - Arabic
 mayawei - Chinese
 SyaoranChang - Chinese (Taiwan)
 Maikeru007 - Czech
@@ -745,12 +770,23 @@ peter9811 - Spanish
 dondrakon, DragonZX, shikulja - Russian
 dondrakon - Ukranian
                     </TextBox>
+                        </StackPanel>
+                    </GroupBox>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Extras">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="4">
-                        <Border BorderThickness="1" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}">
+                    <StackPanel Margin="20,10">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                            </Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="{DynamicResource ContentBackgroundColor}"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <Border BorderThickness="1" CornerRadius="10">
                             <StackPanel Margin="8">
                                 <TextBlock Text="ViGEmBus" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -771,7 +807,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0">
                             <StackPanel Margin="8">
                                 <TextBlock Text="HidHide" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -793,7 +829,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
                             <StackPanel Margin="8">
                                 <TextBlock Text="FakerInput" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -818,7 +854,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
                             <StackPanel Margin="8">
                                 <TextBlock Text="CRC32" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -830,7 +866,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
                             <StackPanel Margin="8">
                                 <TextBlock Text="1&#x20ac; Filter" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -842,7 +878,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
                             <StackPanel Margin="8">
                                 <TextBlock Text="H.NotifyIcon" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -854,7 +890,7 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
                             <StackPanel Margin="8">
                                 <TextBlock Text="vJoyInterfaceCS" FontSize="18" FontWeight="Bold" />
                                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
@@ -866,10 +902,36 @@ dondrakon - Ukranian
                             </StackPanel>
                         </Border>
 
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
+                            <StackPanel Margin="8">
+                                <TextBlock Text="C#/Win32" FontSize="18" FontWeight="Bold" />
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <TextBlock Text="Project URL:" />
+                                    <TextBlock Margin="8,0,0,0">
+                                    <Hyperlink x:Name="csWin32InterfaceLink" Click="csWin32InterfaceLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/microsoft/CsWin32S</Hyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        
+                        
+                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
+                            <StackPanel Margin="8">
+                                <TextBlock Text="WpfExToolkit" FontSize="18" FontWeight="Bold" />
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <TextBlock Text="Project URL:" />
+                                    <TextBlock Margin="8,0,0,0">
+                                    <Hyperlink x:Name="wpfExToolkitInterfaceLink" Click="wpfExToolkitInterfaceLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/dotnetprojects/WpfExtendedToolkit</Hyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
 
                 </ScrollViewer>
             </TabItem>
         </TabControl>
+
+        
     </DockPanel>
 </Window>

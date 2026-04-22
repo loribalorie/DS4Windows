@@ -9,7 +9,9 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="460">
+             d:DesignHeight="450" d:DesignWidth="460"
+             Background="{DynamicResource BackgroundColor}">
+
     <DockPanel LastChildFill="False">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Width="200">
@@ -36,20 +38,37 @@
             <StackPanel Grid.Column="0">
                 <Label Content="{lex:Loc LeftStick}" HorizontalAlignment="Center" Padding="0"/>
                 <Label Content="" HorizontalAlignment="Center" Padding="0"/>
-                <Canvas x:Name="lsCanvas" Width="130" Height="130" ClipToBounds="True">
-                    <Rectangle Width="130" Height="130" Stroke="{DynamicResource ForegroundColor}">
-                    </Rectangle>
-                    <Ellipse x:Name="lsDeadEllipse" Width="{Binding Path=Width, ElementName=lsCanvas}"
-                             Height="{Binding Path=Height, ElementName=lsCanvas}" Fill="#4FCF1F1F">
-                    </Ellipse>
-                    <Ellipse x:Name="lsDriftEllipse" Width="{Binding Path=Width, ElementName=lsCanvas}"
-                            Height="{Binding Path=Height, ElementName=lsCanvas}" Fill="#FFCF1F1F">
-                    </Ellipse>
-                    <Rectangle x:Name="lsMapValRec" Width="6" Height="6" Canvas.Left="62" Canvas.Top="62" Fill="#FFABABAB">
-                    </Rectangle>
-                    <Rectangle x:Name="lsValRec" Width="6" Height="6" Canvas.Left="62" Canvas.Top="62" Fill="{DynamicResource ForegroundColor}">
-                    </Rectangle>
-                </Canvas>
+                
+                    <Canvas x:Name="lsCanvas" Width="130" Height="130" ClipToBounds="True">
+
+                        <!--<Rectangle Width="130" Height="130" Stroke="{DynamicResource AccentColor}"/>-->
+
+                    <Ellipse x:Name="lsDeadEllipse" d:Visibility="Hidden"
+                            Width="130"
+                            Height="130"
+                            Fill="#4FCF1F1F"/>
+
+                    <Ellipse x:Name="lsDriftEllipse" d:Visibility="Hidden"
+                            Width="130"
+                            Height="130"
+                            Fill="Orange"/>
+                    <Ellipse Width="130" Height="130" Stroke="{DynamicResource AccentColor}"/>
+                    <Rectangle Width="130" Height="1" Fill="{DynamicResource AccentColor}" Canvas.Top="64.5"/>
+                    <Rectangle Width="1" Height="130" Fill="{DynamicResource AccentColor}" Canvas.Left="64.5"/>
+
+
+                    
+
+                        <Rectangle x:Name="lsMapValRec" Width="6" Height="6" Canvas.Left="62" Canvas.Top="62"
+                                   Fill="{DynamicResource AccentColor}" RadiusX="3" RadiusY="3"/>
+
+                        <Rectangle x:Name="lsValRec" Width="6" Height="6" Canvas.Left="62" Canvas.Top="62"
+                                   Fill="Black" RadiusX="3" RadiusY="3" />
+
+
+                    </Canvas>
+
+                
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="LX (I): " />
@@ -76,7 +95,7 @@
                 <Label Content="" HorizontalAlignment="Center" Padding="0"/>
                 <Canvas x:Name="rsCanvas" Width="130" Height="130" ClipToBounds="True">
                     <Rectangle Width="{Binding Path=Width, ElementName=rsCanvas}"
-                               Height="{Binding Path=Height, ElementName=rsCanvas}" Stroke="{DynamicResource ForegroundColor}">
+                               Height="{Binding Path=Height, ElementName=rsCanvas}" Stroke="{DynamicResource AccentColor}">
                     </Rectangle>
                     <Ellipse x:Name="rsDeadEllipse" Width="{Binding Path=Width, ElementName=rsCanvas}"
                              Height="{Binding Path=Height, ElementName=rsCanvas}" Fill="#4FCF1F1F">
@@ -111,10 +130,12 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="2">
-                <TextBlock Text="{lex:Loc ReadingsControl.SixAxisXText}" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+                <TextBlock Text="{lex:Loc ReadingsControl.SixAxisXText}"
+                           Foreground="{DynamicResource ForegroundColor}"
+                           TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
                 <Canvas x:Name="sixaxisCanvas" Width="130" Height="130" ClipToBounds="True">
                     <Rectangle Width="{Binding Path=Width, ElementName=sixaxisCanvas}"
-                               Height="{Binding Path=Height, ElementName=sixaxisCanvas}" Stroke="{DynamicResource ForegroundColor}">
+                               Height="{Binding Path=Height, ElementName=sixaxisCanvas}" Stroke="{DynamicResource AccentColor}">
                     </Rectangle>
                     <Ellipse x:Name="sixAxisDeadEllipse" Width="{Binding Path=Width, ElementName=sixaxisCanvas}"
                              Height="{Binding Path=Height, ElementName=sixaxisCanvas}" Fill="#FFCF1F1F">
@@ -208,7 +229,7 @@
 
                 <StackPanel>
                     <StackPanel Height="80">
-                        
+
                     </StackPanel>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -222,7 +243,8 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Border Grid.Column="1" BorderThickness="1" BorderBrush="{DynamicResource ForegroundColor}">
+
+            <Border Grid.Column="1" >
                 <StackPanel Orientation="Horizontal" Margin="6" HorizontalAlignment="Center">
                     <StackPanel Margin="0,0,6,0">
                         <Label Content="{lex:Loc Gyro}" HorizontalAlignment="Center" Padding="0"/>

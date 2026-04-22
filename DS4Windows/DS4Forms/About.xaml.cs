@@ -30,7 +30,7 @@ namespace DS4WinWPF.DS4Forms
         {
             InitializeComponent();
 
-            string version = $"{Global.exeversion})";
+            string version = $"({Global.exeversion})";
             headerLb.Content += version;
         }
 
@@ -42,7 +42,7 @@ namespace DS4WinWPF.DS4Forms
 
         private void SourceLink_Click(object sender, RoutedEventArgs e)
         {
-            Util.StartProcessHelper("https://github.com/schmaldeo/DS4Windows");
+            Util.StartProcessHelper("https://github.com/loribalorie/DS4Windows");
         }
 
         private void Ryochan7Link_Click(object sender, RoutedEventArgs e)
@@ -102,7 +102,22 @@ namespace DS4WinWPF.DS4Forms
 
         private void ContributorsLink_OnClick(object sender, RoutedEventArgs e)
         {
-            Util.StartProcessHelper("https://github.com/schmaldeo/DS4Windows/blob/master/contributors.txt");
+            Util.StartProcessHelper("https://github.com/loribalorie/DS4Windows/blob/master/contributors.txt");
+        }
+
+        private void schmaldeoLink_Click(object sender, RoutedEventArgs e)
+        {
+            Util.StartProcessHelper("https://github.com/schmaldeo");
+        }
+
+        private void csWin32InterfaceLink_Click(object sender, RoutedEventArgs e)
+        {
+            Util.StartProcessHelper("https://github.com/microsoft/CsWin32");
+        }
+
+        private void wpfExToolkitInterfaceLink_Click(object sender, RoutedEventArgs e)
+        {
+            Util.StartProcessHelper("https://github.com/dotnetprojects/WpfExtendedToolkit");
         }
     }
 }

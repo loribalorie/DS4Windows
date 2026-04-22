@@ -1995,27 +1995,28 @@ namespace DS4Windows
 
             if (Program.rootHub.activeControllers != 0)
             {
-                try
-                {
+                //try
+                //{
                     m_Config.rumbleAutostopTime[index] = value;
                     DS4Device tempDev = Program.rootHub.DS4Controllers[index];
 
                     if (tempDev != null && tempDev.isSynced())
                         tempDev.RumbleAutostopTime = value;
 
-                }
-                catch (Exception ex)
-                {
-                    //Dont know how to catch this...
-                    MessageBox.Show("Close the Profile Editor first."
-                        + Environment.NewLine + Environment.NewLine +
-                        ex.Message, "DS4Windows", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    //Dont know how to catch this...
+                //    MessageBox.Show("Close the Profile Editor first."
+                //        + Environment.NewLine + Environment.NewLine +
+                //        ex.Message, "DS4Windows", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+                //}
             }
             else
             {
                 SystemSounds.Exclamation.Play();
-                AppLogger.LogToGui("No Controller found.", true);
+                AppLogger.LogToGui("No Controller found. Changes are not applied.", true);
             }  
         }
 

@@ -10,7 +10,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/DS4Forms/Themes/DarkTheme.xaml" />
+                <!--<ResourceDictionary Source="/DS4Forms/Themes/DarkTheme.xaml"/>-->
+                <ResourceDictionary Source="/DS4Forms/Themes/DefaultTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--<SolidColorBrush x:Key="ForegroundColor" Color="{x:Static SystemColors.ActiveCaptionTextColor}" />-->
@@ -33,6 +34,7 @@
                 <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
                 <Setter Property="TextOptions.TextHintingMode" Value="Fixed" />
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

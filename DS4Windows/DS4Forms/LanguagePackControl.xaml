@@ -9,16 +9,18 @@
              lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="340">
-    <StackPanel Orientation="Horizontal">
-        <Label x:Name="label1" Content="{lex:Loc LangPackControl.UseLangPack}" ContentStringFormat="{}{0}:" />
-        <ComboBox x:Name="cbCulture" Width="200" Margin="10,0,0,0"
+             d:DesignHeight="30" d:DesignWidth="300">
+    <StackPanel HorizontalAlignment="Stretch">
+        <DockPanel >
+            <Label x:Name="label1" Content="{lex:Loc LangPackControl.UseLangPack}" ContentStringFormat="{}{0}" />
+            <ComboBox x:Name="cbCulture" Width="150" HorizontalAlignment="Right"
                   ItemsSource="{Binding LangPackList}" SelectedIndex="{Binding SelectedIndex,FallbackValue=0}" IsEnabled="False">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding NativeName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NativeName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
     </StackPanel>
 </UserControl>

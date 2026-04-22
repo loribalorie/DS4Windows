@@ -899,7 +899,10 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some games implement a block that causes DS4 input to be ignored if a game detects either DS4Windows.exe or InputMapper.exe running at the time. A workaround to the block is to rename DS4Windows.exe so the check in the game fails. Specifying a custom exe name here allows DS4Updater to automatically update a custom copy of DS4Windows to the desired file name. Make sure to omit the extension.
+        ///   Looks up a localized string similar to Some games implement a block that causes DS4 input to be ignored if a game detects either DS4Windows.exe or InputMapper.exe running at the time.
+        ///A workaround to the block is to rename DS4Windows.exe so the check in the game fails.
+        ///Specifying a custom exe name here allows DS4Updater to automatically update a custom copy of DS4Windows to the desired file name.
+        ///Make sure to omit the extension.
         ///
         ///Example: whyme_DS4Windows.
         /// </summary>
@@ -2491,7 +2494,8 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to use a preset option? Choosing No will cause the Profile Editor to use an empty Gamepad profile..
+        ///   Looks up a localized string similar to Do you want to use a preset option? 
+        ///Choosing No will cause the Profile Editor to use an empty Gamepad profile..
         /// </summary>
         public static string PresetIntroText {
             get {
@@ -3140,7 +3144,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Calibrate gyro.
+        ///   Looks up a localized string similar to Gyro Calibration.
         /// </summary>
         public static string SpecialActionEdit_CalibrateGyro {
             get {
@@ -3239,7 +3243,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pressing unload trigger.
+        ///   Looks up a localized string similar to Pressing unload trigger.
         /// </summary>
         public static string SpecialActionEdit_PressingUnloadTrigger {
             get {
@@ -3248,7 +3252,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press/Toggle key.
+        ///   Looks up a localized string similar to Key Press/Toggle.
         /// </summary>
         public static string SpecialActionEdit_PressKey {
             get {
@@ -3257,7 +3261,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record a macro.
+        ///   Looks up a localized string similar to Record a Macro.
         /// </summary>
         public static string SpecialActionEdit_RecordMacro {
             get {
@@ -3266,7 +3270,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to releasing unload trigger.
+        ///   Looks up a localized string similar to Releasing unload trigger.
         /// </summary>
         public static string SpecialActionEdit_ReleasingUnloadTrigger {
             get {
@@ -3293,7 +3297,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -Select an Action-.
+        ///   Looks up a localized string similar to Select an Action.
         /// </summary>
         public static string SpecialActionEdit_SelectAction {
             get {
@@ -3329,7 +3333,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Calibration of sixaxis wheel calibration.
+        ///   Looks up a localized string similar to DS3 Sixaxis Calibration.
         /// </summary>
         public static string SpecialActionEdit_SixAxisWheelCalib {
             get {
@@ -3374,7 +3378,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to via lightbar.
+        ///   Looks up a localized string similar to via Lightbar.
         /// </summary>
         public static string SpecialActionEdit_ViaLightbar {
             get {
@@ -3383,7 +3387,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to via notification.
+        ///   Looks up a localized string similar to via Notification.
         /// </summary>
         public static string SpecialActionEdit_ViaNotification {
             get {

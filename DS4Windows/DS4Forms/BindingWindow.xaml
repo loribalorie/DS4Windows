@@ -57,7 +57,8 @@
                                 <ComboBoxItem Content="{lex:Loc SolidColor}" />
                                 <ComboBoxItem Content="{lex:Loc Macro}" />
                             </ComboBox>
-                            <TabControl SelectedIndex="{Binding ElementName=LightbarModeCombo, Path=SelectedIndex}">
+                            <TabControl SelectedIndex="{Binding ElementName=LightbarModeCombo, Path=SelectedIndex}"
+                                        Style="{DynamicResource HiddenTabControlStyle}">
                                 <TabItem Header="{lex:Loc SolidColor}" Visibility="Collapsed">
                                     <StackPanel Orientation="Vertical" Margin="5,10,5,5">
                                         <CheckBox Content="{lex:Loc BindingWin.ChangeLight}" IsChecked="{Binding UseExtrasColor}" Margin="{StaticResource spaceMargin}" />
