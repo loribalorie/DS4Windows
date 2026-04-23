@@ -603,6 +603,7 @@
                                             <ComboBoxItem Content="{lex:Loc Default}"/>
                                             <ComboBoxItem Content="{lex:Loc Light}"/>
                                             <ComboBoxItem Content="{lex:Loc Dark}"/>
+                                            <ComboBoxItem Content="Green"/>
                                         </ComboBox>
                                     </DockPanel>
 
@@ -874,6 +875,39 @@
                     </ListView>
                 </DockPanel>
             </TabItem>
+
+            <TabItem x:Name="ChangeThemeTab">
+                <TabItem.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border x:Name="Border"
+                                            Background="{TemplateBinding Background}"
+                                            Padding="{TemplateBinding Padding}"
+                                            Margin="0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                          ContentSource="Header"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+                <TabItem.Header>
+                    <DockPanel LastChildFill="True">
+                        <Button Content="Change Theme" x:Name="ChangeThemeButton" Click="ChangeThemeButton_Click" Height="30" Margin="0"
+                                Background="Transparent"
+                                BorderThickness="0"/>
+                    </DockPanel>
+                </TabItem.Header>
+            </TabItem>
+            
 
         </TabControl>
     </DockPanel>

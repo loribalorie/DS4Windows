@@ -74,13 +74,14 @@ namespace DS4WinWPF
         private MemoryMappedFile ipcClassNameMMF = null; // MemoryMappedFile for inter-process communication used to hold className of DS4Form window
         private MemoryMappedFile ipcResultDataMMF = null; // MemoryMappedFile for inter-process communication used to exchange string result data between cmdline client process and the background running DS4Windows app
 
-        private static Dictionary<DS4Windows.AppThemeChoice, string> themeLocs = new
-            Dictionary<DS4Windows.AppThemeChoice, string>()
-        {
-            [DS4Windows.AppThemeChoice.Default] = "DS4Forms/Themes/DefaultTheme.xaml",
-            [DS4Windows.AppThemeChoice.Light] = "DS4Forms/Themes/DefaultTheme.xaml",
-            [DS4Windows.AppThemeChoice.Dark] = "DS4Forms/Themes/DarkTheme.xaml",
-        };
+        private static Dictionary<DS4Windows.AppThemeChoice, string> themeLocs =
+            new Dictionary<DS4Windows.AppThemeChoice, string>()
+            {
+                [DS4Windows.AppThemeChoice.Default] = "DS4Forms/Themes/DefaultTheme.xaml",
+                [DS4Windows.AppThemeChoice.Light] = "DS4Forms/Themes/LightTheme.xaml",
+                [DS4Windows.AppThemeChoice.Dark] = "DS4Forms/Themes/DarkTheme.xaml",
+                [DS4Windows.AppThemeChoice.Green] = "DS4Forms/Themes/GreenTheme.xaml",
+            };
 
         public event EventHandler ThemeChanged;
 

@@ -1843,6 +1843,24 @@ namespace DS4WinWPF.DS4Forms
             }
             process.PriorityClass = selectedPriority;
         }
+
+
+        //App Theme Change Cycle :: For Test Purpose
+        private void ChangeThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            int themeCount = Enum.GetNames(typeof(DS4Windows.AppThemeChoice)).Length;
+            int currentTheme = settingsWrapVM.AppChoiceIndex;
+
+            if (currentTheme >= themeCount-1)
+            { currentTheme = 1; } //Skip Default Theme
+            else
+            { currentTheme++; }
+
+            settingsWrapVM.AppChoiceIndex = currentTheme;
+            //AppLogger.LogToGui(DS4Windows.Global.UseCurrentTheme + " Theme Applied.", false, true);
+            //lastMsgLb.Content = DS4Windows.Global.UseCurrentTheme + " Theme Applied.";
+            
+        }
     }
 
     public class ImageLocationPaths
