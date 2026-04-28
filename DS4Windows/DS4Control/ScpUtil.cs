@@ -93,7 +93,7 @@ namespace DS4Windows
         Default,
         Light,
         Dark,
-        Green,
+        //Green,
     }
 
     public class ControlActionData

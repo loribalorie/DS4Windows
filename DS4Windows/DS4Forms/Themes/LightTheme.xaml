@@ -7,13 +7,13 @@
     <!--xmlns:local="clr-namespace:DS4WinWPF.DS4Forms.Themes"-->
     <!-- Brushes -->
     <SolidColorBrush x:Key="ForegroundColor" Color="#060606"/>
-    <SolidColorBrush x:Key="SecondaryColor" Color="{x:Static SystemColors.ControlColor}"/>
-    <SolidColorBrush x:Key="AccentColorActive" Color="#1FA8FF"/>
-    <SolidColorBrush x:Key="AccentForeColor" Color="White"/>
-    <SolidColorBrush x:Key="AccentColor" Color="#1371EB" />
-    <SolidColorBrush x:Key="BorderColor" Color="#BECDE8" />
-    <SolidColorBrush x:Key="BackgroundColor" Color="#F2F2F2"/>
-    <SolidColorBrush x:Key="ContentBackgroundColor" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#039be5"/>
+    <SolidColorBrush x:Key="AccentColor" Color="#01579b" />
+    <SolidColorBrush x:Key="AccentColorActive" Color="#0277bd"/>
+    <SolidColorBrush x:Key="AccentForeColor" Color="#e1f5fe"/>
+    <SolidColorBrush x:Key="BorderColor" Color="#b3e5fc" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="#F3F3f3"/>
+    <SolidColorBrush x:Key="ContentBackgroundColor" Color="#FBFBFB"/>
     <SolidColorBrush x:Key="DisabledColor" Color="#D3DAEB"/>
     <!--<SolidColorBrush x:Key="BackgroundColor" Color="{x:Static SystemColors.WindowColor}"/>-->
 
@@ -47,6 +47,9 @@
     <SolidColorBrush x:Key="CheckBoxBorderBrushDisabled" Color="#FFADB2B5" />
     <SolidColorBrush x:Key="CheckBoxPressedBackground" Color="#8FD4FC" />
     <SolidColorBrush x:Key="CheckBoxMouseOverBorderBrush" Color="#0078D7" />
+
+    <!--Drop Shadow-->
+    <DropShadowEffect x:Key="DropShadowStyle" BlurRadius="10" Opacity="0.06" ShadowDepth="1" Color="DarkSlateGray" RenderingBias="Quality"/>
 
     <!--  Focus Visual  -->
 
@@ -374,7 +377,7 @@
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource AccentColorActive}" />
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource SecondaryColor}" />
                             <Setter TargetName="checkBoxBorder" Property="BorderThickness" Value="1"/>
                         </Trigger>
 
@@ -582,49 +585,43 @@
         </Setter>
     </Style>
 
-
     <!--GroupBox-->   
     <Style x:Key="GroupBox_NewStyle" TargetType="{x:Type GroupBox}">
-        
+
+        <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>
         <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        
+        <Setter Property="BorderBrush" Value="#E5E5E5" />
+        <Setter Property="BorderThickness" Value="1" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
-                    
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True"
-                            CornerRadius="15">
 
-                        <Grid ShowGridLines="False"
-                              Background="Transparent"
-                              Margin="15">
-                            
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="5"
+                    Padding="8 4 8 8">
+
+                        <Grid ShowGridLines="False" Margin="0">
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0"
-                                  Margin="0,0,0,6"
-                                  VerticalAlignment="Stretch"
-                                  Background="Transparent">
-                                
+                            <!--HEADER-->
+                            <Grid Grid.Row="0" VerticalAlignment="Stretch" >
                                 <ContentPresenter VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  TextElement.Foreground="{TemplateBinding Foreground}"
-                                                  TextElement.FontWeight="Bold"/>
+                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                           TextElement.Foreground="{TemplateBinding Foreground}"
+                                           TextElement.FontWeight="Bold"/>
                             </Grid>
-                            <Grid Grid.Row="1" Margin="0 5" VerticalAlignment="Stretch"
-                                  Background="Transparent" Height="Auto">
-                                
-                                <ContentPresenter VerticalAlignment="Center"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <!--BODY-->
+                            <Grid Grid.Row="1" VerticalAlignment="Stretch" Height="Auto">
+                                <Grid Margin="0 4 0 0">
+                                    <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+
                             </Grid>
                         </Grid>
                     </Border>
@@ -682,6 +679,7 @@
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
 
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -692,7 +690,8 @@
                         </Grid.RowDefinitions>
 
                         <Border Grid.Row="0"
-                                Background="{StaticResource BackgroundColor}">
+                                Padding="6 6 6 0"
+                                Background="{TemplateBinding Background}">
                             <TabPanel IsItemsHost="True"/>
                         </Border>
 
@@ -750,15 +749,16 @@
         <Setter Property="Padding" Value="15,0,15,0"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="BorderThickness" Value="0"/>
-        
+        <Setter Property="Background" Value="Transparent"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
                     <Border x:Name="Border"
-                            Background="{StaticResource BackgroundColor}"
+                            Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}"
-                            Margin="0"
-                            CornerRadius="8,8,0,0">
+                            Margin="1 0"
+                            CornerRadius="5,5,0,0">
                         <ContentPresenter x:Name="ContentSite" ContentSource="Header" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
 
@@ -786,61 +786,14 @@
             </Setter.Value>
         </Setter>
 
-        <!--<Setter Property="Background" Value="{StaticResource AccentColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-        <Setter Property="MinHeight" Value="24" />
-        <Setter Property="MinWidth" Value="50" />
-        <Setter Property="Padding" Value="10,4,10,0"/>
-        <Setter Property="LayoutTransform" >
-            <Setter.Value>
-                <ScaleTransform x:Name="scaleTransform" />
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Border Name="Border"
-                            BorderBrush="Transparent"
-                            Padding="{TemplateBinding Padding}"
-                            Width="{TemplateBinding Width}">
-                        <TextBlock Text="{TemplateBinding Header}"
-                                   Foreground="{TemplateBinding Foreground}"/>
-                    </Border>
-                    
-                    <ControlTemplate.Triggers>
-
-
-
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border"
-                                    Property="Background"
-                                    Value="{StaticResource AccentColor}" />
-                            <Setter Property="Foreground"
-                                    Value="White" />
-                        </Trigger>
-                        <Trigger Property="IsMouseDirectlyOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ForegroundColor}"/>
-                        </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="False"/>
-                                <Condition Property="IsSelected" Value="False"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-                        </MultiTrigger>
-
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>-->
     </Style>
 
     <!--ToolTip-->
     <Style x:Key="ToolTipStyle" TargetType="{x:Type ToolTip}">
+        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
         <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="BorderThickness" Value="2"/>
 
         <Style.Resources>
             <Style TargetType="TextBlock">
@@ -854,9 +807,12 @@
 
     <!--Border-->
     <Style TargetType="{x:Type Border}" x:Key="BorderStyle">
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="BorderBrush" Value="#E5E5E5"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8"/>
     </Style>
 
     <!-- ListBox Style -->
@@ -886,7 +842,6 @@
         </Style.Triggers>-->
     </Style>
 
-
     <!-- based on https://github.com/whistyun/MdXaml/blob/787605545ace5b7cd7d02ff19e80b1c7a019b0d3/MdXaml/Markdown.Style.xaml#L338
     need to use it here because I had to modify it to accomodate for dark theme too -->
     <Style x:Key="WindowStyle" TargetType="{x:Type Window}" >
@@ -894,7 +849,7 @@
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
     </Style>
 
-    <Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />
+    <!--<Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />-->
     <Style BasedOn="{StaticResource TabControlStyle}" TargetType="{x:Type TabControl}" />
     <Style BasedOn="{StaticResource TabItemStyle}" TargetType="{x:Type TabItem}" />
     <Style BasedOn="{StaticResource GroupBox_NewStyle}" TargetType="{x:Type GroupBox}" />

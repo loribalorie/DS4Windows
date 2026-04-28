@@ -23,11 +23,11 @@
         SizeChanged="MainDS4Window_SizeChanged"
         LocationChanged="MainDS4Window_LocationChanged"
         
-        MinWidth="945"
-        MinHeight="640"
-        Height="640"
-        Width="945"
+        MinWidth="1000"
+        MinHeight="800"
+        
         d:Height="Auto"
+        UseLayoutRounding="True"
         Style="{DynamicResource WindowStyle}">
 
     <Window.Resources>
@@ -87,8 +87,6 @@
             </DockPanel>
         </StackPanel>-->
 
-        
-        
         <StatusBar DockPanel.Dock="Bottom" Height="32"
                    Padding="0"
                    Background="{DynamicResource AccentColor}">
@@ -126,7 +124,6 @@
         <!--Main Tab-->
         <TabControl x:Name="mainTabCon" 
                     DockPanel.Dock="Top"
-                    Margin="0,3,0,0"
                     SelectionChanged="MainTabCon_SelectionChanged">
 
             <!--Controllers Tab-->
@@ -360,7 +357,6 @@
                              DockPanel.Dock="Bottom"
                              SelectionChanged="ProfilesListBox_SelectionChanged"
                              MouseDoubleClick="ProfilesListBox_MouseDoubleClick"
-                             Background="{DynamicResource ContentBackgroundColor}"
                              BorderThickness="0">
                         <ListBox.Resources>
                             <localConverters:EscapeAccessKeysConverter x:Key="escapeAccessConvert" />

@@ -77,10 +77,10 @@ namespace DS4WinWPF
         private static Dictionary<DS4Windows.AppThemeChoice, string> themeLocs =
             new Dictionary<DS4Windows.AppThemeChoice, string>()
             {
-                [DS4Windows.AppThemeChoice.Default] = "DS4Forms/Themes/DefaultTheme.xaml",
+                //[DS4Windows.AppThemeChoice.Default] = "DS4Forms/Themes/DefaultTheme.xaml",
                 [DS4Windows.AppThemeChoice.Light] = "DS4Forms/Themes/LightTheme.xaml",
                 [DS4Windows.AppThemeChoice.Dark] = "DS4Forms/Themes/DarkTheme.xaml",
-                [DS4Windows.AppThemeChoice.Green] = "DS4Forms/Themes/GreenTheme.xaml",
+                //[DS4Windows.AppThemeChoice.Green] = "DS4Forms/Themes/GreenTheme.xaml",
             };
 
         public event EventHandler ThemeChanged;

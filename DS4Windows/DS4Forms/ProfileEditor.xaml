@@ -10,7 +10,9 @@
              lex:LocalizeDictionary.DesignCulture=""
              lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:MinWidth="1000"
+             UseLayoutRounding="True">
 
     <UserControl.Resources>
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter"/>
@@ -20,11 +22,10 @@
     </UserControl.Resources>
 
     <DockPanel Background="{DynamicResource BackgroundColor}">
-        
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"
-                    VerticalAlignment="Center" Height="36">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{DynamicResource ContentBackgroundColor}"
+                    VerticalAlignment="Center" Height="36" Margin="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <!--<TextBlock Text="{lex:BLoc Profile, StringFormat='{}{0}:'}" VerticalAlignment="Center" Margin="0,0,8,0"/>-->
                 <Label Content="Profile" Margin="5,0,5,0"/>
                 <TextBox x:Name="profileNameTxt" Text="" Width="160" Height="24" Margin="5,0,5,0"
@@ -59,195 +60,187 @@
             </StackPanel>
         </StackPanel>
 
-        <DockPanel DockPanel.Dock="Bottom" Margin="3">
-            <TabControl x:Name="sidebarTabControl" Width="450"
-                    DockPanel.Dock="Left" 
-                    SelectionChanged="SidebarTabControl_SelectionChanged">
+        <DockPanel DockPanel.Dock="Bottom">
 
-                <!--Control Remap-->
+            <TabControl x:Name="sidebarTabControl"
+                        Width="480"
+                        DockPanel.Dock="Left" 
+                        SelectionChanged="SidebarTabControl_SelectionChanged">
+
+                <!--Controls Tab-->
                 <TabItem Header="{lex:Loc Controls}">
-                    <DockPanel Width="auto"
-                           LastChildFill="True"
-                           Background="{StaticResource BackgroundColor}">
-                        <!--<DockPanel.Background>
-                        <SolidColorBrush Color="DimGray"/>
-                    </DockPanel.Background>-->
+
+                    <DockPanel Margin="8" LastChildFill="True">
 
                         <Border DockPanel.Dock="Top"
-                                Margin="6,6,6,6"
-                                BorderThickness="0"
-                                CornerRadius="15"
-                                Padding="0,6,0,6"
-                                Background="{DynamicResource ContentBackgroundColor}"
-                                BorderBrush="{StaticResource BorderColor}">
-                            <Canvas x:Name="conCanvas"
-                                    Width="440" Height="250">
-                                <Canvas.Resources>
-                                    <ContextMenu x:Key="presetMenu">
-                                        <MenuItem x:Name="controlNameItem" Header="Name" IsEnabled="False" />
-                                        <Separator />
-                                        <MenuItem Header="Default" Tag="0" Click="PresetMenuItem_Click" />
-                                        <MenuItem Header="DPad">
-                                            <MenuItem Header="Normal" Tag="1" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted" Tag="1" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted X" Tag="1" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted Y" Tag="1" CommandParameter="3" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="1" CommandParameter="4" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="1" CommandParameter="5" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Left Stick">
-                                            <MenuItem Header="Normal" Tag="2" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted" Tag="2" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted X" Tag="2" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted Y" Tag="2" CommandParameter="3" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="2" CommandParameter="4" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="2" CommandParameter="5" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Right Stick">
-                                            <MenuItem Header="Normal" Tag="3" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted" Tag="3" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted X" Tag="3" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted Y" Tag="3" CommandParameter="3" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="3" CommandParameter="4" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="3" CommandParameter="5" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Face Buttons">
-                                            <MenuItem Header="Normal" Tag="4" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="4" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="4" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="WASD">
-                                            <MenuItem Header="Normal" Tag="5" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="5" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="5" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Arrow Keys">
-                                            <MenuItem Header="Normal" Tag="6" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="6" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="6" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Mouse">
-                                            <MenuItem Header="Normal" Tag="7" CommandParameter="0" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted" Tag="7" CommandParameter="1" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted X" Tag="7" CommandParameter="2" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Inverted Y" Tag="7" CommandParameter="3" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate 90&#xb0;" Tag="7" CommandParameter="4" Click="PresetMenuItem_Click" />
-                                            <MenuItem Header="Rotate -90&#xb0;" Tag="7" CommandParameter="5" Click="PresetMenuItem_Click" />
-                                        </MenuItem>
-                                        <MenuItem Header="Unbound" Tag="8" Click="PresetMenuItem_Click" />
-                                    </ContextMenu>
-                                </Canvas.Resources>
+                                Style="{DynamicResource BorderStyle}">
+                            <StackPanel Margin="0 16 0 0">
+                                <Canvas x:Name="conCanvas" Width="440" Height="250">
+                                    <Canvas.Resources>
+                                        <ContextMenu x:Key="presetMenu">
+                                            <MenuItem x:Name="controlNameItem" Header="Name" IsEnabled="False" />
+                                            <Separator />
+                                            <MenuItem Header="Default" Tag="0" Click="PresetMenuItem_Click" />
+                                            <MenuItem Header="DPad">
+                                                <MenuItem Header="Normal" Tag="1" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted" Tag="1" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted X" Tag="1" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted Y" Tag="1" CommandParameter="3" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="1" CommandParameter="4" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="1" CommandParameter="5" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Left Stick">
+                                                <MenuItem Header="Normal" Tag="2" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted" Tag="2" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted X" Tag="2" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted Y" Tag="2" CommandParameter="3" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="2" CommandParameter="4" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="2" CommandParameter="5" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Right Stick">
+                                                <MenuItem Header="Normal" Tag="3" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted" Tag="3" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted X" Tag="3" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted Y" Tag="3" CommandParameter="3" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="3" CommandParameter="4" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="3" CommandParameter="5" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Face Buttons">
+                                                <MenuItem Header="Normal" Tag="4" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="4" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="4" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="WASD">
+                                                <MenuItem Header="Normal" Tag="5" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="5" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="5" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Arrow Keys">
+                                                <MenuItem Header="Normal" Tag="6" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="6" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="6" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Mouse">
+                                                <MenuItem Header="Normal" Tag="7" CommandParameter="0" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted" Tag="7" CommandParameter="1" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted X" Tag="7" CommandParameter="2" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Inverted Y" Tag="7" CommandParameter="3" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate 90&#xb0;" Tag="7" CommandParameter="4" Click="PresetMenuItem_Click" />
+                                                <MenuItem Header="Rotate -90&#xb0;" Tag="7" CommandParameter="5" Click="PresetMenuItem_Click" />
+                                            </MenuItem>
+                                            <MenuItem Header="Unbound" Tag="8" Click="PresetMenuItem_Click" />
+                                        </ContextMenu>
+                                    </Canvas.Resources>
 
-                                <Image Source="{StaticResource DS4ConfigPNG}"
-                               Width="440" Height="220" Stretch="Uniform"/>
-                                <!--<Image Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigPNG_White}"
+                                    <Image Source="{DynamicResource DS4ConfigPNG}" Width="440" Height="220" Stretch="Uniform"/>
+                                    <!--<Image Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigPNG_White}"
                                Width="440" Height="220" Stretch="Uniform"/>-->
 
-                                <Button x:Name="ds4LightbarColorBtn" Width="138" Height="12" Canvas.Left="150" Canvas.Top="28"
-                                Background="{x:Null}" BorderBrush="{x:Null}" MouseEnter="Ds4LightbarColorBtn_MouseEnter" MouseLeave="Ds4LightbarColorBtn_MouseLeave" Click="Ds4LightbarColorBtn_Click">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border Background="{TemplateBinding Background}">
-                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="{x:Null}"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Rectangle x:Name="lightbarRect" Fill="{Binding LightbarBrush,FallbackValue=Green}" Width="{Binding Path=Width, ElementName=ds4LightbarColorBtn}"
+                                    <Button x:Name="ds4LightbarColorBtn" Width="138" Height="12" Canvas.Left="150" Canvas.Top="28" Background="{x:Null}" BorderBrush="{x:Null}" MouseEnter="Ds4LightbarColorBtn_MouseEnter" MouseLeave="Ds4LightbarColorBtn_MouseLeave" Click="Ds4LightbarColorBtn_Click">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Border Background="{TemplateBinding Background}">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{x:Null}"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Rectangle x:Name="lightbarRect" Fill="{Binding LightbarBrush,FallbackValue=Green}" Width="{Binding Path=Width, ElementName=ds4LightbarColorBtn}"
                                        Height="{Binding Path=Height, ElementName=ds4LightbarColorBtn}">
-                                        <Rectangle.OpacityMask>
-                                            <ImageBrush ImageSource="{Binding Source={StaticResource resourcesPaths}, Path=DS4LightbarPNG}" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                </Button>
+                                            <Rectangle.OpacityMask>
+                                                <ImageBrush ImageSource="{Binding Source={StaticResource resourcesPaths}, Path=DS4LightbarPNG}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                    </Button>
 
-                                <Image x:Name="picBoxHover" IsEnabled="False" Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigRSPNG}" Height="48" Width="48" Canvas.Left="447" Canvas.Top="5" />
-                                <Image x:Name="picBoxHover2" IsEnabled="False" Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigRSPNG}" Height="48" Width="48" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
+                                    <Image x:Name="picBoxHover" IsEnabled="False" Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigRSPNG}" Height="48" Width="48" Canvas.Left="447" Canvas.Top="5" />
+                                    <Image x:Name="picBoxHover2" IsEnabled="False" Source="{Binding Source={StaticResource resourcesPaths}, Path=DS4ConfigRSPNG}" Height="48" Width="48" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
 
-                                <Button Content="Cross" x:Name="crossConBtn" Canvas.Left="330" Canvas.Top="125" Width="26" Height="26" Click="HoverConBtn_Click" Style="{StaticResource NoBGHoverBtn}" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Circle" x:Name="circleConBtn" Canvas.Left="357" Canvas.Top="99" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Square" x:Name="squareConBtn" Canvas.Left="300" Canvas.Top="98" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Triangle" x:Name="triangleConBtn" Canvas.Left="330" Canvas.Top="74" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Cross" x:Name="crossConBtn" Canvas.Left="330" Canvas.Top="125" Width="26" Height="26" Click="HoverConBtn_Click" Style="{StaticResource NoBGHoverBtn}" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Circle" x:Name="circleConBtn" Canvas.Left="357" Canvas.Top="99" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Square" x:Name="squareConBtn" Canvas.Left="300" Canvas.Top="98" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Triangle" x:Name="triangleConBtn" Canvas.Left="330" Canvas.Top="74" Width="26" Height="26" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
 
-                                <Button Content="L1" x:Name="l1ConBtn" Canvas.Left="75" Canvas.Top="22" Width="50" Height="18" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="R1" x:Name="r1ConBtn" Canvas.Left="317" Canvas.Top="22" Width="50" Height="18" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="L2" x:Name="l2ConBtn" Canvas.Left="78" Canvas.Top="0" Width="46" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="R2" x:Name="r2ConBtn" Canvas.Left="316" Canvas.Top="0" Width="46" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="L1" x:Name="l1ConBtn" Canvas.Left="75" Canvas.Top="22" Width="50" Height="18" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="R1" x:Name="r1ConBtn" Canvas.Left="317" Canvas.Top="22" Width="50" Height="18" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="L2" x:Name="l2ConBtn" Canvas.Left="78" Canvas.Top="0" Width="46" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="R2" x:Name="r2ConBtn" Canvas.Left="316" Canvas.Top="0" Width="46" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
 
-                                <Button Content="Share" x:Name="shareConBtn" Canvas.Left="134" Canvas.Top="63" Width="16" Height="24" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Options" x:Name="optionsConBtn" Canvas.Left="291" Canvas.Top="63" Width="16" Height="24" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Guide" x:Name="guideConBtn" Canvas.Left="211" Canvas.Top="144" Width="20" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Mute" x:Name="muteConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
-                                <Button Content="Function Left" x:Name="fnlConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
-                                <Button Content="Function Right" x:Name="fnrConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
-                                <Button Content="Bottom Left Paddle" x:Name="blpConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
-                                <Button Content="Bottom Right Paddle" x:Name="brpConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
+                                    <Button Content="Share" x:Name="shareConBtn" Canvas.Left="134" Canvas.Top="63" Width="16" Height="24" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Options" x:Name="optionsConBtn" Canvas.Left="291" Canvas.Top="63" Width="16" Height="24" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Guide" x:Name="guideConBtn" Canvas.Left="211" Canvas.Top="144" Width="20" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Mute" x:Name="muteConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
+                                    <Button Content="Function Left" x:Name="fnlConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
+                                    <Button Content="Function Right" x:Name="fnrConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
+                                    <Button Content="Bottom Left Paddle" x:Name="blpConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
+                                    <Button Content="Bottom Right Paddle" x:Name="brpConBtn" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Style="{StaticResource NoBGHoverBtn}" Visibility="Collapsed" />
 
-                                <Button Content="Left Touch" x:Name="leftTouchConBtn" Canvas.Left="158" Canvas.Top="69" Width="37" Height="51" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Multi Touch" x:Name="multiTouchConBtn" Canvas.Left="199" Canvas.Top="74" Width="41" Height="45" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Right Touch" x:Name="rightTouchConBtn" Canvas.Left="251" Canvas.Top="70" Width="32" Height="53" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
-                                <Button Content="Top Touch" x:Name="topTouchConBtn" Canvas.Left="157" Canvas.Top="46" Width="125" Height="23" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Left Touch" x:Name="leftTouchConBtn" Canvas.Left="158" Canvas.Top="69" Width="37" Height="51" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Multi Touch" x:Name="multiTouchConBtn" Canvas.Left="199" Canvas.Top="74" Width="41" Height="45" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Right Touch" x:Name="rightTouchConBtn" Canvas.Left="251" Canvas.Top="70" Width="32" Height="53" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
+                                    <Button Content="Top Touch" x:Name="topTouchConBtn" Canvas.Left="157" Canvas.Top="46" Width="125" Height="23" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave" />
 
-                                <Button Content="L3" x:Name="l3ConBtn" Canvas.Left="138" Canvas.Top="147" Width="42" Height="42" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="L3" x:Name="l3ConBtn" Canvas.Left="138" Canvas.Top="147" Width="42" Height="42" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="LSU" x:Name="lsuConBtn" Canvas.Left="150" Canvas.Top="140" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="LSU" x:Name="lsuConBtn" Canvas.Left="150" Canvas.Top="140" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="LSR" x:Name="lsrConBtn" Canvas.Left="172" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="LSR" x:Name="lsrConBtn" Canvas.Left="172" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="LSD" x:Name="lsdConBtn" Canvas.Left="150" Canvas.Top="180" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="LSD" x:Name="lsdConBtn" Canvas.Left="150" Canvas.Top="180" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="LSL" x:Name="lslConBtn" Canvas.Left="126" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
-                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-
-                                <Button Content="R3" x:Name="r3ConBtn" Canvas.Left="262" Canvas.Top="149" Width="42" Height="42" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
-                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="RSU" x:Name="rsuConBtn" Canvas.Left="275" Canvas.Top="142" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
-                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="RSR" x:Name="rsrConBtn" Canvas.Left="298" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
-                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="RSD" x:Name="rsdConBtn" Canvas.Left="275" Canvas.Top="180" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
-                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="RSL" x:Name="rslConBtn" Canvas.Left="248" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="LSL" x:Name="lslConBtn" Canvas.Left="126" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
 
-                                <Button Content="Up" x:Name="upConBtn" Canvas.Left="88" Canvas.Top="74" Width="20" Height="35" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="R3" x:Name="r3ConBtn" Canvas.Left="262" Canvas.Top="149" Width="42" Height="42" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Right" x:Name="rightConBtn" Canvas.Left="103" Canvas.Top="103" Width="35" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="RSU" x:Name="rsuConBtn" Canvas.Left="275" Canvas.Top="142" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Down" x:Name="downConBtn" Canvas.Left="88" Canvas.Top="114" Width="20" Height="35" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="RSR" x:Name="rsrConBtn" Canvas.Left="298" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
-                                <Button Content="Left" x:Name="leftConBtn" Canvas.Left="56" Canvas.Top="103" Width="35" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                    <Button Content="RSD" x:Name="rsdConBtn" Canvas.Left="275" Canvas.Top="180" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="RSL" x:Name="rslConBtn" Canvas.Left="248" Canvas.Top="162" Width="17" Height="15" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
 
-                                <Label x:Name="highlightControlDisplayLb" Content="" Canvas.Left="150" Canvas.Top="215" MinWidth="150"
-                               HorizontalContentAlignment="Center" Foreground="{StaticResource AccentColor}"
+                                    <Button Content="Up" x:Name="upConBtn" Canvas.Left="88" Canvas.Top="74" Width="20" Height="35" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Right" x:Name="rightConBtn" Canvas.Left="103" Canvas.Top="103" Width="35" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Down" x:Name="downConBtn" Canvas.Left="88" Canvas.Top="114" Width="20" Height="35" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+                                    <Button Content="Left" x:Name="leftConBtn" Canvas.Left="56" Canvas.Top="103" Width="35" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
+                                MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
+
+                                    <Label x:Name="highlightControlDisplayLb" Content="" Canvas.Left="150" Canvas.Top="215" MinWidth="150"
+                               HorizontalContentAlignment="Center" Foreground="{StaticResource AccentColorActive}"
                                FontWeight="Bold"/>
-                            </Canvas>
+                                </Canvas>
+                            </StackPanel>
 
                         </Border>
-                        <Border BorderThickness="0" CornerRadius="15"
-                            BorderBrush="{StaticResource BorderColor}"
-                                Background="{DynamicResource ContentBackgroundColor}"
-                            Margin="6,6,6,6" DockPanel.Dock="Bottom">
+
+                        <Border Margin="0 8 0 0"
+                                Style="{DynamicResource BorderStyle}"
+                                DockPanel.Dock="Bottom">
                             <ListBox x:Name="mappingListBox"
-                             BorderThickness="0"
-                                 Background="Transparent"
-                                 Margin="8"
-                             DockPanel.Dock="Bottom"
-                             ItemsSource="{Binding Mappings}"
-                             SelectedIndex="{Binding SelectedIndex}"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             MouseDoubleClick="MappingListBox_MouseDoubleClick">
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     Margin="6"
+                                     DockPanel.Dock="Bottom"
+                                     ItemsSource="{Binding Mappings}"
+                                     SelectedIndex="{Binding SelectedIndex}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     MouseDoubleClick="MappingListBox_MouseDoubleClick">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" >
@@ -255,105 +248,123 @@
                                                    VerticalAlignment="Center"/>
                                             <TextBlock Text="{Binding MappingName}"
                                                    VerticalAlignment="Center"
-                                                   Foreground="{StaticResource AccentColorActive}"/>
+                                                   Foreground="{DynamicResource AccentColorActive}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </Border>
+
                     </DockPanel>
+
                 </TabItem>
 
                 <!--Special Actions-->
                 <TabItem x:Name="specialActionsTab" Header="Special Actions">
-                    <DockPanel x:Name="specialActionDockPanel">
-                        <DockPanel x:Name="baseSpeActPanel" DockPanel.Dock="Top">
-                            <UniformGrid Rows="1" Columns="4" DockPanel.Dock="Top">
-                                <Button x:Name="newActionBtn" Content="{lex:Loc NewAction}" Margin="0,0,5,0" Click="NewActionBtn_Click" />
-                                <Button x:Name="editActionBtn" Content="{lex:Loc EditAction}" IsEnabled="{Binding ItemSelected}" Margin="5,0" Click="EditActionBtn_Click" />
-                                <Button x:Name="removeActionBtn" Content="{lex:Loc RemoveAction}" IsEnabled="{Binding ItemSelected}" Margin="5,0,0,0" Click="RemoveActionBtn_Click" />
-                                <Button Content="{lex:Loc ExportSpecialActions}" Margin="5 0 0 0" Click="ExportSpecialActions_OnClick"/>
-                            </UniformGrid>
 
-                            <ListView x:Name="specialActionsLV" ItemsSource="{Binding ActionCol}" SelectedIndex="{Binding SpecialActionIndex}" SelectedItem="{Binding CurrentSpecialActionItem,Mode=OneWayToSource}" DockPanel.Dock="Bottom" Margin="0,10,0,0">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="{lex:Loc Name}" Width="150">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <CheckBox IsChecked="{Binding Active}" Click="SpecialActionCheckBox_Click" />
-                                                        <TextBlock Text="{Binding ActionName}" Margin="4,0,0,0" />
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="{lex:Loc Trigger}" DisplayMemberBinding="{Binding Controls}" Width="100" />
-                                        <GridViewColumn Header="{lex:Loc Action}" DisplayMemberBinding="{Binding TypeName}" Width="200" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </DockPanel>
+                    <DockPanel x:Name="specialActionDockPanel" Margin="8">
+                        <Border Style="{DynamicResource BorderStyle}">
+
+                            <DockPanel x:Name="baseSpeActPanel" DockPanel.Dock="Top">
+                                <UniformGrid Rows="1" Columns="4"
+                                         Height="40"
+                                         DockPanel.Dock="Top">
+                                    <Button x:Name="newActionBtn" Content="{lex:Loc NewAction}"
+                                        Click="NewActionBtn_Click" />
+                                    <Button x:Name="editActionBtn" Content="{lex:Loc EditAction}"
+                                        IsEnabled="{Binding ItemSelected}" Click="EditActionBtn_Click" />
+                                    <Button x:Name="removeActionBtn" Content="{lex:Loc RemoveAction}"
+                                        IsEnabled="{Binding ItemSelected}" Click="RemoveActionBtn_Click" />
+                                    <Button Content="{lex:Loc ExportSpecialActions}" 
+                                        Click="ExportSpecialActions_OnClick"/>
+                                </UniformGrid>
+
+                                <ListView x:Name="specialActionsLV"
+                                          Margin="8" BorderThickness="0"
+                                      ItemsSource="{Binding ActionCol}"
+                                      SelectedIndex="{Binding SpecialActionIndex}"
+                                      SelectedItem="{Binding CurrentSpecialActionItem,Mode=OneWayToSource}"
+                                      DockPanel.Dock="Bottom">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="{lex:Loc Name}" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <CheckBox IsChecked="{Binding Active}" Click="SpecialActionCheckBox_Click" />
+                                                            <TextBlock Text="{Binding ActionName}" Margin="4,0,0,0" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="{lex:Loc Trigger}" DisplayMemberBinding="{Binding Controls}" Width="100" />
+                                            <GridViewColumn Header="{lex:Loc Action}" DisplayMemberBinding="{Binding TypeName}" Width="200" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </DockPanel>
+                        </Border>
                     </DockPanel>
+
                 </TabItem>
 
                 <!--Controller Readings-->
                 <TabItem x:Name="contReadingsTab" Header="Controller Readings" IsEnabled="False">
+
                     <local:ControllerReadingsControl x:Name="conReadingsUserCon" />
                 </TabItem>
+
             </TabControl>
 
             <TabControl x:Name="profileSettingsTabCon"
-                    DockPanel.Dock="Right"
-                    Margin="3,0,0,0">
-                <!--<TabControl.Resources>
-                <Thickness x:Key="spaceMargin" Bottom="8" />
-            </TabControl.Resources>-->
+                    DockPanel.Dock="Right">
 
                 <TabItem Header="{lex:Loc AxisConfig}">
-                    <DockPanel LastChildFill="True">
+                    <DockPanel LastChildFill="True" Margin="0">
 
-                        <StackPanel DockPanel.Dock="Top">
+                        <!--<StackPanel DockPanel.Dock="Top">
                             <StackPanel Height="2"/>
-                        </StackPanel>
+                        </StackPanel>-->
 
                         <TabControl DockPanel.Dock="Bottom">
 
                             <!--Left Stick Tab-->
                             <TabItem Header="Left Stick">
-                                <DockPanel LastChildFill="True">
+                                <DockPanel LastChildFill="True" Margin="8">
 
                                     <!--Output Mode ComboBox-->
-                                    <Grid DockPanel.Dock="Top" Margin="15,5,10,0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="30"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="165"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                    <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="165"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="Left Stick Output Mode" Width="170"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                            <ComboBox SelectedIndex="{Binding LSOutputIndex,FallbackValue='1'}"
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Left Stick Output Mode" Width="170"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <ComboBox SelectedIndex="{Binding LSOutputIndex,FallbackValue='1'}"
                                               Width="170">
-                                                <ComboBoxItem Content="{lex:Loc None}" />
-                                                <ComboBoxItem Content="{lex:Loc Controls}" />
-                                                <ComboBoxItem Content="{lex:Loc FlickStick}" />
-                                            </ComboBox>
-                                        </StackPanel>
-                                    </Grid>
+                                                    <ComboBoxItem Content="{lex:Loc None}" />
+                                                    <ComboBoxItem Content="{lex:Loc Controls}" />
+                                                    <ComboBoxItem Content="{lex:Loc FlickStick}" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
 
                                     <!--Left Stick Output Mode Tab-->
                                     <TabControl SelectedIndex="{Binding LSOutputIndex,Mode=OneWay,FallbackValue='1'}"
-                                            Style="{StaticResource HiddenTabControlStyle}"
+                                            Style="{DynamicResource HiddenTabControlStyle}"
                                             DockPanel.Dock="Bottom">
 
                                         <!--None-->
                                         <TabItem Header="{lex:Loc None}"  Visibility="Collapsed">
-                                            <StackPanel Height="500">
+                                            <StackPanel Height="400">
                                             </StackPanel>
                                         </TabItem>
 
@@ -361,17 +372,12 @@
                                         <TabItem Header="{lex:Loc Controls}" Visibility="Collapsed">
 
                                             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                                <StackPanel Margin="5,5,5,5"
-                                                        Orientation="Vertical"
-                                                        HorizontalAlignment="Left"
-                                                        Width="410">
+                                                <StackPanel Margin="0 3 6 3" Orientation="Vertical" HorizontalAlignment="Stretch">
 
                                                     <!--Left Stick
                                                 Dead Zone Type-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
-                                                        <StackPanel Margin="5,0,0,0">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
+                                                        <StackPanel>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <Label Content="{lex:Loc DeadZoneType}"
                                                                    Width="155"/>
@@ -383,7 +389,7 @@
                                                             </StackPanel>
 
                                                             <TabControl SelectedIndex="{Binding LSDeadTypeIndex,Mode=OneWay,FallbackValue='0'}"
-                                                            Style="{StaticResource HiddenTabControlStyle}" Margin="0,3,0,0">
+                                                            Style="{DynamicResource HiddenTabControlStyle}" Margin="0,3,0,0">
 
                                                                 <!--Radial-->
                                                                 <TabItem Header="Radial" Visibility="Collapsed">
@@ -424,7 +430,7 @@
                                                                    Grid.Row="2" Grid.Column="0" />
                                                                         <StackPanel Grid.Row="2" Grid.Column="1"
                                                                         Orientation="Horizontal">
-                                                                            <xctk:DoubleUpDown   Value="{Binding LSAntiDeadZone}"
+                                                                            <xctk:DoubleUpDown Value="{Binding LSAntiDeadZone}"
                                                                                  FormatString="F2" MinWidth="50"
                                                                                  Maximum="1.0" Minimum="0.0"
                                                                                  Increment="0.1">
@@ -529,12 +535,9 @@
 
                                                     <!--Left Stick
                                                 Output Curve-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="165"/>
                                                                 <ColumnDefinition/>
@@ -634,12 +637,9 @@
 
                                                     <!--Left Stick
                                                 Square Stick-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -746,12 +746,9 @@
 
                                                     <!--Left Stick
                                                 Outer Bind-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -817,12 +814,9 @@
 
                                                     <!--Left Stick
                                                 Center Calibration-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -873,12 +867,9 @@
 
                                                     <!--Left Stick
                                                 Delta Acceleration-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <StackPanel Orientation="Vertical"
-                                                                Margin="5,5,0,0">
+                                                        <StackPanel Orientation="Vertical">
                                                             <StackPanel Height="24">
                                                                 <CheckBox Content="{lex:Loc DeltaAcceleration}"
                                                                       IsChecked="{Binding LSDeltaAccelEnabled}" 
@@ -962,15 +953,11 @@
                                         </TabItem>
 
                                         <TabItem Header="{lex:Loc FlickStick}" Visibility="Collapsed">
-                                            <Border Style="{StaticResource BorderStyle}"
-                                                Margin="5,10,5,10"
-                                                Padding="5,10,5,10"
+                                            <Border Style="{DynamicResource BorderStyle}" Margin="0 6"
                                                 VerticalAlignment="Top"
-                                                Width="400"
-                                                HorizontalAlignment="Left">
+                                                HorizontalAlignment="Stretch">
 
-                                                <Grid ShowGridLines="False"
-                                                  Margin="5,0,0,0">
+                                                <Grid ShowGridLines="False">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="165"/>
                                                         <ColumnDefinition/>
@@ -1040,34 +1027,36 @@
 
                             <!--Right Stick Tab-->
                             <TabItem Header="Right Stick">
-                                <DockPanel LastChildFill="True">
+                                <DockPanel LastChildFill="True" Margin="8">
 
                                     <!--Output Mode ComboBox-->
-                                    <Grid DockPanel.Dock="Top" Margin="15,5,10,0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="30"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="165"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                    <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="165"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="Right Stick Output Mode" Width="170"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                            <ComboBox SelectedIndex="{Binding RSOutputIndex,FallbackValue='1'}"
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Right Stick Output Mode" Width="170"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <ComboBox SelectedIndex="{Binding RSOutputIndex,FallbackValue='1'}"
                                                    Width="170">
-                                                <ComboBoxItem Content="{lex:Loc None}" />
-                                                <ComboBoxItem Content="{lex:Loc Controls}" />
-                                                <ComboBoxItem Content="{lex:Loc FlickStick}" />
-                                            </ComboBox>
-                                        </StackPanel>
-                                    </Grid>
+                                                    <ComboBoxItem Content="{lex:Loc None}" />
+                                                    <ComboBoxItem Content="{lex:Loc Controls}" />
+                                                    <ComboBoxItem Content="{lex:Loc FlickStick}" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
 
                                     <!--Right Stick Output Mode Tab-->
                                     <TabControl SelectedIndex="{Binding RSOutputIndex,Mode=OneWay,FallbackValue='0'}"
-                                             Style="{StaticResource HiddenTabControlStyle}"
+                                             Style="{DynamicResource HiddenTabControlStyle}"
                                              DockPanel.Dock="Bottom">
 
                                         <!--None-->
@@ -1080,18 +1069,13 @@
                                     Controls-->
                                         <TabItem Header="{lex:Loc Controls}" Visibility="Collapsed">
 
-                                            <ScrollViewer VerticalScrollBarVisibility="Visible">
-                                                <StackPanel Margin="5,5,5,5"
-                                                       Orientation="Vertical"
-                                                        Width="410"
-                                                        HorizontalAlignment="Left">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel Margin="0 3 6 3" Orientation="Vertical" HorizontalAlignment="Stretch">
 
                                                     <!--Right Stick
                                                 Dead Zone Type-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
-                                                        <StackPanel Margin="5,0,0,0">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 3">
+                                                        <StackPanel>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <Label Content="{lex:Loc DeadZoneType}"
                                                                    Width="155"/>
@@ -1104,7 +1088,7 @@
                                                             </StackPanel>
 
                                                             <TabControl SelectedIndex="{Binding RSDeadTypeIndex,Mode=OneWay,FallbackValue='0'}"
-                                                            Style="{StaticResource HiddenTabControlStyle}" Margin="0,3,0,0">
+                                                            Style="{DynamicResource HiddenTabControlStyle}" Margin="0,3,0,0">
 
                                                                 <!--Radial-->
                                                                 <TabItem Header="Radial" Visibility="Collapsed">
@@ -1252,12 +1236,9 @@
 
                                                     <!--Right Stick
                                                 Output Curve-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="165"/>
                                                                 <ColumnDefinition/>
@@ -1358,12 +1339,9 @@
 
                                                     <!--Right Stick 
                                                 Square Stick-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3" >
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -1468,12 +1446,9 @@
 
                                                     <!--Right Stick
                                                 Outer Bind-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False">
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -1538,12 +1513,9 @@
 
                                                     <!--Right Stick
                                                 Center Calibration-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,10"
-                                                        Padding="5,5,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,2">
 
-                                                        <Grid ShowGridLines="False"
-                                                          Margin="5,0,0,0">
+                                                        <Grid ShowGridLines="False" >
                                                             <Grid.Resources>
                                                                 <Style TargetType="RowDefinition">
                                                                     <Setter Property="Height" Value="30"/>
@@ -1596,12 +1568,9 @@
 
                                                     <!--Right Stick
                                                 Delta Acceleration-->
-                                                    <Border Style="{StaticResource BorderStyle}"
-                                                        Margin="0,5,0,5"
-                                                        Padding="5,10,5,10">
+                                                    <Border Style="{DynamicResource BorderStyle}" Margin="0,3,0,0">
 
-                                                        <StackPanel Orientation="Vertical"
-                                                                Margin="5,5,0,0">
+                                                        <StackPanel Orientation="Vertical">
                                                             <StackPanel Height="24" VerticalAlignment="Center">
                                                                 <CheckBox Grid.Row="0" Grid.Column="0"
                                                                  Content="{lex:Loc DeltaAcceleration}"
@@ -1685,15 +1654,11 @@
                                             </ScrollViewer>
                                         </TabItem>
 
-                                        <!--Right Stick
-                                        Controls-->
+                                        <!--Right Stick Controls-->
                                         <TabItem Header="{lex:Loc FlickStick}" Visibility="Collapsed">
-                                            <Border Style="{StaticResource BorderStyle}"
-                                                Margin="5,10,5,10"
-                                                Padding="5,10,5,10"
+                                            <Border Style="{DynamicResource BorderStyle}" Margin="0 6"
                                                 VerticalAlignment="Top"
-                                                Width="400"
-                                                HorizontalAlignment="Left">
+                                                HorizontalAlignment="Stretch">
 
                                                 <Grid ShowGridLines="False">
                                                     <Grid.ColumnDefinitions>
@@ -1764,14 +1729,11 @@
                             <!--L2 and R2 Tab-->
                             <TabItem Header="L2 &amp; R2">
                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                    <StackPanel Margin="5,5,5,5"
+                                    <StackPanel Margin="8"
                                         Orientation="Vertical"
-                                        HorizontalAlignment="Left"
-                                        Width="400">
+                                        HorizontalAlignment="Stretch">
 
-                                        <Border Style="{StaticResource BorderStyle}"
-                                            Margin="0,5,0,5"
-                                        Padding="5,5,5,10" Width="400">
+                                        <Border Style="{DynamicResource BorderStyle}" Padding="5" Margin="0 0 0 3">
                                             <Grid ShowGridLines="False">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -1816,11 +1778,7 @@
                                         </Border>
 
                                         <!--Output Curve-->
-                                        <Border Style="{StaticResource BorderStyle}"
-                                            Margin="0,5,0,5"
-                                        Padding="5,10,5,10">
-
-
+                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 3" Padding="5">
                                             <Grid ShowGridLines="False">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -1898,10 +1856,7 @@
                                             </Grid>
                                         </Border>
 
-                                        <Border Style="{StaticResource BorderStyle}"
-                                            Margin="0,5,0,5"
-                                        Padding="5,10,5,10">
-
+                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 3 0 0" Padding="5">
                                             <Grid ShowGridLines="False">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -2050,20 +2005,15 @@
 
                                             </Grid>
                                         </Border>
+
                                     </StackPanel>
                                 </ScrollViewer>
                             </TabItem>
 
                             <TabItem Header="Six Axis">
-                                <StackPanel Margin="5,5,5,5"
-                                        Orientation="Vertical"
-                                        HorizontalAlignment="Left"
-                                        Width="400">
+                                <StackPanel Margin="8" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                                    <Border Style="{StaticResource BorderStyle}"
-                                        Margin="0,5,0,5"
-                                        Padding="5,10,5,10">
-
+                                    <Border Style="{DynamicResource BorderStyle}" Padding="5,10,5,10">
                                         <Grid ShowGridLines="False">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
@@ -2197,51 +2147,45 @@
                     </DockPanel>
                 </TabItem>
 
-
-
                 <TabItem Header="{lex:Loc Lightbar}">
-                    <StackPanel Margin="5"
-                            Orientation="Vertical"
-                            HorizontalAlignment="Left">
+                    <StackPanel Orientation="Vertical" Margin="8">
 
-                        <Grid Margin="5,10,5,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="170"/>
-                                <ColumnDefinition Width="170"/>
-                            </Grid.ColumnDefinitions>
+                        <Border Style="{DynamicResource BorderStyle}">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="170"/>
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Row="0" Grid.Column="0"
+                                <StackPanel Grid.Row="0" Grid.Column="0"
                                     Orientation="Horizontal">
-                                <Label Content="{lex:Loc OutputMode}"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Grid.Column="1"
+                                    <Label Content="{lex:Loc OutputMode}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="1"
                                     Orientation="Horizontal">
-                                <ComboBox x:Name="lightbarModeCombo" Width="170"
+                                    <ComboBox x:Name="lightbarModeCombo" Width="170"
                                       SelectedIndex="{Binding LightbarModeIndex, FallbackValue='0'}">
-                                    <ComboBoxItem Content="{lex:Loc Normal}" />
-                                    <ComboBoxItem Content="{lex:Loc Passthru}" />
-                                </ComboBox>
-                            </StackPanel>
-                        </Grid>
-
+                                        <ComboBoxItem Content="{lex:Loc Normal}" />
+                                        <ComboBoxItem Content="{lex:Loc Passthru}" />
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
 
                         <TabControl SelectedIndex="{Binding LightbarModeIndex, FallbackValue='0'}"
-                                Style="{DynamicResource HiddenTabControlStyle}"
-                                Margin="5,10,5,10">
+                                    Style="{DynamicResource HiddenTabControlStyle}"
+                                    Margin="0 6 0 0">
 
-                            <TabItem Header="{lex:Loc Normal}"
-                                 Visibility="Collapsed">
+                            <TabItem Header="{lex:Loc Normal}" Visibility="Collapsed">
 
-                                <StackPanel Width="380">
+                                <StackPanel Width="380" HorizontalAlignment="Left">
                                     <StackPanel Orientation="Horizontal">
 
                                         <GroupBox x:Name="colorGB"
-                                              Header="{lex:Loc Color}"
-                                              Width="170" 
-                                              Padding="5,5,10,5">
+                                              Header="{lex:Loc Color}" Width="170" Padding="5,5,10,5">
                                             <Grid ShowGridLines="False">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -2313,10 +2257,8 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox x:Name="emptyColorGB"
-                                              Header="Low Battery"
-                                              Width="170" Margin="5,0,0,0"
-                                              Padding="5,5,10,5">
+                                        <GroupBox x:Name="emptyColorGB" Margin="6,0,0,0"
+                                              Header="Low Battery" Width="170" Padding="5,5,10,5">
                                             <Grid >
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -2387,10 +2329,8 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Vertical" Margin="1">
-                                        <Border Style="{StaticResource BorderStyle}"
-                                        Width="350"
-                                            Margin="0,5,0,0"
-                                        HorizontalAlignment="Left">
+                                        <Border Style="{DynamicResource BorderStyle}" Width="350" Margin="0,6,0,0"
+                                                HorizontalAlignment="Left">
                                             <Grid ShowGridLines="False" Margin="10,5,10,10">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -2508,15 +2448,12 @@
 
                             </TabItem>
 
-                            <TabItem Header="{lex:Loc Passthru}"
-                                 Visibility="Collapsed">
-                                <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Left">
-                                    <Border Margin="5"
-                                        Style="{StaticResource BorderStyle}"
-                                        Width="300"
-                                        Padding="10"
-                                        Visibility="{Binding UsingMinViGEm173333,Mode=OneWay, Converter={StaticResource InvertBoolToVisibilityConverter}}">
+                            <TabItem Header="{lex:Loc Passthru}" Visibility="Collapsed">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                    <Border Style="{DynamicResource BorderStyle}"
+                                            Width="400"
+                                            Padding="10"
+                                            Visibility="{Binding UsingMinViGEm173333,Mode=OneWay, Converter={StaticResource InvertBoolToVisibilityConverter}}">
                                         <TextBlock Foreground="Red"
                                            Text="{lex:Loc DS4LightbarPassthruDisabled}"
                                            TextWrapping="Wrap">
@@ -2532,66 +2469,65 @@
                 <TabItem Header="{lex:Loc Touchpad}">
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="5" Width="410" HorizontalAlignment="Left">
+                        <StackPanel Margin="8" HorizontalAlignment="Stretch">
 
-                            <Grid Margin="5,5,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="170"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                            <Border Style="{DynamicResource BorderStyle}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                    <ContentControl x:Name="touchContentControl1" 
+                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                                        <ContentControl x:Name="touchContentControl1" 
                                                 HorizontalAlignment="Left"/>
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
+                                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
                                             Orientation="Horizontal">
-                                    <CheckBox Content= "{lex:Loc EnableTouchpadToggle}"
+                                        <CheckBox Content= "{lex:Loc EnableTouchpadToggle}"
                                                   IsChecked="{Binding EnableTouchpadToggle}">
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc Resources:EnableTouchToggle}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
-                                </StackPanel>
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc Resources:EnableTouchToggle}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
+                                    </StackPanel>
 
 
-                                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                                    <Label Content="{lex:Loc OutputMode}" />
-                                </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                        <Label Content="{lex:Loc OutputMode}" />
+                                    </StackPanel>
 
-                                <StackPanel Grid.Row="2" Grid.Column="1"
+                                    <StackPanel Grid.Row="2" Grid.Column="1"
                                         Orientation="Horizontal">
-                                    <ComboBox x:Name="touchpadOutModeCombo"
+                                        <ComboBox x:Name="touchpadOutModeCombo"
                                       SelectedIndex="{Binding TouchpadOutputIndex, FallbackValue='0'}"
                                           Width="170">
-                                        <ComboBoxItem Content="{lex:Loc Mouse}" />
-                                        <ComboBoxItem Content="{lex:Loc Controls}" />
-                                        <ComboBoxItem Content="{lex:Loc MouseJoystick}" />
-                                        <ComboBoxItem Content="{lex:Loc AbsoluteMouse}" />
-                                        <ComboBoxItem Content="{lex:Loc Passthru}" />
-                                    </ComboBox>
-                                </StackPanel>
-                            </Grid>
+                                            <ComboBoxItem Content="{lex:Loc Mouse}" />
+                                            <ComboBoxItem Content="{lex:Loc Controls}" />
+                                            <ComboBoxItem Content="{lex:Loc MouseJoystick}" />
+                                            <ComboBoxItem Content="{lex:Loc AbsoluteMouse}" />
+                                            <ComboBoxItem Content="{lex:Loc Passthru}" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
 
                             <TabControl x:Name="touchOutputTabControl"
                                     Style="{DynamicResource HiddenTabControlStyle}"
                                     SelectedIndex="{Binding TouchpadOutputIndex, FallbackValue='0'}"
                                     BorderBrush="{x:Null}"
-                                    Margin="0,0,0,20">
+                                    Margin="0 6 0 0">
                                 <!--As Mouse-->
-                                <TabItem x:Name="Mouse"
-                                     Header="{lex:Loc Mouse}" 
-                                     Visibility="Collapsed">
+                                <TabItem x:Name="Mouse" Header="{lex:Loc Mouse}" Visibility="Collapsed">
 
-                                    <GroupBox Header="Mouse emulation on Touchpad"
-                                          Margin="0,5,0,5">
-                                        <Grid Margin="5,5,0,0">
+                                    <GroupBox Header="Mouse emulation on Touchpad" >
+                                        <Grid >
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
@@ -2743,7 +2679,6 @@
                                                 <Label Content="-180 to 180"/>
                                             </StackPanel>
 
-
                                             <!--Min Threshold-->
                                             <StackPanel Grid.Row="10" Grid.Column="0"
                                                     Orientation="Horizontal">
@@ -2760,7 +2695,6 @@
                                                 </xctk:DoubleUpDown>
                                                 <Label Content="40.0 max"/>
                                             </StackPanel>
-
 
                                             <!--Trackball-->
                                             <StackPanel  Grid.Row="12" Grid.ColumnSpan="2"
@@ -2792,7 +2726,6 @@
                                                 <Label Content="20.0 max"/>
                                             </StackPanel>
 
-
                                             <!--Invert-->
                                             <StackPanel Grid.Row="14" Grid.Column="0"
                                                     Orientation="Horizontal">
@@ -2808,7 +2741,6 @@
                                                 </ComboBox>
                                             </StackPanel>
 
-
                                             <!--Disable Invert-->
                                             <StackPanel Grid.Row="15" Grid.Column="0"
                                                     Orientation="Horizontal">
@@ -2816,8 +2748,7 @@
                                             </StackPanel>
                                             <StackPanel Grid.Row="15" Grid.Column="1"
                                                     Orientation="Horizontal">
-                                                <Button x:Name="touchDisInvertBtn"
-                                                    Width="170"
+                                                <Button x:Name="touchDisInvertBtn" Width="170"
                                                 Content="{Binding TouchDisInvertString,FallbackValue=None}"
                                                 Click="TouchDisInvertBtn_Click">
                                                     <Button.ContextMenu>
@@ -2864,7 +2795,7 @@
 
                                 <!--As Control/Swipe-->
                                 <TabItem x:Name="Swipe" Header="{lex:Loc Controls}" Visibility="Collapsed">
-                                    <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                                    <StackPanel Orientation="Vertical">
 
                                         <GroupBox Header="Swipe Controls" >
                                             <Grid Margin="10,5,5,5">
@@ -2927,33 +2858,33 @@
                                             </Grid>
 
                                         </GroupBox>
-                                        <Grid Margin="15,8,0,0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="170"/>
-                                                <ColumnDefinition/>
-                                            </Grid.ColumnDefinitions>
+                                        
+                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 6">
+                                            <Grid Margin="0 8">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="170"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Row="4" Grid.ColumnSpan="2"
+                                                <StackPanel Grid.Row="4" Grid.ColumnSpan="2"
                                                     Orientation="Horizontal">
-                                                <CheckBox Content="Passthru Click Action (DS4 mode)"
+                                                    <CheckBox Content="Passthru Click Action (DS4 mode)"
                                                       IsChecked="{Binding TouchpadClickPassthru}"/>
-                                            </StackPanel>
-                                        </Grid>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
                                     </StackPanel>
                                 </TabItem>
 
                                 <!--As Mouse/Touchpad Joystick-->
-                                <TabItem x:Name="Joystick"
-                                     Header="{lex:Loc MouseJoystick}"
-                                     Visibility="Collapsed">
+                                <TabItem x:Name="Joystick" Header="{lex:Loc MouseJoystick}" Visibility="Collapsed">
                                     <StackPanel x:Name="touchMouseJoystickPanel"
-                                            Orientation="Vertical"
-                                            Margin="0,5,0,0">
+                                            Orientation="Vertical">
 
-                                        <GroupBox Header="Joystick Setup" Margin="0,0,0,10">
+                                        <GroupBox Header="Joystick Setup" Margin="0 0 0 3">
                                             <Grid Margin="5,5,0,5">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -3030,7 +2961,7 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Axes Setup" Margin="0,0,0,10">
+                                        <GroupBox Header="Axes Setup" Margin="0,3">
                                             <Grid Margin="5,5,0,5">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -3110,7 +3041,7 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Add Momentum" Margin="0,0,0,10">
+                                        <GroupBox Header="Add Momentum" Margin="0,3">
                                             <Grid Margin="5,5,0,5">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -3165,7 +3096,7 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Smoothing Options">
+                                        <GroupBox Header="Smoothing Options" Margin="0 3 0 0">
                                             <Grid Margin="5,5,0,5">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -3311,10 +3242,10 @@
 
                 <TabItem Header="{lex:Loc Gyro}" VerticalAlignment="Top">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="5" Width="410" HorizontalAlignment="Left">
+                        <StackPanel Margin="8" HorizontalAlignment="Stretch">
 
-                            <GroupBox Header="Setup">
-                                <Grid Margin="0,5,0,0">
+                            <GroupBox Header="Setup" Margin="0 0 0 3">
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="45"/>
                                         <RowDefinition Height="30"/>
@@ -3376,14 +3307,14 @@
 
                             <TabControl SelectedIndex="{Binding GyroOutModeIndex, FallbackValue='3'}"
                                     BorderBrush="{x:Null}"
+                                        Margin="0 3"
                                     Style="{DynamicResource HiddenTabControlStyle}">
 
                                 <!--Control (Accel)-->
                                 <TabItem Header="{lex:Loc GyroControlsAccel}"
                                      Visibility="Collapsed">
 
-                                    <Grid x:Name="gyroControlsPanel" 
-                                      Margin="0,10,0,10">
+                                    <Grid x:Name="gyroControlsPanel">
 
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
@@ -3688,8 +3619,7 @@
                                 </TabItem>
                                 <!--Mouse-->
                                 <TabItem Header="{lex:Loc Mouse}" Visibility="Collapsed">
-                                    <GroupBox Header="Mouse Behavior"
-                                          Margin="0,10,0,10">
+                                    <GroupBox Header="Mouse Behavior">
 
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -3961,7 +3891,7 @@
                                 </TabItem>
                                 <!--MouseJoystick-->
                                 <TabItem Header="{lex:Loc MouseJoystick}" Visibility="Collapsed">
-                                    <GroupBox Header="Mouse Joystick" Margin="0,10,0,10">
+                                    <GroupBox Header="Mouse Joystick">
                                         <Grid x:Name="gyroMouseJoystickPanel">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
@@ -4272,8 +4202,8 @@
                                 </TabItem>
                                 <!--DirectionalSwipe-->
                                 <TabItem Header="{lex:Loc DirectionalSwipe}" Visibility="Collapsed">
-                                    <StackPanel Margin="0,10,0,10">
-                                        <GroupBox Header="Trigger Behavior">
+                                    <StackPanel>
+                                        <GroupBox Header="Trigger Behavior" Margin="0 0 0 3">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -4321,8 +4251,8 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Swipe Emulation">
-                                            <Grid x:Name="gyroDirSwipePanel" Margin="5">
+                                        <GroupBox Header="Swipe Emulation" Margin="0 3">
+                                            <Grid x:Name="gyroDirSwipePanel">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
                                                     <RowDefinition Height="30"/>
@@ -4381,8 +4311,9 @@
 
                                             </Grid>
                                         </GroupBox>
-                                        <GroupBox Header="Gyro Setup">
-                                            <Grid Margin="0,5,0,5">
+
+                                        <GroupBox Header="Gyro Setup" Margin="0 3">
+                                            <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
                                                     <RowDefinition Height="30"/>
@@ -4451,17 +4382,21 @@
 
                                             </Grid>
                                         </GroupBox>
+
                                     </StackPanel>
                                 </TabItem>
                                 <!--passthru-->
                                 <TabItem Header="{lex:Loc Passthru}" Visibility="Collapsed">
-                                    <StackPanel x:Name="passthruPanel"
-                                            Margin="10">
-                                        <TextBlock Foreground="Red"
+                                    <StackPanel x:Name="passthruPanel">
+
+                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 8 0 0"
+                                                Padding="8">
+                                            <TextBlock Foreground="Red"
                                                Visibility="{Binding UsingMinViGEm173333, 
-                                        Mode=OneWay, Converter={StaticResource InvertBoolToVisibilityConverter}}"
+                                                Mode=OneWay, Converter={StaticResource InvertBoolToVisibilityConverter}}"
                                                Text="{lex:Loc ViGEm117MinNeeded}">
-                                        </TextBlock>
+                                            </TextBlock>
+                                        </Border>
 
 
                                     </StackPanel>
@@ -4477,11 +4412,10 @@
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                        <StackPanel Margin="5" Width="410" HorizontalAlignment="Left">
+                        <StackPanel Margin="8" HorizontalAlignment="Stretch">
 
-                            <GroupBox Header="{lex:Loc VirtualControllerSettings}"
-                                  Margin="0,10,0,10">
-                                <Grid Margin="5,5,0,0">
+                            <GroupBox Header="{lex:Loc VirtualControllerSettings}" Margin="0 0 0 3">
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
@@ -4541,8 +4475,8 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="General" Margin="0,0,0,10" >
-                                <Grid  Margin="5,5,0,0">
+                            <GroupBox Header="General" Margin="0 3" >
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
@@ -4686,9 +4620,9 @@
 
                             </GroupBox>
 
-                            <GroupBox Header="{lex:Loc Rumble}"  Margin="0,0,0,10">
+                            <GroupBox Header="{lex:Loc Rumble}"  Margin="0 3">
 
-                                <Grid Margin="5,5,0,0">
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
@@ -4762,28 +4696,27 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Grid.Row="2" Grid.ColumnSpan="2"
-                                  Margin="0,0,0,10"
+                            <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Margin="0 3"
                                   Header="{lex:Loc DualSRumbleSpecificSettings}">
-                                <Grid Margin="5,5,0,0">
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="58"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="0"
-                                            VerticalAlignment="Center">
+                                    <StackPanel Grid.Column="0"
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Margin="0,0,166,0">
                                         <Label Content="Rumble mode" />
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1"
+                                    <StackPanel Grid.Column="1"
                                             Orientation="Horizontal"
-                                            VerticalAlignment="Center">
+                                            VerticalAlignment="Center" Height="24" Margin="4,0,0,0">
                                         <ComboBox x:Name="dualSRumbleEmuMode"
                                               SelectedIndex="{Binding DualSenseRumbleEmulationPerIndex, FallbackValue=0}">
                                             <ComboBox.ToolTip>
@@ -4796,13 +4729,13 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="0"
-                                            VerticalAlignment="Center">
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Margin="0,0,166,0">
                                         <Label Content="Rumble strenght" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="1"
                                             VerticalAlignment="Center"
-                                            Orientation="Horizontal">
+                                            Orientation="Horizontal" Height="24" Margin="4,0,0,0">
                                         <ComboBox SelectedIndex="{Binding DualSenseHapticPowerLevelPerIndex, FallbackValue=0}">
                                             <ComboBox.ToolTip>
                                                 <TextBlock Text="{lex:Loc DualSRumblePowerLevel_Tip}"/>
@@ -4820,19 +4753,15 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
-                                            VerticalAlignment="Top"
-                                            Orientation="Horizontal"
-                                            Margin="0,7,0,5">
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal" Height="27">
                                         <CheckBox x:Name="dualSForceGenRumbleRescale"
                                               IsChecked="{Binding EnableGenericRumbleStrRescaleForDualSenseDevices}"
-                                              VerticalContentAlignment="Top"
-                                              Width="300" Margin="5,0,0,0">
+                                              Margin="5,0,0,0">
                                             <CheckBox.ToolTip>
                                                 <TextBlock Text="{lex:Loc DualSRumbleForceGenericRescale_Tip}"/>
                                             </CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc DualSRumbleForceGenericRescale}"
-                                                   TextWrapping="Wrap"
-                                                   TextAlignment="Justify" />
+                                            <TextBlock Text="{lex:Loc DualSRumbleForceGenericRescale}"/>
                                         </CheckBox>
                                     </StackPanel>
 
@@ -4841,8 +4770,8 @@
                             </GroupBox>
 
 
-                            <GroupBox Header="Profile" Margin="0,0,0,10">
-                                <Grid Margin="5,5,0,5">
+                            <GroupBox Header="Profile" Margin="0 3">
+                                <Grid >
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="180"/>
@@ -4884,8 +4813,8 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="Mouse emulation" Margin="0,0,0,10" >
-                                <Grid Margin="5,5,0,0">
+                            <GroupBox Header="Mouse emulation" Margin="0 3" >
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="32"/>
                                         <RowDefinition Height="32"/>
@@ -4971,11 +4900,11 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="{lex:Loc AbsoluteMouseOptions}" Margin="0,0,0,10">
+                            <GroupBox Header="{lex:Loc AbsoluteMouseOptions}" Margin="0 3">
 
-                                <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                                <StackPanel Orientation="Vertical">
 
-                                    <Grid Margin="5,5,0,0">
+                                    <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="180"/>
                                             <ColumnDefinition/>
@@ -5073,10 +5002,6 @@
 
                                 </StackPanel>
                             </GroupBox>
-
-
-
-
 
                         </StackPanel>
 
