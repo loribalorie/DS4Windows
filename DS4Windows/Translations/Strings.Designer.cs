@@ -3886,7 +3886,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 1: Install ViGEmBus Driver.
+        ///   Looks up a localized string similar to Install ViGEmBus Driver.
         /// </summary>
         public static string Welcome_Step1Text {
             get {
@@ -3904,7 +3904,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 2: If on Windows 7, Install 360 Driver.
+        ///   Looks up a localized string similar to If on Windows 7, Install 360 Driver.
         /// </summary>
         public static string Welcome_Step2Text {
             get {
@@ -3913,7 +3913,8 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Once flashing go to your Bluetooth Settings and connect to &quot;Wireless Controller&quot;. If asked, enter pair code 0000. Once paired, you&apos;re ready. Have fun!.
+        ///   Looks up a localized string similar to Once flashing, open Bluetooth Settings and connect to &quot;Wireless Controller&quot;.
+        ///If asked, enter 0000 pairing code. Once paired, you&apos;re ready..
         /// </summary>
         public static string Welcome_Step3BluetoothHelpText {
             get {
@@ -3922,11 +3923,10 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 3: Connecting the DualShock 4 controller.
-        ///To setup wired/USB:
-        ///Simply plug a micro-USB into your PC and DualShock 4.
-        ///
-        ///To setup Bluetooth (optional): Hold the PS Button and Share for 3 seconds. The lightbar will begin to double flash..
+        ///   Looks up a localized string similar to Connecting the DualShock 4 controller.
+        ///To setup wired/USB, plug a micro-USB into your PC and DualShock 4. 
+        ///To setup Bluetooth, hold the PS and Share buttons for 3 seconds.
+        ///The lightbar will begin to double flash..
         /// </summary>
         public static string Welcome_Step3HelpText {
             get {
@@ -3935,7 +3935,8 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use HidHide to configure and hide any input controllers from other apps running on your system. Some games require only one controller to be present or double input will cause problems in game..
+        ///   Looks up a localized string similar to Use HidHide to configure and hide any input controllers from other apps running on your system.
+        ///Some games require only one controller to be present or double input will cause problems in game..
         /// </summary>
         public static string Welcome_Step4HelpText {
             get {
@@ -3944,7 +3945,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (Optional) Step 4: Install HidHide Driver.
+        ///   Looks up a localized string similar to Install HidHide Driver.
         /// </summary>
         public static string Welcome_Step4Text {
             get {
@@ -3953,7 +3954,10 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use FakerInput driver to expose system-wide virtual keyboard, relative mouse, and absolute mouse. Allows virtual KB+M events to be usable in some situations when SendInput fails. Such situations are elevated process and games, UAC prompts, and anti-cheat systems that block SendInput events. Use of FakerInput is necessary to allow DS4Windows to work with some games with anti-cheat protection like Valorant..
+        ///   Looks up a localized string similar to Use FakerInput driver to expose system-wide virtual keyboard, relative mouse, and absolute mouse.
+        ///It allows virtual KB+M events to be usable in some situations when SendInput fails.
+        ///Such situations are elevated processes, games, UAC prompts, and anti-cheat systems that block SendInput events.
+        ///The use of FakerInput is necessary to allow DS4Windows to work with some games with anti-cheat protection like Valorant..
         /// </summary>
         public static string Welcome_Step5HelpText {
             get {
@@ -3962,7 +3966,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (Optional) Step 5: Install FakerInput Driver.
+        ///   Looks up a localized string similar to Install FakerInput Driver.
         /// </summary>
         public static string Welcome_Step5Text {
             get {
