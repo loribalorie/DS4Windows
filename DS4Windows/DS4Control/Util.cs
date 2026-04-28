@@ -331,15 +331,32 @@ namespace DS4Windows
 
         public static string GetOSProductName()
         {
-            string productName =
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", "").ToString();
+            //string productName = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", "").ToString();
+            
+            RegistryKey regItem = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            // OS name
+            string currentBuild = regItem.GetValue("CurrentBuild")?.ToString() ?? "0";
+            string editionId = regItem.GetValue("EditionID")?.ToString() ?? "";
+            string baseName = (int.Parse(currentBuild) >= 22000) ? "Windows 11" : "Windows 10";
+            string productName = $"{baseName} {editionId}";
+
             return productName;
         }
 
         public static string GetOSReleaseId()
         {
-            string releaseId =
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ReleaseId", "").ToString();
+            //string releaseId = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ReleaseId", "").ToString();
+
+            RegistryKey regItem = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            string releaseId = regItem.GetValue("DisplayVersion")?.ToString() ?? regItem.GetValue("ReleaseId")?.ToString() ?? "-";
+
+            return releaseId;
+        }
+        public static string GetOSBuildNumber()
+        {
+            RegistryKey regItem = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            string releaseId = $"{regItem.GetValue("CurrentMajorVersionNumber")}.{regItem.GetValue("CurrentMinorVersionNumber")}.{regItem.GetValue("CurrentBuildNumber")}";
+
             return releaseId;
         }
 
