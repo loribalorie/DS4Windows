@@ -712,9 +712,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-
-
+        
     </Style>
 
     <!--ListBox Control Template-->

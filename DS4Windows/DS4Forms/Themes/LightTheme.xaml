@@ -470,18 +470,6 @@
                             <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource SecondaryColor}"/>
                         </Trigger>
 
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="True"/>
-                                <Condition Property="IsEnabled" Value="False"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColor}" />
-                            <Setter Property="Foreground" Value="{StaticResource ToggleColor_disabled}" />
-                        </MultiTrigger>-->
-                        <!--<Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="optionMark" Property="Visibility" Value="Hidden"/>
-                            <Setter TargetName="optionMark" Property="Opacity" Value="1" />
-                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
