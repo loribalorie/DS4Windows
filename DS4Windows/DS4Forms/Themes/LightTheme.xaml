@@ -6,12 +6,12 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <!--xmlns:local="clr-namespace:DS4WinWPF.DS4Forms.Themes"-->
     <!-- Brushes -->
-    <SolidColorBrush x:Key="ForegroundColor" Color="#060606"/>
-    <SolidColorBrush x:Key="SecondaryColor" Color="#039be5"/>
     <SolidColorBrush x:Key="AccentColor" Color="#01579b" />
     <SolidColorBrush x:Key="AccentColorActive" Color="#0277bd"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#039be5"/>
     <SolidColorBrush x:Key="AccentForeColor" Color="#e1f5fe"/>
     <SolidColorBrush x:Key="BorderColor" Color="#b3e5fc" />
+    <SolidColorBrush x:Key="ForegroundColor" Color="#060606"/>
     <SolidColorBrush x:Key="BackgroundColor" Color="#F3F3f3"/>
     <SolidColorBrush x:Key="ContentBackgroundColor" Color="#FBFBFB"/>
     <SolidColorBrush x:Key="DisabledColor" Color="#D3DAEB"/>
@@ -253,18 +253,69 @@
     </Style>
 
     <!--Style for Buttons, ComboBox, UpDownBox-->
-    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+    <!--<Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="24"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="4"/>
+                <Setter Property="CornerRadius" Value="5"/>
             </Style>
         </Style.Resources>
 
+    </Style>-->
+
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
+        <Setter Property="Background" Value="#fefefe"/>
+        <Setter Property="BorderBrush" Value="#d3d3d3"/>
+        <Setter Property="Foreground" Value="#1B1B1B"/>
+        <Setter Property="Padding" Value="1"/>
+
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="true"
+                            CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="#f2f2f2"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="#EBEBEB"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DimGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
 
     <Style TargetType="ComboBox">
         <Setter Property="Width" Value="100"/>
@@ -303,165 +354,23 @@
 
     </Style>
 
-    <Style TargetType="Label">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
 
     <!--CheckBox Default Style-->
     <Style x:Key="CheckBoxStyle_Default" TargetType="CheckBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <!--CheckBox Toggle Style -->
-    <Style x:Key="CheckBox_Toggle_Style" TargetType="{x:Type CheckBox}">
-        
-        <Setter Property="Height" Value="21" />
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Background" Value="{StaticResource CheckBoxBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Grid x:Name="templateRoot"
-                          Background="Transparent"
-                          SnapsToDevicePixels="True">
-                        <Grid.ColumnDefinitions>
-                            <!--Checkbox-->
-                            <ColumnDefinition Width="Auto"/>
-                            <!--Label-->
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Border x:Name="checkBoxBorder"
-                                Width="39"
-                                Height="21"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="11">
-
-                            <Grid x:Name="markGrid">
-                                <Ellipse x:Name="optionMark"
-                                         Width="11"
-                                         Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualWidth, Mode=OneWay}"
-                                         Fill="{StaticResource ForegroundColor}"
-                                         StrokeThickness="0">
-                                    <Ellipse.RenderTransform>
-                                        <TranslateTransform X="-9" Y="0"/>
-                                    </Ellipse.RenderTransform>
-                                </Ellipse>
-                            </Grid>
-
-                        </Border>
-
-                        
-                        <ContentPresenter x:Name="contentPresenter"
-                                          Grid.Column="1"
-                                          Margin="4,0,4,0"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
-                                          Focusable="False"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="HasContent" Value="true">
-                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
-                            <Setter Property="Padding" Value="0" />
-                        </Trigger>
-
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource SecondaryColor}" />
-                            <Setter TargetName="checkBoxBorder" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource CheckBoxBorderBrushDisabled}" />
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource CheckBoxBackgroundDisabled}" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CheckBoxFillPathDisabled}" />
-                            <Setter Property="Foreground" Value="{StaticResource CheckBoxBorderBrushDisabled}" />
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="true">
-                            <Setter TargetName="optionMark" Property="Opacity" Value="1" />
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColorActive}" />
-                            <Setter TargetName="checkBoxBorder" Property="BorderThickness" Value="0" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CheckBoxBackground}" />
-
-                            <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="checkBeginStoryboard">
-                                    <Storyboard>
-                                        <DoubleAnimation BeginTime="00:00:00"
-                                                         Storyboard.TargetName="optionMark"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                         Duration="00:00:0.2" To="9" >
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuarticEase EasingMode="EaseIn"/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation BeginTime="00:00:00"
-                                                        Storyboard.TargetName="optionMark"
-                                                        Storyboard.TargetProperty="Width"
-                                                        Duration="00:00:0.2" To="19">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuarticEase EasingMode="EaseOut"/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-
-                            <Trigger.ExitActions>
-                                <BeginStoryboard x:Name="uncheckBeginStoryboard">
-                                    <Storyboard>
-                                        <DoubleAnimation BeginTime="00:00:00"
-                                                         Storyboard.TargetName="optionMark"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                         Duration="00:00:0.2" To="-9">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuarticEase EasingMode="EaseIn"/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation BeginTime="00:00:00"
-                                                         Storyboard.TargetName="optionMark"
-                                                         Storyboard.TargetProperty="Width"
-                                                         Duration="00:00:0.2" To="11">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuinticEase EasingMode="EaseInOut"/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="optionMark" Property="Visibility" Value="Hidden"/>
-                            <Setter TargetName="optionMark" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!--CheckBox Toggle Style 2-->
-
-    <SolidColorBrush x:Key="CheckBoxBG_Default" Color="#DFE7F2"/>
-    <SolidColorBrush x:Key="CheckBoxMark_Default" Color="White"/>
+    <SolidColorBrush x:Key="ToggleColor_disabled" Color="#dfdfdf" />
+    <SolidColorBrush x:Key="ToggleColor_off" Color="#aaaaaa" />
+    <SolidColorBrush x:Key="ToggleCheckBox_Border" Color="Transparent" />
+    <SolidColorBrush x:Key="ToggleEllipseColor" Color="White" />
 
     <Style x:Key="CheckBox_Toggle_Style_2" TargetType="{x:Type CheckBox}">
         <Setter Property="Height" Value="27" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -478,16 +387,16 @@
 
                         <Border x:Name="checkBoxBorder" Grid.Column="0"
                                 Width="37" Height="23" CornerRadius="12"
-                                BorderThickness="{TemplateBinding BorderThickness}"
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                                BorderBrush="Transparent"
-                                Background="{StaticResource CheckBoxBG_Default}">
+                                BorderBrush="{StaticResource ToggleCheckBox_Border}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{StaticResource ToggleColor_off}">
 
                             <Grid x:Name="markGrid">
                                 <Ellipse x:Name="optionMark" StrokeThickness="0"
                                         Width="13"
                                         Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualWidth, Mode=OneWay}"
-                                        Fill="{StaticResource CheckBoxMark_Default}">
+                                        Fill="{StaticResource BackgroundColor}">
                                     <Ellipse.RenderTransform>
                                         <TranslateTransform X="-7" Y="0"/>
                                     </Ellipse.RenderTransform>
@@ -503,24 +412,17 @@
                     </Grid>
                     <ControlTemplate.Triggers>
 
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource AccentColorActive}" />
-                            <Setter TargetName="checkBoxBorder" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-
                         <Trigger Property="IsEnabled" Value="false">
-
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource CheckBoxBackgroundDisabled}" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CheckBoxFillPathDisabled}" />
-                            <Setter Property="Foreground" Value="{StaticResource CheckBoxBorderBrushDisabled}" />
+                            <Setter TargetName="optionMark" Property="Opacity" Value="0" />
+                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource ToggleEllipseColor}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource ToggleColor_disabled}" />
+                            <Setter Property="Foreground" Value="{StaticResource ToggleColor_disabled}" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="true">
                             <Setter TargetName="optionMark" Property="Opacity" Value="1" />
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColor}" />
-                            <Setter TargetName="checkBoxBorder" Property="BorderThickness" Value="1" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CheckBoxBackground}" />
-
+                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource ToggleEllipseColor}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColorActive}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard x:Name="checkBeginStoryboard">
                                     <Storyboard>
@@ -539,7 +441,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
-
                             <Trigger.ExitActions>
                                 <BeginStoryboard x:Name="uncheckBeginStoryboard">
                                     <Storyboard>
@@ -562,23 +463,25 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
+
                         </Trigger>
 
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource SecondaryColor}"/>
+                        </Trigger>
 
-                        <MultiTrigger>
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="IsEnabled" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource CheckBoxBackgroundDisabled}" />
-                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource CheckBoxBG_Default}" />
-                            <Setter Property="Foreground" Value="{StaticResource CheckBoxBorderBrushDisabled}" />
-                        </MultiTrigger>
-
-                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColor}" />
+                            <Setter Property="Foreground" Value="{StaticResource ToggleColor_disabled}" />
+                        </MultiTrigger>-->
+                        <!--<Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="optionMark" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="optionMark" Property="Opacity" Value="1" />
-                        </Trigger>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -831,15 +734,10 @@
         <Setter Property="Padding" Value="8,0"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
+    </Style>
 
-        <!--<Style.Triggers>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                <Setter Property="Background" Value="#D8DFF0"></Setter>
-            </Trigger>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                <Setter Property="Background" Value="#E4EAF7"></Setter>
-            </Trigger>
-        </Style.Triggers>-->
+    <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <!-- based on https://github.com/whistyun/MdXaml/blob/787605545ace5b7cd7d02ff19e80b1c7a019b0d3/MdXaml/Markdown.Style.xaml#L338
@@ -849,7 +747,8 @@
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
     </Style>
 
-    <!--<Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />-->
+    <Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
     <Style BasedOn="{StaticResource TabControlStyle}" TargetType="{x:Type TabControl}" />
     <Style BasedOn="{StaticResource TabItemStyle}" TargetType="{x:Type TabItem}" />
     <Style BasedOn="{StaticResource GroupBox_NewStyle}" TargetType="{x:Type GroupBox}" />
@@ -858,6 +757,5 @@
     <Style BasedOn="{StaticResource ListBoxStyle}" TargetType="{x:Type ListBox}" />
     <Style BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}" />
     <Style BasedOn="{StaticResource CheckBox_Toggle_Style_2}" TargetType="{x:Type CheckBox}" />
-    
-
 </ResourceDictionary>
+    

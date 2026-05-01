@@ -18,7 +18,7 @@
         <local:ResourcePaths x:Key="resourcesPaths" />
     </UserControl.Resources>
 
-    <Grid x:Name="mainGrid" Background="{DynamicResource BackgroundColor}">
+    <Grid x:Name="mainGrid" Background="{DynamicResource ContentBackgroundColor}">
         <!--<Grid.Resources>
             <Style BasedOn="{StaticResource DoubleUpDown}" TargetType="{x:Type xctk:DoubleUpDown}">
             
