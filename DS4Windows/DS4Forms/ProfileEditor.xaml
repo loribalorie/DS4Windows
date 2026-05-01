@@ -74,8 +74,8 @@
 
                         <Border DockPanel.Dock="Top"
                                 Style="{DynamicResource BorderStyle}">
-                            <StackPanel Margin="0 16 0 0">
-                                <Canvas x:Name="conCanvas" Width="440" Height="250">
+                            <StackPanel Margin="0 8" Orientation="Vertical">
+                                <Canvas x:Name="conCanvas" Width="440" Height="220">
                                     <Canvas.Resources>
                                         <ContextMenu x:Key="presetMenu">
                                             <MenuItem x:Name="controlNameItem" Header="Name" IsEnabled="False" />
@@ -221,13 +221,18 @@
                                     <Button Content="Left" x:Name="leftConBtn" Canvas.Left="56" Canvas.Top="103" Width="35" Height="20" Style="{StaticResource NoBGHoverBtn}" Click="HoverConBtn_Click" MouseEnter="ContBtn_MouseEnter" MouseLeave="ContBtn_MouseLeave"
                                 MouseRightButtonUp="ConBtn_MouseRightButtonUp" />
 
-                                    <Label x:Name="highlightControlDisplayLb" Content="" Canvas.Left="150" Canvas.Top="215" MinWidth="150"
-                               HorizontalContentAlignment="Center" Foreground="{StaticResource AccentColorActive}"
-                               FontWeight="Bold"/>
+                                    <!--<Label x:Name="highlightControlDisplayLb" Content="" Canvas.Left="150" Canvas.Top="215" MinWidth="150" HorizontalContentAlignment="Center" Foreground="{DynamicResource AccentColorActive}" FontWeight="Bold"/>-->
                                 </Canvas>
+                                <StackPanel>
+                                    <Label x:Name="highlightControlDisplayLb" Content="" Foreground="{DynamicResource AccentColorActive}"
+                                           HorizontalContentAlignment="Center" d:Content="asdasdafafdasf"/>
+                                </StackPanel>
                             </StackPanel>
+                            
 
                         </Border>
+
+                        
 
                         <Border Margin="0 8 0 0"
                                 Style="{DynamicResource BorderStyle}"
@@ -4415,6 +4420,15 @@
 
                         <StackPanel Margin="8" HorizontalAlignment="Stretch">
 
+                            <StackPanel>
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="adfklhfsdljfhds"/>
+                            </StackPanel>
+                            
                             <GroupBox Header="{lex:Loc VirtualControllerSettings}" Margin="0 0 0 3">
                                 <Grid>
                                     <Grid.RowDefinitions>
