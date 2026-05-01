@@ -262,10 +262,11 @@
                 <!--Special Actions-->
                 <TabItem x:Name="specialActionsTab" Header="Special Actions">
 
-                    <DockPanel x:Name="specialActionDockPanel" Margin="8">
-                        <Border Style="{DynamicResource BorderStyle}">
+                    <DockPanel x:Name="specialActionDockPanel" LastChildFill="True" Margin="8"
+                               Background="{DynamicResource BackgroundColor}">
+                        <Border x:Name="baseSpeActPanel" Style="{DynamicResource BorderStyle}">
 
-                            <DockPanel x:Name="baseSpeActPanel" DockPanel.Dock="Top">
+                            <DockPanel  DockPanel.Dock="Top">
                                 <UniformGrid Rows="1" Columns="4"
                                          Height="40"
                                          DockPanel.Dock="Top">
