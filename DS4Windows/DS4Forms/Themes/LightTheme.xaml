@@ -486,7 +486,136 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>-->
+
+    <!--CheckBox Toggle Style 2-->
+    <SolidColorBrush x:Key="ToggleColor_disabled" Color="#dfdfdf" />
+    <SolidColorBrush x:Key="ToggleColor_off" Color="#aaaaaa" />
+    <SolidColorBrush x:Key="ToggleCheckBox_Border" Color="Transparent" />
+    <SolidColorBrush x:Key="ToggleEllipseColor" Color="White" />
+
+    <Style x:Key="CheckBox_Toggle_Style_2" TargetType="{x:Type CheckBox}">
+        <Setter Property="Height" Value="27" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+
+                    <Grid x:Name="templateRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="checkBoxBorder" Grid.Column="0"
+                                Width="37" Height="23" CornerRadius="12"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                BorderBrush="{StaticResource ToggleCheckBox_Border}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{StaticResource ToggleColor_off}">
+
+                            <Grid x:Name="markGrid">
+                                <Ellipse x:Name="optionMark" StrokeThickness="0"
+                                        Width="13"
+                                        Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualWidth, Mode=OneWay}"
+                                        Fill="{StaticResource BackgroundColor}">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform X="-7" Y="0"/>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Grid>
+
+                        </Border>
+
+                        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Margin="10,0,0,0"
+                                          HorizontalAlignment="Left" VerticalAlignment="Center"
+                                          Focusable="False" RecognizesAccessKey="True"/>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="optionMark" Property="Opacity" Value="0" />
+                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource ToggleEllipseColor}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource ToggleColor_disabled}" />
+                            <Setter Property="Foreground" Value="{StaticResource ToggleColor_disabled}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="optionMark" Property="Opacity" Value="1" />
+                            <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource ToggleEllipseColor}" />
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColorActive}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="checkBeginStoryboard">
+                                    <Storyboard>
+                                        <DoubleAnimation BeginTime="00:00:00" Storyboard.TargetName="optionMark" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                                     Duration="00:00:0.2" To="7" >
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuarticEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation BeginTime="00:00:00" Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Width"
+                                                                     Duration="00:00:0.2" To="17">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuarticEase EasingMode="EaseInOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="uncheckBeginStoryboard">
+                                    <Storyboard>
+                                        <DoubleAnimation BeginTime="00:00:00"
+                                                       Storyboard.TargetName="optionMark"
+                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                       Duration="00:00:0.2" To="-7">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuarticEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation BeginTime="00:00:00"
+                                                       Storyboard.TargetName="optionMark"
+                                                       Storyboard.TargetProperty="Width"
+                                                       Duration="00:00:0.2" To="13">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuinticEase EasingMode="EaseInOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource SecondaryColor}"/>
+                        </Trigger>
+
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsEnabled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource AccentColor}" />
+                            <Setter Property="Foreground" Value="{StaticResource ToggleColor_disabled}" />
+                        </MultiTrigger>-->
+                        <!--<Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="optionMark" Property="Visibility" Value="Hidden"/>
+                            <Setter TargetName="optionMark" Property="Opacity" Value="1" />
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
 
     <!--GroupBox-->   
     <Style x:Key="GroupBox_NewStyle" TargetType="{x:Type GroupBox}">
