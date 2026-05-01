@@ -1258,23 +1258,24 @@ It might fix rumble and lightbar support for some third party DS4 clones</value>
     <value>Program Folder</value>
   </data>
   <data name="SaveWhere.AppDataDescText" xml:space="preserve">
-    <value>For those who prefer a regular install. Settings saved at %appdata%\DS4Windows</value>
+    <value>For those who prefer a regular install. Settings are saved at
+%AppData%\DS4Windows</value>
   </data>
   <data name="SaveWhere.DontDelete" xml:space="preserve">
-    <value>Don't Delete the other settings yet</value>
+    <value>Don't Delete the other settings yet.</value>
   </data>
   <data name="SaveWhere.MultipleSaves" xml:space="preserve">
-    <value>Multiple save locations detected</value>
+    <value>Multiple Save Locations Detected!</value>
   </data>
   <data name="SaveWhere.PickWhere" xml:space="preserve">
     <value>Pick where you want profiles and settings to be saved</value>
   </data>
   <data name="SaveWhere.ProgramFolderDescText" xml:space="preserve">
     <value>For those who prefer a portable program.
-Note: this option does not work if in an admin folder w/o UAC</value>
+Note that this option does not work if in an Admin folder w/o UAC.</value>
   </data>
   <data name="SaveWhere.WinTitle" xml:space="preserve">
-    <value>Save Where</value>
+    <value>Profile and Settings folder</value>
   </data>
   <data name="Welcome.BluetoothSettings" xml:space="preserve">
     <value>Bluetooth Settings</value>

@@ -2981,7 +2981,8 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For those who prefer a regular install. Settings saved at %appdata%\DS4Windows.
+        ///   Looks up a localized string similar to For those who prefer a regular install. Settings are saved at
+        ///%AppData%\DS4Windows.
         /// </summary>
         public static string SaveWhere_AppDataDescText {
             get {
@@ -2990,7 +2991,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t Delete the other settings yet.
+        ///   Looks up a localized string similar to Don&apos;t Delete the other settings yet..
         /// </summary>
         public static string SaveWhere_DontDelete {
             get {
@@ -2999,7 +3000,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Multiple save locations detected.
+        ///   Looks up a localized string similar to Multiple Save Locations Detected!.
         /// </summary>
         public static string SaveWhere_MultipleSaves {
             get {
@@ -3018,7 +3019,7 @@ namespace DS4WinWPF.Translations {
         
         /// <summary>
         ///   Looks up a localized string similar to For those who prefer a portable program.
-        ///Note: this option does not work if in an admin folder w/o UAC.
+        ///Note that this option does not work if in an Admin folder w/o UAC..
         /// </summary>
         public static string SaveWhere_ProgramFolderDescText {
             get {
@@ -3027,7 +3028,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Where.
+        ///   Looks up a localized string similar to Profile and Settings folder.
         /// </summary>
         public static string SaveWhere_WinTitle {
             get {

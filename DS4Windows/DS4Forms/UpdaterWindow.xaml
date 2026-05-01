@@ -11,25 +11,27 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="{lex:Loc UpdaterWin.WinTitle}" Height="450" Width="800"
-        Style="{DynamicResource WindowStyle}" Closed="Window_Closed">
-    <DockPanel Margin="8,8,8,0">
-        <TextBlock x:Name="captionTextBlock" Text="{Binding IntroText}" DockPanel.Dock="Top" Margin="0,4" />
+        Title="{lex:Loc UpdaterWin.WinTitle}"
+        Height="450" Width="800"
+        Style="{DynamicResource WindowStyle}"
+        Closed="Window_Closed"
+        UseLayoutRounding="True">
+    <DockPanel Margin="8">
+        <TextBlock x:Name="captionTextBlock" Text="{Binding IntroText}" DockPanel.Dock="Top" FontSize="15"/>
         
         <StackPanel Orientation="Horizontal"
                     DockPanel.Dock="Bottom"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,0,8">
+                    HorizontalAlignment="Right">
             <Button x:Name="skipVersionBtn" Content="{lex:Loc SkipVersion}" MinWidth="80" Click="SkipVersionBtn_Click" />
             <Button x:Name="yesBtn" Content="{lex:Loc Yes}" MinWidth="60" Click="YesBtn_Click" Margin="10,0,0,0" />
             <Button x:Name="noBtn" Content="{lex:Loc No}" MinWidth="60" Click="NoBtn_Click" Margin="10,0,0,0" />
         </StackPanel>
 
-        <mdxam:MarkdownScrollViewer Margin="0,8"
-                                    BorderThickness="1"
-                                    BorderBrush="{StaticResource BorderColor}"
+        <Border Style="{DynamicResource BorderStyle}" Margin="0,8">
+            <mdxam:MarkdownScrollViewer BorderThickness="1"
                                     Markdown="{Binding Markdown}"
                                     ClickAction="OpenBrowser"
                                     MarkdownStyle="{StaticResource DocumentStyleGithubLike}" />
+        </Border>
     </DockPanel>
 </Window>

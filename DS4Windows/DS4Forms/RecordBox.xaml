@@ -10,10 +10,12 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
              mc:Ignorable="d" 
-             d:DesignHeight="400"
-             Background="{StaticResource BackgroundColor}"
+             d:Height="Auto"
+             Background="{DynamicResource BackgroundColor}"
              d:DesignWidth="700"
-             KeyDown="UserControl_KeyDown" KeyUp="UserControl_KeyUp" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp" Focusable="True" >
+             KeyDown="UserControl_KeyDown" KeyUp="UserControl_KeyUp" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp" Focusable="True"
+             UseLayoutRounding="True">
+    
     <UserControl.Resources>
         <DataTemplate x:Key="DisplayTemplate">
             <StackPanel Orientation="Horizontal">
@@ -34,71 +36,106 @@
 
         <local:RecordBoxResourcePaths x:Key="resourcePaths" />
     </UserControl.Resources>
-    <DockPanel Margin="4">
-        <DockPanel DockPanel.Dock="Right" Width="250" LastChildFill="False" Margin="4,0">
-            <StackPanel DockPanel.Dock="Top">
-                <UniformGrid Rows="1">
-                    <Button x:Name="saveBtn" Content="{lex:Loc Save}" Click="SaveBtn_Click" Margin="0,0,5,0" />
-                    <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="5,0,0,0" />
-                </UniformGrid>
-
-                <Button x:Name="recordBtn" Content="{lex:Loc RecordText}" Margin="0,10,0,0" Click="RecordBtn_Click" />
-
-                <UniformGrid Rows="1" Columns="2" FirstColumn="1" Margin="0,10,0,0">
-                    <Button x:Name="clearStepsBtn" Content="{lex:Loc Clear}" Margin="5,00,0,0" Click="ClearStepsBtn_Click" />
-                </UniformGrid>
-                
-                <UniformGrid Rows="1" Margin="0,10,0,0">
-                    <Button x:Name="loadPresetBtn" Content="{lex:Loc RecordBox.LoadPreset}" Margin="0,0,5,0" Click="LoadPresetBtn_Click">
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem x:Name="cycleProgPresetMenuItem" Header="Cycle Programs" Click="CycleProgPresetMenuItem_Click" />
-                                <MenuItem x:Name="loadPresetFromFileMenuItem" Header="From File..." Click="LoadPresetFromFileMenuItem_Click" />
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                    </Button>
-                    <Button x:Name="savePresetBtn" Content="{lex:Loc RecordBox.SavePreset}" Margin="5,0,0,0" Click="SavePresetBtn_Click" />
-                </UniformGrid>
-
-                <Button x:Name="addWaitTimeBtn" Content="{lex:Loc RecordBox.InsertWait}" Margin="0,10,5,0" Click="AddWaitTimeBtn_Click" />
-
-                <CheckBox x:Name="recordDelaysCk" Content="{lex:Loc RecordBox.RecordDelays}" HorizontalAlignment="Center" IsChecked="{Binding RecordDelays}" Margin="0,10,0,0" />
-                <TextBlock Text="{lex:Loc RecordBox.DoubleClickWaitEdit}" Margin="0,10,0,0" />
-                <ComboBox x:Name="macroModeCombo" SelectedIndex="{Binding MacroModeIndex,FallbackValue=0}" Margin="0,10,0,0">
-                    <ComboBoxItem Content="{lex:Loc RecordBox.PlayOnce}" />
-                    <ComboBoxItem Content="{lex:Loc RecordBox.RepeatWhileHeld}" />
-                </ComboBox>
-                <CheckBox x:Name="useScanCode" Content="{lex:Loc ScanCode}" IsChecked="{Binding UseScanCode}" Margin="0,10,0,0"
-                          HorizontalAlignment="Center" />
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <StackPanel x:Name="mouseButtonsPanel">
-                    <Button x:Name="fourMouseBtn" Content="{lex:Loc RecordBox.FourthMB}" Width="120" Click="FourMouseBtn_Click" />
-                    <Button x:Name="fiveMouseBtn" Content="{lex:Loc RecordBox.FifthMB}" Width="120" Click="FiveMouseBtn_Click" Margin="0,10,0,0" />
-                </StackPanel>
-
-                <StackPanel x:Name="extraConPanel">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                        <Button x:Name="addRumbleBtn" Content="{lex:Loc RecordBox.AddRumble}" Width="124" Click="AddRumbleBtn_Click" />
-                        <Image Source="{Binding Source={StaticResource resourcePaths}, Path=LeftTouch}" Width="43" Visibility="Collapsed" />
+    
+    <DockPanel Margin="8">
+        <DockPanel DockPanel.Dock="Right" Width="250" LastChildFill="False">
+            <StackPanel DockPanel.Dock="Top" Margin="8 0 0 0">
+                <StackPanel Orientation="Vertical" Margin="8" Width="208">
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="0 4"/>
+                        </Style>
+                        
+                    </StackPanel.Resources>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        
+                            <Button x:Name="saveBtn" Content="{lex:Loc Save}" Click="SaveBtn_Click" Margin="0 0 4 0"/>
+                   
+                            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="4 0 0 0"/>
+                        
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                        <Button x:Name="changeLightBtn" Content="{lex:Loc RecordBox.ChangeLightbarColor}" Width="124" Click="ChangeLightBtn_Click" />
-                        <Image Source="{Binding Source={StaticResource resourcePaths}, Path=LeftTouch}" Width="43" Visibility="Collapsed" />
+                    <StackPanel>
+                        <Button x:Name="recordBtn" Content="{lex:Loc RecordText}" Click="RecordBtn_Click" Width="Auto"/>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Button x:Name="clearStepsBtn" Content="{lex:Loc Clear}" Click="ClearStepsBtn_Click" Width="Auto"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="loadPresetBtn" Content="{lex:Loc RecordBox.LoadPreset}" Click="LoadPresetBtn_Click" Margin="0 0 4 0">
+                            <Button.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="cycleProgPresetMenuItem" Header="Cycle Programs" Click="CycleProgPresetMenuItem_Click" />
+                                    <MenuItem x:Name="loadPresetFromFileMenuItem" Header="From File..." Click="LoadPresetFromFileMenuItem_Click" />
+                                </ContextMenu>
+                            </Button.ContextMenu>
+                        </Button>
+                        <Button x:Name="savePresetBtn" Content="{lex:Loc RecordBox.SavePreset}" Click="SavePresetBtn_Click" Margin="4 0 0 0"/>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Button x:Name="addWaitTimeBtn" Content="{lex:Loc RecordBox.InsertWait}" Click="AddWaitTimeBtn_Click" Width="Auto"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Style="{DynamicResource BorderStyle}">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="recordDelaysCk" Content="{lex:Loc RecordBox.RecordDelays}" IsChecked="{Binding RecordDelays}"/>
+                        <!--<TextBlock Text="{lex:Loc RecordBox.DoubleClickWaitEdit}" />-->
+                        <ComboBox x:Name="macroModeCombo" SelectedIndex="{Binding MacroModeIndex,FallbackValue=0}" Width="Auto" Margin="8">
+                            <ComboBoxItem Content="{lex:Loc RecordBox.PlayOnce}" />
+                            <ComboBoxItem Content="{lex:Loc RecordBox.RepeatWhileHeld}" />
+                        </ComboBox>
+                        <CheckBox x:Name="useScanCode" Content="{lex:Loc ScanCode}" IsChecked="{Binding UseScanCode}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Bottom" Width="208" Margin="8">
+                <!--<StackPanel.Resources>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="0 4"/>
+                    </Style>
+
+                </StackPanel.Resources>-->
+
+                <StackPanel x:Name="mouseButtonsPanel" Orientation="Vertical">
+                    
+                    <Button x:Name="fourMouseBtn" Content="{lex:Loc RecordBox.FourthMB}" Width="Auto" Click="FourMouseBtn_Click" Margin="0 4"/>
+                 
+                    <Button x:Name="fiveMouseBtn" Content="{lex:Loc RecordBox.FifthMB}" Width="auto" Click="FiveMouseBtn_Click" Margin="0 4"/>
+                </StackPanel>
+
+                <StackPanel x:Name="extraConPanel" Margin="0 4">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 4">
+                        <Button x:Name="addRumbleBtn" Content="{lex:Loc RecordBox.AddRumble}" Width="130" Click="AddRumbleBtn_Click" />
+                        <Image Source="{Binding Source={StaticResource resourcePaths}, Path=LeftTouch}" Width="43" Visibility="Collapsed" d:Visibility="Visible"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 4 0 0">
+                        <Button x:Name="changeLightBtn" Content="{lex:Loc RecordBox.ChangeLightbarColor}" Width="130" Click="ChangeLightBtn_Click" />
+                        <Image Source="{Binding Source={StaticResource resourcePaths}, Path=LeftTouch}" Width="43" Visibility="Collapsed" d:Visibility="Visible"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
         </DockPanel>
+        
         <DockPanel x:Name="leftSideDockPanel" DockPanel.Dock="Left">
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="{lex:Loc RecordBox.MacroOrder}" />
                 <Label Content="{lex:Loc RecordBox.UseActionToRecord}" DockPanel.Dock="Right" HorizontalAlignment="Right" />
             </DockPanel>
-            <ListBox x:Name="macroListBox" ItemsSource="{Binding MacroSteps}" SelectedIndex="{Binding MacroStepIndex}"
+            <Border Style="{DynamicResource BorderStyle}">
+                <ListBox x:Name="macroListBox" ItemsSource="{Binding MacroSteps}" SelectedIndex="{Binding MacroStepIndex}"
                      ItemTemplate="{StaticResource DisplayTemplate}" MouseDoubleClick="MacroListBox_MouseDoubleClick"
+                         BorderThickness="0"
+                         Background="Transparent"
                      LostFocus="MacroListBox_LostFocus">
-            </ListBox>
+                </ListBox>
+            </Border>
         </DockPanel>
     </DockPanel>
 </UserControl>

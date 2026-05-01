@@ -11,7 +11,9 @@
         mc:Ignorable="d"
         Title="{lex:Loc RecordBoxWin.WinTitle}" Height="450" Width="800"
         Style="{DynamicResource WindowStyle}"
+        UseLayoutRounding="True"
         WindowStartupLocation="CenterOwner">
+    
     <DockPanel x:Name="mainPanel">
 
     </DockPanel>

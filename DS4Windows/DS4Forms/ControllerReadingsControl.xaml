@@ -9,6 +9,7 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
              mc:Ignorable="d"
+             UseLayoutRounding="True"
              Background="{DynamicResource BackgroundColor}">
 
     <Grid Width="Auto">
@@ -224,11 +225,11 @@
                             </StackPanel>
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="I: " Width="30" />
+                                    <Label Content="I: " />
                                     <Label x:Name="l2InValLb" Content="" Width="30" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="O: " Width="30" />
+                                    <Label Content="O: " />
                                     <Label x:Name="l2OutValLb" Content="" Width="30" />
                                 </StackPanel>
                             </StackPanel>
@@ -251,11 +252,11 @@
 
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="I: " Width="30" />
+                                    <Label Content="I: "/>
                                     <Label x:Name="r2InValLb" Content="" Width="30" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="O: " Width="30" />
+                                    <Label Content="O: " />
                                     <Label x:Name="r2OutValLb" Content="" Width="30" />
                                 </StackPanel>
                             </StackPanel>
@@ -267,11 +268,11 @@
                             </StackPanel>
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="TX: " Width="30" />
+                                    <Label Content="TX: " />
                                     <Label x:Name="touchXValLb" Content="" Width="50" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="TY: " Width="30" />
+                                    <Label Content="TY: " />
                                     <Label x:Name="touchYValLb" Content="" Width="50" />
                                 </StackPanel>
                             </StackPanel>

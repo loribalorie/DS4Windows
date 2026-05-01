@@ -6,26 +6,31 @@
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         mc:Ignorable="d"
-        Title="{lex:LocExtension HotkeysAbout}" Height="450" Width="800"
+        Title="{lex:LocExtension HotkeysAbout}"
+        Height="600" Width="800"
         Style="{DynamicResource WindowStyle}"
         WindowStartupLocation="CenterScreen"
-        d:Height="Auto">
-    <DockPanel LastChildFill="True">
+        MinHeight="600"
+        ResizeMode="NoResize"
+        UseLayoutRounding="True">
+    
+    <DockPanel LastChildFill="True" Margin="8">
         <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
             <Label x:Name="headerLb" Content="DS4Windows - loribalorie Build "
                Margin="5,0"
-               HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="15"/>
+               HorizontalAlignment="Left" FontWeight="Medium" FontSize="15"/>
         </StackPanel>
 
-        <Grid DockPanel.Dock="Bottom" Height="36">
+        <Grid DockPanel.Dock="Bottom" Margin="0 8 0 0">
             <Button Content="Close" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        
-        <TabControl Background="{DynamicResource ContentBackgroundColor}" DockPanel.Dock="Top">
-            <TabItem Header="Hotkeys">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                    <TextBlock TextWrapping="Wrap"
+        <Border Style="{DynamicResource BorderStyle}" Padding="4">
+            <TabControl Background="{DynamicResource ContentBackgroundColor}" DockPanel.Dock="Top">
+                <TabItem Header="Hotkeys">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                        <TextBlock TextWrapping="Wrap"
                                Padding="10"
                                Foreground="{DynamicResource ForegroundColor}"
                                Background="{DynamicResource ContentBackgroundColor}"
@@ -46,13 +51,13 @@ Toggle: The key will remain in a "held down" state until pressed again
 Macro: Assign multiple keys to one input
 Scan Code: Keys are interpreted differently.
 May be needed for certain games *If enabled
-                    </TextBlock>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="License">
-                <ScrollViewer VerticalScrollBarVisibility="Visible">
-                    <Grid >
-                        <TextBox TextAlignment="Center" Background="{DynamicResource ContentBackgroundColor}"
+                        </TextBlock>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="License">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                        <Grid >
+                            <TextBox TextAlignment="Center" Background="{DynamicResource ContentBackgroundColor}"
                                  xml:space="preserve"
                                  IsReadOnly="True">
 GNU GENERAL PUBLIC LICENSE
@@ -730,29 +735,34 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;https://www.gnu.org/licenses/why-not-lgpl.html&gt;.
                 </TextBox>
-                    </Grid>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Credits">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Margin="30,10">
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Credits">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top">
 
-                        <WrapPanel Orientation="Vertical" Height="50">
-                            <!-- <TextBlock><Hyperlink x:Name="siteLink" Click="SiteLink_Click" Foreground="{DynamicResource AccentColor}">Site</Hyperlink></TextBlock> -->
-                            <TextBlock Margin="10,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click" Foreground="{DynamicResource AccentColor}">Source</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink Click="Ryochan7Link_Click" Foreground="{DynamicResource AccentColor}">Ryochan7</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" Foreground="{DynamicResource AccentColor}">Jays2Kings</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink x:Name="schmaldeoLink" Click="schmaldeoLink_Click" Foreground="{DynamicResource AccentColor}">schmaldeo</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" Foreground="{DynamicResource AccentColor}">InhexSTER (Starter of DS4Tool)</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink x:Name="electrobrainsLink" Click="ElectrobrainsLink_Click" Foreground="{DynamicResource AccentColor}">electrobrains (Branched off of)</Hyperlink></TextBlock>
-                            <TextBlock Margin="10,0"><Hyperlink Click="ContributorsLink_OnClick" Foreground="{DynamicResource AccentColor}">Contributors</Hyperlink></TextBlock>
-                        </WrapPanel>
+                            <WrapPanel Orientation="Vertical" Height="50" Margin="8 16 8 8">
+                                <WrapPanel.Resources>
+                                    <Style TargetType="Hyperlink">
+                                        <Setter Property="Foreground" Value="{DynamicResource AccentColorActive}"/>
+                                    </Style>
+                                </WrapPanel.Resources>
+                                <!-- <TextBlock><Hyperlink x:Name="siteLink" Click="SiteLink_Click" Foreground="{DynamicResource AccentColor}">Site</Hyperlink></TextBlock> -->
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click">Source</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink Click="Ryochan7Link_Click" >Ryochan7</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" >Jays2Kings</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="schmaldeoLink" Click="schmaldeoLink_Click" >schmaldeo</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" >InhexSTER (Starter of DS4Tool)</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="electrobrainsLink" Click="ElectrobrainsLink_Click" >electrobrains (Branched off of)</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink Click="ContributorsLink_OnClick" >Contributors</Hyperlink></TextBlock>
+                            </WrapPanel>
 
-                    </StackPanel>
-                    <GroupBox Header="Translators" Margin="20,5,20,0">
+                        </StackPanel>
+                        <GroupBox Header="Translators" Margin="8" Background="{DynamicResource BackgroundColor}">
 
-                        <StackPanel Orientation="Vertical">
-                            <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True"
+                            <StackPanel Orientation="Vertical">
+                                <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True"
                                  BorderThickness="0" Background="Transparent"
                              DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">xLive - Arabic
 mayawei - Chinese
@@ -770,168 +780,173 @@ peter9811 - Spanish
 dondrakon, DragonZX, shikulja - Russian
 dondrakon - Ukranian
                     </TextBox>
-                        </StackPanel>
-                    </GroupBox>
-                </DockPanel>
-            </TabItem>
-            <TabItem Header="Extras">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="20,10">
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-                            </Style>
-                            <Style TargetType="Border">
-                                <Setter Property="Background" Value="{DynamicResource ContentBackgroundColor}"/>
-                            </Style>
-                        </StackPanel.Resources>
-                        
-                        <Border BorderThickness="1" CornerRadius="10">
-                            <StackPanel Margin="8">
-                                <TextBlock Text="ViGEmBus" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                            </StackPanel>
+                        </GroupBox>
+                    </DockPanel>
+                </TabItem>
+                
+                <TabItem Header="Extras">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Border Style="{DynamicResource BorderStyle}" Background="{DynamicResource BackgroundColor}" Margin="8 16">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                                    </Style>
+                                    <!--<Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                                        --><!--<Setter Property="Background" Value="{DynamicResource ContentBackgroundColor}"/>--><!--
+                                    </Style>-->
+                                    <Style TargetType="Border" BasedOn="{StaticResource BorderStyle}">
+                                        <Setter Property="Margin" Value="0 0 0 8"/>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="ViGEmBus" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="viGEmBusLink" Click="ViGEmBusLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/nefarius/ViGEmBus/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                                <Expander Header="Description" Margin="0,8,0,0">
-                                    <Expander.Content>
-                                        <TextBlock TextWrapping="Wrap">
-                                            <TextBlock.Text>
-                                                Driver that provides virtual gamepad support system-wide. Used by many controller mapping applications. Written by nefarius
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Expander.Content>
-                                </Expander>
-                            </StackPanel>
-                        </Border>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <Expander Header="Description" Margin="0,8,0,0">
+                                            <Expander.Content>
+                                                <TextBlock TextWrapping="Wrap">
+                                                    <TextBlock.Text>
+                                                        Driver that provides virtual gamepad support system-wide. Used by many controller mapping applications. Written by nefarius
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </Expander.Content>
+                                        </Expander>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0">
-                            <StackPanel Margin="8">
-                                <TextBlock Text="HidHide" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="HidHide" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="hidHideLink" Click="HidHideLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/nefarius/HidHide/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                                <Expander Header="Description" Margin="0,8,0,0">
-                                    <Expander.Content>
-                                        <TextBlock TextWrapping="Wrap">
-                                            <TextBlock.Text>
-                                                Use HidHide to configure and hide any input controllers from other apps running on your system.
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <Expander Header="Description" Margin="0,8,0,0">
+                                            <Expander.Content>
+                                                <TextBlock TextWrapping="Wrap">
+                                                    <TextBlock.Text>
+                                                        Use HidHide to configure and hide any input controllers from other apps running on your system.
                                                 Some games require only one controller to be present or double input will cause problems in game. Written by nefarius.
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Expander.Content>
-                                </Expander>
-                            </StackPanel>
-                        </Border>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </Expander.Content>
+                                        </Expander>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="FakerInput" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border >
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="FakerInput" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="fakerInputLink" Click="FakerInputLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/Ryochan7/FakerInput/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                                <Expander Header="Description" Margin="0,8,0,0">
-                                    <Expander.Content>
-                                        <TextBlock TextWrapping="Wrap">
-                                            <TextBlock.Text>
-                                                Use FakerInput driver to expose system-wide virtual keyboard, relative mouse, and absolute mouse.
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <Expander Header="Description" Margin="0,8,0,0">
+                                            <Expander.Content>
+                                                <TextBlock TextWrapping="Wrap">
+                                                    <TextBlock.Text>
+                                                        Use FakerInput driver to expose system-wide virtual keyboard, relative mouse, and absolute mouse.
                                                 Allows virtual KB+M events to be usable in some situations when SendInput fails.
                                                 Such situations are elevated process and games, UAC prompts, and anti-cheat systems that block SendInput events.
                                                 Use of FakerInput is necessary to allow DS4Windows to work with some games with anti-cheat protection
                                                 like Valorant.
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Expander.Content>
-                                </Expander>
-                            </StackPanel>
-                        </Border>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </Expander.Content>
+                                        </Expander>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="CRC32" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border >
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="CRC32" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="crc32Link" Click="Crc32Link_Click" Foreground="{DynamicResource AccentColor}">https://github.com/dariogriffo/Crc32</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="1&#x20ac; Filter" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="1&#x20ac; Filter" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="oneEuroLink" Click="OneEuroLink_Click" Foreground="{DynamicResource AccentColor}">http://cristal.univ-lille.fr/~casiez/1euro/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="H.NotifyIcon" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="H.NotifyIcon" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="hNotifyIconLink" Click="HNotifyIconLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/HavenDV/H.NotifyIcon/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="vJoyInterfaceCS" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border >
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="vJoyInterfaceCS" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="vjoyInterfaceLink" Click="VJoyInterfaceLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/shauleiz/vJoy/tree/master/apps/common/vJoyInterfaceCS</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="C#/Win32" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="C#/Win32" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="csWin32InterfaceLink" Click="csWin32InterfaceLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/microsoft/CsWin32S</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                        
-                        
-                        <Border BorderThickness="1" CornerRadius="10" Margin="0,8,0,0" >
-                            <StackPanel Margin="8">
-                                <TextBlock Text="WpfExToolkit" FontSize="18" FontWeight="Bold" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="Project URL:" />
-                                    <TextBlock Margin="8,0,0,0">
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+
+                                <Border>
+                                    <StackPanel Margin="8">
+                                        <TextBlock Text="WpfExToolkit" FontSize="18" FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                            <TextBlock Text="Project URL:" />
+                                            <TextBlock Margin="8,0,0,0">
                                     <Hyperlink x:Name="wpfExToolkitInterfaceLink" Click="wpfExToolkitInterfaceLink_Click" Foreground="{DynamicResource AccentColor}">https://github.com/dotnetprojects/WpfExtendedToolkit</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
                             </StackPanel>
                         </Border>
-                    </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </Border>
 
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-
-        
     </DockPanel>
 </Window>

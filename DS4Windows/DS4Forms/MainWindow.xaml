@@ -16,6 +16,7 @@
         xml:lang="en-US"
         mc:Ignorable="d"
         
+        Style="{DynamicResource WindowStyle}"
         Title="DS4Windows (Dev Build)" 
         Closing="MainDS4Window_Closing"
         Closed="MainDS4Window_Closed"
@@ -25,10 +26,8 @@
         
         MinWidth="1000"
         MinHeight="800"
-        
-        d:Height="Auto"
-        UseLayoutRounding="True"
-        Style="{DynamicResource WindowStyle}">
+        Width="1000"
+        UseLayoutRounding="True">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -391,13 +390,11 @@
                      IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
                 <DockPanel LastChildFill="True">
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                   VerticalScrollBarVisibility="Auto">
 
-                        <WrapPanel Orientation="Vertical"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Top"
-                                   Width="830" Height="1100">
+                        <WrapPanel Orientation="Vertical" Height="1000"
+                                   HorizontalAlignment="Center">
 
                             <!--<WrapPanel.Resources>
                                 <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBox_Toggle_Style_2}"/>
@@ -412,8 +409,8 @@
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
 
                                     <Button x:Name="deviceOptionSettingsBtn"
-                                        Width="150" Margin="0,0,0,10"
-                                        HorizontalAlignment="Left"
+                                        Width="200" Margin="0,0,0,10"
+                                        HorizontalAlignment="Center"
                                         Content="{lex:Loc DeviceOptions}"
                                         Click="DeviceOptionSettingsBtn_Click" />
 
@@ -770,19 +767,19 @@
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left"
                                   Height="auto">
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Vertical">
                                     <StackPanel>
-                                        <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap"/>
-
+                                        <TextBox x:Name="fakeExeNameTxt" Height="24" Margin="5,5" Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Expander Header="Guide">
+                                            <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap"/>
+                                        </Expander>
                                         <!--<Button x:Name="fakeExeNameExplainBtn" Width="50" Height="50" Click="FakeExeNameExplainBtn_Click">
                                     <Image Source="{Binding QuestionMarkSource, Mode=OneTime}" Width="40" Height="40" Stretch="UniformToFill" />
                                      </Button>-->
                                     </StackPanel>
-                                    <StackPanel>
-                                        <TextBox x:Name="fakeExeNameTxt" Height="24"
-                                                 Margin="5,5"
-                                                 Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
-                                    </StackPanel>
+                                    
                                 </StackPanel>
                             </GroupBox>
 

@@ -1634,7 +1634,7 @@
 
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="5"
-                            Padding="8 4 8 8">
+                            Padding="10 6 10 10">
 
                         <Grid ShowGridLines="False" Margin="0">
 
@@ -2203,7 +2203,7 @@
     <!-- Window Style -->
     <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
+        <!--<Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />-->
     </Style>
 
     <!-- Now apply custom styles -->

@@ -8,37 +8,53 @@
         lex:LocalizeDictionary.DesignCulture=""
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+        Background="{DynamicResource BackgroundColor}"
         mc:Ignorable="d"
         Title="{lex:Loc SaveWhere.WinTitle}"
-        Height="225" Width="453"
+        Height="330"
+        Width="550"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        Style="{DynamicResource WindowStyle}">
-    <StackPanel Margin="10">
-        <DockPanel x:Name="multipleSavesDockP"
-                   Margin="4,0">
-            <Label Content="{lex:Loc SaveWhere.MultipleSaves}"
-                   VerticalContentAlignment="Center"/>
-            <CheckBox x:Name="dontDeleteCk"
+        WindowStartupLocation="CenterScreen">
+    
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Border x:Name="multipleSavesDockP" d:Visibility="Visible" Margin="0 0 0 10"
+                Style="{DynamicResource BorderStyle}" Background="{DynamicResource AccentColor}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <Label Content="{lex:Loc SaveWhere.MultipleSaves}"
+                       VerticalContentAlignment="Center" FontWeight="Medium" FontSize="15"/>
+                <CheckBox x:Name="dontDeleteCk"
                       Content="{lex:Loc SaveWhere.DontDelete}"
-                      DockPanel.Dock="Right"
-                      HorizontalAlignment="Right"
                       VerticalAlignment="Center" />
-        </DockPanel>
-        <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}"
-                   TextWrapping="Wrap" HorizontalAlignment="Center" Margin="4,10,4,0" TextAlignment="Center" />
-        <DockPanel Margin="4,10,4,0">
-            <StackPanel x:Name="progFolderPanel" Width="200">
-                <Button x:Name="progFolderBtn" Content="{lex:Loc ProgramFolder}" Click="ProgFolderBtn_Click" />
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{lex:Loc SaveWhere.ProgramFolderDescText}">
-                </TextBlock>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Width="200">
-                <Button x:Name="appdataBtn" Content="{lex:Loc Appdata}" Click="AppdataBtn_Click" />
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
-                           Text="{lex:Loc SaveWhere.AppDataDescText}">
-                </TextBlock>
-            </StackPanel>
-        </DockPanel>
+        </Border>
+
+        <StackPanel>
+            <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}"
+                   TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"
+                       FontWeight="Medium" FontSize="15"/> 
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+
+            <Border Style="{DynamicResource BorderStyle}" Margin="0 0 4 0" Width="250" Height="150">
+                <StackPanel x:Name="progFolderPanel">
+                    <Button x:Name="progFolderBtn" Content="{lex:Loc ProgramFolder}" Click="ProgFolderBtn_Click"
+                            Height="30" Width="130" Margin="0 15 0 0"/>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{lex:Loc SaveWhere.ProgramFolderDescText}"
+                               Margin="8"/>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{DynamicResource BorderStyle}" Margin="4 0 0 0" Width="250" Height="150">
+                <StackPanel DockPanel.Dock="Right" Margin="0 15 0 0">
+                    <Button x:Name="appdataBtn" Content="{lex:Loc Appdata}" Click="AppdataBtn_Click"
+                            Height="30" Width="130"/>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                               Text="{lex:Loc SaveWhere.AppDataDescText}"
+                               Margin="8"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </StackPanel>
 </Window>

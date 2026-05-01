@@ -973,7 +973,8 @@ namespace DS4WinWPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to , other location files will be deleted.
+        ///   Looks up a localized string similar to ,
+        ///other location files will be deleted.
         /// </summary>
         public static string OtherFileLocation {
             get {

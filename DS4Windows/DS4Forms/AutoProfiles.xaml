@@ -11,278 +11,295 @@
              xmlns:entity="clr-namespace:DS4WinWPF"
              mc:Ignorable="d" 
              d:DesignWidth="800"
+             d:Height="Auto"
+             UseLayoutRounding="True"
              Background="{DynamicResource BackgroundColor}">
     
-    <DockPanel>
+    <DockPanel Margin="8">
 
-        <ScrollViewer x:Name="sidebarScrollViewer"
-                        DockPanel.Dock="Right" Width="260"
-                        Margin="8" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="outerEditControlsPanel">
-                <StackPanel.Resources>
-                    <CollectionViewSource x:Key="profileCollection" Source="{Binding ProfileList.ProfileListCol,Mode=OneWay}" />
-                </StackPanel.Resources>
+            <ScrollViewer x:Name="sidebarScrollViewer" Width="260" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+                <StackPanel x:Name="outerEditControlsPanel">
+                    <StackPanel.Resources>
+                        <CollectionViewSource x:Key="profileCollection" Source="{Binding ProfileList.ProfileListCol,Mode=OneWay}" />
+                    </StackPanel.Resources>
 
-                <StackPanel x:Name="editControlsPanel" IsEnabled="False">
-                        
-                    <DockPanel HorizontalAlignment="Stretch" Height="30">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="removeAutoBtn" Content="{lex:Loc Remove}" Width="80"
-                                IsEnabled="{Binding Exists}" Click="RemoveAutoBtn_Click"
-                                Margin="5 0"/>
-                        <Button x:Name="saveAutoBtn" Content="{lex:Loc Save}"  Width="80"
-                                Click="SaveAutoBtn_Click"
-                                Margin="5 0"/>
-                    </StackPanel>
-                    </DockPanel>
-                    <Grid x:Name="autoProfilesGrid" Margin="15,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="editControlsPanel" IsEnabled="False" d:IsEnabled="True">
 
-                        <Label Content="{lex:Loc Controller1Text}" />
-                        <Label Content="{lex:Loc Controller2Text}" Grid.Row="1"/>
-                        <Label Content="{lex:Loc Controller3Text}" Grid.Row="2"/>
-                        <Label Content="{lex:Loc Controller4Text}" Grid.Row="3"/>
-                        <Label Content="{lex:Loc Controller5Text}" Grid.Row="4" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
-                        <Label Content="{lex:Loc Controller6Text}" Grid.Row="5" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
-                        <Label Content="{lex:Loc Controller7Text}" Grid.Row="6" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}"/>
-                        <Label Content="{lex:Loc Controller8Text}" Grid.Row="7" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
+                        <DockPanel HorizontalAlignment="Stretch" Margin="0 8 0 0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="removeAutoBtn" Content="{lex:Loc Remove}" IsEnabled="{Binding Exists}" Click="RemoveAutoBtn_Click" Margin="4 0"/>
+                                <Button x:Name="saveAutoBtn" Content="{lex:Loc Save}" Click="SaveAutoBtn_Click" Margin="4 0"/>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <Border Style="{DynamicResource BorderStyle}" Margin="8 8 0 0">
+                            <Grid x:Name="autoProfilesGrid" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="{lex:Loc Controller1Text}" />
+                                <Label Content="{lex:Loc Controller2Text}" Grid.Row="1"/>
+                                <Label Content="{lex:Loc Controller3Text}" Grid.Row="2"/>
+                                <Label Content="{lex:Loc Controller4Text}" Grid.Row="3"/>
+                                <Label Content="{lex:Loc Controller5Text}" Grid.Row="4" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
+                                <Label Content="{lex:Loc Controller6Text}" Grid.Row="5" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
+                                <Label Content="{lex:Loc Controller7Text}" Grid.Row="6" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}"/>
+                                <Label Content="{lex:Loc Controller8Text}" Grid.Row="7" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" />
 
 
-                        <ComboBox x:Name="cont1AutoProf" Grid.Column="1"
-                            SelectedIndex="{Binding SelectedIndexCon1}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
+                                <ComboBox x:Name="cont1AutoProf" Grid.Column="1"
+                                SelectedIndex="{Binding SelectedIndexCon1}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
 
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer x:Name="cont1AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer x:Name="cont1AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
 
-                        <ComboBox x:Name="cont2AutoProf" Grid.Row="1" Grid.Column="1"
-                            SelectedIndex="{Binding SelectedIndexCon2}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
+                                <ComboBox x:Name="cont2AutoProf" Grid.Row="1" Grid.Column="1"
+                                SelectedIndex="{Binding SelectedIndexCon2}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
 
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer x:Name="cont2AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-                        
-                        <ComboBox x:Name="cont3AutoProf" Grid.Row="2" Grid.Column="1"
-                            SelectedIndex="{Binding SelectedIndexCon3}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer x:Name="cont2AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
 
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer x:Name="cont3AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-                        
-                        <ComboBox x:Name="cont4AutoProf" Grid.Row="3" Grid.Column="1"
-                            SelectedIndex="{Binding SelectedIndexCon4}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
+                                <ComboBox x:Name="cont3AutoProf" Grid.Row="2" Grid.Column="1"
+                                SelectedIndex="{Binding SelectedIndexCon3}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
 
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer x:Name="cont4AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer x:Name="cont3AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cont4AutoProf" Grid.Row="3" Grid.Column="1"
+                                SelectedIndex="{Binding SelectedIndexCon4}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
+
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer x:Name="cont4AutoProfCol" Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cont5AutoProf" Grid.Row="4" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
+                                SelectedIndex="{Binding SelectedIndexCon5}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
+
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cont6AutoProf" Grid.Row="5" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}"
+                                SelectedIndex="{Binding SelectedIndexCon6}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
+
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cont7AutoProf" Grid.Row="6" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
+                                SelectedIndex="{Binding SelectedIndexCon7}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
+
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cont8AutoProf" Grid.Row="7" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
+                                SelectedIndex="{Binding SelectedIndexCon8}"
+                                      Width="Auto">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                                            <TextBlock Text="{Binding Content}" />
+                                        </DataTemplate>
+
+                                        <DataTemplate DataType="{x:Type entity:ProfileEntity}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content="(none)"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+                            </Grid>
+
+                        </Border>
+
+                   
+                        <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                            <CheckBox IsChecked="{Binding Turnoff}">
+                                <TextBlock Text="{lex:Loc TurnOffDS4WindowsTemporarily}" TextWrapping="Wrap"/>
+                            </CheckBox>
+                        </Border>
                     
-                        <ComboBox x:Name="cont5AutoProf" Grid.Row="4" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
-                            SelectedIndex="{Binding SelectedIndexCon5}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
-
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-
-                        <ComboBox x:Name="cont6AutoProf" Grid.Row="5" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}"
-                            SelectedIndex="{Binding SelectedIndexCon6}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
-
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-
-                        <ComboBox x:Name="cont7AutoProf" Grid.Row="6" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
-                            SelectedIndex="{Binding SelectedIndexCon7}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
-
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-
-                        <ComboBox x:Name="cont8AutoProf" Grid.Row="7" Grid.Column="1" Visibility="{Binding ExpandedControllersVisible, Mode=OneWay}" 
-                            SelectedIndex="{Binding SelectedIndexCon8}"
-                                  Width="Auto">
-                            <ComboBox.Resources>
-                                <DataTemplate DataType="{x:Type ComboBoxItem}">
-                                    <TextBlock Text="{Binding Content}" />
-                                </DataTemplate>
-
-                                <DataTemplate DataType="{x:Type entity:ProfileEntity}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <ComboBoxItem Content="(none)"/>
-                                    <CollectionContainer Collection="{Binding Source={StaticResource profileCollection}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-                    </Grid>
-
-
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <CheckBox Content="{lex:Loc TurnOffDS4WindowsTemporarily}"
-                            IsChecked="{Binding Turnoff}" />
-                        <TextBox Text="{Binding Path}" Height="24">
-                            <TextBox.ToolTip>
-                                <TextBlock Text="{lex:Loc AutoProfPathTip}"/>
-                            </TextBox.ToolTip>
-                        </TextBox>
-
-                        <Grid>
-                            <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}"
-                                Height="24">
+                        <GroupBox Header="Path" Margin=" 8 8 0 0">
+                            <TextBox Text="{Binding Path}" Height="30">
                                 <TextBox.ToolTip>
-                                    <TextBlock Text="{lex:Loc AutoProfTitleTip}"/>
+                                    <TextBlock Text="{lex:Loc AutoProfPathTip}"/>
                                 </TextBox.ToolTip>
                             </TextBox>
+                        </GroupBox>
+                        
+                        <GroupBox Header="Window Title" Margin=" 8 8 0 0">
+                            <Grid>
+                                <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}" Height="30">
+                                    <TextBox.ToolTip>
+                                        <TextBlock Text="{lex:Loc AutoProfTitleTip}"/>
+                                    </TextBox.ToolTip>
+                                </TextBox>
 
-                            <TextBlock Text="Window title..." Foreground="{DynamicResource ForegroundColor}"
-                                    Height="24"
-                                      
-                                    Opacity="0.7" IsHitTestVisible="False">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
+                                <!--<TextBlock Text="Window title..." Foreground="{DynamicResource ForegroundColor}"
+                                           Height="30" Opacity="0.7" IsHitTestVisible="False">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="False">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
 
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="False">
-                                                <Setter Property="Visibility" Value="Hidden" />
-                                            </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>-->
 
-                                            <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                            </Grid>
+                        </GroupBox>
+                    
+                            
+                        <!--<Border Height="4" Background="{DynamicResource BorderColor}" Margin="0,10,0,0" />-->
+                    
+                </StackPanel>
 
-                        </Grid>
+                
+                    
+                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                    <CheckBox x:Name="revertDefaultProfileOnUnknownCk" Height="Auto"
+                                IsChecked="{Binding RevertDefaultProfileOnUnknown}">
+                        <TextBlock Text="{lex:Loc RevertToDefaultProfileOnUnknown}" TextWrapping="Wrap"/>
+                    </CheckBox>
+                </Border>
+
+                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                    <CheckBox x:Name="showAutoDebugCk"
+                                Click="ShowAutoDebugCk_Click" Height="Auto">
+                        <TextBlock Text="{lex:Loc ShowAutoProfileDebugMessages}" TextWrapping="Wrap"/>
+                    </CheckBox>
+                </Border>
+
+                <GroupBox Header="{lex:Loc AutoProfiles.DisplaySwitchVia}"  Margin=" 8 8 0 0">
+                    <StackPanel Orientation="Vertical">
+                        <ComboBox ItemsSource="{Binding DisplayProfileSwitchList}" DisplayMemberPath="DisplayName" SelectedValuePath="ChoiceValue" SelectedValue="{Binding ProfileSwitchChoice}" Width="Auto"/>
                     </StackPanel>
-                    <!--<Border Height="4" Background="{DynamicResource BorderColor}" Margin="0,10,0,0" />-->
-                </StackPanel>
+                </GroupBox>
+                
+                
 
-            <StackPanel Orientation="Vertical">
-                <CheckBox x:Name="revertDefaultProfileOnUnknownCk" Content="{lex:Loc RevertToDefaultProfileOnUnknown}"
-                            IsChecked="{Binding RevertDefaultProfileOnUnknown}" />
-                <CheckBox x:Name="showAutoDebugCk" Content="{lex:Loc ShowAutoProfileDebugMessages}"
-                            Click="ShowAutoDebugCk_Click" />
-                <StackPanel Orientation="Vertical">
-                    <Label Content="{lex:Loc AutoProfiles.DisplaySwitchVia}" />
-                    <ComboBox ItemsSource="{Binding DisplayProfileSwitchList}"
-                                DisplayMemberPath="DisplayName" SelectedValuePath="ChoiceValue"
-                            SelectedValue="{Binding ProfileSwitchChoice}" />
-                </StackPanel>
             </StackPanel>
+            </ScrollViewer>
 
-        </StackPanel>
-        </ScrollViewer>
-
-        <DockPanel Width="Auto">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="8">
+        <DockPanel Width="Auto" LastChildFill="True">
+                 
+            <StackPanel Orientation="Horizontal" Margin="0 8 0 8" DockPanel.Dock="Top">
                 <Button x:Name="addProgramsBtn" Content="{lex:Loc AddPrograms}" Click="AddProgramsBtn_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
@@ -295,34 +312,38 @@
                 </Button>
                 <Button x:Name="hideUncheckedBtn" Content="{lex:Loc HideUnchecked}" Margin="6,0,0,0" Click="HideUncheckedBtn_Click" />
             </StackPanel>
-            <ListView x:Name="programListLV" ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                      ScrollViewer.CanContentScroll="True" SelectedIndex="{Binding SelectedIndex}"
-                      SelectedItem="{Binding SelectedItem}"
-                      BorderThickness="0">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="{lex:Loc Name}" Width="150">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding Exists,Mode=OneWay}" IsEnabled="False" Margin="0,10,0,0" />
-                                        <Image Source="{Binding Exeicon}" Width="30" Margin="0,0,10,0" />
-                                        <TextBlock Text="{Binding Filename}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="{lex:Loc Path}" Width="150" DisplayMemberBinding="{Binding Path}"/>
-                        <GridViewColumn Header="{lex:Loc WindowTitle}" Width="150" DisplayMemberBinding="{Binding Title}"/>
-                    </GridView>
-                </ListView.View>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="{lex:Loc MoveUp}" Name="MoveUp" Click="MoveUpDownAutoBtn_Click"/>
-                        <MenuItem Header="{lex:Loc MoveDown}" Name="MoveDown" Click="MoveUpDownAutoBtn_Click"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-            </ListView>
+
+            <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top">
+                
+                <ListView x:Name="programListLV" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedItem}" BorderThickness="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{lex:Loc Name}" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox IsChecked="{Binding Exists,Mode=OneWay}" IsEnabled="False" Margin="0,10,0,0" />
+                                            <Image Source="{Binding Exeicon}" Width="30" Margin="0,0,10,0" />
+                                            <TextBlock Text="{Binding Filename}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{lex:Loc Path}" Width="150" DisplayMemberBinding="{Binding Path}"/>
+                            <GridViewColumn Header="{lex:Loc WindowTitle}" Width="150" DisplayMemberBinding="{Binding Title}"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{lex:Loc MoveUp}" Name="MoveUp" Click="MoveUpDownAutoBtn_Click"/>
+                            <MenuItem Header="{lex:Loc MoveDown}" Name="MoveDown" Click="MoveUpDownAutoBtn_Click"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+                
+            </Border>
+         
+            
         </DockPanel>
     </DockPanel>
 </UserControl>

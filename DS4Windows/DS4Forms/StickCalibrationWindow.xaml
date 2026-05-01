@@ -9,35 +9,32 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Stick Calibration" Height="140" Width="300"
+        Title="Stick Calibration"
+        Height="170" Width="300"
+        UseLayoutRounding="True"
+        WindowStartupLocation="CenterOwner"
         Style="{DynamicResource WindowStyle}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="30px"/>
-        </Grid.RowDefinitions>
+    
+    <DockPanel Margin="8" LastChildFill="False">
 
-        <TextBlock Grid.ColumnSpan="3"
-                   Margin="10" TextWrapping="Wrap">
-            Please move your stick to the sides and release it a few times, then after you are done press Save.
-        </TextBlock>
+        <GroupBox Header="Stick Calibration" DockPanel.Dock="Top">
+            <TextBlock TextWrapping="Wrap">
+            Please move your stick to the sides and release it a few times, then after you are done press Save button.
+            </TextBlock>
+        </GroupBox>
 
-        <Button Grid.Row="1" Grid.Column="1"
-                Content="Cancel"
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+            <Button Content="Cancel"
                 Click="CloseButton_OnClick"
                 VerticalAlignment="Center"
                 Width="80"
                 HorizontalAlignment="Center"/>
-        <Button Grid.Row="1" Grid.Column="2"
-                HorizontalAlignment="Center"
+            <Button HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                    Margin="8 0 0 0"
                 Width="80"
                 Content="Save"
                 Click="SaveButton_OnClick"/>
-    </Grid>
+        </StackPanel>
+    </DockPanel>
 </Window>

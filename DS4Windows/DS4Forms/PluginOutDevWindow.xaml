@@ -9,23 +9,30 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="PluginOutDevWindow" Height="200" Width="400"
-        Style="{DynamicResource WindowStyle}">
-    <DockPanel LastChildFill="False">
-        <TextBlock Text="{lex:Loc DeviceType}" DockPanel.Dock="Top" />
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="40" HorizontalAlignment="Right">
+        Style="{DynamicResource WindowStyle}"
+        UseLayoutRounding="True">
+    
+    <DockPanel LastChildFill="False" Margin="8">
+        
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0 8 0 0">
             <Button x:Name="acceptBtn" Content="{lex:Loc Accept}" Click="AcceptBtn_Click" />
-            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="20,0,0,0" />
+            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="8,0,0,0" />
         </StackPanel>
 
-        <ComboBox x:Name="devTypeCombo" SelectedIndex="0" DockPanel.Dock="Top">
-            <ComboBoxItem Tag="0" Content="X360" />
-            <ComboBoxItem Tag="1" Content="DS4" />
-        </ComboBox>
+        <GroupBox Header="{lex:Loc DeviceType}" DockPanel.Dock="Top">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <ComboBox x:Name="devTypeCombo" SelectedIndex="0" Margin="0 8 0 0" Width="200">
+                    <ComboBoxItem Tag="0" Content="X360" />
+                    <ComboBoxItem Tag="1" Content="DS4" />
+                </ComboBox>
 
-        <ComboBox x:Name="reserveTypeCombo" SelectedIndex="0" DockPanel.Dock="Top">
-            <ComboBoxItem Content="{lex:Loc Dynamic}" Tag="0" />
-            <ComboBoxItem Content="{lex:Loc Permanent}" Tag="1" />
-        </ComboBox>
+                <ComboBox x:Name="reserveTypeCombo" SelectedIndex="0"  Margin="0 8 0 8" Width="200">
+                    <ComboBoxItem Content="{lex:Loc Dynamic}" Tag="0" />
+                    <ComboBoxItem Content="{lex:Loc Permanent}" Tag="1" />
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
     </DockPanel>
 </Window>

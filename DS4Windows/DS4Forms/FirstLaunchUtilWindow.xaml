@@ -9,70 +9,82 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        Title="{lex:Loc FirstLaunch.WinTitle}" Height="500" Width="800"
+        Title="{lex:Loc FirstLaunch.WinTitle}"
+        Height="Auto" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowStyle}"
-        Background="{StaticResource BackgroundColor}"
-        Foreground="{StaticResource ForegroundColor}">
+        UseLayoutRounding="True">
+    
     <!-- Window will likely be used for other first launch configuration in the future.
          For now, only deal with device mapper support -->
-    <DockPanel>
-        <Button Content="{lex:Loc Close}" Click="Button_Click" DockPanel.Dock="Bottom" Margin="16,16,16,16" />
+    <DockPanel Margin="8">
+        <Button Content="Continue" Click="Button_Click" DockPanel.Dock="Bottom"/>
 
-        <TabControl Name="pagesTabControl" TabStripPlacement="Left">
-            <TabItem Header="{lex:Loc FirstLaunch.DeviceSupport}" Visibility="Collapsed">
+        <TabControl Name="pagesTabControl" TabStripPlacement="Left"
+                    Style="{DynamicResource HiddenTabControlStyle}">
+            <TabItem Header="{lex:Loc FirstLaunch.DeviceSupport}"
+                     Visibility="Collapsed">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{lex:Loc FirstLaunch.Header}" FontWeight="UltraBold" FontSize="16" HorizontalAlignment="Center"
+                    <TextBlock Text="{lex:Loc FirstLaunch.Header}" FontWeight="Medium" FontSize="20" HorizontalAlignment="Center"
                                Margin="0,8,0,0" DockPanel.Dock="Top" />
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,8,0,0">
-                        <StackPanel Orientation="Vertical" Margin="4">
-                            <TextBlock TextWrapping="Wrap"
-                                       DockPanel.Dock="Top">
-                                <TextBlock.Text>
-                                    <lex:Loc Key="FirstLaunch.DeviceIntroText"></lex:Loc>
-                                </TextBlock.Text>
-                            </TextBlock>
-
-                            <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}" Margin="0,16,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <CheckBox Name="ds4SupportEnableCkb" IsChecked="{Binding EnableDS4}" Content="{lex:Loc FirstLaunch.DS4EnableCkbLabel}" FontWeight="Bold" />
-                                    <TextBlock Text="{lex:Loc FirstLaunch.DS4EnableText}" Margin="0,8,0,0" />
-                                </StackPanel>
+                    
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                            <StackPanel Orientation="Vertical" Margin="8">
+                            
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                <TextBlock TextWrapping="Wrap" FontSize="14"
+                                       DockPanel.Dock="Top" Margin="8 0">
+                                    <TextBlock.Text>
+                                        <lex:Loc Key="FirstLaunch.DeviceIntroText"></lex:Loc>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Border>
 
-                            <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}" Margin="0,16,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <CheckBox Name="dualSenseSupportEnableCkb" IsChecked="{Binding EnableDualSense}" Content="{lex:Loc FirstLaunch.DSEnableCkbLabel}" FontWeight="Bold" />
-                                    <TextBlock Text="{lex:Loc FirstLaunch.DSEnableText}" Margin="0,8,0,0" />
-                                </StackPanel>
-                            </Border>
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox Name="ds4SupportEnableCkb" IsChecked="{Binding EnableDS4}" Content="{lex:Loc FirstLaunch.DS4EnableCkbLabel}" FontWeight="Bold" />
+                                        <TextBlock Text="{lex:Loc FirstLaunch.DS4EnableText}" Margin="50,0,0,0" />
+                                    </StackPanel>
+                                </Border>
 
-                            <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}" Margin="0,16,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <CheckBox Name="switchProSupportEnableCkb" IsChecked="{Binding EnableSwitchPro}" Content="{lex:Loc FirstLaunch.SwitchProEnableCkbLabel}" FontWeight="Bold" />
-                                    <TextBlock Text="{lex:Loc FirstLaunch.SwitchProEnableText}" Margin="0,8,0,0" />
-                                </StackPanel>
-                            </Border>
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox Name="dualSenseSupportEnableCkb" IsChecked="{Binding EnableDualSense}" Content="{lex:Loc FirstLaunch.DSEnableCkbLabel}" FontWeight="Bold" />
+                                        <TextBlock Text="{lex:Loc FirstLaunch.DSEnableText}" Margin="50,0,0,0" />
+                                    </StackPanel>
+                                </Border>
 
-                            <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}" Margin="0,16,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <CheckBox Name="joyConSupportEnableCkb" IsChecked="{Binding EnableJoyCon}" Content="{lex:Loc FirstLaunch.JoyConEnableCkbLabel}" FontWeight="Bold" />
-                                    <TextBlock Text="{lex:Loc FirstLaunch.JoyConEnableText}" Margin="0,8,0,0" />
-                                </StackPanel>
-                            </Border>
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox Name="switchProSupportEnableCkb" IsChecked="{Binding EnableSwitchPro}" Content="{lex:Loc FirstLaunch.SwitchProEnableCkbLabel}" FontWeight="Bold" />
+                                        <TextBlock Text="{lex:Loc FirstLaunch.SwitchProEnableText}" Margin="50,0,0,0" />
+                                    </StackPanel>
+                                </Border>
 
-                            <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}" Margin="0,16,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <CheckBox Name="ds3SupportEnableCkb" IsChecked="{Binding EnableDS3}" Content="{lex:Loc FirstLaunch.DS3EnableCkbLabel}" FontWeight="Bold" />
-                                    <TextBlock Text="{lex:Loc FirstLaunch.DS3EnableText}" Margin="0,8,0,0" />
-                                    <TextBlock>
-                                        <Hyperlink x:Name="dsHidMiniLink" Click="DsHidMiniLink_Click" Foreground="{DynamicResource AccentColor}">https://vigem.org/projects/DsHidMini/</Hyperlink>
-                                    </TextBlock>
-                                </StackPanel>
-                            </Border>
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox Name="joyConSupportEnableCkb" IsChecked="{Binding EnableJoyCon}" Content="{lex:Loc FirstLaunch.JoyConEnableCkbLabel}" FontWeight="Bold" />
+                                        <TextBlock Text="{lex:Loc FirstLaunch.JoyConEnableText}" Margin="50,0,0,0" />
+                                    </StackPanel>
+                                </Border>
 
-                        </StackPanel>
-                    </ScrollViewer>
+                            <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <CheckBox Name="ds3SupportEnableCkb" IsChecked="{Binding EnableDS3}" Content="{lex:Loc FirstLaunch.DS3EnableCkbLabel}" FontWeight="Bold" />
+                                        <TextBlock Text="{lex:Loc FirstLaunch.DS3EnableText}" Margin="50,0,0,0" />
+                                        <TextBlock Margin="50 0 0 0">
+                                        <Hyperlink x:Name="dsHidMiniLink" Click="DsHidMiniLink_Click" Foreground="{DynamicResource AccentColor}">
+                                            https://vigem.org/projects/DsHidMini/
+                                        </Hyperlink>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    
                 </StackPanel>
                 
             </TabItem>

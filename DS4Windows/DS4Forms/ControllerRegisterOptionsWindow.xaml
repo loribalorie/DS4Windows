@@ -11,6 +11,7 @@
         mc:Ignorable="d"
         Title="{lex:Loc ControllerRegOptWin.WinTitle}"
         Height="450" Width="600"
+        UseLayoutRounding="True"
         Style="{DynamicResource WindowStyle}"
         WindowStartupLocation="CenterOwner"
         Closed="Window_Closed">
