@@ -10,7 +10,7 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         mc:Ignorable="d"
-        Title="Select action" Height="580" Width="1120"
+        Title="Select action" Height="600" Width="1120"
         Closing="Window_Closing"
         ResizeMode="NoResize"
         Style="{DynamicResource WindowStyle}"

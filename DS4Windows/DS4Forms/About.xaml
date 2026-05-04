@@ -7,10 +7,10 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         mc:Ignorable="d"
         Title="{lex:LocExtension HotkeysAbout}"
-        Height="600" Width="800"
+        Height="600" Width="500"
         Style="{DynamicResource WindowStyle}"
-        WindowStartupLocation="CenterScreen"
-        MinHeight="600"
+        WindowStartupLocation="CenterOwner"
+        MinHeight="500"
         ResizeMode="NoResize"
         UseLayoutRounding="True">
     

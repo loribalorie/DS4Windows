@@ -24,9 +24,9 @@
         SizeChanged="MainDS4Window_SizeChanged"
         LocationChanged="MainDS4Window_LocationChanged"
         
-        MinWidth="1000"
+        MinWidth="950"
         MinHeight="800"
-        Width="1000"
+        Width="950"
         UseLayoutRounding="True">
 
     <Window.Resources>

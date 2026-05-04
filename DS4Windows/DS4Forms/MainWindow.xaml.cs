@@ -247,6 +247,7 @@ namespace DS4WinWPF.DS4Forms
             Dispatcher.Invoke(() =>
             {
                 var updaterWin = new UpdaterWindow(version);
+                updaterWin.Owner = App.Current.MainWindow;
                 updaterWin.ShowDialog();
                 result = updaterWin.Result;
             });
@@ -307,6 +308,7 @@ namespace DS4WinWPF.DS4Forms
                 Dispatcher.Invoke(() =>
                 {
                     UpdaterWindow updaterWin = new UpdaterWindow(newversion);
+                    updaterWin.Owner = App.Current.MainWindow;
                     updaterWin.ShowDialog();
                     result = updaterWin.Result;
                 });
@@ -838,7 +840,7 @@ namespace DS4WinWPF.DS4Forms
         private void AboutBtn_Click(object sender, RoutedEventArgs e)
         {
             About aboutWin = new About();
-            aboutWin.Owner = this;
+            aboutWin.Owner = App.Current.MainWindow;
             aboutWin.ShowDialog();
         }
 
@@ -1793,6 +1795,7 @@ namespace DS4WinWPF.DS4Forms
         private void ChecklogViewBtn_Click(object sender, RoutedEventArgs e)
         {
             ChangelogWindow changelogWin = new ChangelogWindow();
+            changelogWin.Owner = App.Current.MainWindow;
             changelogWin.ShowDialog();
         }
 
@@ -1820,6 +1823,7 @@ namespace DS4WinWPF.DS4Forms
                 {
                     RenameProfileWindow renameWin = new RenameProfileWindow();
                     renameWin.ChangeProfileName(entity.Name);
+                    renameWin.Owner = App.Current.MainWindow;
                     bool? result = renameWin.ShowDialog();
                     if (result.HasValue && result.Value)
                     {

@@ -14,6 +14,7 @@
     <SolidColorBrush x:Key="ForegroundColor" Color="#E9E9E9" />
     <SolidColorBrush x:Key="BackgroundColor" Color="#202020" />
     <SolidColorBrush x:Key="ContentBackgroundColor" Color="#2b2b2b"/>
+    <SolidColorBrush x:Key="DisabledColor" Color="#2a2a2a"/>
 
     <!--ScrollBar Brush-->
     <SolidColorBrush x:Key="ScrollBar.Static.Thumb" Color="#CDCDCD"/>
@@ -714,6 +715,68 @@
         </Setter>
         
     </Style>
+
+    <!--TabControl Grouup button style-->
+    <Style TargetType="{x:Type TabControl}" x:Key="TabButtonGroup_Style">
+        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Padding="16 8 16 0" Background="{TemplateBinding Background}" >
+                            <TabPanel IsItemsHost="True"/>
+                        </Border>
+                        <Border Grid.Row="1">
+                            <Border Background="Transparent">
+                                <StackPanel>
+                                    <ContentPresenter ContentSource="SelectedContent"/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--TabItem Grouup button style-->
+    <Style TargetType="{x:Type TabItem}" x:Key="TabItemGroup_Style">
+        <Setter Property="Padding" Value="6 3"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="tabButton" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Margin="3 0" CornerRadius="6">
+                        <ContentPresenter x:Name="ContentSite" ContentSource="Header" VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="tabButton" Property="Background" Value="{StaticResource AccentColorActive}"/>
+                            <Setter Property="Foreground" Value="{StaticResource AccentForeColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="tabButton" Property="Background" Value="{StaticResource AccentColor}"/>
+                            <Setter Property="Foreground" Value="{StaticResource AccentForeColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="tabButton" Property="Background" Value="{StaticResource DisabledColor}"/>
+                            <Setter Property="Foreground" Value="{StaticResource AccentForeColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
     <!--ListBox Control Template-->
     <ControlTemplate x:Key="ListBoxControlTemplate1" TargetType="{x:Type ListBox}">

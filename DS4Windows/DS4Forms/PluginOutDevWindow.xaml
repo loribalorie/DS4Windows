@@ -9,8 +9,8 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterOwner"
-        Title="PluginOutDevWindow" Height="200" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Title="Output Slot Manager" Height="200" Width="400"
         Style="{DynamicResource WindowStyle}"
         UseLayoutRounding="True">
     
