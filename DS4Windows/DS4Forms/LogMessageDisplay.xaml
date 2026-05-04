@@ -22,7 +22,7 @@
             <RichTextBox x:Name="richMessageBox" VerticalScrollBarVisibility="Auto"
                      IsReadOnly="True" IsDocumentEnabled="True"
                      BorderBrush="{x:Null}" BorderThickness="0"
-                     HorizontalContentAlignment="Stretch" VerticalAlignment="Center"/>
+                     HorizontalContentAlignment="Stretch"/>
         </Border>
     </DockPanel>
 </Window>

@@ -777,6 +777,7 @@ namespace DS4WinWPF.DS4Forms
                 currentProfile = null;
                 PresetOptionWindow presetWin = new PresetOptionWindow();
                 presetWin.SetupData(deviceNum);
+                presetWin.Owner = App.Current.MainWindow;
                 presetWin.ShowDialog();
                 if (presetWin.Result == MessageBoxResult.Cancel)
                 {
@@ -1784,6 +1785,7 @@ namespace DS4WinWPF.DS4Forms
             presetWin.SetupData(deviceNum);
             presetWin.ToPresetsScreen();
             presetWin.DelayPresetApply = true;
+            presetWin.Owner = App.Current.MainWindow;
             presetWin.ShowDialog();
 
             if (presetWin.Result == MessageBoxResult.OK)

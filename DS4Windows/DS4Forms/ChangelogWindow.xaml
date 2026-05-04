@@ -7,7 +7,7 @@
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         mc:Ignorable="d"
-        Title="{lex:Loc Changelog}" Height="450" Width="800"
+        Title="{lex:Loc Changelog}" Height="450" Width="600"
         WindowStartupLocation="CenterOwner"
         UseLayoutRounding="True"
         Style="{DynamicResource WindowStyle}">

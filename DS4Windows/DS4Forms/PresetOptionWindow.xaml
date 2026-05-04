@@ -15,7 +15,7 @@
     Width="500"
     Padding="0"
     UseLayoutRounding="True"
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="CenterOwner"
     ResizeMode="NoResize"
     Style="{DynamicResource WindowStyle}"
     Closed="Window_Closed">

@@ -17,7 +17,7 @@
     
     <DockPanel Margin="8">
 
-            <ScrollViewer x:Name="sidebarScrollViewer" Width="260" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+            <ScrollViewer x:Name="sidebarScrollViewer" Width="270" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
                 <StackPanel x:Name="outerEditControlsPanel">
                     <StackPanel.Resources>
                         <CollectionViewSource x:Key="profileCollection" Source="{Binding ProfileList.ProfileListCol,Mode=OneWay}" />
@@ -25,14 +25,14 @@
 
                     <StackPanel x:Name="editControlsPanel" IsEnabled="False" d:IsEnabled="True">
 
-                        <DockPanel HorizontalAlignment="Stretch" Margin="0 8 0 0">
+                        <DockPanel HorizontalAlignment="Stretch" Margin="0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button x:Name="removeAutoBtn" Content="{lex:Loc Remove}" IsEnabled="{Binding Exists}" Click="RemoveAutoBtn_Click" Margin="4 0"/>
                                 <Button x:Name="saveAutoBtn" Content="{lex:Loc Save}" Click="SaveAutoBtn_Click" Margin="4 0"/>
                             </StackPanel>
                         </DockPanel>
 
-                        <Border Style="{DynamicResource BorderStyle}" Margin="8 8 0 0">
+                        <Border Style="{DynamicResource BorderStyle}" Margin="8 4 0 0">
                             <Grid x:Name="autoProfilesGrid" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
@@ -223,44 +223,28 @@
                         </Border>
 
                    
-                        <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                        <Border Style="{DynamicResource BorderStyle}" Margin=" 8 4 0 0">
                             <CheckBox IsChecked="{Binding Turnoff}">
                                 <TextBlock Text="{lex:Loc TurnOffDS4WindowsTemporarily}" TextWrapping="Wrap"/>
                             </CheckBox>
                         </Border>
                     
-                        <GroupBox Header="Path" Margin=" 8 8 0 0">
-                            <TextBox Text="{Binding Path}" Height="30">
+                        <GroupBox Header="Path" Margin=" 8 4 0 0">
+                            <TextBox Text="{Binding Path}" d:Text="Test" Height="24" VerticalContentAlignment="Center">
                                 <TextBox.ToolTip>
-                                    <TextBlock Text="{lex:Loc AutoProfPathTip}"/>
+                                    <TextBlock Text="{lex:Loc AutoProfPathTip}" VerticalAlignment="Center"/>
                                 </TextBox.ToolTip>
                             </TextBox>
                         </GroupBox>
                         
-                        <GroupBox Header="Window Title" Margin=" 8 8 0 0">
+                        <GroupBox Header="Window Title" Margin=" 8 4 0 0">
                             <Grid>
-                                <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}" Height="30">
+                                <TextBox x:Name="mainTxtBox" Text="{Binding Title, UpdateSourceTrigger=LostFocus}" d:Text="Test" Height="24" VerticalContentAlignment="Center">
                                     <TextBox.ToolTip>
                                         <TextBlock Text="{lex:Loc AutoProfTitleTip}"/>
                                     </TextBox.ToolTip>
                                 </TextBox>
 
-                                <!--<TextBlock Text="Window title..." Foreground="{DynamicResource ForegroundColor}"
-                                           Height="30" Opacity="0.7" IsHitTestVisible="False">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="False">
-                                                    <Setter Property="Visibility" Value="Hidden" />
-                                                </DataTrigger>
-
-                                                <DataTrigger Binding="{Binding ElementName=mainTxtBox, Path=Text.IsEmpty, Mode=OneWay}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>-->
 
                             </Grid>
                         </GroupBox>
@@ -272,21 +256,21 @@
 
                 
                     
-                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 4 0 0">
                     <CheckBox x:Name="revertDefaultProfileOnUnknownCk" Height="Auto"
                                 IsChecked="{Binding RevertDefaultProfileOnUnknown}">
                         <TextBlock Text="{lex:Loc RevertToDefaultProfileOnUnknown}" TextWrapping="Wrap"/>
                     </CheckBox>
                 </Border>
 
-                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 8 0 0">
+                <Border Style="{DynamicResource BorderStyle}" Margin=" 8 4 0 0">
                     <CheckBox x:Name="showAutoDebugCk"
                                 Click="ShowAutoDebugCk_Click" Height="Auto">
                         <TextBlock Text="{lex:Loc ShowAutoProfileDebugMessages}" TextWrapping="Wrap"/>
                     </CheckBox>
                 </Border>
 
-                <GroupBox Header="{lex:Loc AutoProfiles.DisplaySwitchVia}"  Margin=" 8 8 0 0">
+                <GroupBox Header="{lex:Loc AutoProfiles.DisplaySwitchVia}"  Margin=" 8 4 0 0">
                     <StackPanel Orientation="Vertical">
                         <ComboBox ItemsSource="{Binding DisplayProfileSwitchList}" DisplayMemberPath="DisplayName" SelectedValuePath="ChoiceValue" SelectedValue="{Binding ProfileSwitchChoice}" Width="Auto"/>
                     </StackPanel>
@@ -299,7 +283,7 @@
 
         <DockPanel Width="Auto" LastChildFill="True">
                  
-            <StackPanel Orientation="Horizontal" Margin="0 8 0 8" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 4" DockPanel.Dock="Top">
                 <Button x:Name="addProgramsBtn" Content="{lex:Loc AddPrograms}" Click="AddProgramsBtn_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
@@ -321,10 +305,12 @@
                             <GridViewColumn Header="{lex:Loc Name}" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding Exists,Mode=OneWay}" IsEnabled="False" Margin="0,10,0,0" />
-                                            <Image Source="{Binding Exeicon}" Width="30" Margin="0,0,10,0" />
-                                            <TextBlock Text="{Binding Filename}" />
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="30">
+                                            <CheckBox IsChecked="{Binding Exists,Mode=OneWay}" IsEnabled="False"
+                                                      Style="{DynamicResource CheckBoxStyle_Default}"
+                                                      VerticalContentAlignment="Center"/>
+                                            <Image Source="{Binding Exeicon}" Width="24" Margin="4,0,4,0" />
+                                            <TextBlock Text="{Binding Filename}" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -339,6 +325,8 @@
                             <MenuItem Header="{lex:Loc MoveDown}" Name="MoveDown" Click="MoveUpDownAutoBtn_Click"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
+
+               
                 </ListView>
                 
             </Border>
