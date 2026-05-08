@@ -11,7 +11,6 @@
              lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              mc:Ignorable="d"
-             d:Height="800"
              d:MinWidth="950"
              UseLayoutRounding="True">
 
@@ -323,11 +322,11 @@
             <TabControl x:Name="profileSettingsTabCon" DockPanel.Dock="Right">
 
                 <TabItem Header="{lex:Loc AxisConfig}">
-                
+
                     <TabControl Style="{DynamicResource TabButtonGroup_Style}">
-      
                         <!--Left Stick Tab-->
                         <TabItem Header="Left Stick" Style="{DynamicResource TabItemGroup_Style}">
+                            
                             <DockPanel LastChildFill="True">
                                 <!--Output Mode ComboBox-->
                                 <Border Style="{DynamicResource BorderStyle}" Margin="8 4"
@@ -356,11 +355,9 @@
                                 </Border>
 
                                 <!--Left Stick Output Mode Tab-->
-                                <ScrollViewer VerticalScrollBarVisibility="Visible"
-                                              Margin="8 0"
-                                              DockPanel.Dock="Top">
-                                    <TabControl SelectedIndex="{Binding LSOutputIndex,Mode=OneWay,FallbackValue='1'}"
-                                        Style="{DynamicResource HiddenTabControlStyle}">
+                                  <TabControl SelectedIndex="{Binding LSOutputIndex,Mode=OneWay,FallbackValue='1'}"
+                                        Style="{DynamicResource HiddenTabControlStyle}" DockPanel.Dock="Bottom"
+                                              Margin="8 0 0 8">
 
                                         <!--None-->
                                         <TabItem Header="{lex:Loc None}"  Visibility="Collapsed">
@@ -371,7 +368,7 @@
                                         <!--Controls-->
                                         <TabItem Header="{lex:Loc Controls}" Visibility="Collapsed">
 
-                                            <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="8 0 0 8">-->
+                                            <ScrollViewer VerticalScrollBarVisibility="Visible">
                                             <StackPanel Orientation="Vertical" Margin="0 0 8 0">
 
                                                 <!--Left Stick
@@ -872,13 +869,14 @@
                                                 </Border>
 
                                             </StackPanel>
-                                            <!--</ScrollViewer>-->
+                                            </ScrollViewer>
                                         </TabItem>
 
                                         <TabItem Header="{lex:Loc FlickStick}" Visibility="Collapsed">
-                                            <Border Style="{DynamicResource BorderStyle}" Margin="8 0 8 8"
-                                            VerticalAlignment="Top"
-                                            HorizontalAlignment="Stretch">
+                                            <Border Style="{DynamicResource BorderStyle}"
+                                                    Margin="0 0 8 0"
+                                                    VerticalAlignment="Top"
+                                                    HorizontalAlignment="Stretch">
 
                                                 <Grid ShowGridLines="False">
                                                     <Grid.ColumnDefinitions>
@@ -943,7 +941,7 @@
                                             </Border>
                                         </TabItem>
                                     </TabControl>
-                                </ScrollViewer>
+           
                             </DockPanel>
                         </TabItem>
 
@@ -978,7 +976,7 @@
                                 <!--Right Stick Output Mode Tab-->
                                 <TabControl SelectedIndex="{Binding RSOutputIndex,Mode=OneWay,FallbackValue='0'}"
                                             Style="{DynamicResource HiddenTabControlStyle}"
-                                            DockPanel.Dock="Bottom">
+                                            DockPanel.Dock="Bottom" Margin="8 0 0 8">
 
                                     <!--None-->
                                     <TabItem Header="{lex:Loc None}"  Visibility="Collapsed">
@@ -986,15 +984,15 @@
                                         </StackPanel>
                                     </TabItem>
 
-                                    <!--Right Stick
-                                Controls-->
+                                    <!--Right Stick Controls-->
                                     <TabItem Header="{lex:Loc Controls}" Visibility="Collapsed">
 
-                                        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="8 0 0 8">
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0 0 8 0">
+                                        <ScrollViewer VerticalScrollBarVisibility="Visible">
+                                            <StackPanel Orientation="Vertical"
+                                                        HorizontalAlignment="Stretch"
+                                                        Margin="0 0 8 0">
 
-                                                <!--Right Stick
-                                            Dead Zone Type-->
+                                                <!--Right Stick Dead Zone Type-->
                                                 <Border Style="{DynamicResource BorderStyle}">
                                                     <StackPanel>
                                                         <StackPanel Orientation="Horizontal">
@@ -1081,8 +1079,7 @@
                                                     </StackPanel>
                                                 </Border>
 
-                                                <!--Right Stick
-                                            Output Curve-->
+                                                <!--Right Stick Output Curve-->
                                                 <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0">
 
                                                     <Grid ShowGridLines="False">
@@ -1184,8 +1181,7 @@
                                                     </Grid>
                                                 </Border>
 
-                                                <!--Right Stick 
-                                            Square Stick-->
+                                                <!--Right Stick Square Stick-->
                                                 <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0" >
 
                                                     <Grid ShowGridLines="False">
@@ -1291,8 +1287,7 @@
 
                                                 </Border>
 
-                                                <!--Right Stick
-                                            Outer Bind-->
+                                                <!--Right Stick Outer Bind-->
                                                 <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0">
 
                                                     <Grid ShowGridLines="False">
@@ -1358,8 +1353,7 @@
 
                                                 </Border >
 
-                                                <!--Right Stick
-                                            Center Calibration-->
+                                                <!--Right Stick Center Calibration-->
                                                 <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0">
 
                                                     <Grid ShowGridLines="False" >
@@ -1413,8 +1407,7 @@
                                                     </Grid>
                                                 </Border>
 
-                                                <!--Right Stick
-                                            Delta Acceleration-->
+                                                <!--Right Stick Delta Acceleration-->
                                                 <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0">
 
                                                     <StackPanel Orientation="Vertical">
@@ -1503,9 +1496,10 @@
 
                                     <!--Right Stick Controls-->
                                     <TabItem Header="{lex:Loc FlickStick}" Visibility="Collapsed">
-                                        <Border Style="{DynamicResource BorderStyle}" Margin="8 0 8 8"
-                                            VerticalAlignment="Top"
-                                            HorizontalAlignment="Stretch">
+                                        <Border Style="{DynamicResource BorderStyle}"
+                                                Margin="0 0 8 0"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Stretch">
 
                                             <Grid ShowGridLines="False">
                                                 <Grid.ColumnDefinitions>

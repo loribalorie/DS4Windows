@@ -732,9 +732,9 @@
                         </Border>
                         <Border Grid.Row="1">
                             <Border Background="Transparent">
-                                <StackPanel>
+                                <Grid>
                                     <ContentPresenter ContentSource="SelectedContent"/>
-                                </StackPanel>
+                                </Grid>
                             </Border>
                         </Border>
                     </Grid>
