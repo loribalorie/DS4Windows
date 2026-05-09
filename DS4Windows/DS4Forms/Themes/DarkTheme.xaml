@@ -727,7 +727,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Padding="16 8 16 0" Background="{TemplateBinding Background}" >
+                        <Border Grid.Row="0" Padding="16 9 16 0" Background="{TemplateBinding Background}" >
                             <TabPanel IsItemsHost="True"/>
                         </Border>
                         <Border Grid.Row="1">
@@ -745,8 +745,8 @@
 
     <!--TabItem Grouup button style-->
     <Style TargetType="{x:Type TabItem}" x:Key="TabItemGroup_Style">
-        <Setter Property="Padding" Value="6 3"/>
-        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Padding" Value="12 0"/>
+        <Setter Property="Height" Value="28"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>

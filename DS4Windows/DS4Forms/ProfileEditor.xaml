@@ -229,9 +229,7 @@
 
                         </Border>
 
-                        
-
-                        <Border Margin="0 8 0 0"
+                        <Border Margin="0 4 0 0"
                                 Style="{DynamicResource BorderStyle}"
                                 DockPanel.Dock="Bottom">
                             <ListBox x:Name="mappingListBox"
