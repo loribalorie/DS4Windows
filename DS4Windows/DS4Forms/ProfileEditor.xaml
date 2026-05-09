@@ -3057,17 +3057,13 @@
                         <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top" Margin="8 8 8 0">
                             <StackPanel Orientation="Horizontal" >
 
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170">
-                                    <Button x:Name="gyroCalBtn3" 
-                                        Content="Gyro Calibration"
-                                        Width="150"
-                                        Click="GyroCalibration_Click"
-                                        FontWeight="Bold" />
+                                <StackPanel VerticalAlignment="Center" Width="170">
+                                    <Button x:Name="gyroCalBtn3" Content="Gyro Calibration"
+                                            Width="150" Click="GyroCalibration_Click" FontWeight="Bold" />
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center">
-                                    <CheckBox IsChecked="{Binding UseDs3PitchRollSim}" VerticalContentAlignment="Top">
+                                <StackPanel VerticalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding UseDs3PitchRollSim}" Width="250" Height="Auto">
                                         <TextBlock Text="{lex:Loc UseDs3PitchRollSim}" TextWrapping="Wrap"/>
                                         <CheckBox.ToolTip>
                                             <TextBlock Text="{lex:Loc UseDs3PitchRollSimTooltip}"/>
@@ -3080,15 +3076,13 @@
                         
                         <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top" Margin="8 4 8 4">
                             <StackPanel Orientation="Horizontal">
-
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <Label Content="{lex:Loc OutputMode}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <ComboBox x:Name="gyroOutModeCombo"
-                                          Width="170"
-                                          SelectedIndex="{Binding GyroOutModeIndex, FallbackValue='0'}">
+                                    <ComboBox x:Name="gyroOutModeCombo" Width="170"
+                                              SelectedIndex="{Binding GyroOutModeIndex, FallbackValue='0'}">
                                         <ComboBoxItem Content="{lex:Loc GyroControlsAccel}" />
                                         <ComboBoxItem Content="{lex:Loc Mouse}" />
                                         <ComboBoxItem Content="{lex:Loc MouseJoystick}" />
@@ -3659,7 +3653,6 @@
                                 </TabItem>
                                 <!--MouseJoystick-->
                                 <TabItem Header="{lex:Loc MouseJoystick}" Visibility="Collapsed">
-
                                     <GroupBox Header="Mouse Joystick">
                                         <Grid x:Name="gyroMouseJoystickPanel">
                                             <Grid.RowDefinitions>
@@ -3967,12 +3960,11 @@
                                             </StackPanel>
                                         </Grid>
                                     </GroupBox>
-
                                 </TabItem>
                                 <!--DirectionalSwipe-->
                                 <TabItem Header="{lex:Loc DirectionalSwipe}" Visibility="Collapsed">
                                     <StackPanel>
-                                        <GroupBox Header="Trigger Behavior" Margin="0 0 0 3">
+                                        <GroupBox Header="Trigger Behavior" Margin="0 0 0 4">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -3984,28 +3976,20 @@
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <StackPanel Grid.Row="0" Grid.Column="0"
-                                            Orientation="Horizontal"
-                                            VerticalAlignment="Center">
+                                                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                                                     <Label Content="Gyro trigger buttons"/>
                                                 </StackPanel>
 
-
-                                                <StackPanel Grid.Row="0" Grid.Column="1"
-                                                Orientation="Horizontal">
-                                                    <Button x:Name="gyroSwipeTrigBtn"
-                                                Content="{Binding GyroSwipeTrigDisplay,FallbackValue=Always On}"
-                                                Width="170" Click="GyroSwipeTrigBtn_Click" >
+                                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                                    <Button x:Name="gyroSwipeTrigBtn" Content="{Binding GyroSwipeTrigDisplay,FallbackValue=Always On}" Width="170" Click="GyroSwipeTrigBtn_Click" >
                                                         <Button.ContextMenu>
                                                             <ContextMenu />
                                                         </Button.ContextMenu>
                                                     </Button>
                                                 </StackPanel>
 
-                                                <StackPanel Grid.Row="1" Grid.Column="1"
-                                                Orientation="Horizontal">
-                                                    <CheckBox Content="Turn Behavior - Turns Gyro"
-                                                    IsChecked="{Binding GyroSwipeTurns}">
+                                                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                                    <CheckBox Content="Turn Behavior - Turns Gyro" IsChecked="{Binding GyroSwipeTurns}">
                                                         <CheckBox.ToolTip>
                                                             <TextBlock Text="{lex:Loc Resources:GyroTriggerBehavior}"/>
                                                         </CheckBox.ToolTip>
@@ -4020,7 +4004,7 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Swipe Emulation" Margin="0 3">
+                                        <GroupBox Header="Swipe Emulation" Margin="0 0 0 4">
                                             <Grid x:Name="gyroDirSwipePanel">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -4081,7 +4065,7 @@
                                             </Grid>
                                         </GroupBox>
 
-                                        <GroupBox Header="Gyro Setup" Margin="0 3 0 0">
+                                        <GroupBox Header="Gyro Setup">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
@@ -4157,7 +4141,7 @@
                                 <!--passthru-->
                                 <TabItem Header="{lex:Loc Passthru}" Visibility="Collapsed">
                                     <StackPanel x:Name="passthruPanel" Visibility="{Binding UsingMinViGEm173333, Mode=OneWay, Converter={StaticResource InvertBoolToVisibilityConverter}}" >
-                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 8 0 0" Padding="8">
+                                        <Border Style="{DynamicResource BorderStyle}" Padding="8">
                                             <TextBlock Foreground="Red" Text="{lex:Loc ViGEm117MinNeeded}">
                                             </TextBlock>
                                         </Border>
@@ -4175,7 +4159,7 @@
 
                         <StackPanel Margin="8" HorizontalAlignment="Stretch">
 
-                            <GroupBox Header="{lex:Loc VirtualControllerSettings}" Margin="0 0 0 3">
+                            <GroupBox Header="{lex:Loc VirtualControllerSettings}" Margin="0 0 0 2">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
@@ -4236,7 +4220,7 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="General" Margin="0 3" >
+                            <GroupBox Header="General" Margin="0 2" >
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
@@ -4264,7 +4248,7 @@
                                                         Minimum="0"
                                                         Maximum="1000"
                                                         VerticalContentAlignment="Center"/>
-                                        <Label Content="millisec (1000 max)"/>
+                                        <Label Content="ms (1000 max)"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="0"
@@ -4323,7 +4307,7 @@
                                                         Value="{Binding IdleDisconnect,FallbackValue=5}"
                                                         IsEnabled="{Binding IdleDisconnectExists}"
                                                         Minimum="0" Maximum="60"/>
-                                        <Label Content="minutes (60 max)"/>
+                                        <Label Content="mins (60 max)"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="3" Grid.Column="0"
@@ -4375,11 +4359,9 @@
                                     </StackPanel>
 
                                 </Grid>
-
                             </GroupBox>
 
-                            <GroupBox Header="{lex:Loc Rumble}"  Margin="0 3">
-
+                            <GroupBox Header="{lex:Loc Rumble}"  Margin="0 2">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
@@ -4453,81 +4435,68 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Margin="0 3"
-                                  Header="{lex:Loc DualSRumbleSpecificSettings}">
-                                <Grid >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                            <GroupBox Grid.Row="2" Margin="0 2" Header="{lex:Loc DualSRumbleSpecificSettings}">
+                                <StackPanel Orientation="Vertical">
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
-                                        <Label Content="Rumble mode"/>
-                                    </StackPanel>
+                                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                            <Label Content="Rumble mode"/>
+                                        </StackPanel>
 
-                                    <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                                        <ComboBox x:Name="dualSRumbleEmuMode"
+                                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" >
+                                            <ComboBox x:Name="dualSRumbleEmuMode"
                                               SelectedIndex="{Binding DualSenseRumbleEmulationPerIndex, FallbackValue=0}">
-                                            <ComboBox.ToolTip>
-                                                <TextBlock Text="{lex:Loc DualSRumbleModes_Tip}"/>
-                                            </ComboBox.ToolTip>
-                                            <ComboBoxItem Content="{lex:Loc DualSRumbleModeAccurate}"   />
-                                            <ComboBoxItem Content="{lex:Loc DualSRumbleModeLegacy}" />
-                                            <ComboBoxItem Content="{lex:Loc DualSRumbleModeDisabled}" />
-                                        </ComboBox>
-                                    </StackPanel>
+                                                <ComboBox.ToolTip>
+                                                    <TextBlock Text="{lex:Loc DualSRumbleModes_Tip}"/>
+                                                </ComboBox.ToolTip>
+                                                <ComboBoxItem Content="{lex:Loc DualSRumbleModeAccurate}"   />
+                                                <ComboBoxItem Content="{lex:Loc DualSRumbleModeLegacy}" />
+                                                <ComboBoxItem Content="{lex:Loc DualSRumbleModeDisabled}" />
+                                            </ComboBox>
+                                        </StackPanel>
 
-                                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-                                        <Label Content="Rumble strenght" />
-                                    </StackPanel>
+                                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                            <Label Content="Rumble strenght" />
+                                        </StackPanel>
 
-                                    <StackPanel Grid.Row="1" Grid.Column="1"
-                                            VerticalAlignment="Center" Orientation="Horizontal">
-                                        <ComboBox SelectedIndex="{Binding DualSenseHapticPowerLevelPerIndex, FallbackValue=0}">
-                                            <ComboBox.ToolTip>
-                                                <TextBlock Text="{lex:Loc DualSRumblePowerLevel_Tip}"/>
-                                            </ComboBox.ToolTip>
-                                            <ComboBoxItem Content="100%" />
-                                            <ComboBoxItem Content="87%" />
-                                            <ComboBoxItem Content="75%" />
-                                            <ComboBoxItem Content="62%" />
-                                            <ComboBoxItem Content="50%" />
-                                            <ComboBoxItem Content="37%" />
-                                            <ComboBoxItem Content="25%" />
-                                            <ComboBoxItem Content="12%" />
-                                        </ComboBox>
-
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
-                                            VerticalAlignment="Center">
-                                        <CheckBox x:Name="dualSForceGenRumbleRescale"
-                                                  Width="300"
-                                                  Height="Auto"
-                                              IsChecked="{Binding EnableGenericRumbleStrRescaleForDualSenseDevices}">
+                                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
+                                            <ComboBox SelectedIndex="{Binding DualSenseHapticPowerLevelPerIndex, FallbackValue=0}">
+                                                <ComboBox.ToolTip>
+                                                    <TextBlock Text="{lex:Loc DualSRumblePowerLevel_Tip}"/>
+                                                </ComboBox.ToolTip>
+                                                <ComboBoxItem Content="100%" />
+                                                <ComboBoxItem Content="87%" />
+                                                <ComboBoxItem Content="75%" />
+                                                <ComboBoxItem Content="62%" />
+                                                <ComboBoxItem Content="50%" />
+                                                <ComboBoxItem Content="37%" />
+                                                <ComboBoxItem Content="25%" />
+                                                <ComboBoxItem Content="12%" />
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="dualSForceGenRumbleRescale" Width="370" IsChecked="{Binding EnableGenericRumbleStrRescaleForDualSenseDevices}" Height="Auto" >
                                             <CheckBox.ToolTip>
                                                 <TextBlock Text="{lex:Loc DualSRumbleForceGenericRescale_Tip}"/>
                                             </CheckBox.ToolTip>
                                             <TextBlock Text="{lex:Loc DualSRumbleForceGenericRescale}" TextWrapping="Wrap"/>
                                         </CheckBox>
                                     </StackPanel>
-
-                                </Grid>
-
+                                </StackPanel>
                             </GroupBox>
 
-
-                            <GroupBox Header="Profile" Margin="0 3">
+                            <GroupBox Header="Profile" Margin="0 2">
                                 <StackPanel Orientation="Horizontal">
-
-
-                                    <StackPanel Orientation="Horizontal"
-                                            Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0">
                                         <CheckBox x:Name="launchProgCk"
                                               Content="{lex:Loc LaunchProgramWithProfile}"
                                               IsChecked="{Binding LaunchProgramExists}"
@@ -4557,7 +4526,7 @@
                                 </StackPanel>
                             </GroupBox>
 
-                            <GroupBox Header="Mouse emulation" Margin="0 3" >
+                            <GroupBox Header="Mouse emulation" Margin="0 2" >
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="32"/>
@@ -4572,22 +4541,16 @@
                                     </Grid.ColumnDefinitions>
 
 
-                                    <StackPanel Grid.Row="0" Grid.Column="0"
-                                            Orientation="Horizontal" Height="25">
-                                        <Label Content="{lex:Loc MouseSensitivity}"
-                                           VerticalAlignment="Center" />
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                        <Label Content="{lex:Loc MouseSensitivity}" VerticalAlignment="Center" />
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1"
-                                            Orientation="Horizontal" >
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
                                         <xctk:IntegerUpDown Value="{Binding ButtonMouseSensitivity,FallbackValue=25}"
-                                                        Minimum="0" Maximum="255"
-                                                        Increment="1"
-                                                        VerticalContentAlignment="Center"/>
+                                                            Minimum="0" Maximum="255"
+                                                            Increment="1" VerticalContentAlignment="Center"/>
                                         <Label Content="{Binding OutputMouseSpeed,Mode=OneWay}"
-                                           ContentStringFormat="{}{0} pps"
-                                           MinWidth="70"
-                                           Margin="5,0,0,0" />
+                                               ContentStringFormat="{}{0} pps" MinWidth="70" Margin="5,0,0,0" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.Column="0"
@@ -4642,8 +4605,7 @@
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="{lex:Loc AbsoluteMouseOptions}" Margin="0 3">
-
+                            <GroupBox Header="{lex:Loc AbsoluteMouseOptions}" Margin="0 2 0 0">
                                 <StackPanel Orientation="Vertical">
 
                                     <Grid>
