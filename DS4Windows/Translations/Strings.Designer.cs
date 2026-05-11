@@ -340,7 +340,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abs Mouse.
+        ///   Looks up a localized string similar to Absolute Mouse.
         /// </summary>
         public static string BindingWin_AbsMouse {
             get {
@@ -403,7 +403,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KB &amp; Rel Mouse.
+        ///   Looks up a localized string similar to Keyboard or Mouse.
         /// </summary>
         public static string BindingWin_KeyAndRelMouse {
             get {

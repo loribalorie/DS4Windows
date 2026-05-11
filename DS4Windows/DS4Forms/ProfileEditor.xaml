@@ -23,38 +23,23 @@
 
     <DockPanel Background="{DynamicResource BackgroundColor}">
 
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{DynamicResource ContentBackgroundColor}"
-                    VerticalAlignment="Center" Height="36" Margin="0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <!--<TextBlock Text="{lex:BLoc Profile, StringFormat='{}{0}:'}" VerticalAlignment="Center" Margin="0,0,8,0"/>-->
-                <Label Content="Profile" Margin="5,0,5,0"/>
-                <TextBox x:Name="profileNameTxt" Text="" Width="160" Height="24" Margin="5,0,5,0"
-                     VerticalContentAlignment="Center" />
-                <Button x:Name="saveBtn" Content="{lex:Loc SaveProfile}" Width="50"
-                    Margin="5,0,5,0" Click="SaveBtn_Click" />
-                <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Width="60"
-                    Margin="5,0,5,0" Click="CancelBtn_Click" />
-                <Button x:Name="applyBtn" Content="{lex:Loc Apply}" Width="50"
-                    Margin="5,0,5,0" Click="ApplyBtn_Click" IsEnabled="False" />
-                <Button x:Name="presetBtn" Content="Select Preset" Width="90"
-                    Margin="5,0,5,0" Click="PresetBtn_Click" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="keepSizeBtn" Margin="5,0,5,0"
-                    Click="KeepSizeBtn_Click"
-                    Width="auto">
-                    <StackPanel Orientation="Horizontal" Margin="6,0,6,0">
-                        <Image x:Name="sizeImage"
-                           Source="{Binding Source={StaticResource resourcesPaths}, Path=SizePNG}"
-                           Width="20" Height="20"/>
-                        <TextBlock x:Name="sizeMsg"
-                               Text="Keep window size after closing"
-                               VerticalAlignment="Center" />
-                    </StackPanel>
-
-                </Button>
-
-            </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{DynamicResource ContentBackgroundColor}" VerticalAlignment="Center" Height="36">
+            
+            <!--<TextBlock Text="{lex:BLoc Profile, StringFormat='{}{0}:'}" VerticalAlignment="Center" Margin="0,0,8,0"/>-->
+            <Label Content="Profile" Margin="10 0 0 0"/>
+            <TextBox x:Name="profileNameTxt" Text="" Width="160" Height="24" VerticalContentAlignment="Center" Margin="4 0"/>
+            <Button x:Name="saveBtn" Content="{lex:Loc SaveProfile}" Click="SaveBtn_Click" Margin="4 0"/>
+            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="4 0"/>
+            <Button x:Name="applyBtn" Content="{lex:Loc Apply}" Click="ApplyBtn_Click" IsEnabled="False" Margin="4 0"/>
+            <Button x:Name="presetBtn" Content="Select Preset" Click="PresetBtn_Click" Margin="4 0"/>
+            <Button x:Name="keepSizeBtn" Click="KeepSizeBtn_Click" Margin="4 0">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="sizeImage" Source="{Binding Source={StaticResource resourcesPaths}, Path=SizePNG}"
+                            Width="16" Height="16" Margin="0 0 4 0"/>
+                    <TextBlock x:Name="sizeMsg" Text="Keep window size after closing" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            
         </StackPanel>
 
         <DockPanel DockPanel.Dock="Bottom">
@@ -235,7 +220,6 @@
                             <ListBox x:Name="mappingListBox"
                                      BorderThickness="0"
                                      Background="Transparent"
-                                     Margin="6"
                                      DockPanel.Dock="Bottom"
                                      ItemsSource="{Binding Mappings}"
                                      SelectedIndex="{Binding SelectedIndex}"
@@ -267,21 +251,18 @@
                         <Border x:Name="baseSpeActPanel" Style="{DynamicResource BorderStyle}">
 
                             <DockPanel  DockPanel.Dock="Top">
-                                <UniformGrid Rows="1" Columns="4"
-                                         Height="40"
-                                         DockPanel.Dock="Top">
-                                    <Button x:Name="newActionBtn" Content="{lex:Loc NewAction}"
-                                        Click="NewActionBtn_Click" />
-                                    <Button x:Name="editActionBtn" Content="{lex:Loc EditAction}"
-                                        IsEnabled="{Binding ItemSelected}" Click="EditActionBtn_Click" />
-                                    <Button x:Name="removeActionBtn" Content="{lex:Loc RemoveAction}"
-                                        IsEnabled="{Binding ItemSelected}" Click="RemoveActionBtn_Click" />
-                                    <Button Content="{lex:Loc ExportSpecialActions}" 
-                                        Click="ExportSpecialActions_OnClick"/>
+                                <UniformGrid Rows="1" Columns="4" Height="36" DockPanel.Dock="Top">
+                                    <Button x:Name="newActionBtn" Content="{lex:Loc NewAction}" Click="NewActionBtn_Click"
+                                            Margin="4 0"/>
+                                    <Button x:Name="editActionBtn" Content="{lex:Loc EditAction}" IsEnabled="{Binding ItemSelected}" Click="EditActionBtn_Click"
+                                            Margin="4 0"/>
+                                    <Button x:Name="removeActionBtn" Content="{lex:Loc RemoveAction}" IsEnabled="{Binding ItemSelected}" Click="RemoveActionBtn_Click"
+                                            Margin="4 0"/>
+                                    <Button Content="{lex:Loc ExportSpecialActions}" Click="ExportSpecialActions_OnClick"
+                                            Margin="4 0"/>
                                 </UniformGrid>
 
-                                <ListView x:Name="specialActionsLV"
-                                          Margin="8" BorderThickness="0"
+                                <ListView x:Name="specialActionsLV" BorderThickness="0"
                                       ItemsSource="{Binding ActionCol}"
                                       SelectedIndex="{Binding SpecialActionIndex}"
                                       SelectedItem="{Binding CurrentSpecialActionItem,Mode=OneWayToSource}"
@@ -544,11 +525,9 @@
                                                         <Button x:Name="lsCustomEditorBtn"
                                                             Content="Bezier Editor (Browser)"
                                                             Tag="LS"
-                                                            Margin="0,3,0,3"
                                                             Click="CustomEditorBtn_Click"
                                                             Width="170"
                                                             Grid.Row="5" Grid.Column="1"
-                                                            VerticalAlignment="Center"
                                                             HorizontalAlignment="Left"/>
                                                     </Grid>
                                                 </Border>
@@ -775,7 +754,6 @@
                                                             Grid.Row="3" Grid.Column="0"/>
                                                         <Button Grid.Row="3"
                                                             Grid.Column="1"
-                                                            Width="170"
                                                             HorizontalAlignment="Left"
                                                             Content="{lex:Loc AutomaticallyRecalibrateStick}"
                                                             Click="CalibrateStick_OnClick"
@@ -1170,11 +1148,9 @@
                                                         <Button x:Name="rsCustomEditorBtn"
                                                             Content="Bezier Editor (Browser)"
                                                             Tag="RS"
-                                                            Margin="0,3,0,3"
                                                             Click="CustomEditorBtn_Click"
                                                             Width="170"
                                                             Grid.Row="5" Grid.Column="1"
-                                                            VerticalAlignment="Center"
                                                             HorizontalAlignment="Left"/>
                                                     </Grid>
                                                 </Border>
@@ -1396,7 +1372,6 @@
                                                             Grid.Row="3" Grid.Column="0"/>
                                                         <Button Grid.Row="3"
                                                             Grid.Column="1"
-                                                            Width="170"
                                                             HorizontalAlignment="Left"
                                                             Content="{lex:Loc AutomaticallyRecalibrateStick}"
                                                             Click="CalibrateStick_OnClick"
@@ -1568,10 +1543,10 @@
                         <!--L2 and R2 Tab-->
                         <TabItem Header="L2 &amp; R2" Style="{DynamicResource TabItemGroup_Style}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <StackPanel Margin="8" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                <StackPanel Margin="8 4" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                                    <Border Style="{DynamicResource BorderStyle}" Padding="5" Margin="0 0 0 3">
-                                        <Grid ShowGridLines="False">
+                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 0 0 4">
+                                        <Grid ShowGridLines="False" Width="410" HorizontalAlignment="Left">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
@@ -1581,9 +1556,8 @@
                                                 <RowDefinition Height="30"/>
 
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
@@ -1592,38 +1566,38 @@
                                             <Label Content="R2" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Center"/>
 
                                             <Label Content="{lex:Loc DeadZone}" ContentStringFormat="{}{0}" Grid.Row="1" Grid.Column="0" />
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2DeadZone}" MinWidth="50" Grid.Row="1" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2DeadZone}" MinWidth="50" Grid.Row="1" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2DeadZone}" Grid.Row="1" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2DeadZone}" Grid.Row="1" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
 
                                             <Label Content="{lex:Loc MaxZone}" ContentStringFormat="{}{0}" Grid.Row="2" Grid.Column="0" />
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2MaxZone}" MinWidth="50" Grid.Row="2" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2MaxZone}" MinWidth="50" Grid.Row="2" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2MaxZone}" Grid.Row="2" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2MaxZone}" Grid.Row="2" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
 
                                             <Label Content="{lex:Loc AntiDeadZone}" ContentStringFormat="{}{0}" Grid.Row="3" Grid.Column="0" />
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2AntiDeadZone}" MinWidth="50" Grid.Row="3" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2AntiDeadZone}" MinWidth="50" Grid.Row="3" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2AntiDeadZone}" Grid.Row="3" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2AntiDeadZone}" Grid.Row="3" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
 
                                             <Label Content="{lex:Loc MaxOutput}" ContentStringFormat="{}{0}" Grid.Row="4" Grid.Column="0" />
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2MaxOutput}" MinWidth="50" Grid.Row="4" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2MaxOutput}" MinWidth="50" Grid.Row="4" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2MaxOutput}" Grid.Row="4" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2MaxOutput}" Grid.Row="4" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
 
                                             <Label Content="{lex:Loc Sensitivity}" ContentStringFormat="{}{0}" Grid.Row="5" Grid.Column="0" />
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2Sens}" MinWidth="50" Grid.Row="5" Grid.Column="1" Maximum="10.0" Minimum="0.1" Increment="0.1"/>
-                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2Sens}" MinWidth="50" Grid.Row="5" Grid.Column="2" Maximum="10.0" Minimum="0.1" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding L2Sens}" Grid.Row="5" Grid.Column="1" Maximum="10.0" Minimum="0.1" Increment="0.1"/>
+                                            <xctk:DoubleUpDown   FormatString="F2" Value="{Binding R2Sens}" Grid.Row="5" Grid.Column="2" Maximum="10.0" Minimum="0.1" Increment="0.1"/>
 
                                         </Grid>
                                     </Border>
 
                                     <!--Output Curve-->
-                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 3" Padding="5">
-                                        <Grid ShowGridLines="False">
+                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 0 0 4">
+                                        <Grid ShowGridLines="False" Width="410" HorizontalAlignment="Left">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition />
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
@@ -1693,8 +1667,8 @@
                                         </Grid>
                                     </Border>
 
-                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 3 0 0" Padding="5">
-                                        <Grid ShowGridLines="False">
+                                    <Border Style="{DynamicResource BorderStyle}" Margin="0 0 0 4">
+                                        <Grid ShowGridLines="False" Width="410" HorizontalAlignment="Left">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
@@ -1703,7 +1677,7 @@
                                                 <RowDefinition Height="30"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
@@ -1826,7 +1800,7 @@
                                                 <Label Content="ms"/>
                                             </StackPanel>
 
-                                            <Label Content="{lex:Loc TriggerEffect}" ContentStringFormat="{}{0}:" Grid.Row="4" Grid.Column="0" />
+                                            <Label Content="{lex:Loc TriggerEffect}" Grid.Row="4" Grid.Column="0" />
 
                                             <ComboBox Grid.Row="4" Grid.Column="1"
                                                 ItemsSource="{Binding Path=TriggerEffectChoices}"
@@ -1848,10 +1822,10 @@
                         </TabItem>
 
                         <TabItem Header="Six Axis" Style="{DynamicResource TabItemGroup_Style}">
-                            <StackPanel Margin="8" Orientation="Vertical" HorizontalAlignment="Stretch">
+                            <StackPanel Margin="8 4" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                                <Border Style="{DynamicResource BorderStyle}" Padding="5,10,5,10">
-                                    <Grid ShowGridLines="False">
+                                <Border Style="{DynamicResource BorderStyle}">
+                                    <Grid ShowGridLines="False" Width="400" HorizontalAlignment="Left">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="30"/>
                                             <RowDefinition Height="30"/>
@@ -4210,11 +4184,11 @@
                             <GroupBox Header="General" Margin="0 2" >
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="30"/>
                                         <RowDefinition Height="auto" MinHeight="30"/>
-                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="auto" MinHeight="30"/>
+                                        <RowDefinition Height="auto" MinHeight="30"/>
+                                        <RowDefinition Height="auto" MinHeight="30"/>
+                                        <RowDefinition Height="auto" MinHeight="30"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="180"/>
@@ -4278,11 +4252,10 @@
                                         </ComboBox>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="2" Grid.Column="0"
-                                            Orientation="Horizontal"
-                                            VerticalAlignment="Center">
-                                        <CheckBox Content="{lex:Loc IdleDisconnect}"
-                                              IsChecked="{Binding IdleDisconnectExists}" />
+                                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                        <CheckBox Width="170" Height="Auto" IsChecked="{Binding IdleDisconnectExists}">
+                                            <TextBlock Text="{lex:Loc IdleDisconnect}" TextWrapping="Wrap"/>
+                                        </CheckBox>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.Column="1"
@@ -4297,20 +4270,14 @@
                                         <Label Content="mins (60 max)"/>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="3" Grid.Column="0"
-                                            VerticalAlignment="Top"
-                                            Orientation="Horizontal">
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
                                         <CheckBox x:Name="useControllerReadoutCk"
-                                              VerticalContentAlignment="Top"
-                                              IsChecked="{Binding UseControllerReadout}"
-                                              Click="UseControllerReadoutCk_Click"
+                                              IsChecked="{Binding UseControllerReadout}" Click="UseControllerReadoutCk_Click"
                                               Width="170" Height="auto">
                                             <CheckBox.ToolTip>
                                                 <TextBlock Text="{lex:Loc Resources:UseControllerForMapping}"/>
                                             </CheckBox.ToolTip>
-                                            <TextBlock Text="Use Controller # for readouts"
-                                                   TextWrapping="Wrap"
-                                                   TextAlignment="Left" />
+                                            <TextBlock Text="Use Controller # for readouts" TextWrapping="Wrap"/>
                                         </CheckBox>
                                     </StackPanel>
 
@@ -4375,15 +4342,15 @@
                                         <Label Content="Duration (0 = Default)"/>
                                     </StackPanel>
 
-                                    <StackPanel VerticalAlignment="Center" 
+                                    <StackPanel VerticalAlignment="Center"
                                             Grid.Row="0" Grid.Column="1"
                                             Orientation="Horizontal">
-                                        <Button x:Name="heavyRumbleTestBtn"
+                                        <Button x:Name="heavyRumbleTestBtn" MinWidth="100"
                                             Margin="0,0,3,0"
                                             Content="{lex:Loc TestHeavy}" 
                                             Click="RumbleTestBtn_Click" />
 
-                                        <Button x:Name="lightRumbleTestBtn"
+                                        <Button x:Name="lightRumbleTestBtn" MinWidth="100"
                                             Margin="3,0,0,0"
                                             Content="{lex:Loc TestLight}" 
                                             Click="RumbleTestBtn_Click" />
@@ -4490,7 +4457,7 @@
                                               IsEnabled="{Binding LaunchProgramExists}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="8 0">
-                                        <Button x:Name="launchProgBrowseBtn"
+                                        <Button x:Name="launchProgBrowseBtn" MinWidth="100"
                                             Click="LaunchProgBrowseBtn_Click">
                                             <Button.Content>
                                                 <PriorityBinding>

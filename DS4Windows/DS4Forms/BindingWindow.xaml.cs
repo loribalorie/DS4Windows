@@ -68,11 +68,12 @@ namespace DS4WinWPF.DS4Forms
 
             if (settings.control != DS4Windows.DS4Controls.None)
             {
-                Title = $"Select action for {DS4Windows.Global.ds4inputNames[settings.control]}";
+                //Title = $"Select Action for {DS4Windows.Global.ds4inputNames[settings.control]}";
+                userInstructionLabel.Content = $"Select Action for {DS4Windows.Global.ds4inputNames[settings.control]}";
             }
             else
             {
-                Title = "Select action";
+                Title = "Select Action";
             }
 
             guideBtn.Content = "";
@@ -102,7 +103,7 @@ namespace DS4WinWPF.DS4Forms
             {
                 //topGrid.Visibility = Visibility.Collapsed;
                 topGrid.ColumnDefinitions.RemoveAt(3);
-                keyMouseTopTxt.Visibility = Visibility.Collapsed;
+                //keyMouseTopTxt.Visibility = Visibility.Collapsed;
                 macroOnLb.Visibility = Visibility.Collapsed;
                 recordMacroBtn.Visibility = Visibility.Collapsed;
                 mouseCanvas.Visibility = Visibility.Collapsed;
@@ -110,8 +111,8 @@ namespace DS4WinWPF.DS4Forms
                 extrasSidePanel.Visibility = Visibility.Collapsed;
                 mouseGridColumn.Width = new GridLength(0);
                 //otherKeysMouseGrid.Columns = 2;
-                Width = 950;
-                Height = 300;
+                //Width = 950;
+                //Height = 300;
             }
 
             ChangeForCurrentAction();
@@ -236,7 +237,7 @@ namespace DS4WinWPF.DS4Forms
         {
             if (highlightBtn != null)
             {
-                highlightBtn.Background = SystemColors.ControlBrush;
+                highlightBtn.Background = SystemColors.ControlLightBrush;
             }
 
             OutBinding binding = bindingVM.ActionBinding;

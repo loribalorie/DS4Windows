@@ -55,38 +55,7 @@
         </tb:TaskbarIcon>
 
         <!--Status Bar-->
-        <!--<StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-            <DockPanel Height="30"
-                       Background="#CC6633">
-                <StackPanel DockPanel.Dock="Right"
-                            Orientation="Horizontal"
-                            Margin="6,0,6,0">
-                    <Button x:Name="aboutBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3881D8"
-                            Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
-                        <TextBlock Text="{lex:Loc HotkeysAbout}"
-                                   TextDecorations="Underline"
-                                   Foreground="{DynamicResource AccentForeColor}"
-                                   Cursor="Hand"
-                                   x:Uid="hotkeysText" />
-                    </Button>
-                    <Button x:Name="StartStopBtn2"
-                            Content="{lex:Loc StartText}"
-                            Margin="10,0,3,0"
-                            BorderThickness="0"
-                            Click="StartStopBtn_Click"
-                            Width="90"
-                            Background="{DynamicResource AccentColor}"
-                            Foreground="{DynamicResource AccentForeColor}" />
-                </StackPanel>
-                <Label x:Name="lastMsgLb2"
-                       Content="{Binding Message}"
-                       ToolTip="{Binding Message}"
-                       Foreground="{Binding StatusLogTextColor}"
-                       Margin="4,0,2,0" />
-            </DockPanel>
-        </StackPanel>-->
-
-        <StatusBar DockPanel.Dock="Bottom" Height="32"
+        <StatusBar DockPanel.Dock="Bottom" Height="36"
                    Padding="0"
                    Background="{DynamicResource AccentColor}">
             <StatusBar.ItemsPanel>
@@ -94,18 +63,20 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
             <StatusBarItem Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0">
-                <Label x:Name="lastMsgLb" Padding="0" Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{Binding StatusLogTextColor}" />
+                <Label x:Name="lastMsgLb" d:Content="Sample Log"
+                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}" />
+                <!--<Label x:Name="lastMsgLb" d:Content="Sample Log"
+                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{Binding StatusLogTextColor}" />-->
             </StatusBarItem>
             <StatusBarItem Grid.Column="1" HorizontalAlignment="Right" Margin="5,0,0,0">
-                <Button x:Name="aboutBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3881D8"
-                        Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
+                <Button x:Name="aboutBtn" BorderThickness="0" Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
                     <TextBlock Text="{lex:Loc HotkeysAbout}"
                                TextDecorations="Underline"
                                Foreground="{DynamicResource AccentForeColor}"
@@ -113,13 +84,12 @@
                                x:Uid="hotkeysText" />
                 </Button>
             </StatusBarItem>
-            <StatusBarItem Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <StatusBarItem Grid.Column="2" HorizontalAlignment="Right" Margin="10 0">
                 <Button x:Name="StartStopBtn" Content="{lex:Loc StartText}" Click="StartStopBtn_Click"
-                        BorderThickness="0"/>
+                        MinWidth="100"/>
             </StatusBarItem>
         </StatusBar>
         
-
         <!--Main Tab-->
         <TabControl x:Name="mainTabCon" 
                     DockPanel.Dock="Top"
@@ -390,36 +360,22 @@
                      IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
                 <DockPanel LastChildFill="True">
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                  VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                        <WrapPanel Orientation="Vertical" Height="1000"
+                        <WrapPanel Orientation="Vertical" Height="900" Margin="4" VerticalAlignment="Stretch"
                                    HorizontalAlignment="Center">
 
-                            <!--<WrapPanel.Resources>
-                                <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBox_Toggle_Style_2}"/>
-                            </WrapPanel.Resources>-->
 
-                            <GroupBox Header="Controller"
-                                  Margin="10,10,0,0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-
-                                    <Button x:Name="deviceOptionSettingsBtn"
-                                        Width="200" Margin="0,0,0,10"
-                                        HorizontalAlignment="Center"
-                                        Content="{lex:Loc DeviceOptions}"
-                                        Click="DeviceOptionSettingsBtn_Click" />
+                            <GroupBox Header="Controller" Margin="4 4 4 0" Width="400">
+                                <StackPanel Orientation="Vertical">
+                                    <Button x:Name="deviceOptionSettingsBtn" Width="200" Margin="0,0,0,8"
+                                            HorizontalAlignment="Center" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click" />
 
                                     <CheckBox x:Name="hideDS4ContCk"
                                               Content="{lex:Loc HideDS4Controller}"
                                               x:Uid="hideDS4Checkbox"
                                               IsChecked="{Binding HideDS4Controller}"
                                               Click="HideDS4ContCk_Click"/>
-
 
                                     <CheckBox x:Name="swipeTouchCk"
                                           Content="{lex:Loc SwipeTouchpadToSwitchProfiles}"
@@ -437,11 +393,11 @@
                                             <TextBlock Text="{lex:Loc Resources:QuickCharge}"/>
                                         </CheckBox.ToolTip>
                                     </CheckBox>
-                                    
-                                    <DockPanel Width="360">
+
+                                    <DockPanel>
                                         <CheckBox Content="{lex:Loc FlashLightbarAtHighLatency}"
-                                                  IsChecked="{Binding FlashHighLatency}" 
-                                                  HorizontalAlignment="Left"/>
+                                                  IsChecked="{Binding FlashHighLatency}"
+                                                  DockPanel.Dock="Left"/>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Right"
                                                     Margin="15,0,0,0"
@@ -450,14 +406,11 @@
                                             <Label Content="ms"/>
                                         </StackPanel>
                                     </DockPanel>
-
-                                   
-
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="App Behavior"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
@@ -498,7 +451,7 @@
                             </GroupBox>
 
                             <GroupBox Header="Startup"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
@@ -510,19 +463,15 @@
                                     </CheckBox>
 
 
-                                    <GroupBox Header="Run as..." Style="{StaticResource GroupBoxStyle}"
-                                              Width="200" HorizontalAlignment="Left"
-                                              Visibility="{Binding ShowRunStartPanel}">
+                                    <GroupBox Header="Run as..." Style="{StaticResource GroupBoxStyle}" Width="200" HorizontalAlignment="Left" Visibility="{Binding ShowRunStartPanel}">
 
+                                        <StackPanel Margin="10,5,0,5" Orientation="Vertical" HorizontalAlignment="Left">
 
-                                        <StackPanel Margin="10,5,0,5"
-                                            Orientation="Vertical" HorizontalAlignment="Left">
-
-                                            <StackPanel Height="30" VerticalAlignment="Center" Orientation="Horizontal">
+                                            <StackPanel Height="24" VerticalAlignment="Center" Orientation="Horizontal">
                                                 <RadioButton Content="{lex:Loc Program}" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartProg}" />
                                             </StackPanel>
 
-                                            <StackPanel Height="30" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <StackPanel Height="24" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
                                                 <RadioButton Content="Task Scheduler" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartTask}" IsEnabled="{Binding CanWriteTask}" />
                                                 <Image x:Name="uacImg" Source="{Binding UACSource, Mode=OneTime}" Width="24" Height="24" Margin="10,0,0,0">
                                                     <Image.ToolTip>
@@ -530,26 +479,22 @@
                                                     </Image.ToolTip>
                                                 </Image>
                                             </StackPanel>
-
-
                                         </StackPanel>
-
                                     </GroupBox>
-
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox x:Name="notificationsGroupBox"
                                   Header="Notifications" 
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
                                 <StackPanel Orientation="Vertical"
                                             Width="360" HorizontalAlignment="Left">
-                                    
+
                                     <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}" Visibility="{Binding IsProfileChangedCheckVisible}"/>
-                                    
+
                                     <DockPanel Height="30">
                                         <Label Content="{lex:Loc ShowNotifications}" />
                                         <ComboBox SelectedIndex="{Binding ShowNotificationsIndex}"
@@ -560,19 +505,19 @@
                                             <ComboBoxItem Content="{lex:Loc All}" />
                                         </ComboBox>
                                     </DockPanel>
-                                   
+
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="Appearance"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
-                                
+
                                 <StackPanel Orientation="Vertical" Width="360"
                                             HorizontalAlignment="Left">
-                                    
+
                                     <DockPanel Height="30">
                                         <Label Content="{lex:Loc IconChoice}" ContentStringFormat="{}{0}"/>
                                         <ComboBox x:Name="useIconChoiceCom"
@@ -603,53 +548,49 @@
                                     <DockPanel Height="30">
                                         <local:LanguagePackControl VerticalAlignment="Center"/>
                                     </DockPanel>
-                                    
+
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="Updater"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
-                                
+
                                 <StackPanel Orientation="Vertical"
                                             Width="360" HorizontalAlignment="Left">
                                     <CheckBox Content="{lex:Loc CheckUpdateStartup}"   IsChecked="{Binding CheckForUpdates}" />
-                                    
+
                                     <DockPanel x:Name="checkEveryOptionsStack"
                                                LastChildFill="False"
                                                 Height="30"
                                                 IsEnabled="{Binding CheckForUpdates}">
                                         <Label Content="{lex:Loc CheckEvery}" />
-                                        
+
                                         <ComboBox DockPanel.Dock="Right"
                                                             Margin="6,0,0,0"
                                                   SelectedIndex="{Binding CheckEveryUnit,FallbackValue=1}">
                                             <ComboBoxItem Content="{lex:Loc Hours}" />
                                             <ComboBoxItem Content="{lex:Loc Days}" />
                                         </ComboBox>
-                                        
+
                                         <xctk:IntegerUpDown Value="{Binding CheckEvery}"
                                                             DockPanel.Dock="Right"
                                                             ButtonSpinnerLocation="Right"
                                                             Increment="1" Maximum="30" Minimum="0" />
-                                        
+
                                     </DockPanel>
-                                    
+
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc OscServerHeading}" 
-                                  Margin="10,10,0,0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-                                <StackPanel Width="360">
+                                  Margin="4 4 4 0"
+                                  Width="400">
+                                <StackPanel HorizontalAlignment="Stretch">
                                     <DockPanel MinHeight="30">
-                                        <CheckBox x:Name="useOscServerCk"
-                                                  Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click" VerticalAlignment="Center" />
-
+                                        <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click" VerticalAlignment="Center" />
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                                                      IsEnabled="{Binding UseOSCServer}">
                                             <Label Content="Port" VerticalAlignment="Center"/>
@@ -668,38 +609,42 @@
                                         <CheckBox x:Name="useOscSenderCk" Content="{lex:Loc EnableOscSender}" IsChecked="{Binding UseOSCSender}" Click="UseOscSenderCk_Click" VerticalAlignment="Center" />
                                     </StackPanel>
                                     <DockPanel Height="30" LastChildFill="False">
-                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                                            <Label Content="Address" HorizontalAlignment="Right"/>
-                                            <TextBox x:Name="oscSenderTxt" Height="24"
-                                                 Width="100"
-                                                 VerticalContentAlignment="Center"
-                                                 HorizontalAlignment="Right"
-                                                     TextAlignment="Right"
-                                                 IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Text="{Binding OscSenderAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
-                                            
-                                        </StackPanel>
-                                    </DockPanel>
-                                    <DockPanel Height="30" LastChildFill="False">
-                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="16 0 0 0">
                                             <Label Content="Port" VerticalAlignment="Center"/>
                                             <xctk:IntegerUpDown x:Name="oscSendPort" IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Value="{Binding OscSendPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                            <Label Content="Address" HorizontalAlignment="Right"/>
+                                            <TextBox x:Name="oscSenderTxt" Height="24"
+                                                    Width="100"
+                                                    VerticalContentAlignment="Center"
+                                                    HorizontalAlignment="Right"
+                                                        TextAlignment="Right"
+                                                    IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Text="{Binding OscSenderAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
+                                        </StackPanel>
                                     </DockPanel>
+
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc UDPServer}" 
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
-                                
+
                                 <StackPanel Orientation="Vertical">
-                                    <DockPanel LastChildFill="False" MinHeight="30">
+                                    <StackPanel MinHeight="30">
                                         <CheckBox x:Name="useUdpServerCk"
                                                   DockPanel.Dock="Left"
                                                   Content="{lex:Loc MainWin.EnableServer}" IsChecked="{Binding UseUDPServer}" Click="UseUdpServerCk_Click" VerticalAlignment="Center" />
+                                    </StackPanel>
 
+                                    <DockPanel LastChildFill="False">
+                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="16 0 0 0">
+                                            <Label Content="{lex:Loc Port}" VerticalAlignment="Center" />
+                                            <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
+                                        </StackPanel>
                                         <StackPanel Orientation="Horizontal"
                                                     DockPanel.Dock="Right">
                                             <Label Content="Address"/>
@@ -710,43 +655,36 @@
                                         </StackPanel>
                                     </DockPanel>
 
-                                    <DockPanel LastChildFill="False">
-                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                                            <Label Content="{lex:Loc Port}" VerticalAlignment="Center" />
-                                            <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
-                                        </StackPanel>
-                                    </DockPanel>
-
                                     <CheckBox Content="{lex:Loc UseSmoothing}" IsChecked="{Binding UseUdpSmoothing,FallbackValue='False'}" IsEnabled="{Binding UseUDPServer,Mode=OneWay}"/>
 
                                     <DockPanel x:Name="udpEuroPanel" LastChildFill="False"
                                                MinHeight="30"
                                                 Visibility="{Binding UdpServerOneEuroPanelVisibility,FallbackValue='Collapsed'}">
 
-                                            <Label Content="{lex:Loc MainWin.OneEuroMinCutoff}"/>
-                                            <xctk:DoubleUpDown FormatString="F5"
+                                        <Label Content="{lex:Loc MainWin.OneEuroMinCutoff}"/>
+                                        <xctk:DoubleUpDown FormatString="F5"
                                                                DockPanel.Dock="Right"
                                                                Value="{Binding UdpSmoothMinCutoff,FallbackValue=1.0,UpdateSourceTrigger=LostFocus}" Minimum="0.00001" Maximum="100.0" Increment="0.1" MinWidth="60" />
-                                        
+
                                     </DockPanel>
                                     <DockPanel LastChildFill="False" MinHeight="30"
                                                Visibility="{Binding UdpServerOneEuroPanelVisibility,FallbackValue='Collapsed'}">
-                                        
+
                                         <Label Content="{lex:Loc MainWin.OneEuroBeta}" />
                                         <xctk:DoubleUpDown FormatString="F5"
                                                             DockPanel.Dock="Right"
                                                             Value="{Binding UdpSmoothBeta,FallbackValue=0.0,UpdateSourceTrigger=LostFocus}" Minimum="0.0" Maximum="1.0" Increment="0.1" MinWidth="60" />
-                                                                                
+
                                     </DockPanel>
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="Steam Specific"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
-                                
+
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                         <CheckBox x:Name="customSteamCk" Content="{lex:Loc UseCustomSteamFolder}" IsChecked="{Binding UseCustomSteamFolder}" />
@@ -762,7 +700,7 @@
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc CustomExeName}"
-                                  Margin="10,10,0,0"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left"
@@ -772,19 +710,19 @@
                                         <TextBox x:Name="fakeExeNameTxt" Height="24" Margin="5,5" Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
                                     </StackPanel>
                                     <StackPanel>
-                                        <Expander Header="Guide">
+                                        <Expander Header="Guide" d:IsExpanded="True">
                                             <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap"/>
                                         </Expander>
                                         <!--<Button x:Name="fakeExeNameExplainBtn" Width="50" Height="50" Click="FakeExeNameExplainBtn_Click">
                                     <Image Source="{Binding QuestionMarkSource, Mode=OneTime}" Width="40" Height="40" Stretch="UniformToFill" />
                                      </Button>-->
                                     </StackPanel>
-                                    
+
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc Utils}"
-                                  Margin="10,10,0,10"
+                                  Margin="4 4 4 0"
                                   Width="400" Padding="3,10"
                                   VerticalAlignment="Top"
                                   HorizontalAlignment="Left">
