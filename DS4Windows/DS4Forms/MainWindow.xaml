@@ -362,14 +362,23 @@
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                        <WrapPanel Orientation="Vertical" Height="900" Margin="4" VerticalAlignment="Stretch"
+                        <WrapPanel Orientation="Vertical" Height="1000"
                                    HorizontalAlignment="Center">
 
 
-                            <GroupBox Header="Controller" Margin="4 4 4 0" Width="400">
-                                <StackPanel Orientation="Vertical">
-                                    <Button x:Name="deviceOptionSettingsBtn" Width="200" Margin="0,0,0,8"
-                                            HorizontalAlignment="Center" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click" />
+                            <GroupBox Header="Controller"
+                                  Margin="10,10,0,0"
+                                  Width="400" Padding="3,10"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left">
+
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+
+                                    <Button x:Name="deviceOptionSettingsBtn"
+                                        Width="200" Margin="0,0,0,10"
+                                        HorizontalAlignment="Center"
+                                        Content="{lex:Loc DeviceOptions}"
+                                        Click="DeviceOptionSettingsBtn_Click" />
 
                                     <CheckBox x:Name="hideDS4ContCk"
                                               Content="{lex:Loc HideDS4Controller}"
@@ -586,9 +595,11 @@
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc OscServerHeading}" 
-                                  Margin="4 4 4 0"
-                                  Width="400">
-                                <StackPanel HorizontalAlignment="Stretch">
+                                  Margin="10,10,0,0"
+                                  Width="400" Padding="3,10"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left">
+                                <StackPanel Width="360">
                                     <DockPanel MinHeight="30">
                                         <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click" VerticalAlignment="Center" />
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
