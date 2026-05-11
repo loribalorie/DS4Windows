@@ -916,7 +916,7 @@ It might fix rumble and lightbar support for some third party DS4 clones</value>
     <value>Anti Radius</value>
   </data>
   <data name="BindingWin.AbsMouse" xml:space="preserve">
-    <value>Abs Mouse</value>
+    <value>Absolute Mouse</value>
   </data>
   <data name="BindingWin.AbsMouseDown" xml:space="preserve">
     <value>Abs Mouse Down</value>
@@ -937,7 +937,7 @@ It might fix rumble and lightbar support for some third party DS4 clones</value>
     <value>Change Mouse Sensitivity</value>
   </data>
   <data name="BindingWin.KeyAndRelMouse" xml:space="preserve">
-    <value>KB &amp; Rel Mouse</value>
+    <value>Keyboard or Mouse</value>
   </data>
   <data name="BindingWin.KeyboardAndMouse" xml:space="preserve">
     <value>Keyboard &amp; Mouse</value>

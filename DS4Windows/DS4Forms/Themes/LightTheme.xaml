@@ -67,7 +67,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="OptionMarkFocusVisual">
+    <!--<Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -79,7 +79,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     
@@ -266,15 +266,18 @@
 
     </Style>-->
 
+    <!--Button New Style-->
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
         <Setter Property="Background" Value="#fefefe"/>
         <Setter Property="BorderBrush" Value="#d3d3d3"/>
         <Setter Property="Foreground" Value="#1B1B1B"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12 4"/>
 
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="Auto"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>

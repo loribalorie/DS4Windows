@@ -68,11 +68,12 @@ namespace DS4WinWPF.DS4Forms
 
             if (settings.control != DS4Windows.DS4Controls.None)
             {
-                Title = $"Select action for {DS4Windows.Global.ds4inputNames[settings.control]}";
+                Title = $"Select Action for {DS4Windows.Global.ds4inputNames[settings.control]}";
+                userInstructionLabel.Content = $"Select Action for {DS4Windows.Global.ds4inputNames[settings.control]}";
             }
             else
             {
-                Title = "Select action";
+                Title = "Select Action";
             }
 
             guideBtn.Content = "";

@@ -331,10 +331,22 @@
     <value>Тест геймпада</value>
     <comment>settings tab&gt;utils</comment>
   </data>
+  <data name="EnableOutputDataToDS4" xml:space="preserve">
+    <value>Включить вывод данных в DS4</value>
+    <comment>Profiles tab&gt;edit&gt;Other</comment>
+  </data>
+  <data name="EnableOutputDataToDS4Tip" xml:space="preserve">
+    <value>Периодически выводить данные световой панели и вибрации на геймпад DS4. Снимите флажок, если геймпад не поддерживает прием данных.
+Изменения этого параметра вступают в силу во время подключения геймпада.</value>
+    <comment>To enter a line break into a string resource value in VisualStudio resource editor press Shift+Enter.</comment>
+  </data>
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
     <comment>Profiles&gt;Edit&gt;Apply
 (button)</comment>
+  </data>
+  <data name="HidNinja" xml:space="preserve">
+    <value>HidNinja</value>
   </data>
   <data name="CustomExeName" xml:space="preserve">
     <value>Настраиваемое имя Exe</value>
@@ -348,6 +360,10 @@
     <comment>Settings tab
 (help button)</comment>
   </data>
+  <data name="XInputChecker" xml:space="preserve">
+    <value>Проверка XInput</value>
+    <comment>settings tab&gt;utils</comment>
+  </data>
   <data name="Controller5Text" xml:space="preserve">
     <value>Контроллер 5</value>
   </data>
@@ -360,56 +376,6 @@
   <data name="Controller8Text" xml:space="preserve">
     <value>Контроллер 8</value>
   </data>
-  <data name="GamepadPresetName" xml:space="preserve">
-    <value>Геймпад</value>
-    <comment>preset name</comment>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Описание</value>
-    <comment>Profiles tab&gt;Select Preset</comment>
-  </data>
-  <data name="PresetIntroText" xml:space="preserve">
-    <value>Вы хотите использовать предустановленный вариант? При выборе «Нет» редактор профиля будет использовать пустой профиль геймпада.</value>
-    <comment>Profiles tab&gt;Select Preset</comment>
-  </data>
-  <data name="Presets" xml:space="preserve">
-    <value>Пресеты</value>
-    <comment>Profiles tab&gt;Select Preset</comment>
-  </data>
-  <data name="Changelog" xml:space="preserve">
-    <value>Журнал изменений</value>
-    <comment>settings tab&gt;utils</comment>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Закрыть</value>
-    <comment>Changelog window
-(button)</comment>
-  </data>
-  <data name="Profiles" xml:space="preserve">
-    <value>Профили</value>
-    <comment>Main tab</comment>
-  </data>
-  <data name="NoControllersConnected" xml:space="preserve">
-    <value>Контроллеры не подключены (Максимум {0})</value>
-    <comment>Controllers tab
-(if controllers are disabled)</comment>
-  </data>
-  <data name="EnableOutputDataToDS4" xml:space="preserve">
-    <value>Включить вывод данных в DS4</value>
-    <comment>Profiles tab&gt;edit&gt;Other</comment>
-  </data>
-  <data name="EnableOutputDataToDS4Tip" xml:space="preserve">
-    <value>Периодически выводить данные световой панели и вибрации на геймпад DS4. Снимите флажок, если геймпад не поддерживает прием данных.
-Изменения этого параметра вступают в силу во время подключения геймпада.</value>
-    <comment>To enter a line break into a string resource value in VisualStudio resource editor press Shift+Enter.</comment>
-  </data>
-  <data name="XInputChecker" xml:space="preserve">
-    <value>Проверка XInput</value>
-    <comment>settings tab&gt;utils</comment>
-  </data>
-  <data name="HidNinja" xml:space="preserve">
-    <value>HidNinja</value>
-  </data>
   <data name="GamepadGyroCameraDescription" xml:space="preserve">
     <value>Maps the controller output to a standard XInput gamepad or DS4 pad. Gyro is mapped to a Mouse-like Joystick.</value>
     <comment>Description</comment>
@@ -421,6 +387,10 @@
   <data name="GamepadPresetDescription" xml:space="preserve">
     <value>Maps the controller output to a standard gamepad</value>
     <comment>Description</comment>
+  </data>
+  <data name="GamepadPresetName" xml:space="preserve">
+    <value>Геймпад</value>
+    <comment>preset name</comment>
   </data>
   <data name="KBMGyroMouseDescription" xml:space="preserve">
     <value>Maps the controller output to virtual KB+M controls. Useful for playing FPS games with no gamepad support. Gyro is mapped to a virtual Mouse.</value>
@@ -453,6 +423,36 @@
   <data name="MixedPresetName" xml:space="preserve">
     <value>Gamepad with High Precision Camera</value>
     <comment>preset name</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+    <comment>Profiles tab&gt;Select Preset</comment>
+  </data>
+  <data name="PresetIntroText" xml:space="preserve">
+    <value>Вы хотите использовать предустановленный вариант? При выборе «Нет» редактор профиля будет использовать пустой профиль геймпада.</value>
+    <comment>Profiles tab&gt;Select Preset</comment>
+  </data>
+  <data name="Presets" xml:space="preserve">
+    <value>Пресеты</value>
+    <comment>Profiles tab&gt;Select Preset</comment>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Журнал изменений</value>
+    <comment>settings tab&gt;utils</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+    <comment>Changelog window
+(button)</comment>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Профили</value>
+    <comment>Main tab</comment>
+  </data>
+  <data name="NoControllersConnected" xml:space="preserve">
+    <value>Контроллеры не подключены (Максимум {0})</value>
+    <comment>Controllers tab
+(if controllers are disabled)</comment>
   </data>
   <data name="FlickThreshold" xml:space="preserve">
     <value>Flick Threshold</value>
@@ -499,6 +499,9 @@
   </data>
   <data name="SharedAccess" xml:space="preserve">
     <value>Общий доступ</value>
+  </data>
+  <data name="RenameProfile" xml:space="preserve">
+    <value>Переименовать</value>
   </data>
   <data name="Accept" xml:space="preserve">
     <value>Принять</value>
@@ -547,9 +550,6 @@
   </data>
   <data name="Plug" xml:space="preserve">
     <value>Подключить</value>
-  </data>
-  <data name="RenameProfile" xml:space="preserve">
-    <value>Переименовать</value>
   </data>
   <data name="RevertToDefaultProfileOnUnknown" xml:space="preserve">
     <value>Вернуть профиль по умолчанию на неизвестном</value>
@@ -614,12 +614,6 @@
   <data name="Hours" xml:space="preserve">
     <value>Часов</value>
   </data>
-  <data name="RunAs" xml:space="preserve">
-    <value>Запускать как</value>
-  </data>
-  <data name="Task" xml:space="preserve">
-    <value>Задачу</value>
-  </data>
   <data name="UseCustomSteamFolder" xml:space="preserve">
     <value>Использовать кастомную папку Steam</value>
   </data>
@@ -628,6 +622,12 @@
   </data>
   <data name="Program" xml:space="preserve">
     <value>Программа</value>
+  </data>
+  <data name="RunAs" xml:space="preserve">
+    <value>Запускать как</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Задачу</value>
   </data>
   <data name="GyroTriggerJitterCompensationTooltip" xml:space="preserve">
     <value>Добавьте дополнительное регулирование на нижнем конце кривой, чтобы учесть тряску устройства.</value>
@@ -821,8 +821,9 @@
   <data name="BindingWin.ChangeMouseSensitivity" xml:space="preserve">
     <value>Изменить чувствительность мыши</value>
   </data>
-  <data name="BindingWin.KeyAndRelMouse" xml:space="preserve">
-    <value>KB &amp; Rel Mouse</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BindingWin.KeyAndRelMouse" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="BindingWin.KeyboardAndMouse" xml:space="preserve">
     <value>Keyboard &amp; Mouse</value>
