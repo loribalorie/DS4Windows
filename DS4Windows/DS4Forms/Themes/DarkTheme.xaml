@@ -165,7 +165,6 @@
         </Setter>
     </Style>
 
-
     <!-- Repeat Button Style -->
     <Style x:Key="RepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -778,8 +777,6 @@
         </Setter>
     </Style>
 
-
-
     <!--ListBox Control Template-->
     <ControlTemplate x:Key="ListBoxControlTemplate1" TargetType="{x:Type ListBox}">
         <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
@@ -810,9 +807,7 @@
         <Setter Property="Template" Value="{StaticResource ListBoxControlTemplate1}" />
     </Style>
 
-    <!-- ListView style -->
-    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
-       TargetType="ScrollViewer">
+    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}" TargetType="ScrollViewer">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ScrollViewer">
@@ -884,10 +879,16 @@
         </Setter>
     </Style>
 
+    <!-- ListView style -->
+    <Style TargetType="{x:Type ListView}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -901,12 +902,10 @@
                         <Border.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border
-                                                Background="White"
-                                                SnapsToDevicePixels="True"
-                                                CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
-                                                Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
-                                                Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                                    <Border Background="White" SnapsToDevicePixels="True"
+                                            CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Border.OpacityMask>
@@ -921,8 +920,8 @@
 
     <!-- ListViewItem style -->
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="2,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -932,11 +931,11 @@
                                 Padding="{TemplateBinding Padding}" 
                                 SnapsToDevicePixels="true" />
                         <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="innerBorder" Property="Background" Value="{StaticResource SecondaryColor}"/>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{StaticResource AccentColorActive}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="innerBorder" Property="Background" Value="{StaticResource AccentColor}"/>
@@ -1511,7 +1510,6 @@
                 </Setter>
             </Trigger>
 
-
             <Trigger Property="Role" Value="SubmenuItem">
                 <Setter Property="Margin" Value="0,0"/>
                 <Setter Property="Padding" Value="7,2,8,3"/>
@@ -1697,9 +1695,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
 
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="5"
-                            Padding="10 6 10 10">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True" CornerRadius="5" Padding="10 6 10 10">
 
                         <Grid ShowGridLines="False" Margin="0">
 
@@ -1711,9 +1708,9 @@
                             <!--HEADER-->
                             <Grid Grid.Row="0" VerticalAlignment="Stretch" >
                                 <ContentPresenter VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True"
-                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                   TextElement.Foreground="{TemplateBinding Foreground}"
-                                   TextElement.FontWeight="Bold"/>
+                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                   TextElement.Foreground="{TemplateBinding Foreground}"
+                                                   TextElement.FontWeight="Regular" TextElement.FontSize="14"/>
                             </Grid>
                             <!--BODY-->
                             <Grid Grid.Row="1" VerticalAlignment="Stretch" Height="Auto">
@@ -2245,10 +2242,9 @@
 
     <!--BORDER-->
     <Style TargetType="{x:Type Border}" x:Key="BorderStyle">
-        <!--<Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>-->
         <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}"/>
         <Setter Property="CornerRadius" Value="5"/>
-        <Setter Property="BorderBrush" Value="#1d1d1d"/>
+        <Setter Property="BorderBrush" Value="#1D1D1D"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="8"/>
 
@@ -2263,12 +2259,137 @@
     <!-- Label Style -->
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="0"/>
     </Style>
 
     <!-- Window Style -->
     <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
         <!--<Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />-->
+    </Style>
+
+    <!--Custom Slide Itemr-->
+    <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="SliderHorizontalThumbTemplate" TargetType="{x:Type Thumb}">
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="true" VerticalAlignment="Center">
+            <Rectangle x:Name="grip" Fill="{StaticResource AccentColorActive}" Stroke="{StaticResource AccentColor}"
+                       StrokeThickness="1" SnapsToDevicePixels="true"
+                       Width="8" Height="16" RadiusX="3" RadiusY="3" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="grip" Property="Fill" Value="#DEDEDE"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FF7EB4EA"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="true">
+                <Setter TargetName="grip" Property="Fill" Value="#DADADA"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FF569DE5"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="grip" Property="Fill" Value="#FFF4F4F4"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FFADB2B5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SliderVerticalThumbTemplate" TargetType="{x:Type Thumb}">
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="true" VerticalAlignment="Center">
+            <Rectangle x:Name="grip" Fill="{StaticResource AccentColorActive}" Stroke="{StaticResource AccentColor}"
+                       StrokeThickness="1" SnapsToDevicePixels="true"
+                       Width="16" Height="8" RadiusX="3" RadiusY="3" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="grip" Property="Fill" Value="#DEDEDE"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FF7EB4EA"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="true">
+                <Setter TargetName="grip" Property="Fill" Value="#DADADA"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FF569DE5"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="grip" Property="Fill" Value="#FFF4F4F4"/>
+                <Setter TargetName="grip" Property="Stroke" Value="#FFADB2B5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="CustomSliderStyle" TargetType="{x:Type Slider}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FFC4C4C4"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <Grid>
+                            <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Top" Visibility="Collapsed" Margin="0,0,0,2"/>
+                            <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Placement="Bottom" Visibility="Collapsed" Margin="0,2,0,0"/>
+                            <TickBar x:Name="LeftTick" Fill="{TemplateBinding Foreground}" Width="4" Placement="Left" Visibility="Collapsed"/>
+                            <TickBar x:Name="RightTick" Fill="{TemplateBinding Foreground}" Width="4" Placement="Right" Visibility="Collapsed"/>
+                            <Grid x:Name="TrackBackground">
+                                <Border x:Name="TrackRectangle" Background="{StaticResource BackgroundColor}" BorderBrush="{StaticResource BorderColor}"
+                                        BorderThickness="1" CornerRadius="3" VerticalAlignment="Center"/>
+                                <Track x:Name="PART_Track">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Focusable="false" Height="Auto" Width="Auto" VerticalAlignment="Center"
+                                               Template="{StaticResource SliderHorizontalThumbTemplate}"/>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TickPlacement" Value="TopLeft">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="LeftTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="TickPlacement" Value="BottomRight">
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RightTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="TickPlacement" Value="Both">
+                            <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="LeftTick" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RightTick" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="TrackRectangle" Property="Width" Value="8"/>
+                            <Setter TargetName="TrackRectangle" Property="Height" Value="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="Thumb" Property="Template" Value="{StaticResource SliderVerticalThumbTemplate}"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="TrackRectangle" Property="Height" Value="8"/>
+                            <Setter TargetName="TrackRectangle" Property="Width" Value="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="Thumb" Property="Template" Value="{StaticResource SliderHorizontalThumbTemplate}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Now apply custom styles -->
@@ -2286,7 +2407,7 @@
     <Style BasedOn="{StaticResource ListBoxStyle}" TargetType="{x:Type ListBox}" />
     <Style BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}" />
     <Style BasedOn="{StaticResource ComboBoxItemStyle}" TargetType="{x:Type ComboBoxItem}" />
-    <Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type ListView}" />
+    <!--<Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type ListView}" />-->
     <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
     <Style BasedOn="{StaticResource GridViewColumnHeaderStyle}" TargetType="{x:Type GridViewColumnHeader}" />
     <Style BasedOn="{StaticResource DocumentStyleGithubLike}" TargetType="{x:Type FlowDocument}" />

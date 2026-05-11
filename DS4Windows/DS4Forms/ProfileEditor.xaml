@@ -214,7 +214,7 @@
 
                         </Border>
 
-                        <Border Margin="0 4 0 0"
+                        <Border Margin="0 4 0 0" Padding="0 4"
                                 Style="{DynamicResource BorderStyle}"
                                 DockPanel.Dock="Bottom">
                             <ListBox x:Name="mappingListBox"
@@ -248,10 +248,10 @@
 
                     <DockPanel x:Name="specialActionDockPanel" LastChildFill="True" Margin="8"
                                Background="{DynamicResource BackgroundColor}">
-                        <Border x:Name="baseSpeActPanel" Style="{DynamicResource BorderStyle}">
+                        <Border x:Name="baseSpeActPanel"  DockPanel.Dock="Top">
 
-                            <DockPanel  DockPanel.Dock="Top">
-                                <UniformGrid Rows="1" Columns="4" Height="36" DockPanel.Dock="Top">
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                                <UniformGrid Rows="1" Columns="4"  DockPanel.Dock="Top">
                                     <Button x:Name="newActionBtn" Content="{lex:Loc NewAction}" Click="NewActionBtn_Click"
                                             Margin="4 0"/>
                                     <Button x:Name="editActionBtn" Content="{lex:Loc EditAction}" IsEnabled="{Binding ItemSelected}" Click="EditActionBtn_Click"
@@ -262,19 +262,20 @@
                                             Margin="4 0"/>
                                 </UniformGrid>
 
-                                <ListView x:Name="specialActionsLV" BorderThickness="0"
+                                <d:ListView x:Name="specialActionsLV" BorderThickness="0"
                                       ItemsSource="{Binding ActionCol}"
                                       SelectedIndex="{Binding SpecialActionIndex}"
                                       SelectedItem="{Binding CurrentSpecialActionItem,Mode=OneWayToSource}"
-                                      DockPanel.Dock="Bottom">
-                                    <ListView.View>
+                                      DockPanel.Dock="Top" Height="200"
+                                            Visibility="Collapsed">
+                                    <d:ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="{lex:Loc Name}" Width="150">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <StackPanel Orientation="Horizontal">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                             <CheckBox IsChecked="{Binding Active}" Click="SpecialActionCheckBox_Click" />
-                                                            <TextBlock Text="{Binding ActionName}" Margin="4,0,0,0" />
+                                                            <TextBlock Text="{Binding ActionName}" Margin="4,0,0,0"/>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </GridViewColumn.CellTemplate>
@@ -282,10 +283,65 @@
                                             <GridViewColumn Header="{lex:Loc Trigger}" DisplayMemberBinding="{Binding Controls}" Width="100" />
                                             <GridViewColumn Header="{lex:Loc Action}" DisplayMemberBinding="{Binding TypeName}" Width="200" />
                                         </GridView>
-                                    </ListView.View>
+                                    </d:ListView.View>
+                                </d:ListView>
+
+                                <ListView BorderThickness="0" Background="Transparent" DockPanel.Dock="Top"
+                                  ItemsSource="{Binding ActionCol}" SelectedIndex="{Binding SpecialActionIndex}"
+                                  SelectedItem="{Binding CurrentSpecialActionItem,Mode=OneWayToSource}"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  HorizontalContentAlignment="Stretch"
+                                  Margin="0 4 0 0">
+
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Height" Value="Auto"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Margin" Value="0 1"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{DynamicResource BorderStyle}" Padding="16 8 4 8">
+                                                <DockPanel>
+                                                    <CheckBox DockPanel.Dock="Right" Margin="8 0 0 0"
+                                                              IsChecked="{Binding Active}" Click="SpecialActionCheckBox_Click" />
+                                                    <StackPanel Orientation="Vertical"  DockPanel.Dock="Left">
+                                                        <TextBlock Text="{Binding ActionName}"
+                                                                   TextWrapping="Wrap" FontWeight="Regular" FontSize="13" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{Binding TypeName}" 
+                                                                   TextWrapping="Wrap" Opacity="0.8" Margin="0 2 0 0" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{Binding Controls}"
+                                                                   TextWrapping="Wrap" Opacity="0.6" Margin="0 4 0 0" HorizontalAlignment="Left"/>
+                                                    </StackPanel>
+                                                </DockPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+
+                                    <d:ListViewItem>
+                                        <Border Style="{DynamicResource BorderStyle}" Padding="16 8 4 8">
+                                            <DockPanel>
+                                                <CheckBox DockPanel.Dock="Right" Margin="8 0 0 0"/>
+                                                <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                                                    <TextBlock Text="Special Action name here andd ;ajfd jf pu pdfwpodafdfpj oj jaef dpjfojf we "
+                                                               TextWrapping="Wrap" FontWeight="Regular" FontSize="13" HorizontalAlignment="Left"/>
+                                                    <TextBlock Text="Special Action here..."
+                                                               TextWrapping="Wrap" Opacity="0.8" Margin="0 2 0 0" HorizontalAlignment="Left"/>
+                                                    <TextBlock Text="Button Combination here..."
+                                                               TextWrapping="Wrap" Opacity="0.6" Margin="0 4 0 0" HorizontalAlignment="Left"/>
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </Border>
+                                    </d:ListViewItem>
+
+
                                 </ListView>
+
                             </DockPanel>
                         </Border>
+
                     </DockPanel>
 
                 </TabItem>
@@ -4449,31 +4505,26 @@
                             </GroupBox>
 
                             <GroupBox Header="Profile" Margin="0 2">
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <CheckBox x:Name="launchProgCk"
                                               Content="{lex:Loc LaunchProgramWithProfile}"
                                               IsChecked="{Binding LaunchProgramExists}"
                                               IsEnabled="{Binding LaunchProgramExists}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="8 0">
-                                        <Button x:Name="launchProgBrowseBtn" MinWidth="100"
-                                            Click="LaunchProgBrowseBtn_Click">
+                                    <StackPanel Orientation="Horizontal" Margin="8 0" VerticalAlignment="Center">
+                                        <Button x:Name="launchProgIconBtn" Focusable="False" Width="24" Height="24">
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="{Binding LaunchProgramIcon}"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Button x:Name="launchProgBrowseBtn" Width="80" Click="LaunchProgBrowseBtn_Click" Margin="8 0 0 0" HorizontalContentAlignment="Center"> 
                                             <Button.Content>
                                                 <PriorityBinding>
                                                     <Binding Path="LaunchProgramName" />
                                                     <lex:BLoc Key="Browse" />
                                                 </PriorityBinding>
                                             </Button.Content>
-                                        </Button>
-                                        <Button x:Name="launchProgIconBtn"
-                                            Margin="8,0,0,0"
-                                            Focusable="False"
-                                            Width="24"
-                                            VerticalContentAlignment="Center">
-                                            <Button.Background>
-                                                <ImageBrush ImageSource="{Binding LaunchProgramIcon}" />
-                                            </Button.Background>
                                         </Button>
                                     </StackPanel>
 
@@ -4483,11 +4534,11 @@
                             <GroupBox Header="Mouse emulation" Margin="0 2" >
                                 <Grid >
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="32"/>
-                                        <RowDefinition Height="32"/>
-                                        <RowDefinition Height="32"/>
-                                        <RowDefinition Height="32"/>
-                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="180"/>

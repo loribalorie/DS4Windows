@@ -73,7 +73,8 @@ namespace DS4WinWPF.DS4Forms
             }
             else
             {
-                Title = "Select Action";
+                Title = "Special Action";
+                userInstructionLabel.Content = $"Keyboard Keys Only";
             }
 
             guideBtn.Content = "";
@@ -102,17 +103,24 @@ namespace DS4WinWPF.DS4Forms
             else
             {
                 //topGrid.Visibility = Visibility.Collapsed;
-                topGrid.ColumnDefinitions.RemoveAt(3);
+                topGrid.ColumnDefinitions.RemoveAt(2);
                 //keyMouseTopTxt.Visibility = Visibility.Collapsed;
                 macroOnLb.Visibility = Visibility.Collapsed;
                 recordMacroBtn.Visibility = Visibility.Collapsed;
-                mouseCanvas.Visibility = Visibility.Collapsed;
+                //mouseCanvas.Visibility = Visibility.Collapsed;
                 bottomPanel.Visibility = Visibility.Collapsed;
                 extrasSidePanel.Visibility = Visibility.Collapsed;
-                mouseGridColumn.Width = new GridLength(0);
+                //mouseGridColumn.Width = new GridLength(0);
                 //otherKeysMouseGrid.Columns = 2;
                 //Width = 950;
                 //Height = 300;
+
+                mouseCanvas.IsEnabled = false;
+                modePanel.Visibility = Visibility.Collapsed;
+                foreach (TabItem tab in mapOptionsPanel.Items)
+                {
+                    tab.Visibility = Visibility.Collapsed;
+                }
             }
 
             ChangeForCurrentAction();

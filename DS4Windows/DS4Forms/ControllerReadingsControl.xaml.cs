@@ -255,18 +255,34 @@ namespace DS4WinWPF.DS4Forms
 
         private void ChangeRsDriftControls(object sender, EventArgs e)
         {
-            rsDriftEllipse.Width = rsDeadX * CANVAS_WIDTH;
-            rsDriftEllipse.Height = rsDeadY * CANVAS_WIDTH;
-            Canvas.SetLeft(rsDriftEllipse, (1 + (RsDriftX / 127.0) - rsDeadX) * CANVAS_MIDPOINT);
-            Canvas.SetTop(rsDriftEllipse, (1 + (RsDriftY / 127.0) - rsDeadY) * CANVAS_MIDPOINT);
+            if (RsDriftX != 0 || RsDriftY != 0)
+            {
+                rsDriftEllipse.Width = rsDeadX * CANVAS_WIDTH;
+                rsDriftEllipse.Height = rsDeadY * CANVAS_WIDTH;
+                Canvas.SetLeft(rsDriftEllipse, (1 + (RsDriftX / 127.0) - rsDeadX) * CANVAS_MIDPOINT);
+                Canvas.SetTop(rsDriftEllipse, (1 + (RsDriftY / 127.0) - rsDeadY) * CANVAS_MIDPOINT);
+                rsDriftEllipse.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                rsDriftEllipse.Visibility = Visibility.Hidden;
+            }
         }
 
         private void ChangeLsDriftControls(object sender, EventArgs e)
         {
-            lsDriftEllipse.Width = lsDeadX * CANVAS_WIDTH;
-            lsDriftEllipse.Height = lsDeadY * CANVAS_WIDTH;
-            Canvas.SetLeft(lsDriftEllipse, (1 + (LsDriftX / 127.0) - lsDeadX) * CANVAS_MIDPOINT);
-            Canvas.SetTop(lsDriftEllipse, (1 + (LsDriftY / 127.0) - lsDeadY) * CANVAS_MIDPOINT);
+            if (LsDriftX != 0 || LsDriftY != 0)
+            {
+                lsDriftEllipse.Width = lsDeadX * CANVAS_WIDTH;
+                lsDriftEllipse.Height = lsDeadY * CANVAS_WIDTH;
+                Canvas.SetLeft(lsDriftEllipse, (1 + (LsDriftX / 127.0) - lsDeadX) * CANVAS_MIDPOINT);
+                Canvas.SetTop(lsDriftEllipse, (1 + (LsDriftY / 127.0) - lsDeadY) * CANVAS_MIDPOINT);
+                lsDriftEllipse.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lsDriftEllipse.Visibility = Visibility.Hidden;
+            }
         }
 
         private void ChangeRsDeadControls(object sender, EventArgs e)

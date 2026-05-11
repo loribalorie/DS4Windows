@@ -109,7 +109,6 @@
                     <ListView x:Name="controllerLV"
                               ItemsSource="{Binding ControllerCol}" 
                               SelectionMode="Single"
-                              BorderThickness="1,0,1,0"
                               SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}" Grid.ColumnSpan="2">
                         <ListView.View>
                             <GridView>
@@ -122,7 +121,6 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-
                                 <GridViewColumn x:Name="idColumn" Header="{lex:Loc ID}" Width="120">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -355,21 +353,18 @@
             </TabItem>
 
             <!--Settings Tab-->
-            <TabItem x:Name="settingsTab"
-                     Header="{lex:Loc Settings}"
-                     IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
+            <TabItem x:Name="settingsTab" Header="{lex:Loc Settings}" IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
                 <DockPanel LastChildFill="True">
-
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <WrapPanel Orientation="Vertical" Height="900" HorizontalAlignment="Center" Margin="0 8" d:Height="Auto">
 
-                        <WrapPanel Orientation="Vertical" Height="900" Margin="4" VerticalAlignment="Stretch"
-                                   HorizontalAlignment="Center">
-
-
-                            <GroupBox Header="Controller" Margin="4 4 4 0" Width="400">
-                                <StackPanel Orientation="Vertical">
-                                    <Button x:Name="deviceOptionSettingsBtn" Width="200" Margin="0,0,0,8"
-                                            HorizontalAlignment="Center" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click" />
+                            <GroupBox Header="Controller" Margin="2" Width="400" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <Button x:Name="deviceOptionSettingsBtn"
+                                        Width="200" Margin="0,0,0,4"
+                                        HorizontalAlignment="Center"
+                                        Content="{lex:Loc DeviceOptions}"
+                                        Click="DeviceOptionSettingsBtn_Click" />
 
                                     <CheckBox x:Name="hideDS4ContCk"
                                               Content="{lex:Loc HideDS4Controller}"
@@ -394,30 +389,27 @@
                                         </CheckBox.ToolTip>
                                     </CheckBox>
 
-                                    <DockPanel>
-                                        <CheckBox Content="{lex:Loc FlashLightbarAtHighLatency}"
-                                                  IsChecked="{Binding FlashHighLatency}"
-                                                  DockPanel.Dock="Left"/>
-                                        <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Right"
-                                                    Margin="15,0,0,0"
-                                                    IsEnabled="{Binding FlashHighLatency,FallbackValue='False'}">
+                                    <CheckBox Content="{lex:Loc FlashLightbarAtHighLatency}"  IsChecked="{Binding FlashHighLatency}" DockPanel.Dock="Left"/>
+
+                                    <DockPanel IsEnabled="{Binding FlashHighLatency,FallbackValue='False'}">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" 
+                                                    Margin="15,0,0,0" DockPanel.Dock="Right">
                                             <xctk:IntegerUpDown Value="{Binding FlashHighLatencyAt}" Width="70" ButtonSpinnerLocation="Right" Increment="1" Maximum="100" Minimum="10" />
-                                            <Label Content="ms"/>
+                                            <Label Content="ms" Margin="4 0 0 0"/>
                                         </StackPanel>
+                                        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="46 0 0 0">
+                                            <TextBlock Text="Lightbar turns red when input delay hits 100 milliseconds or below." TextWrapping="Wrap" TextAlignment="Left"/>
+                                        </StackPanel>
+
                                     </DockPanel>
+                                    
                                 </StackPanel>
                             </GroupBox>
 
                             <GroupBox Header="App Behavior"
-                                  Margin="4 4 4 0"
-                                  Width="400"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-                                <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Left"
-                                            Width="360">
-
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
                                     <CheckBox Content="{lex:Loc StartMinimized}" IsChecked="{Binding StartMinimize}" />
                                     <CheckBox Content="{lex:Loc MinimizeToTaskbar}" IsChecked="{Binding MinimizeToTaskbar}"  >
                                         <CheckBox.ToolTip>
@@ -451,11 +443,9 @@
                             </GroupBox>
 
                             <GroupBox Header="Startup"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
                                     <CheckBox x:Name="runAtStartCk" Content="{lex:Loc RunAtStartup}"   IsChecked="{Binding RunAtStartup}" Click="RunAtStartCk_Click">
                                         <CheckBox.ToolTip>
                                             <TextBlock Text="{lex:Loc Resources:RunAtStartup}"/>
@@ -463,10 +453,9 @@
                                     </CheckBox>
 
 
-                                    <GroupBox Header="Run as..." Style="{StaticResource GroupBoxStyle}" Width="200" HorizontalAlignment="Left" Visibility="{Binding ShowRunStartPanel}">
-
-                                        <StackPanel Margin="10,5,0,5" Orientation="Vertical" HorizontalAlignment="Left">
-
+                                    <GroupBox Header="Run as..." Style="{DynamicResource GroupBox_NewStyle}" HorizontalAlignment="Left" Visibility="{Binding ShowRunStartPanel}"
+                                              Margin="0 4 0 0">
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                             <StackPanel Height="24" VerticalAlignment="Center" Orientation="Horizontal">
                                                 <RadioButton Content="{lex:Loc Program}" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartProg}" />
                                             </StackPanel>
@@ -486,12 +475,9 @@
 
                             <GroupBox x:Name="notificationsGroupBox"
                                   Header="Notifications" 
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-                                <StackPanel Orientation="Vertical"
-                                            Width="360" HorizontalAlignment="Left">
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
 
                                     <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}" Visibility="{Binding IsProfileChangedCheckVisible}"/>
 
@@ -510,14 +496,9 @@
                             </GroupBox>
 
                             <GroupBox Header="Appearance"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-
-                                <StackPanel Orientation="Vertical" Width="360"
-                                            HorizontalAlignment="Left">
-
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
                                     <DockPanel Height="30">
                                         <Label Content="{lex:Loc IconChoice}" ContentStringFormat="{}{0}"/>
                                         <ComboBox x:Name="useIconChoiceCom"
@@ -553,13 +534,10 @@
                             </GroupBox>
 
                             <GroupBox Header="Updater"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
 
-                                <StackPanel Orientation="Vertical"
-                                            Width="360" HorizontalAlignment="Left">
+                                <StackPanel>
                                     <CheckBox Content="{lex:Loc CheckUpdateStartup}"   IsChecked="{Binding CheckForUpdates}" />
 
                                     <DockPanel x:Name="checkEveryOptionsStack"
@@ -586,40 +564,43 @@
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc OscServerHeading}" 
-                                  Margin="4 4 4 0"
-                                  Width="400">
-                                <StackPanel HorizontalAlignment="Stretch">
-                                    <DockPanel MinHeight="30">
-                                        <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click" VerticalAlignment="Center" />
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
+                                    <DockPanel Height="30" >
+                                        <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                                                      IsEnabled="{Binding UseOSCServer}">
                                             <Label Content="Port" VerticalAlignment="Center"/>
                                             <xctk:IntegerUpDown x:Name="oscPortNum"
-                                                                Width="100"
+                                                                Width="100" Margin="4 0 0 0"
                                                                 IsEnabled="{Binding UseOSCServer}"
                                                                 Value="{Binding OscPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}"
                                                                 ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
                                         </StackPanel>
                                     </DockPanel>
 
-                                    <StackPanel Height="30">
-                                        <CheckBox x:Name="interpretingOscMonitoringCk" Content="{lex:Loc EnableInterpretingOscMonitoring}" IsChecked="{Binding InterpretingOscMonitoring}" IsEnabled="{Binding UseOSCServer}" />
+                                    <StackPanel Height="30" Orientation="Horizontal">
+                                        <CheckBox x:Name="interpretingOscMonitoringCk" Content="{lex:Loc EnableInterpretingOscMonitoring}"
+                                                  IsChecked="{Binding InterpretingOscMonitoring}" IsEnabled="{Binding UseOSCServer}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Height="30">
-                                        <CheckBox x:Name="useOscSenderCk" Content="{lex:Loc EnableOscSender}" IsChecked="{Binding UseOSCSender}" Click="UseOscSenderCk_Click" VerticalAlignment="Center" />
+                                        <CheckBox x:Name="useOscSenderCk" Content="{lex:Loc EnableOscSender}" IsChecked="{Binding UseOSCSender}" Click="UseOscSenderCk_Click"
+                                                  VerticalAlignment="Center" />
                                     </StackPanel>
                                     <DockPanel Height="30" LastChildFill="False">
                                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="16 0 0 0">
                                             <Label Content="Port" VerticalAlignment="Center"/>
-                                            <xctk:IntegerUpDown x:Name="oscSendPort" IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Value="{Binding OscSendPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
+                                            <xctk:IntegerUpDown x:Name="oscSendPort" IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Value="{Binding OscSendPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
+                                                                Margin="4 0 0 0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
                                             <Label Content="Address" HorizontalAlignment="Right"/>
                                             <TextBox x:Name="oscSenderTxt" Height="24"
-                                                    Width="100"
+                                                    Width="100" Margin="4 0 0 0"
                                                     VerticalContentAlignment="Center"
                                                     HorizontalAlignment="Right"
-                                                        TextAlignment="Right"
+                                                    TextAlignment="Right"
                                                     IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Text="{Binding OscSenderAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
                                         </StackPanel>
                                     </DockPanel>
@@ -628,13 +609,11 @@
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc UDPServer}" 
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
+                                  Margin="2" Width="400"
+                                  VerticalAlignment="Top">
 
                                 <StackPanel Orientation="Vertical">
-                                    <StackPanel MinHeight="30">
+                                    <StackPanel MinHeight="30" Orientation="Horizontal">
                                         <CheckBox x:Name="useUdpServerCk"
                                                   DockPanel.Dock="Left"
                                                   Content="{lex:Loc MainWin.EnableServer}" IsChecked="{Binding UseUDPServer}" Click="UseUdpServerCk_Click" VerticalAlignment="Center" />
@@ -643,13 +622,14 @@
                                     <DockPanel LastChildFill="False">
                                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="16 0 0 0">
                                             <Label Content="{lex:Loc Port}" VerticalAlignment="Center" />
-                                            <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
+                                            <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
+                                                                Margin="4 0 0 0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"
                                                     DockPanel.Dock="Right">
                                             <Label Content="Address"/>
                                             <TextBox x:Name="udpServerTxt"
-                                                     Width="100" Height="24"
+                                                     Width="100" Height="24" Margin="4 0 0 0"
                                                      TextAlignment="Right" VerticalContentAlignment="Center"
                                                      IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Text="{Binding UdpIpAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
                                         </StackPanel>
@@ -680,12 +660,10 @@
                             </GroupBox>
 
                             <GroupBox Header="Steam Specific"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-
-                                <StackPanel Orientation="Vertical">
+                                  Margin="2"
+                                  Width="400"
+                                  VerticalAlignment="Top">
+                                <StackPanel>
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                         <CheckBox x:Name="customSteamCk" Content="{lex:Loc UseCustomSteamFolder}" IsChecked="{Binding UseCustomSteamFolder}" />
                                     </StackPanel>
@@ -700,18 +678,16 @@
                             </GroupBox>
 
                             <GroupBox Header="{lex:Loc CustomExeName}"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
+                                  Margin="2" Width="400"
                                   VerticalAlignment="Top"
-                                  HorizontalAlignment="Left"
                                   Height="auto">
-                                <StackPanel Orientation="Vertical">
+                                <StackPanel>
                                     <StackPanel>
                                         <TextBox x:Name="fakeExeNameTxt" Height="24" Margin="5,5" Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <Expander Header="Guide" d:IsExpanded="True">
-                                            <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap" TextAlignment="Left" Opacity="0.8" Margin="8"/>
                                         </Expander>
                                         <!--<Button x:Name="fakeExeNameExplainBtn" Width="50" Height="50" Click="FakeExeNameExplainBtn_Click">
                                     <Image Source="{Binding QuestionMarkSource, Mode=OneTime}" Width="40" Height="40" Stretch="UniformToFill" />
@@ -721,45 +697,47 @@
                                 </StackPanel>
                             </GroupBox>
 
-                            <GroupBox Header="{lex:Loc Utils}"
-                                  Margin="4 4 4 0"
-                                  Width="400" Padding="3,10"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Left">
-                                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                                    <Button x:Name="profFolderBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="ProfFolderBtn_Click">
-                                        <TextBlock Text="{lex:Loc ProfileFolder}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                            <GroupBox Header="{lex:Loc Utils}" Margin="2" Width="400" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="{DynamicResource AccentColorActive}"/>
+                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NoBGHoverBtn}">
+                                            <Setter Property="BorderBrush" Value="{x:Null}"/>
+                                            <Setter Property="Background" Value="{x:Null}"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    
+                                    <Button x:Name="profFolderBtn" Click="ProfFolderBtn_Click">
+                                        <TextBlock Text="{lex:Loc ProfileFolder}"/>
                                     </Button>
-                                    <Button x:Name="controlPanelBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="ControlPanelBtn_Click" >
-                                        <TextBlock Text="{lex:Loc ControlPanel}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                    <Button x:Name="controlPanelBtn" BorderThickness="0"  Click="ControlPanelBtn_Click" >
+                                        <TextBlock Text="{lex:Loc ControlPanel}"  />
                                     </Button>
-                                    <Button x:Name="html5GameBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="Html5GameBtn_Click" >
-                                        <TextBlock Text="{lex:Loc GamepadTest}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                    <Button x:Name="html5GameBtn" BorderThickness="0"  Click="Html5GameBtn_Click" >
+                                        <TextBlock Text="{lex:Loc GamepadTest}"  />
                                     </Button>
-                                    <Button x:Name="xinputCheckerBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="XinputCheckerBtn_Click" >
-                                        <TextBlock Text="{lex:Loc XInputChecker}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                    <Button x:Name="xinputCheckerBtn" BorderThickness="0"  Click="XinputCheckerBtn_Click" >
+                                        <TextBlock Text="{lex:Loc XInputChecker}"  />
                                     </Button>
-                                    <Button x:Name="hidHideBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="HidHideBtn_Click" Visibility="{Binding HidHideClientFound, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
-                                        <TextBlock Text="{lex:Loc HidHideConfigClient}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                    <Button x:Name="hidHideBtn" BorderThickness="0"  Click="HidHideBtn_Click"
+                                            Visibility="{Binding HidHideClientFound, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
+                                        <TextBlock Text="{lex:Loc HidHideConfigClient}"  />
                                     </Button>
-                                    <Button x:Name="driverSetupBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}"  Click="DriverSetupBtn_Click">
-                                        <TextBlock Text="{lex:Loc DriverSetup}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                    <Button x:Name="driverSetupBtn" BorderThickness="0"   Click="DriverSetupBtn_Click">
+                                        <TextBlock Text="{lex:Loc DriverSetup}"  />
                                     </Button>
-                                    <Button x:Name="checkUpdatesBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="CheckUpdatesBtn_Click">
+                                    <Button x:Name="checkUpdatesBtn" BorderThickness="0"  Click="CheckUpdatesBtn_Click">
                                         <!--="CheckUpdatesBtn_Click">-->
-                                        <TextBlock Text="{lex:Loc CheckUpdateNow}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                        <TextBlock Text="{lex:Loc CheckUpdateNow}"  />
                                     </Button>
-                                    <Button x:Name="checklogViewBtn" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"
-                            Style="{StaticResource NoBGHoverBtn}" Click="ChecklogViewBtn_Click">
+                                    <Button x:Name="checklogViewBtn" BorderThickness="0"  Click="ChecklogViewBtn_Click">
                                         <!--="CheckUpdatesBtn_Click">-->
-                                        <TextBlock Text="{lex:Loc Changelog}" TextDecorations="Underline" Foreground="{DynamicResource AccentColor}" Cursor="Hand" />
+                                        <TextBlock Text="{lex:Loc Changelog}"  />
                                     </Button>
                                 </StackPanel>
                             </GroupBox>

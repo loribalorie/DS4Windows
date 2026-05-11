@@ -16,7 +16,8 @@
         ResizeMode="NoResize"
         Style="{DynamicResource WindowStyle}"
         WindowStartupLocation="CenterOwner"
-        UseLayoutRounding="True">
+        UseLayoutRounding="True"
+        Background="{DynamicResource BackgroundColor}">
     
     <Window.Resources>
         <local:BindingWinResourcePaths x:Key="resourcePaths" />
@@ -90,8 +91,8 @@
 
                 <!--Keyboard Mouse-->
                 <TabItem Header="{lex:Loc BindingWin.KeyAndRelMouse}">
-                    <DockPanel Margin="0 8 0 0" LastChildFill="False">
-                        <Grid x:Name="topGrid" DockPanel.Dock="Top" Margin="4 0 4 8">
+                    <DockPanel Margin="0 4 0 0" LastChildFill="False">
+                        <Grid x:Name="topGrid" DockPanel.Dock="Top" Margin="4 8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
@@ -501,33 +502,34 @@
                 </TabItem>
 
                 <TabItem Header="Gamepad">
-                    <DockPanel x:Name="bottomPanel" DockPanel.Dock="Top">
-                        <StackPanel x:Name="outConPanel" Width="630" Orientation="Vertical" HorizontalAlignment="Center">
-                            <Canvas Height="247">
-                                <Canvas.Background>
-                                    <ImageBrush x:Name="conImageBrush" ImageSource="{Binding Source={StaticResource resourcePaths}, Path=Xbox360MapPNG}" Stretch="Uniform"/>
-                                </Canvas.Background>
+                    <Border Style="{DynamicResource BorderStyle}" Margin="0 8 0 0">
+                        <DockPanel x:Name="bottomPanel">
+                            <StackPanel x:Name="outConPanel" Width="630" Orientation="Vertical" HorizontalAlignment="Center">
+                                <Canvas Height="247">
+                                    <Canvas.Background>
+                                        <ImageBrush x:Name="conImageBrush" ImageSource="{Binding Source={StaticResource resourcePaths}, Path=Xbox360MapPNG}" Stretch="Uniform"/>
+                                    </Canvas.Background>
 
-                                <Canvas.Resources>
-                                    <Style TargetType="{x:Type Button}" x:Key="NoBGHoverBtn">
-                                        <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Canvas.Resources>
+                                    <Canvas.Resources>
+                                        <Style TargetType="{x:Type Button}" x:Key="NoBGHoverBtn">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Canvas.Resources>
 
-                                <Image x:Name="highlightImg" Width="30" Height="30" 
+                                    <Image x:Name="highlightImg" Width="30" Height="30" 
                             Source="{Binding Source={StaticResource resourcePaths}, Path=Xbox360HighlightPNG}" 
                             Canvas.Left="622" Canvas.Top="11" IsEnabled="True"
                             Visibility="Hidden"/>
-                                <Label x:Name="highlightLb" Content="A" 
+                                    <Label x:Name="highlightLb" Content="A" 
                             Background="{StaticResource AccentColor}"
                             Foreground="White" 
                             IsEnabled="True"
@@ -535,50 +537,55 @@
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center" />
 
-                                <!--<Button x:Name="guideBtn2" Width="16" Height="30" Tag="Ni" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="212" Canvas.Top="112"  />-->
-                                <Button x:Name="guideBtn" Width="26" Height="20" Tag="Guide" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="303" Canvas.Top="87" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave"  />
-                                <Button x:Name="aBtn" Width="24" Height="18" Tag="A" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="433" Canvas.Top="114" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="bBtn" Width="24" Height="18" Tag="B" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="470" Canvas.Top="85" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="xBtn" Width="24" Height="18" Tag="X" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="400" Canvas.Top="89" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="yBtn" Width="24" Height="18" Tag="Y" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="437" Canvas.Top="59" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="lbBtn" Width="64" Height="18" Tag="LB" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="27" Canvas.Top="59" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rbBtn" Width="64" Height="18" Tag="RB" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="536" Canvas.Top="62" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="ltBtn" Width="42" Height="36" Tag="LT" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="48" Canvas.Top="17" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rtBtn" Width="42" Height="36" Tag="RT" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="544" Canvas.Top="20" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="backBtn" Width="20" Height="20" Tag="Back" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="257" Canvas.Top="86" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="startBtn" Width="20" Height="20" Tag="Start" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="353" Canvas.Top="88" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <!--<Button x:Name="guideBtn2" Width="16" Height="30" Tag="Ni" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="212" Canvas.Top="112"  />-->
+                                    <Button x:Name="guideBtn" Width="26" Height="20" Tag="Guide" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="303" Canvas.Top="87" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave"  />
+                                    <Button x:Name="aBtn" Width="24" Height="18" Tag="A" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="433" Canvas.Top="114" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="bBtn" Width="24" Height="18" Tag="B" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="470" Canvas.Top="85" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="xBtn" Width="24" Height="18" Tag="X" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="400" Canvas.Top="89" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="yBtn" Width="24" Height="18" Tag="Y" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="437" Canvas.Top="59" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lbBtn" Width="64" Height="18" Tag="LB" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="27" Canvas.Top="59" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rbBtn" Width="64" Height="18" Tag="RB" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="536" Canvas.Top="62" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="ltBtn" Width="42" Height="36" Tag="LT" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="48" Canvas.Top="17" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rtBtn" Width="42" Height="36" Tag="RT" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="544" Canvas.Top="20" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="backBtn" Width="20" Height="20" Tag="Back" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="257" Canvas.Top="86" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="startBtn" Width="20" Height="20" Tag="Start" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="353" Canvas.Top="88" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
 
-                                <Button x:Name="lsbBtn" Width="16" Height="16" Tag="Left Stick" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="174" Canvas.Top="102" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="lsuBtn" Width="47" Height="16" Tag="LS Y-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="159" Canvas.Top="81" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="lsrBtn" Width="16" Height="28" Tag="LS X-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="197" Canvas.Top="96" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="lsdBtn" Width="28" Height="16" Tag="LS Y-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="167" Canvas.Top="122" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="lslBtn" Width="16" Height="28" Tag="LS X-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="148" Canvas.Top="95" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lsbBtn" Width="16" Height="16" Tag="Left Stick" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="174" Canvas.Top="102" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lsuBtn" Width="47" Height="16" Tag="LS Y-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="159" Canvas.Top="81" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lsrBtn" Width="16" Height="28" Tag="LS X-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="197" Canvas.Top="96" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lsdBtn" Width="28" Height="16" Tag="LS Y-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="167" Canvas.Top="122" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="lslBtn" Width="16" Height="28" Tag="LS X-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="148" Canvas.Top="95" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
 
-                                <Button x:Name="rsbBtn" Width="16" Height="16" Tag="Right Stick" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="370" Canvas.Top="169" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rsuBtn" Width="26" Height="16" Tag="RS Y-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="365" Canvas.Top="149" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rsrBtn" Width="16" Height="28" Tag="RS X-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="392" Canvas.Top="161" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rsdBtn" Width="28" Height="16" Tag="RS Y-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="363" Canvas.Top="189" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="rslBtn" Width="16" Height="16" Tag="RS X-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="347" Canvas.Top="167" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rsbBtn" Width="16" Height="16" Tag="Right Stick" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="370" Canvas.Top="169" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rsuBtn" Width="26" Height="16" Tag="RS Y-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="365" Canvas.Top="149" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rsrBtn" Width="16" Height="28" Tag="RS X-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="392" Canvas.Top="161" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rsdBtn" Width="28" Height="16" Tag="RS Y-Axis+" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="363" Canvas.Top="189" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="rslBtn" Width="16" Height="16" Tag="RS X-Axis-" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="347" Canvas.Top="167" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
 
-                                <Button x:Name="dpadUBtn" Width="16" Height="12" Tag="Dpad Up" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="240" Canvas.Top="136" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="dpadRBtn" Width="16" Height="30" Tag="Dpad Right" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="268" Canvas.Top="150" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="dpadDBtn" Width="16" Height="12" Tag="Dpad Down" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="244" Canvas.Top="187" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="dpadLBtn" Width="16" Height="30" Tag="Dpad Left" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="214" Canvas.Top="148" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                                <Button x:Name="touchpadClickBtn" Visibility="Collapsed" Width="126" Height="72" Tag="Touchpad Click" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="256" Canvas.Top="57" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
-                            </Canvas>
-                        </StackPanel>
-                    </DockPanel>
+                                    <Button x:Name="dpadUBtn" Width="16" Height="12" Tag="Dpad Up" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="240" Canvas.Top="136" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="dpadRBtn" Width="16" Height="30" Tag="Dpad Right" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="268" Canvas.Top="150" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="dpadDBtn" Width="16" Height="12" Tag="Dpad Down" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="244" Canvas.Top="187" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="dpadLBtn" Width="16" Height="30" Tag="Dpad Left" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="214" Canvas.Top="148" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                    <Button x:Name="touchpadClickBtn" Visibility="Collapsed" Width="126" Height="72" Tag="Touchpad Click" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="256" Canvas.Top="57" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave" />
+                                </Canvas>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
 
                 </TabItem>
 
                 <!--Absolute Mouse-->
                 <TabItem Header="{lex:Loc BindingWin.AbsMouse}">
-                    <StackPanel Orientation="Vertical" Margin="8 16" HorizontalAlignment="Left">
-                        <Button x:Name="absMouseUpBindBtn" Content="{lex:Loc BindingWin.AbsMouseUp}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
-                        <Button x:Name="absMouseDownBindBtn" Content="{lex:Loc BindingWin.AbsMouseDown}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
-                        <Button x:Name="absMouseLeftBindBtn" Content="{lex:Loc BindingWin.AbsMouseLeft}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
-                        <Button x:Name="absMouseRightBindBtn" Content="{lex:Loc BindingWin.AbsMouseRight}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
-                    </StackPanel>
+                    <WrapPanel Margin="0 8 0 0">
+                        <Border Style="{DynamicResource BorderStyle}" >
+                            <StackPanel Orientation="Vertical" Margin="8" HorizontalAlignment="Left">
+                                <Button x:Name="absMouseUpBindBtn" Content="{lex:Loc BindingWin.AbsMouseUp}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
+                                <Button x:Name="absMouseDownBindBtn" Content="{lex:Loc BindingWin.AbsMouseDown}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
+                                <Button x:Name="absMouseLeftBindBtn" Content="{lex:Loc BindingWin.AbsMouseLeft}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
+                                <Button x:Name="absMouseRightBindBtn" Content="{lex:Loc BindingWin.AbsMouseRight}" HorizontalAlignment="Left" Width="180" Margin="4,5,4,0"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </TabItem>
 
                 <!--Record Macro-->
