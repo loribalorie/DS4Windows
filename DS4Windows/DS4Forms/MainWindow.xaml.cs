@@ -114,6 +114,8 @@ namespace DS4WinWPF.DS4Forms
             conLvViewModel = new ControllerListViewModel(App.rootHub, profileListHolder);
             controllerLV.DataContext = conLvViewModel;
             controllerLV.ItemsSource = conLvViewModel.ControllerCol;
+            controllerLV_2.DataContext = conLvViewModel;
+            controllerLV_2.ItemsSource = conLvViewModel.ControllerCol;
             ChangeControllerPanel();
 
             // Sort device by input slot number
@@ -121,6 +123,10 @@ namespace DS4WinWPF.DS4Forms
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("DevIndex", ListSortDirection.Ascending));
             view.Refresh();
+            CollectionView view_2 = (CollectionView)CollectionViewSource.GetDefaultView(controllerLV_2.ItemsSource);
+            view_2.SortDescriptions.Clear();
+            view_2.SortDescriptions.Add(new SortDescription("DevIndex", ListSortDirection.Ascending));
+            view_2.Refresh();
 
             trayIconVM = new TrayIconViewModel(App.rootHub, profileListHolder);
 
@@ -218,6 +224,10 @@ namespace DS4WinWPF.DS4Forms
                         if (Changelog.CheckNewerVersionExists(out var version, false))
                         {
                             DisplayUpdaterWindow(version.ToString());
+                        }
+                        else
+                        {
+                            AppLogger.LogToGui("No Update Found.", false, false);
                         }
                     }
                     catch
@@ -721,11 +731,13 @@ namespace DS4WinWPF.DS4Forms
             if (conLvViewModel.ControllerCol.Count == 0)
             {
                 controllerLV.Visibility = Visibility.Hidden;
+                controllerLV_2.Visibility = Visibility.Hidden;
                 noContLb.Visibility = Visibility.Visible;
             }
             else
             {
                 controllerLV.Visibility = Visibility.Visible;
+                controllerLV_2.Visibility = Visibility.Visible;
                 noContLb.Visibility = Visibility.Hidden;
             }
         }
@@ -888,14 +900,15 @@ namespace DS4WinWPF.DS4Forms
 
         private void MainTabCon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mainTabCon.SelectedIndex == 4)
-            {
-                lastMsgLb.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lastMsgLb.Visibility = Visibility.Visible;
-            }
+            //if (mainTabCon.SelectedIndex == 4)
+            //{
+            //    lastMsgLb.Visibility = Visibility.Hidden;
+            //}
+            //else
+            //{
+            //    lastMsgLb.Visibility = Visibility.Visible;
+            //}
+            //Why is this needed? imma disabled this for now -loribalorie
         }
 
         private void ProfilesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -914,7 +927,6 @@ namespace DS4WinWPF.DS4Forms
             settingsWrapVM.ShowRunStartPanel = runAtStartCk.IsChecked == true ? Visibility.Visible :
                 Visibility.Collapsed;
         }
-
         private void ContStatusImg_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             Image img = sender as Image;
@@ -922,6 +934,17 @@ namespace DS4WinWPF.DS4Forms
             conLvViewModel.CurrentIndex = tag;
             CompositeDeviceModel item = conLvViewModel.CurrentItem;
             //CompositeDeviceModel item = conLvViewModel.ControllerDict[tag];
+            if (item != null)
+            {
+                item.RequestDisconnect();
+            }
+        }
+        private void DisconnectGamepadByTag(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = Convert.ToInt32(btn.Tag);
+            conLvViewModel.CurrentIndex = index;
+            CompositeDeviceModel item = conLvViewModel.CurrentItem;
             if (item != null)
             {
                 item.RequestDisconnect();
@@ -1368,6 +1391,7 @@ namespace DS4WinWPF.DS4Forms
             Control temp = sender as Control;
             int idx = Convert.ToInt32(temp.Tag);
             controllerLV.SelectedIndex = idx;
+            controllerLV_2.SelectedIndex = idx;
             CompositeDeviceModel item = conLvViewModel.CurrentItem;
 
             if (item != null && item.SelectedIndex != -1)
@@ -1383,6 +1407,7 @@ namespace DS4WinWPF.DS4Forms
             Control temp = sender as Control;
             int idx = Convert.ToInt32(temp.Tag);
             controllerLV.SelectedIndex = idx;
+            controllerLV_2.SelectedIndex = idx;
             ShowProfileEditor(idx, null);
             mainTabCon.SelectedIndex = 1;
             //controllerLV.Focus();
@@ -1849,7 +1874,7 @@ namespace DS4WinWPF.DS4Forms
         }
 
 
-        //App Theme Change Cycle :: For Test Purpose
+        //App's Theme Change Cycle
         private void ChangeThemeButton_Click(object sender, RoutedEventArgs e)
         {
             int themeCount = Enum.GetNames(typeof(DS4Windows.AppThemeChoice)).Length;
@@ -1864,6 +1889,22 @@ namespace DS4WinWPF.DS4Forms
             //AppLogger.LogToGui(DS4Windows.Global.UseCurrentTheme + " Theme Applied.", false, true);
             //lastMsgLb.Content = DS4Windows.Global.UseCurrentTheme + " Theme Applied.";
             
+        }
+
+        private void switchGamepadListView_Click(object sender, RoutedEventArgs e)
+        {
+            if (gamepadListView_New.Visibility == Visibility.Visible)
+            { //Original List
+                gamepadListView_New.Visibility = Visibility.Collapsed;
+                gamepadListView_Original.Visibility = Visibility.Visible;
+                switchGamepadListView.Content = "\uf0e2";
+            }
+            else
+            { //New List
+                gamepadListView_New.Visibility = Visibility.Visible;
+                gamepadListView_Original.Visibility = Visibility.Collapsed;
+                switchGamepadListView.Content = "\uf2c7";
+            }
         }
     }
 

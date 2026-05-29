@@ -754,7 +754,8 @@ It might fix rumble and lightbar support for some third party DS4 clones</value>
     <value>DS3 Controller Support</value>
   </data>
   <data name="FirstLaunch.DeviceIntroText" xml:space="preserve">
-    <value>Due to other mappers enabling support for multiple device types by default (Steam Input), DS4Windows only enables support for reading from DS4 controllers by default. You can specify mapper support for other supported device types here. Be careful when using DS4Windows with other possible mappers running at the same time.</value>
+    <value>DS4Windows only supports DualShock 4 controllers by default. Other third party DS4 might work but not all. Throughout the development, first party DualShock 3, DualSense and Switch Controllers has been added.
+Be careful when using DS4Windows with other controller remapper running at the same time.</value>
   </data>
   <data name="FirstLaunch.DS3EnableCkbLabel" xml:space="preserve">
     <value>DS3 Device Support</value>
@@ -775,7 +776,7 @@ It might fix rumble and lightbar support for some third party DS4 clones</value>
     <value>Support for DualSense (PS5) controllers. Base model and DS Edge</value>
   </data>
   <data name="FirstLaunch.Header" xml:space="preserve">
-    <value>Enabled Devices Mapper Support</value>
+    <value>Enable Device Mapping Support</value>
   </data>
   <data name="FirstLaunch.JoyConEnableCkbLabel" xml:space="preserve">
     <value>JoyCon Device Support</value>

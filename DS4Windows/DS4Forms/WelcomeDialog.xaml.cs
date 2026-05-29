@@ -16,12 +16,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using DS4Windows;
+using HttpProgress;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Windows;
-using HttpProgress;
 using NonFormTimer = System.Timers.Timer;
 
 namespace DS4WinWPF.DS4Forms
@@ -494,6 +496,14 @@ namespace DS4WinWPF.DS4Forms
         {
             step4HidHidePanel.IsEnabled = IsHidHideControlCompatible();
             step5FakerInputPanel.IsEnabled = IsFakerInputControlCompatible();
+        }
+
+        public Bitmap WelcomeDialogGamepadPairMode
+        {
+            get
+            {
+                return App.Current.FindResource($"{DS4Windows.Global.RESOURCES_PREFIX}/Pairmode.png") as Bitmap;
+            }
         }
     }
 

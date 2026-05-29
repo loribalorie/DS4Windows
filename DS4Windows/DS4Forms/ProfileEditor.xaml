@@ -294,7 +294,7 @@
                                   Margin="0 4 0 0">
 
                                     <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListBoxItem">
+                                        <Style TargetType="ListViewItem">
                                             <Setter Property="Height" Value="Auto"/>
                                             <Setter Property="Padding" Value="0"/>
                                             <Setter Property="Margin" Value="0 1"/>

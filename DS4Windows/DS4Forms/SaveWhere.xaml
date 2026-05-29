@@ -8,24 +8,24 @@
         lex:LocalizeDictionary.DesignCulture=""
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
-        Background="{DynamicResource BackgroundColor}"
         mc:Ignorable="d"
         Title="{lex:Loc SaveWhere.WinTitle}"
-        Height="330"
+        Height="300"
         Width="550"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
+        Background="{DynamicResource BackgroundColor}">
     
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
         <Border x:Name="multipleSavesDockP" d:Visibility="Visible" Margin="0 0 0 10"
                 Style="{DynamicResource BorderStyle}" Background="{DynamicResource AccentColor}">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <Label Content="{lex:Loc SaveWhere.MultipleSaves}"
-                       VerticalContentAlignment="Center" FontWeight="Medium" FontSize="15"/>
-                <CheckBox x:Name="dontDeleteCk"
-                      Content="{lex:Loc SaveWhere.DontDelete}"
-                      VerticalAlignment="Center" />
+                <TextBlock Text="{lex:Loc SaveWhere.MultipleSaves}" Foreground="{DynamicResource AccentForeColor}" FontWeight="Medium" FontSize="15"/>
+                <CheckBox x:Name="dontDeleteCk" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="{lex:Loc SaveWhere.DontDelete}" Foreground="{DynamicResource AccentForeColor}"/>
+                </CheckBox>
             </StackPanel>
         </Border>
 

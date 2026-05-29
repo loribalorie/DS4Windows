@@ -94,13 +94,9 @@
                             
                         </TextBlock>
                     </StackPanel>
-                    <StackPanel VerticalAlignment="Center"
-                                Margin="40 0"
-                                HorizontalAlignment="Center">
-                        <Image Source="{Binding Source={StaticResource resourcePaths}, Path=PairmodePNG}"
-                               Width="230"
-                               Height="130"/>
-
+                    <StackPanel VerticalAlignment="Center" Margin="40 0" HorizontalAlignment="Center">
+                        <Image Width="230" Height="130" Source="/Resources/Pairmode.png"/>
+                        <!--<Image Source="{Binding Source={StaticResource resourcePaths}, Path=PairmodePNG}" Width="230" Height="130"/>-->
                         <TextBlock TextAlignment="Center">
                         <Hyperlink x:Name="bluetoothSetLink" Click="BluetoothSetLink_Click" Foreground="{DynamicResource AccentColor}">
                             <Run Text="{lex:Loc Welcome.BluetoothSettings}" />

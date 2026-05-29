@@ -1420,7 +1420,8 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Due to other mappers enabling support for multiple device types by default (Steam Input), DS4Windows only enables support for reading from DS4 controllers by default. You can specify mapper support for other supported device types here. Be careful when using DS4Windows with other possible mappers running at the same time..
+        ///   Looks up a localized string similar to DS4Windows only supports DualShock 4 controllers by default. Other third party DS4 might work but not all. Throughout the development, first party DualShock 3, DualSense and Switch Controllers has been added.
+        ///Be careful when using DS4Windows with other controller remapper running at the same time..
         /// </summary>
         public static string FirstLaunch_DeviceIntroText {
             get {
@@ -1492,7 +1493,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabled Devices Mapper Support.
+        ///   Looks up a localized string similar to Enable Device Mapping Support.
         /// </summary>
         public static string FirstLaunch_Header {
             get {

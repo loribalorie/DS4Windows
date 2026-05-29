@@ -30,8 +30,8 @@
                 <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Horizontal"
                                 DockPanel.Dock="Bottom" HorizontalAlignment="Right">
-                        <Button x:Name="noPresetBtn" Content="No" Margin="0,0,10,0" TabIndex="0" Click="NoPresetBtn_Click" />
-                        <Button x:Name="yesPresetBtn" Content="Yes" TabIndex="1" Click="YesPresetBtn_Click" />
+                        <Button x:Name="noPresetBtn" Content="No" Width="100" Margin="0,0,10,0" TabIndex="0" Click="NoPresetBtn_Click" />
+                        <Button x:Name="yesPresetBtn" Content="Yes" Width="100" TabIndex="1" Click="YesPresetBtn_Click" />
                     </StackPanel>
                     <Border Style="{DynamicResource BorderStyle}" Margin="0 8">
                         
@@ -88,8 +88,8 @@
                                 HorizontalAlignment="Right"
                                 DockPanel.Dock="Bottom">
                         
-                        <Button x:Name="presetCancelBtn" Content="{lex:Loc Cancel}" MinWidth="60" Click="PresetCancelBtn_Click" />
-                        <Button x:Name="presetApplyBtn" Content="{lex:Loc Apply}" MinWidth="60" Margin="10,0,0,0" Click="PresetApplyBtn_Click" />
+                        <Button x:Name="presetCancelBtn" Content="{lex:Loc Cancel}" Width="100" Click="PresetCancelBtn_Click" />
+                        <Button x:Name="presetApplyBtn" Content="{lex:Loc Apply}" Width="100" Margin="10,0,0,0" Click="PresetApplyBtn_Click" />
                     </StackPanel>
                 </DockPanel>
 

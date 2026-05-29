@@ -6,28 +6,21 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         mc:Ignorable="d"
-        Title="Color Picker Window" Width="280" Height="360" ResizeMode="NoResize"
+        Title="Color Picker Window" ResizeMode="NoResize"
         Style="{DynamicResource WindowStyle}"
         UseLayoutRounding="True"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner" Height="355" Width="298" >
 
-    <DockPanel HorizontalAlignment="Center"
-               VerticalAlignment="Top">
-        <StackPanel Margin="0,10,0,0"
-                    DockPanel.Dock="Top">
-            <xctk:ColorCanvas x:Name="colorPicker"
-                          BorderThickness="0"
-                          SelectedColorChanged="ColorPicker_SelectedColorChanged"
-                          Background="{DynamicResource BackgroundColor}"
-                          UsingAlphaChannel="False"  />
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+        <Border Style="{DynamicResource BorderStyle}" Margin="8 8 8 0">
+            <StackPanel>
+                <xctk:ColorCanvas x:Name="colorPicker" BorderThickness="0" SelectedColorChanged="ColorPicker_SelectedColorChanged"
+                                  Background="Transparent" UsingAlphaChannel="False" Foreground="{DynamicResource ForegroundColor}"/>
 
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="8" DockPanel.Dock="Top">
+            <Button Content="Close" Click="Button_Click" Width="100"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="15"
-                    DockPanel.Dock="Top">
-            <Button Content="Close" Click="Button_Click"/>
-        </StackPanel>
-    </DockPanel>
+    </StackPanel>
 </Window>
