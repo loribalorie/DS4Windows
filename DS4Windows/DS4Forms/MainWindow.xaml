@@ -16,6 +16,8 @@
         xml:lang="en-US"
         mc:Ignorable="d"
         
+        xmlns:helper="clr-namespace:DS4WinWPF.DS4Forms.ViewModels"
+        
         Style="{DynamicResource WindowStyle}"
         Title="DS4Windows (Dev Build)" 
         Closing="MainDS4Window_Closing"
@@ -35,7 +37,7 @@
     </Window.Resources>
 
 
-    <DockPanel Background="{DynamicResource BackgroundColor}">
+    <DockPanel LastChildFill="True" Background="{DynamicResource BackgroundColor}">
 
         <!--Tray Icon-->
         <tb:TaskbarIcon x:Name="notifyIcon"
@@ -55,9 +57,7 @@
         </tb:TaskbarIcon>
 
         <!--Status Bar-->
-        <StatusBar DockPanel.Dock="Bottom" Height="36"
-                   Padding="0"
-                   Background="{DynamicResource AccentColor}">
+        <StatusBar DockPanel.Dock="Bottom" Height="40" Padding="8 0" Background="{DynamicResource AccentColor}">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
@@ -69,755 +69,909 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0">
-                <Label x:Name="lastMsgLb" d:Content="Sample Log"
-                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}" />
-                <!--<Label x:Name="lastMsgLb" d:Content="Sample Log"
-                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{Binding StatusLogTextColor}" />-->
+            <StatusBarItem Grid.Column="0" HorizontalAlignment="Left">
+                <TextBlock x:Name="lastMsgLb" d:Text="Sample Log Sample Log Sample samplesamedasd  adasd ad Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log "
+                           Text="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}"
+                           TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                <!--<Label x:Name="lastMsgLb" d:Content="Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log "
+                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}"/>-->
             </StatusBarItem>
-            <StatusBarItem Grid.Column="1" HorizontalAlignment="Right" Margin="5,0,0,0">
+            <StatusBarItem Grid.Column="1" HorizontalAlignment="Right" Margin="4 0">
                 <Button x:Name="aboutBtn" BorderThickness="0" Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
-                    <TextBlock Text="{lex:Loc HotkeysAbout}"
-                               TextDecorations="Underline"
+                    <TextBlock Text="{lex:Loc HotkeysAbout}" TextDecorations="Underline"
                                Foreground="{DynamicResource AccentForeColor}"
-                               Cursor="Hand"
-                               x:Uid="hotkeysText" />
+                               Cursor="Hand" x:Uid="hotkeysText" Opacity="0.8"/>
                 </Button>
             </StatusBarItem>
-            <StatusBarItem Grid.Column="2" HorizontalAlignment="Right" Margin="10 0">
+            <StatusBarItem Grid.Column="3" HorizontalAlignment="Right" Margin="4 0 0 0">
                 <Button x:Name="StartStopBtn" Content="{lex:Loc StartText}" Click="StartStopBtn_Click"
-                        MinWidth="100"/>
+                        Width="100" Height="30" FontWeight="Medium"/>
             </StatusBarItem>
         </StatusBar>
-        
+
         <!--Main Tab-->
-        <TabControl x:Name="mainTabCon" 
-                    DockPanel.Dock="Top"
-                    SelectionChanged="MainTabCon_SelectionChanged">
+        <Grid DockPanel.Dock="Top">
+            <TabControl x:Name="mainTabCon" SelectionChanged="MainTabCon_SelectionChanged">
 
-            <!--Controllers Tab-->
-            <TabItem Header="{lex:Loc Controllers}"
-                     IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
-                <Grid>
+                <!--Controllers Tab-->
+                <TabItem Header="{lex:Loc Controllers}" IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
+                    <DockPanel LastChildFill="True" Margin="4">
+                        
+                        <!--Original Controller ListView-->
+                        <Border Style="{DynamicResource BorderStyle}" Margin="4" Padding="0" Height="210" DockPanel.Dock="Top" Visibility="Collapsed">
+                            <Grid Margin="0 6">
+                                <Label x:Name="noContLb" Visibility="Hidden" d:Visibility="Visible" Content="{lex:Loc NoControllersConnected}"
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                   FontSize="15" FontWeight="Medium" Opacity="0.8"/>
 
-                    <Label x:Name="noContLb"
-                           Visibility="Hidden"
-                           Content="{lex:Loc NoControllersConnected}"
-                           HorizontalContentAlignment="Center"
-                           VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
-
-                    <ListView x:Name="controllerLV"
-                              ItemsSource="{Binding ControllerCol}" 
-                              SelectionMode="Single"
-                              SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}" Grid.ColumnSpan="2">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn x:Name="indexColumn" Header="#" Width="30">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel  Width="{Binding ElementName=indexColumn, Path=Width}">
-                                                <TextBlock Text="{Binding DisplayDevIndex}" HorizontalAlignment="Center" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="idColumn" Header="{lex:Loc ID}" Width="120">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock x:Name="idColumnTxtB" Text="{Binding IdText, Mode=OneWay}" ToolTip="{Binding TooltipIDText, Mode=OneWay}" ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="{lex:Loc Status}"  x:Name="statusColumn" Width="40">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=statusColumn, Path=Width}">
-                                                <Image x:Name="contStatusImg" Source="{Binding StatusSource}" Stretch="Uniform" Width="20" Height="20" HorizontalAlignment="Center" ToolTip="Right click to disconnect wireless" MouseRightButtonUp="ContStatusImg_MouseRightButtonUp" Tag="{Binding DevIndex}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="exclusiveColumn" Header="Ex" Width="50">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=exclusiveColumn, Path=Width}">
-                                                <Image Source="{Binding ExclusiveSource}" Stretch="Uniform" Width="20" Height="20" HorizontalAlignment="Center"
+                                <ListView x:Name="controllerLV" SelectionMode="Single"
+                                      ItemsSource="{Binding ControllerCol}" SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn x:Name="indexColumn" Header="#" Width="30">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=indexColumn, Path=Width}">
+                                                            <TextBlock Text="{Binding DisplayDevIndex}" HorizontalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="idColumn" Header="{lex:Loc ID}" Width="120">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock x:Name="idColumnTxtB" Text="{Binding IdText, Mode=OneWay}" ToolTip="{Binding TooltipIDText, Mode=OneWay}" ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="{lex:Loc Status}"  x:Name="statusColumn" Width="40">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=statusColumn, Path=Width}">
+                                                            <Image x:Name="contStatusImg" Source="{Binding StatusSource}" Stretch="Uniform" Width="20" Height="20" HorizontalAlignment="Center" ToolTip="Right click to disconnect wireless" MouseRightButtonUp="ContStatusImg_MouseRightButtonUp" Tag="{Binding DevIndex}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="exclusiveColumn" Header="Ex" Width="50">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=exclusiveColumn, Path=Width}">
+                                                            <Image Source="{Binding ExclusiveSource}" Stretch="Uniform" Width="20" Height="20" HorizontalAlignment="Center"
                                                        ToolTip="{Binding IsExclusiveText}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="batteryColumn" Header="{lex:Loc Battery}" Width="60">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=batteryColumn, Path=Width}">
-                                                <Label Content="{Binding BatteryState, Mode=OneWay}" HorizontalAlignment="Center">
-                                                </Label>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="LinkProfColumn" Header="{lex:Loc LinkProfileId}" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=LinkProfColumn, Path=Width}">
-                                                <CheckBox IsChecked="{Binding LinkedProfile}" HorizontalAlignment="Center" IsEnabled="{Binding PrimaryDevice}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="selectProfileColumn" Header="{lex:Loc SelectedProfile}" Width="130">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding Path=Width, ElementName=selectProfileColumn, Mode=OneWay}" HorizontalAlignment="Center">
-                                                <ComboBox x:Name="selectProfCombo" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
-                                                          ItemsSource="{Binding ProfileListCol}" SelectedIndex="{Binding SelectedIndex}" Height="Auto" Tag="{Binding DevIndex, Mode=OneTime}" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0"
-                                                          SelectionChanged="SelectProfCombo_SelectionChanged" KeyDown="SelectProfCombo_KeyDown">
-                                                    <ComboBox.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock Text="{Binding Name,Mode=OneWay,FallbackValue=''}" />
-                                                        </DataTemplate>
-                                                    </ComboBox.ItemTemplate>
-                                                </ComboBox>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="editColumn" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=editColumn, Path=Width}">
-                                                <xctk:SplitButton x:Name="ProfEditSBtn" Content="{lex:Loc Edit}" Height="20" MinWidth="60" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="batteryColumn" Header="{lex:Loc Battery}" Width="60">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=batteryColumn, Path=Width}">
+                                                            <Label Content="{Binding BatteryState, Mode=OneWay}" HorizontalAlignment="Center">
+                                                            </Label>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="LinkProfColumn" Header="{lex:Loc LinkProfileId}" Width="100">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=LinkProfColumn, Path=Width}">
+                                                            <CheckBox IsChecked="{Binding LinkedProfile}" HorizontalAlignment="Center" IsEnabled="{Binding PrimaryDevice}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="selectProfileColumn" Header="{lex:Loc SelectedProfile}" Width="130">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding Path=Width, ElementName=selectProfileColumn, Mode=OneWay}" HorizontalAlignment="Center">
+                                                            <ComboBox x:Name="selectProfCombo" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                                                    ItemsSource="{Binding ProfileListCol}" SelectedIndex="{Binding SelectedIndex}" Height="Auto" Tag="{Binding DevIndex, Mode=OneTime}" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0"
+                                                                    SelectionChanged="SelectProfCombo_SelectionChanged" KeyDown="SelectProfCombo_KeyDown">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name,Mode=OneWay,FallbackValue=''}" />
+                                                                    </DataTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="editColumn" Width="100">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=editColumn, Path=Width}">
+                                                            <xctk:SplitButton x:Name="ProfEditSBtn" Content="{lex:Loc Edit}" Height="20" MinWidth="60" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                                   Tag="{Binding DevIndex, Mode=OneTime}" Click="ProfEditSBtn_Click" HorizontalAlignment="Center">
-                                                    <xctk:SplitButton.DropDownContent>
-                                                        <Button x:Name="newProfBtn" Content="{lex:Loc NewProfile}" MinWidth="120" Tag="{Binding DevIndex, Mode=OneTime}" Click="NewProfBtn_Click"  />
-                                                    </xctk:SplitButton.DropDownContent>
-                                                </xctk:SplitButton>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="customColorColumn" Width="150">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="{Binding ElementName=customColorColumn, Path=Width}">
-                                                <!--<xctk:ColorPicker x:Name="customColorPick" SelectedColor="{Binding LightColor, Mode=OneWay}" Width="150"
-                                                                  ShowTabHeaders="False" ColorMode="ColorCanvas" SelectedColorChanged="CustomColorPick_SelectedColorChanged" />-->
-                                                <Button x:Name="LightColorBtn" Width="120" Height="20" Background="{Binding LightColor, Mode=OneWay}" Tag="{Binding DevIndex, Mode=OneTime}" Click="LightColorBtn_Click">
-                                                    <!--<Button.ContextMenu>
-                                                        <ContextMenu>
-                                                            <MenuItem Header="Use Profile Color" IsCheckable="True" />
-                                                            <MenuItem Header="Use Custom Color" IsCheckable="True" />
-                                                        </ContextMenu>
-                                                    </Button.ContextMenu>-->
-                                                </Button>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-            </TabItem>
+                                                                <xctk:SplitButton.DropDownContent>
+                                                                    <Button x:Name="newProfBtn" Content="{lex:Loc NewProfile}" MinWidth="120" Tag="{Binding DevIndex, Mode=OneTime}" Click="NewProfBtn_Click"  />
+                                                                </xctk:SplitButton.DropDownContent>
+                                                            </xctk:SplitButton>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn x:Name="customColorColumn" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Width="{Binding ElementName=customColorColumn, Path=Width}">
+                                                            
+                                                            <Button x:Name="LightColorBtn" Width="120" Height="20" Background="{Binding LightColor, Mode=OneWay}" Tag="{Binding DevIndex, Mode=OneTime}" Click="LightColorBtn_Click">
+                                                                
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </Border>
 
-            <!--Profiles Tab-->
-            <TabItem x:Name="profilesTab"
-                     Header="{lex:Loc Profiles}">
-                <DockPanel x:Name="profDockPanel" LastChildFill="True">
+                        <!--Common Options-->
+                        <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Bottom" Margin="16" Height="60">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <CheckBox x:Name="hideDS4ContCk_shortcut" Content="DS4 Exclusive Mode" Margin="8 0" Style="{DynamicResource CheckBoxStyle_Default}"/>
 
-                    <!--Main Toolbar-->
-                    <ToolBar x:Name="profOptsToolbar"
+                                <Button x:Name="deviceOptionSettingsBtn_shortcut" Width="120" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click"/>
+
+                            </StackPanel>
+                        </Border>
+
+                        <!--New Controller ListView-->
+                        <Grid DockPanel.Dock="Bottom">
+                            <ListView x:Name="controllerLV_2" SelectionMode="Single" Margin="8"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch"
+                                      ItemsSource="{Binding ControllerCol}" SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemWidth="450"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{DynamicResource BorderStyle}" Margin="0 2" Padding="15 10" CornerRadius="15" >
+                                            <Border.Resources>
+                                                <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
+                                                    <Setter Property="FontSize" Value="14"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                </Style>
+
+                                                <Style x:Key="BodyTextBlockStyle" TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                                                    <Setter Property="FontSize" Value="12"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                </Style>
+
+                                                <Style x:Key="SecondaryTextBlockStyle" TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="{DynamicResource AccentColorActive}"/>
+                                                    <Setter Property="FontSize" Value="12"/>
+                                                </Style>
+
+                                            </Border.Resources>
+
+                                            <DockPanel LastChildFill="True">
+                                                <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                                                    <Button Height="38" DockPanel.Dock="Left" VerticalAlignment="Center"
+                                                            Style="{StaticResource NoBGHoverBtn}" Tag="{Binding DevIndex, Mode=OneTime}" Click="LightColorBtn_Click">
+                                                        <Button.Content>
+                                                            <TextBlock Style="{DynamicResource GamepadIcon}" Margin="0"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+
+                                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Width="38">
+                                                    <Button HorizontalAlignment="Right" Tag="{Binding DevIndex}" ToolTip="Disconnect Controller"
+                                                            Height="24"  BorderThickness="0" Padding="0" Background="Transparent">
+                                                        <Button.Content>
+                                                            <TextBlock Style="{DynamicResource ClearIcon}"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="14 0 0 0">
+                                                    <DockPanel LastChildFill="True">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                                                            <StackPanel Orientation="Horizontal" Height="30">
+                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4 0">
+                                                                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" d:Text="100%+" Text="{Binding BatteryState, Mode=OneWay}"/>
+                                                                    <TextBlock Style="{DynamicResource BatteryIcon}"/>
+                                                                </StackPanel>
+
+                                                                <TextBlock d:Style="{DynamicResource UsbWiredIcon}" Tag="{Binding DevIndex}"
+                                                                       Margin="4 0" Style="{Binding StatusSource_2}"/>
+                                                                <TextBlock d:Style="{DynamicResource KeyIcon}" Style="{Binding ExclusiveSource_2}"
+                                                                       Margin="4 0" ToolTip="{Binding IsExclusiveText}"/>
+
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <CheckBox IsChecked="{Binding LinkedProfile}" Style="{DynamicResource CheckBoxStyle_Default}" IsEnabled="{Binding PrimaryDevice}" >
+                                                                        <CheckBox.Content>
+                                                                            <TextBlock Style="{DynamicResource LinkedProfileIcon}"/>
+                                                                        </CheckBox.Content>
+                                                                    </CheckBox>
+                                                                </StackPanel>
+
+                                                            </StackPanel>
+
+                                                            <DockPanel LastChildFill="True" VerticalAlignment="Center" Height="30">
+                                                                <StackPanel Orientation="Horizontal" Margin="8 0 0 0" DockPanel.Dock="Right"
+                                                                    VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                                                                    <Button x:Name="ProfEditSBtn" Click="ProfEditSBtn_Click" Style="{DynamicResource NoBGHoverBtn}">
+                                                                        <Button.Content>
+                                                                            <TextBlock Style="{DynamicResource EditIcon}"/>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                    <Button x:Name="newProfBtn" Click="NewProfBtn_Click" Margin="8 0 0 0" Style="{DynamicResource NoBGHoverBtn}">
+                                                                        <Button.Content>
+                                                                            <TextBlock Style="{DynamicResource NewProfileIcon}"/>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                </StackPanel>
+
+                                                                <ComboBox x:Name="selectProfCombo" ItemsSource="{Binding ProfileListCol}"
+                                                                SelectedIndex="{Binding SelectedIndex}" Tag="{Binding DevIndex, Mode=OneTime}"
+                                                                Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                                                SelectionChanged="SelectProfCombo_SelectionChanged" KeyDown="SelectProfCombo_KeyDown"
+                                                                Background="Transparent" BorderThickness="0" DockPanel.Dock="Left" Width="Auto">
+                                                                    <ComboBox.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock Text="{Binding Name,Mode=OneWay,FallbackValue=''}" />
+                                                                        </DataTemplate>
+                                                                    </ComboBox.ItemTemplate>
+                                                                    <d:ComboBoxItem>
+                                                                        <TextBlock Text="Test"/>
+                                                                    </d:ComboBoxItem>
+                                                                </ComboBox>
+                                                            </DockPanel>
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" VerticalAlignment="Center">
+                                                            <TextBlock d:Text="DualSense" Style="{StaticResource HeaderTextBlockStyle}" Margin="0 0 0 4"
+                                                                Text="{Binding IdText, Mode=OneWay}" TextWrapping="Wrap" ToolTip="{Binding TooltipIDText, Mode=OneWay}"
+                                                                ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}"/>
+
+                                                            <TextBlock d:Text="DD:DD:DD:DD:DD" Style="{StaticResource BodyTextBlockStyle}" Opacity="0.7" 
+                                                                Text="{Binding IdText_2, Mode=OneWay}" TextWrapping="Wrap" ToolTip="{Binding TooltipIDText, Mode=OneWay}"
+                                                                ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}"/>
+                                                        </StackPanel>
+                                                    </DockPanel>
+
+
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </Border>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                                <d:ListView.ItemsSource>
+                                    <x:Array Type="{x:Type helper:CompositeDeviceModel}">
+                                        <helper:CompositeDeviceModel DisplayDevIndex="0"/>
+                                        <helper:CompositeDeviceModel DisplayDevIndex="1"/>
+                                        <helper:CompositeDeviceModel DisplayDevIndex="2"/>
+                                    </x:Array>
+                                </d:ListView.ItemsSource>
+
+
+                            </ListView>
+                        </Grid>
+
+                    </DockPanel>
+                </TabItem>
+
+                <!--Profiles Tab-->
+                <TabItem x:Name="profilesTab" Header="{lex:Loc Profiles}">
+                    <DockPanel x:Name="profDockPanel" LastChildFill="True">
+
+                        <!--Main Toolbar-->
+                        <ToolBar x:Name="profOptsToolbar"
                              ToolBarTray.IsLocked="True"
                              ToolBar.OverflowMode="Never"
                              Height="30"
                              DockPanel.Dock="Top"
                              Background="{DynamicResource ContentBackgroundColor}">
-                        <ToolBar.Resources>
-                            <Style TargetType="Image">
-                                <Setter Property="Margin" Value="0,0,5,0"/>
-                                <Setter Property="Height" Value="18"/>
-                            </Style>
-                            <Style TargetType="StackPanel">
-                                <Setter Property="Margin" Value="8,0"/>
+                            <ToolBar.Resources>
+                                <Style TargetType="Image">
+                                    <Setter Property="Margin" Value="0,0,5,0"/>
+                                    <Setter Property="Height" Value="18"/>
+                                </Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Margin" Value="8,0"/>
 
-                            </Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-                            </Style>
-                        </ToolBar.Resources>
-                        
+                                </Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                                </Style>
+                            </ToolBar.Resources>
 
-                        <Button x:Name="newProfListBtn"
+
+                            <Button x:Name="newProfListBtn"
                                 Click="NewProfListBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding NewProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc New}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button x:Name="editProfBtn" IsEnabled="False" Click="EditProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding EditProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc Edit}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button x:Name="deleteProfBtn" IsEnabled="False" Click="DeleteProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding DeleteProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc Delete}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button x:Name="renameProfBtn" IsEnabled="False" Click="RenameProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding EditProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc RenameProfile}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button x:Name="dupProfBtn" IsEnabled="False" Click="DupProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding DuplicateProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc Duplicate}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Separator Margin="6,2,6,2"/>
-                        <Button x:Name="importProfBtn" Click="ImportProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding ImportProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc Import}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button x:Name="exportProfBtn" IsEnabled="False" Click="ExportProfBtn_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding ExportProfile, Source={StaticResource ImgLocPaths}}" />
-                                    <TextBlock Text="{lex:Loc Export}" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </ToolBar>
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding NewProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc New}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="editProfBtn" IsEnabled="False" Click="EditProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding EditProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc Edit}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="deleteProfBtn" IsEnabled="False" Click="DeleteProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding DeleteProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc Delete}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="renameProfBtn" IsEnabled="False" Click="RenameProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding EditProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc RenameProfile}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="dupProfBtn" IsEnabled="False" Click="DupProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding DuplicateProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc Duplicate}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Separator Margin="6,2,6,2"/>
+                            <Button x:Name="importProfBtn" Click="ImportProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding ImportProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc Import}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="exportProfBtn" IsEnabled="False" Click="ExportProfBtn_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding ExportProfile, Source={StaticResource ImgLocPaths}}" />
+                                        <TextBlock Text="{lex:Loc Export}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </ToolBar>
 
-                    <!--Profile Duplicate Popup-->
-                    <ToolBar x:Name="dupBoxBar"
+                        <!--Profile Duplicate Popup-->
+                        <ToolBar x:Name="dupBoxBar"
                              Height="34"
                              ToolBarTray.IsLocked="True"
                              ToolBar.OverflowMode="Never"
                              DockPanel.Dock="Top"
                              HorizontalAlignment="Stretch"
                              Visibility="Collapsed">
-                        <local:DupBox x:Name="dupBox" />
-                    </ToolBar>
+                            <local:DupBox x:Name="dupBox" />
+                        </ToolBar>
 
-                    <ListBox x:Name="profilesListBox" 
+                        <ListBox x:Name="profilesListBox" 
                              DockPanel.Dock="Bottom"
                              SelectionChanged="ProfilesListBox_SelectionChanged"
                              MouseDoubleClick="ProfilesListBox_MouseDoubleClick"
                              BorderThickness="0">
-                        <ListBox.Resources>
-                            <localConverters:EscapeAccessKeysConverter x:Key="escapeAccessConvert" />
-                        </ListBox.Resources>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Name, Mode=OneWay, Converter={StaticResource escapeAccessConvert}}" Padding="10,0" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-            </TabItem>
+                            <ListBox.Resources>
+                                <localConverters:EscapeAccessKeysConverter x:Key="escapeAccessConvert" />
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name, Mode=OneWay, Converter={StaticResource escapeAccessConvert}}" Padding="10,0" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+                </TabItem>
 
-            <!--Auto Profiles Tab-->
-            <TabItem Header="{lex:Loc AutoProfiles}"
-                     IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
-                <local:AutoProfiles x:Name="autoProfControl"/>
+                <!--Auto Profiles Tab-->
+                <TabItem Header="{lex:Loc AutoProfiles}" IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
+                    <local:AutoProfiles x:Name="autoProfControl"/>
 
-                <!--</local:AutoProfiles>-->
-            </TabItem>
+                    <!--</local:AutoProfiles>-->
+                </TabItem>
 
-            <!--Output Slots Tab-->
-            <TabItem Header="{lex:Loc OutputSlots}"
-                     IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
-                <local:OutputSlotManagerControl x:Name="slotManControl"/>
+                <!--Output Slots Tab-->
+                <TabItem Header="{lex:Loc OutputSlots}" IsEnabled="{Binding FullTabsEnabled,Mode=OneWay}">
+                    <local:OutputSlotManagerControl x:Name="slotManControl"/>
 
-            </TabItem>
+                </TabItem>
 
-            <!--Settings Tab-->
-            <TabItem x:Name="settingsTab" Header="{lex:Loc Settings}" IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
-                <DockPanel LastChildFill="True">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel Orientation="Vertical" Height="900" HorizontalAlignment="Center" Margin="0 8" d:Height="Auto">
+                <!--Settings Tab-->
+                <TabItem x:Name="settingsTab" Header="{lex:Loc Settings}" IsEnabled="{Binding ViewEnabled,Mode=OneWay}">
+                <!--<TabItem x:Name="settingsTab" Header="{lex:Loc Settings}">-->
+                    <DockPanel LastChildFill="True">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <WrapPanel Orientation="Vertical" Height="900" HorizontalAlignment="Center" Margin="0 8" d:Height="Auto">
 
-                            <GroupBox Header="Controller" Margin="2" Width="400" VerticalAlignment="Top">
-                                <StackPanel>
-                                    <Button x:Name="deviceOptionSettingsBtn"
-                                        Width="200" Margin="0,0,0,4"
-                                        HorizontalAlignment="Center"
-                                        Content="{lex:Loc DeviceOptions}"
-                                        Click="DeviceOptionSettingsBtn_Click" />
+                                <GroupBox Header="Controller" Margin="2" Width="400" VerticalAlignment="Top">
+                                    <StackPanel>
+                                        <Button x:Name="deviceOptionSettingsBtn"
+                                                Width="200" Margin="0,0,0,4"
+                                                HorizontalAlignment="Center"
+                                                Content="{lex:Loc DeviceOptions}"
+                                                Click="DeviceOptionSettingsBtn_Click" />
 
-                                    <CheckBox x:Name="hideDS4ContCk"
+                                        <CheckBox x:Name="hideDS4ContCk"
                                               Content="{lex:Loc HideDS4Controller}"
                                               x:Uid="hideDS4Checkbox"
                                               IsChecked="{Binding HideDS4Controller}"
                                               Click="HideDS4ContCk_Click"/>
 
-                                    <CheckBox x:Name="swipeTouchCk"
+                                        <CheckBox x:Name="swipeTouchCk"
                                           Content="{lex:Loc SwipeTouchpadToSwitchProfiles}"
                                               IsChecked="{Binding SwipeTouchSwitchProfile}"
                                               Click="SwipeTouchCk_Click">
 
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc Resources:TwoFingerSwipe}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc Resources:TwoFingerSwipe}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
 
-                                    <CheckBox Content="{lex:Loc DisconnectFromBtWhenStopping}" IsChecked="{Binding DisconnectBTStop}" />
-                                    <CheckBox Content="{lex:Loc QuickCharge}" IsChecked="{Binding QuickCharge}">
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc Resources:QuickCharge}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
+                                        <CheckBox Content="{lex:Loc DisconnectFromBtWhenStopping}" IsChecked="{Binding DisconnectBTStop}" />
+                                        <CheckBox Content="{lex:Loc QuickCharge}" IsChecked="{Binding QuickCharge}">
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc Resources:QuickCharge}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
 
-                                    <CheckBox Content="{lex:Loc FlashLightbarAtHighLatency}"  IsChecked="{Binding FlashHighLatency}" DockPanel.Dock="Left"/>
+                                        <CheckBox Content="{lex:Loc FlashLightbarAtHighLatency}"  IsChecked="{Binding FlashHighLatency}" DockPanel.Dock="Left"/>
 
-                                    <DockPanel IsEnabled="{Binding FlashHighLatency,FallbackValue='False'}">
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" 
+                                        <DockPanel IsEnabled="{Binding FlashHighLatency,FallbackValue='False'}">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" 
                                                     Margin="15,0,0,0" DockPanel.Dock="Right">
-                                            <xctk:IntegerUpDown Value="{Binding FlashHighLatencyAt}" Width="70" ButtonSpinnerLocation="Right" Increment="1" Maximum="100" Minimum="10" />
-                                            <Label Content="ms" Margin="4 0 0 0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="46 0 0 0">
-                                            <TextBlock Text="Lightbar turns red when input delay hits 100 milliseconds or below." TextWrapping="Wrap" TextAlignment="Left"/>
-                                        </StackPanel>
+                                                <xctk:IntegerUpDown Value="{Binding FlashHighLatencyAt}" Width="70" ButtonSpinnerLocation="Right" Increment="1" Maximum="100" Minimum="10" />
+                                                <Label Content="ms" Margin="4 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="46 0 0 0">
+                                                <TextBlock Text="Lightbar turns red when input delay hits 100 milliseconds or below." TextWrapping="Wrap" TextAlignment="Left"/>
+                                            </StackPanel>
 
-                                    </DockPanel>
-                                    
-                                </StackPanel>
-                            </GroupBox>
+                                        </DockPanel>
 
-                            <GroupBox Header="App Behavior"
+                                    </StackPanel>
+                                </GroupBox>
+
+                                <GroupBox Header="App Behavior"
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
-                                    <CheckBox Content="{lex:Loc StartMinimized}" IsChecked="{Binding StartMinimize}" />
-                                    <CheckBox Content="{lex:Loc MinimizeToTaskbar}" IsChecked="{Binding MinimizeToTaskbar}"  >
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc MinimizeToTaskbarTip}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
-                                    <CheckBox Content="{lex:Loc CloseMinimizes}" IsChecked="{Binding CloseMinimizes}">
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc Resources:CloseMinimize}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
+                                    <StackPanel>
+                                        <CheckBox Content="{lex:Loc StartMinimized}" IsChecked="{Binding StartMinimize}" />
+                                        <CheckBox Content="{lex:Loc MinimizeToTaskbar}" IsChecked="{Binding MinimizeToTaskbar}"  >
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc MinimizeToTaskbarTip}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
+                                        <CheckBox Content="{lex:Loc CloseMinimizes}" IsChecked="{Binding CloseMinimizes}">
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc Resources:CloseMinimize}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
 
 
-                                    <DockPanel Height="30" >
-                                        <Label Content="{lex:Loc ProcessPriority}"
+                                        <DockPanel Height="30" >
+                                            <Label Content="{lex:Loc ProcessPriority}"
                                                ContentStringFormat="{}{0}"/>
-                                        <ComboBox x:Name="ProcessPriorityComboBox"
+                                            <ComboBox x:Name="ProcessPriorityComboBox"
                                                   HorizontalAlignment="Right" Width="150"
                                                   SelectedIndex="{Binding ProcessPriorityIndex}" SelectionChanged="ProcessPriorityComboBox_OnSelectionChanged" />
-                                    </DockPanel>
+                                        </DockPanel>
 
-                                    <DockPanel  Height="30">
-                                        <Label Content="{lex:Loc MainWin.AbsDisplayMonitor}" ContentStringFormat="{}{0}" />
-                                        <ComboBox ItemsSource="{Binding AbsMonitorChoices}"
+                                        <DockPanel  Height="30">
+                                            <Label Content="{lex:Loc MainWin.AbsDisplayMonitor}" ContentStringFormat="{}{0}" />
+                                            <ComboBox ItemsSource="{Binding AbsMonitorChoices}"
                                                   HorizontalAlignment="Right" Width="150"
                                                   DisplayMemberPath="DisplayItemString" SelectedValuePath="EDID" SelectedValue="{Binding AbsMonitorSettingEDID}"/>
 
-                                    </DockPanel>
-                                </StackPanel>
+                                        </DockPanel>
+                                    </StackPanel>
 
-                            </GroupBox>
+                                </GroupBox>
 
-                            <GroupBox Header="Startup"
+                                <GroupBox Header="Startup"
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
-                                    <CheckBox x:Name="runAtStartCk" Content="{lex:Loc RunAtStartup}"   IsChecked="{Binding RunAtStartup}" Click="RunAtStartCk_Click">
-                                        <CheckBox.ToolTip>
-                                            <TextBlock Text="{lex:Loc Resources:RunAtStartup}"/>
-                                        </CheckBox.ToolTip>
-                                    </CheckBox>
+                                    <StackPanel>
+                                        <CheckBox x:Name="runAtStartCk" Content="{lex:Loc RunAtStartup}"   IsChecked="{Binding RunAtStartup}" Click="RunAtStartCk_Click">
+                                            <CheckBox.ToolTip>
+                                                <TextBlock Text="{lex:Loc Resources:RunAtStartup}"/>
+                                            </CheckBox.ToolTip>
+                                        </CheckBox>
 
 
-                                    <GroupBox Header="Run as..." Style="{DynamicResource GroupBox_NewStyle}" HorizontalAlignment="Left" Visibility="{Binding ShowRunStartPanel}"
+                                        <GroupBox Header="Run as..." Style="{DynamicResource GroupBox_NewStyle}" HorizontalAlignment="Left" Visibility="{Binding ShowRunStartPanel}"
                                               Margin="0 4 0 0">
-                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                            <StackPanel Height="24" VerticalAlignment="Center" Orientation="Horizontal">
-                                                <RadioButton Content="{lex:Loc Program}" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartProg}" />
-                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                                <StackPanel Height="24" VerticalAlignment="Center" Orientation="Horizontal">
+                                                    <RadioButton Content="{lex:Loc Program}" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartProg}" />
+                                                </StackPanel>
 
-                                            <StackPanel Height="24" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <RadioButton Content="Task Scheduler" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartTask}" IsEnabled="{Binding CanWriteTask}" />
-                                                <Image x:Name="uacImg" Source="{Binding UACSource, Mode=OneTime}" Width="24" Height="24" Margin="10,0,0,0">
-                                                    <Image.ToolTip>
-                                                        <TextBlock Text="{lex:Loc Resources:UACTask}"/>
-                                                    </Image.ToolTip>
-                                                </Image>
+                                                <StackPanel Height="24" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <RadioButton Content="Task Scheduler" GroupName="RunAsOpt" VerticalAlignment="Center"  IsChecked="{Binding RunStartTask}" IsEnabled="{Binding CanWriteTask}" />
+                                                    <Image x:Name="uacImg" Source="{Binding UACSource, Mode=OneTime}" Width="24" Height="24" Margin="10,0,0,0">
+                                                        <Image.ToolTip>
+                                                            <TextBlock Text="{lex:Loc Resources:UACTask}"/>
+                                                        </Image.ToolTip>
+                                                    </Image>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </GroupBox>
-                                </StackPanel>
-                            </GroupBox>
+                                        </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox x:Name="notificationsGroupBox"
+                                <GroupBox x:Name="notificationsGroupBox"
                                   Header="Notifications" 
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
+                                    <StackPanel>
 
-                                    <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}" Visibility="{Binding IsProfileChangedCheckVisible}"/>
+                                        <CheckBox Content="{lex:Loc ProfileSwitchNotification}" IsChecked="{Binding ProfileChangedNotification}" Visibility="{Binding IsProfileChangedCheckVisible}"/>
 
-                                    <DockPanel Height="30">
-                                        <Label Content="{lex:Loc ShowNotifications}" />
-                                        <ComboBox SelectedIndex="{Binding ShowNotificationsIndex}"
+                                        <DockPanel Height="30">
+                                            <Label Content="{lex:Loc ShowNotifications}" />
+                                            <ComboBox SelectedIndex="{Binding ShowNotificationsIndex}"
                                                   HorizontalAlignment="Right"
                                                   Width="150">
-                                            <ComboBoxItem Content="{lex:Loc None}" />
-                                            <ComboBoxItem Content="{lex:Loc WarningsOnly}" />
-                                            <ComboBoxItem Content="{lex:Loc All}" />
-                                        </ComboBox>
-                                    </DockPanel>
+                                                <ComboBoxItem Content="{lex:Loc None}" />
+                                                <ComboBoxItem Content="{lex:Loc WarningsOnly}" />
+                                                <ComboBoxItem Content="{lex:Loc All}" />
+                                            </ComboBox>
+                                        </DockPanel>
 
-                                </StackPanel>
-                            </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox Header="Appearance"
+                                <GroupBox Header="Appearance"
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
-                                    <DockPanel Height="30">
-                                        <Label Content="{lex:Loc IconChoice}" ContentStringFormat="{}{0}"/>
-                                        <ComboBox x:Name="useIconChoiceCom"
+                                    <StackPanel>
+                                        <DockPanel Height="30">
+                                            <Label Content="{lex:Loc IconChoice}" ContentStringFormat="{}{0}"/>
+                                            <ComboBox x:Name="useIconChoiceCom"
                                                   HorizontalAlignment="Right"
                                                   Width="150"
                                                   SelectedIndex="{Binding IconChoiceIndex,FallbackValue='0'}">
-                                            <ComboBoxItem Content="{lex:Loc Default}"/>
-                                            <ComboBoxItem Content="{lex:Loc Colored}"/>
-                                            <ComboBoxItem Content="{lex:Loc White}"/>
-                                            <ComboBoxItem Content="{lex:Loc Black}"/>
-                                            <ComboBoxItem Content="{lex:Loc Battery}"/>
-                                        </ComboBox>
-                                    </DockPanel>
-                                    <DockPanel Height="30">
-                                        <Label Content="{lex:Loc AppTheme}"
+                                                <ComboBoxItem Content="{lex:Loc Default}"/>
+                                                <ComboBoxItem Content="{lex:Loc Colored}"/>
+                                                <ComboBoxItem Content="{lex:Loc White}"/>
+                                                <ComboBoxItem Content="{lex:Loc Black}"/>
+                                                <ComboBoxItem Content="{lex:Loc Battery}"/>
+                                            </ComboBox>
+                                        </DockPanel>
+                                        <DockPanel Height="30">
+                                            <Label Content="{lex:Loc AppTheme}"
                                                ContentStringFormat="{}{0}"/>
-                                        <ComboBox x:Name="appThemeCom"
+                                            <ComboBox x:Name="appThemeCom"
                                                   HorizontalAlignment="Right"
                                                   Width="150"
                                                   SelectedIndex="{Binding AppChoiceIndex,FallbackValue='0'}">
-                                            <ComboBoxItem Content="{lex:Loc Default}"/>
-                                            <ComboBoxItem Content="{lex:Loc Light}"/>
-                                            <ComboBoxItem Content="{lex:Loc Dark}"/>
-                                            <ComboBoxItem Content="Green"/>
-                                        </ComboBox>
-                                    </DockPanel>
+                                                <ComboBoxItem Content="{lex:Loc Default}"/>
+                                                <ComboBoxItem Content="{lex:Loc Light}"/>
+                                                <ComboBoxItem Content="{lex:Loc Dark}"/>
+                                                <ComboBoxItem Content="Green"/>
+                                            </ComboBox>
+                                        </DockPanel>
 
-                                    <DockPanel Height="30">
-                                        <local:LanguagePackControl VerticalAlignment="Center"/>
-                                    </DockPanel>
+                                        <DockPanel Height="30">
+                                            <local:LanguagePackControl VerticalAlignment="Center"/>
+                                        </DockPanel>
 
-                                </StackPanel>
-                            </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox Header="Updater"
+                                <GroupBox Header="Updater"
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
 
-                                <StackPanel>
-                                    <CheckBox Content="{lex:Loc CheckUpdateStartup}"   IsChecked="{Binding CheckForUpdates}" />
+                                    <StackPanel>
+                                        <CheckBox Content="{lex:Loc CheckUpdateStartup}"   IsChecked="{Binding CheckForUpdates}" />
 
-                                    <DockPanel x:Name="checkEveryOptionsStack"
+                                        <DockPanel x:Name="checkEveryOptionsStack"
                                                LastChildFill="False"
                                                 Height="30"
                                                 IsEnabled="{Binding CheckForUpdates}">
-                                        <Label Content="{lex:Loc CheckEvery}" />
+                                            <Label Content="{lex:Loc CheckEvery}" />
 
-                                        <ComboBox DockPanel.Dock="Right"
+                                            <ComboBox DockPanel.Dock="Right"
                                                             Margin="6,0,0,0"
                                                   SelectedIndex="{Binding CheckEveryUnit,FallbackValue=1}">
-                                            <ComboBoxItem Content="{lex:Loc Hours}" />
-                                            <ComboBoxItem Content="{lex:Loc Days}" />
-                                        </ComboBox>
+                                                <ComboBoxItem Content="{lex:Loc Hours}" />
+                                                <ComboBoxItem Content="{lex:Loc Days}" />
+                                            </ComboBox>
 
-                                        <xctk:IntegerUpDown Value="{Binding CheckEvery}"
+                                            <xctk:IntegerUpDown Value="{Binding CheckEvery}"
                                                             DockPanel.Dock="Right"
                                                             ButtonSpinnerLocation="Right"
                                                             Increment="1" Maximum="30" Minimum="0" />
 
-                                    </DockPanel>
+                                        </DockPanel>
 
-                                </StackPanel>
-                            </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox Header="{lex:Loc OscServerHeading}" 
+                                <GroupBox Header="{lex:Loc OscServerHeading}" 
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
-                                    <DockPanel Height="30" >
-                                        <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                    <StackPanel>
+                                        <DockPanel Height="30" >
+                                            <CheckBox x:Name="useOscServerCk" Content="{lex:Loc EnableOscServer}" IsChecked="{Binding UseOSCServer}" Click="UseOscServerCk_Click"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                                                      IsEnabled="{Binding UseOSCServer}">
-                                            <Label Content="Port" VerticalAlignment="Center"/>
-                                            <xctk:IntegerUpDown x:Name="oscPortNum"
+                                                <Label Content="Port" VerticalAlignment="Center"/>
+                                                <xctk:IntegerUpDown x:Name="oscPortNum"
                                                                 Width="100" Margin="4 0 0 0"
                                                                 IsEnabled="{Binding UseOSCServer}"
                                                                 Value="{Binding OscPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}"
                                                                 ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0" />
-                                        </StackPanel>
-                                    </DockPanel>
+                                            </StackPanel>
+                                        </DockPanel>
 
-                                    <StackPanel Height="30" Orientation="Horizontal">
-                                        <CheckBox x:Name="interpretingOscMonitoringCk" Content="{lex:Loc EnableInterpretingOscMonitoring}"
+                                        <StackPanel Height="30" Orientation="Horizontal">
+                                            <CheckBox x:Name="interpretingOscMonitoringCk" Content="{lex:Loc EnableInterpretingOscMonitoring}"
                                                   IsChecked="{Binding InterpretingOscMonitoring}" IsEnabled="{Binding UseOSCServer}"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Height="30">
-                                        <CheckBox x:Name="useOscSenderCk" Content="{lex:Loc EnableOscSender}" IsChecked="{Binding UseOSCSender}" Click="UseOscSenderCk_Click"
-                                                  VerticalAlignment="Center" />
-                                    </StackPanel>
-                                    <DockPanel Height="30" LastChildFill="False">
-                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="16 0 0 0">
-                                            <Label Content="Port" VerticalAlignment="Center"/>
-                                            <xctk:IntegerUpDown x:Name="oscSendPort" IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Value="{Binding OscSendPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
-                                                                Margin="4 0 0 0"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                                            <Label Content="Address" HorizontalAlignment="Right"/>
-                                            <TextBox x:Name="oscSenderTxt" Height="24"
+                                        <StackPanel Orientation="Horizontal" Height="30">
+                                            <CheckBox x:Name="useOscSenderCk" Content="{lex:Loc EnableOscSender}" IsChecked="{Binding UseOSCSender}" Click="UseOscSenderCk_Click"
+                                                  VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <DockPanel Height="30" LastChildFill="False">
+                                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="16 0 0 0">
+                                                <Label Content="Port" VerticalAlignment="Center"/>
+                                                <xctk:IntegerUpDown x:Name="oscSendPort" IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Value="{Binding OscSendPort, UpdateSourceTrigger=LostFocus,FallbackValue='9000'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
+                                                                Margin="4 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                                <Label Content="Address" HorizontalAlignment="Right"/>
+                                                <TextBox x:Name="oscSenderTxt" Height="24"
                                                     Width="100" Margin="4 0 0 0"
                                                     VerticalContentAlignment="Center"
                                                     HorizontalAlignment="Right"
                                                     TextAlignment="Right"
                                                     IsEnabled="{Binding UseOSCSender,Mode=OneWay}" Text="{Binding OscSenderAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
-                                        </StackPanel>
-                                    </DockPanel>
+                                            </StackPanel>
+                                        </DockPanel>
 
-                                </StackPanel>
-                            </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox Header="{lex:Loc UDPServer}" 
+                                <GroupBox Header="{lex:Loc UDPServer}" 
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top">
 
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel MinHeight="30" Orientation="Horizontal">
-                                        <CheckBox x:Name="useUdpServerCk"
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel MinHeight="30" Orientation="Horizontal">
+                                            <CheckBox x:Name="useUdpServerCk"
                                                   DockPanel.Dock="Left"
                                                   Content="{lex:Loc MainWin.EnableServer}" IsChecked="{Binding UseUDPServer}" Click="UseUdpServerCk_Click" VerticalAlignment="Center" />
-                                    </StackPanel>
-
-                                    <DockPanel LastChildFill="False">
-                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="16 0 0 0">
-                                            <Label Content="{lex:Loc Port}" VerticalAlignment="Center" />
-                                            <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
-                                                                Margin="4 0 0 0"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal"
+
+                                        <DockPanel LastChildFill="False">
+                                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="16 0 0 0">
+                                                <Label Content="{lex:Loc Port}" VerticalAlignment="Center" />
+                                                <xctk:IntegerUpDown x:Name="updPortNum" IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Value="{Binding UdpPort, UpdateSourceTrigger=LostFocus,FallbackValue='26760'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="65535" Minimum="0"
+                                                                Margin="4 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal"
                                                     DockPanel.Dock="Right">
-                                            <Label Content="Address"/>
-                                            <TextBox x:Name="udpServerTxt"
+                                                <Label Content="Address"/>
+                                                <TextBox x:Name="udpServerTxt"
                                                      Width="100" Height="24" Margin="4 0 0 0"
                                                      TextAlignment="Right" VerticalContentAlignment="Center"
                                                      IsEnabled="{Binding UseUDPServer,Mode=OneWay}" Text="{Binding UdpIpAddress, UpdateSourceTrigger=LostFocus,FallbackValue='127.0.0.1'}"/>
-                                        </StackPanel>
-                                    </DockPanel>
+                                            </StackPanel>
+                                        </DockPanel>
 
-                                    <CheckBox Content="{lex:Loc UseSmoothing}" IsChecked="{Binding UseUdpSmoothing,FallbackValue='False'}" IsEnabled="{Binding UseUDPServer,Mode=OneWay}"/>
+                                        <CheckBox Content="{lex:Loc UseSmoothing}" IsChecked="{Binding UseUdpSmoothing,FallbackValue='False'}" IsEnabled="{Binding UseUDPServer,Mode=OneWay}"/>
 
-                                    <DockPanel x:Name="udpEuroPanel" LastChildFill="False"
+                                        <DockPanel x:Name="udpEuroPanel" LastChildFill="False"
                                                MinHeight="30"
                                                 Visibility="{Binding UdpServerOneEuroPanelVisibility,FallbackValue='Collapsed'}">
 
-                                        <Label Content="{lex:Loc MainWin.OneEuroMinCutoff}"/>
-                                        <xctk:DoubleUpDown FormatString="F5"
+                                            <Label Content="{lex:Loc MainWin.OneEuroMinCutoff}"/>
+                                            <xctk:DoubleUpDown FormatString="F5"
                                                                DockPanel.Dock="Right"
                                                                Value="{Binding UdpSmoothMinCutoff,FallbackValue=1.0,UpdateSourceTrigger=LostFocus}" Minimum="0.00001" Maximum="100.0" Increment="0.1" MinWidth="60" />
 
-                                    </DockPanel>
-                                    <DockPanel LastChildFill="False" MinHeight="30"
+                                        </DockPanel>
+                                        <DockPanel LastChildFill="False" MinHeight="30"
                                                Visibility="{Binding UdpServerOneEuroPanelVisibility,FallbackValue='Collapsed'}">
 
-                                        <Label Content="{lex:Loc MainWin.OneEuroBeta}" />
-                                        <xctk:DoubleUpDown FormatString="F5"
+                                            <Label Content="{lex:Loc MainWin.OneEuroBeta}" />
+                                            <xctk:DoubleUpDown FormatString="F5"
                                                             DockPanel.Dock="Right"
                                                             Value="{Binding UdpSmoothBeta,FallbackValue=0.0,UpdateSourceTrigger=LostFocus}" Minimum="0.0" Maximum="1.0" Increment="0.1" MinWidth="60" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </GroupBox>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </GroupBox>
 
-                            <GroupBox Header="Steam Specific"
+                                <GroupBox Header="Steam Specific"
                                   Margin="2"
                                   Width="400"
                                   VerticalAlignment="Top">
-                                <StackPanel>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                        <CheckBox x:Name="customSteamCk" Content="{lex:Loc UseCustomSteamFolder}" IsChecked="{Binding UseCustomSteamFolder}" />
-                                    </StackPanel>
                                     <StackPanel>
-                                        <TextBox x:Name="customSteamTxt" Height="24"
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                            <CheckBox x:Name="customSteamCk" Content="{lex:Loc UseCustomSteamFolder}" IsChecked="{Binding UseCustomSteamFolder}" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBox x:Name="customSteamTxt" Height="24"
                                                  Margin="5,5"
                                                  HorizontalAlignment="Stretch"
                                                  Text="{Binding CustomSteamFolder, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding UseCustomSteamFolder}" />
+                                        </StackPanel>
+
                                     </StackPanel>
+                                </GroupBox>
 
-                                </StackPanel>
-                            </GroupBox>
-
-                            <GroupBox Header="{lex:Loc CustomExeName}"
+                                <GroupBox Header="{lex:Loc CustomExeName}"
                                   Margin="2" Width="400"
                                   VerticalAlignment="Top"
                                   Height="auto">
-                                <StackPanel>
                                     <StackPanel>
-                                        <TextBox x:Name="fakeExeNameTxt" Height="24" Margin="5,5" Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <Expander Header="Guide" d:IsExpanded="True">
-                                            <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap" TextAlignment="Left" Opacity="0.8" Margin="8"/>
-                                        </Expander>
-                                        <!--<Button x:Name="fakeExeNameExplainBtn" Width="50" Height="50" Click="FakeExeNameExplainBtn_Click">
+                                        <StackPanel>
+                                            <TextBox x:Name="fakeExeNameTxt" Height="24" Margin="5,5" Text="{Binding FakeExeName, UpdateSourceTrigger=LostFocus}"/>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Expander Header="Guide" d:IsExpanded="True">
+                                                <TextBlock Text="{lex:Loc CustomExeNameInfo}" TextWrapping="Wrap" TextAlignment="Left" Opacity="0.8" Margin="8"/>
+                                            </Expander>
+                                            <!--<Button x:Name="fakeExeNameExplainBtn" Width="50" Height="50" Click="FakeExeNameExplainBtn_Click">
                                     <Image Source="{Binding QuestionMarkSource, Mode=OneTime}" Width="40" Height="40" Stretch="UniformToFill" />
                                      </Button>-->
+                                        </StackPanel>
+
                                     </StackPanel>
+                                </GroupBox>
 
-                                </StackPanel>
-                            </GroupBox>
+                                <GroupBox Header="{lex:Loc Utils}" Margin="2" Width="400" VerticalAlignment="Top">
+                                    <StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="{DynamicResource AccentColorActive}"/>
+                                                <Setter Property="TextDecorations" Value="Underline"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                            </Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource NoBGHoverBtn}">
+                                                <Setter Property="BorderBrush" Value="{x:Null}"/>
+                                                <Setter Property="Background" Value="{x:Null}"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                            </Style>
+                                        </StackPanel.Resources>
 
-                            <GroupBox Header="{lex:Loc Utils}" Margin="2" Width="400" VerticalAlignment="Top">
-                                <StackPanel>
-                                    <StackPanel.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Foreground" Value="{DynamicResource AccentColorActive}"/>
-                                            <Setter Property="TextDecorations" Value="Underline"/>
-                                            <Setter Property="Cursor" Value="Hand"/>
-                                        </Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource NoBGHoverBtn}">
-                                            <Setter Property="BorderBrush" Value="{x:Null}"/>
-                                            <Setter Property="Background" Value="{x:Null}"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
-                                        </Style>
-                                    </StackPanel.Resources>
-                                    
-                                    <Button x:Name="profFolderBtn" Click="ProfFolderBtn_Click">
-                                        <TextBlock Text="{lex:Loc ProfileFolder}"/>
-                                    </Button>
-                                    <Button x:Name="controlPanelBtn" BorderThickness="0"  Click="ControlPanelBtn_Click" >
-                                        <TextBlock Text="{lex:Loc ControlPanel}"  />
-                                    </Button>
-                                    <Button x:Name="html5GameBtn" BorderThickness="0"  Click="Html5GameBtn_Click" >
-                                        <TextBlock Text="{lex:Loc GamepadTest}"  />
-                                    </Button>
-                                    <Button x:Name="xinputCheckerBtn" BorderThickness="0"  Click="XinputCheckerBtn_Click" >
-                                        <TextBlock Text="{lex:Loc XInputChecker}"  />
-                                    </Button>
-                                    <Button x:Name="hidHideBtn" BorderThickness="0"  Click="HidHideBtn_Click"
+                                        <Button x:Name="profFolderBtn" Click="ProfFolderBtn_Click">
+                                            <TextBlock Text="{lex:Loc ProfileFolder}"/>
+                                        </Button>
+                                        <Button x:Name="controlPanelBtn" BorderThickness="0"  Click="ControlPanelBtn_Click" >
+                                            <TextBlock Text="{lex:Loc ControlPanel}"  />
+                                        </Button>
+                                        <Button x:Name="html5GameBtn" BorderThickness="0"  Click="Html5GameBtn_Click" >
+                                            <TextBlock Text="{lex:Loc GamepadTest}"  />
+                                        </Button>
+                                        <Button x:Name="xinputCheckerBtn" BorderThickness="0"  Click="XinputCheckerBtn_Click" >
+                                            <TextBlock Text="{lex:Loc XInputChecker}"  />
+                                        </Button>
+                                        <Button x:Name="hidHideBtn" BorderThickness="0"  Click="HidHideBtn_Click"
                                             Visibility="{Binding HidHideClientFound, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
-                                        <TextBlock Text="{lex:Loc HidHideConfigClient}"  />
-                                    </Button>
-                                    <Button x:Name="driverSetupBtn" BorderThickness="0"   Click="DriverSetupBtn_Click">
-                                        <TextBlock Text="{lex:Loc DriverSetup}"  />
-                                    </Button>
-                                    <Button x:Name="checkUpdatesBtn" BorderThickness="0"  Click="CheckUpdatesBtn_Click">
-                                        <!--="CheckUpdatesBtn_Click">-->
-                                        <TextBlock Text="{lex:Loc CheckUpdateNow}"  />
-                                    </Button>
-                                    <Button x:Name="checklogViewBtn" BorderThickness="0"  Click="ChecklogViewBtn_Click">
-                                        <!--="CheckUpdatesBtn_Click">-->
-                                        <TextBlock Text="{lex:Loc Changelog}"  />
-                                    </Button>
-                                </StackPanel>
-                            </GroupBox>
+                                            <TextBlock Text="{lex:Loc HidHideConfigClient}"  />
+                                        </Button>
+                                        <Button x:Name="driverSetupBtn" BorderThickness="0"   Click="DriverSetupBtn_Click">
+                                            <TextBlock Text="{lex:Loc DriverSetup}"  />
+                                        </Button>
+                                        <Button x:Name="checkUpdatesBtn" BorderThickness="0"  Click="CheckUpdatesBtn_Click">
+                                            <!--="CheckUpdatesBtn_Click">-->
+                                            <TextBlock Text="{lex:Loc CheckUpdateNow}"  />
+                                        </Button>
+                                        <Button x:Name="checklogViewBtn" BorderThickness="0"  Click="ChecklogViewBtn_Click">
+                                            <!--="CheckUpdatesBtn_Click">-->
+                                            <TextBlock Text="{lex:Loc Changelog}"  />
+                                        </Button>
+                                    </StackPanel>
+                                </GroupBox>
 
-                        </WrapPanel>
+                            </WrapPanel>
 
-                    </ScrollViewer>
-                </DockPanel>
-            </TabItem>
-
-            <!--Logs Tab-->
-            <TabItem Header="{lex:Loc Log}">
-                <DockPanel>
-                    <DockPanel Height="36" DockPanel.Dock="Bottom">
-                        <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
-                            <Button x:Name="exportLogBtn" Content="{lex:Loc Export}" Click="ExportLogBtn_Click" />
-                            <Button x:Name="clearLogBtn" Content="{lex:Loc Clear}" Margin="6,0,0,0" Click="ClearLogBtn_Click" />
-                        </StackPanel>
+                        </ScrollViewer>
                     </DockPanel>
-                    <ListView x:Name="logListView" DockPanel.Dock="Top"
+                </TabItem>
+
+                <!--Logs Tab-->
+                <TabItem Header="{lex:Loc Log}">
+                    <DockPanel>
+                        <DockPanel Height="36" DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
+                                <Button x:Name="exportLogBtn" Content="{lex:Loc Export}" Click="ExportLogBtn_Click" />
+                                <Button x:Name="clearLogBtn" Content="{lex:Loc Clear}" Margin="6,0,0,0" Click="ClearLogBtn_Click" />
+                            </StackPanel>
+                        </DockPanel>
+                        <ListView x:Name="logListView" DockPanel.Dock="Top"
                               BorderThickness="0"
                               ItemsSource="{Binding LogItems}"
                               MouseDoubleClick="LogListView_MouseDoubleClick"
                               Margin="0"
                               Background="{DynamicResource BackgroundColor}">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="False">
-                                <GridViewColumn Header="Time" Width="150">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path=Datetime, StringFormat=\{0:G\}}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Data" Width="800">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path=Message}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </DockPanel>
-            </TabItem>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="Time" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Datetime, StringFormat=\{0:G\}}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Data" Width="800">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Message}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
 
-            <TabItem x:Name="ChangeThemeTab">
-                <TabItem.Resources>
-                    <Style TargetType="TabItem">
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="TabItem">
-                                    <Border x:Name="Border"
+                <!--<TabItem x:Name="ChangeThemeTab">
+                    <TabItem.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Border x:Name="Border"
                                             Background="{TemplateBinding Background}"
                                             Padding="{TemplateBinding Padding}"
                                             Margin="0">
-                                        <ContentPresenter x:Name="ContentSite"
+                                            <ContentPresenter x:Name="ContentSite"
                                                           ContentSource="Header"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"/>
-                                    </Border>
+                                        </Border>
 
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabItem.Resources>
-                <TabItem.Header>
-                    <DockPanel LastChildFill="True">
-                        <Button Content="Change Theme" x:Name="ChangeThemeButton" Click="ChangeThemeButton_Click" Height="30" Margin="0"
-                                Background="Transparent"
-                                BorderThickness="0"/>
-                    </DockPanel>
-                </TabItem.Header>
-            </TabItem>
-            
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabItem.Resources>
+                    <TabItem.Header>
+                        
+                    </TabItem.Header>
+                </TabItem>-->
 
-        </TabControl>
+            </TabControl>
+
+            <!--Theme Changer Button-->
+            <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Content="Theme" x:Name="ChangeThemeButton"
+                        Click="ChangeThemeButton_Click" Height="24" Margin="0 9 8 0"
+                        Background="Transparent" BorderThickness="0"/>
+            </DockPanel>
+        </Grid>
     </DockPanel>
 </Window>
+    
+    

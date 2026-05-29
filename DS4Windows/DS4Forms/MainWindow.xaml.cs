@@ -114,6 +114,8 @@ namespace DS4WinWPF.DS4Forms
             conLvViewModel = new ControllerListViewModel(App.rootHub, profileListHolder);
             controllerLV.DataContext = conLvViewModel;
             controllerLV.ItemsSource = conLvViewModel.ControllerCol;
+            controllerLV_2.DataContext = conLvViewModel;
+            controllerLV_2.ItemsSource = conLvViewModel.ControllerCol;
             ChangeControllerPanel();
 
             // Sort device by input slot number
@@ -121,6 +123,10 @@ namespace DS4WinWPF.DS4Forms
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("DevIndex", ListSortDirection.Ascending));
             view.Refresh();
+            CollectionView view_2 = (CollectionView)CollectionViewSource.GetDefaultView(controllerLV_2.ItemsSource);
+            view_2.SortDescriptions.Clear();
+            view_2.SortDescriptions.Add(new SortDescription("DevIndex", ListSortDirection.Ascending));
+            view_2.Refresh();
 
             trayIconVM = new TrayIconViewModel(App.rootHub, profileListHolder);
 
@@ -218,6 +224,10 @@ namespace DS4WinWPF.DS4Forms
                         if (Changelog.CheckNewerVersionExists(out var version, false))
                         {
                             DisplayUpdaterWindow(version.ToString());
+                        }
+                        else
+                        {
+                            AppLogger.LogToGui("No Update Found.", false, false);
                         }
                     }
                     catch
@@ -721,11 +731,13 @@ namespace DS4WinWPF.DS4Forms
             if (conLvViewModel.ControllerCol.Count == 0)
             {
                 controllerLV.Visibility = Visibility.Hidden;
+                controllerLV_2.Visibility = Visibility.Hidden;
                 noContLb.Visibility = Visibility.Visible;
             }
             else
             {
                 controllerLV.Visibility = Visibility.Visible;
+                controllerLV_2.Visibility = Visibility.Visible;
                 noContLb.Visibility = Visibility.Hidden;
             }
         }
@@ -888,14 +900,15 @@ namespace DS4WinWPF.DS4Forms
 
         private void MainTabCon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mainTabCon.SelectedIndex == 4)
-            {
-                lastMsgLb.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lastMsgLb.Visibility = Visibility.Visible;
-            }
+            //if (mainTabCon.SelectedIndex == 4)
+            //{
+            //    lastMsgLb.Visibility = Visibility.Hidden;
+            //}
+            //else
+            //{
+            //    lastMsgLb.Visibility = Visibility.Visible;
+            //}
+            //Why is this needed? imma disabled this for now -loribalorie
         }
 
         private void ProfilesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1368,6 +1381,7 @@ namespace DS4WinWPF.DS4Forms
             Control temp = sender as Control;
             int idx = Convert.ToInt32(temp.Tag);
             controllerLV.SelectedIndex = idx;
+            controllerLV_2.SelectedIndex = idx;
             CompositeDeviceModel item = conLvViewModel.CurrentItem;
 
             if (item != null && item.SelectedIndex != -1)
@@ -1383,6 +1397,7 @@ namespace DS4WinWPF.DS4Forms
             Control temp = sender as Control;
             int idx = Convert.ToInt32(temp.Tag);
             controllerLV.SelectedIndex = idx;
+            controllerLV_2.SelectedIndex = idx;
             ShowProfileEditor(idx, null);
             mainTabCon.SelectedIndex = 1;
             //controllerLV.Focus();
@@ -1394,6 +1409,7 @@ namespace DS4WinWPF.DS4Forms
             StartStopBtn.IsEnabled = false;
             //bool checkStatus = hideDS4ContCk.IsChecked == true;
             hideDS4ContCk.IsEnabled = false;
+            hideDS4ContCk_shortcut.IsEnabled = false;
             Task serviceTask = Task.Run(() =>
             {
                 App.rootHub.Stop();
@@ -1405,6 +1421,7 @@ namespace DS4WinWPF.DS4Forms
             await serviceTask;
 
             hideDS4ContCk.IsEnabled = true;
+            hideDS4ContCk_shortcut.IsEnabled = true;
             StartStopBtn.IsEnabled = true;
         }
 

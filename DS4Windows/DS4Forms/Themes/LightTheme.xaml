@@ -18,12 +18,24 @@
     <!--<SolidColorBrush x:Key="BackgroundColor" Color="{x:Static SystemColors.WindowColor}"/>-->
 
     <BitmapImage x:Key="DS4ConfigPNG" UriSource="/Resources/DS4 Config.png"/>
+    <BitmapImage x:Key="BtImg_2" UriSource="/Resources/BT.png"/>
+    <BitmapImage x:Key="UsbImg_2" UriSource="/Resources/USB.png"/>
+    <BitmapImage x:Key="KeyImageImg_2" UriSource="/Resources/key-solid.png"/>
+    <BitmapImage x:Key="CancelImg_2" UriSource="/Resources/cancel.png"/>
+    <BitmapImage x:Key="CheckedImg_2" UriSource="/Resources/checked.png"/>
 
+    <BitmapImage x:Key="CopyImg_2" UriSource="/Resources/copy.png"/>
+    <BitmapImage x:Key="DeleteImg_2" UriSource="/Resources/delete.png"/>
+    <BitmapImage x:Key="EditImg_2" UriSource="/Resources/edit.png"/>
+    <BitmapImage x:Key="ExportImg_2" UriSource="/Resources/export.png"/>
+    <BitmapImage x:Key="ImportImg_2" UriSource="/Resources/import.png"/>
+    <BitmapImage x:Key="NewProfileImg_2" UriSource="/Resources/newprofile.png"/>
+    
     <system:String x:Key="KeyImageImg">key-solid.png</system:String>
     <system:String x:Key="CancelImg">cancel.png</system:String>
     <system:String x:Key="CheckedImg">checked.png</system:String>
-    <system:String x:Key="BtImg">BT.png</system:String>
     <system:String x:Key="UsbImg">USB.png</system:String>
+    <system:String x:Key="BtImg">BT.png</system:String>
     <system:String x:Key="KeyUpImg">keyup.png</system:String>
     <system:String x:Key="KeyDownImg">keydown.png</system:String>
     <system:String x:Key="ClockImg">clock.png</system:String>
@@ -50,6 +62,96 @@
 
     <!--Drop Shadow-->
     <DropShadowEffect x:Key="DropShadowStyle" BlurRadius="10" Opacity="0.06" ShadowDepth="1" Color="DarkSlateGray" RenderingBias="Quality"/>
+
+    <Style x:Key="GamepadIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xE7FC;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="BatteryIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xf5fc;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="LinkedProfileIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe71b;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="KeyIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe8d7;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="BTIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xec41;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="UsbWiredIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xecf0;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="EditIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe70f;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="CancelIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe711;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="NewProfileIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xed0e;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="CheckIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe73e;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
     <!--  Focus Visual  -->
     <Style x:Key="FocusVisual">
@@ -478,30 +580,27 @@
         </Setter>
     </Style>
 
-    <!--GroupBox-->   
+    <!--GroupBox-->
+    <Style x:Key="GroupBox_default" TargetType="{x:Type GroupBox}">
+        
+    </Style>
+    
     <Style x:Key="GroupBox_NewStyle" TargetType="{x:Type GroupBox}">
-
         <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>
         <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
         <Setter Property="BorderBrush" Value="#E5E5E5" />
         <Setter Property="BorderThickness" Value="1" />
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
-
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="5"
-                    Padding="10 6 10 10">
-
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="5" Padding="10 6 10 10">
                         <Grid ShowGridLines="False" Margin="0">
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-
                             <!--HEADER-->
                             <Grid Grid.Row="0" VerticalAlignment="Stretch" >
                                 <ContentPresenter VerticalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True"
@@ -510,9 +609,9 @@
                                                   TextElement.FontWeight="Regular" TextElement.FontSize="14"/>
                             </Grid>
                             <!--BODY-->
-                            <Grid Grid.Row="1" VerticalAlignment="Stretch" Height="Auto">
+                            <Grid Grid.Row="1">
                                 <Grid Margin="0 4 0 0">
-                                    <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <ContentPresenter Height="Auto" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </Grid>
 
                             </Grid>
@@ -741,7 +840,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <!--ToolTip-->
     <Style x:Key="ToolTipStyle" TargetType="{x:Type ToolTip}">

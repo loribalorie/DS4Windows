@@ -3824,7 +3824,7 @@ namespace DS4Windows
         { new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER}, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER}, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER },
           new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER}, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER }, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER },
           new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER }, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER}, new int[1] { DEFAULT_TOUCH_DIS_INVERT_TRIGGER } };
-        public Boolean useExclusiveMode = false; // Re-enable Ex Mode
+        public Boolean useExclusiveMode = true; // Re-enable Ex Mode //loribalorie set to true by default
 
         public const int DEFAULT_FORM_WIDTH = 782;
         public int formWidth = DEFAULT_FORM_WIDTH;

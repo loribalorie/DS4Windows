@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -279,6 +280,34 @@ namespace DS4WinWPF.DS4Forms.ViewModels
                 return source;
             }
         }
+        public Style StatusSource_2
+        {
+            get
+            {
+                Style statusIcon = App.Current.TryFindResource(device.ConnectionType == ConnectionType.BT ? "BTIcon" : "UsbWiredIcon") as Style;
+                return statusIcon;
+            }
+        }
+        public Style ExclusiveSource_2
+        {
+            get
+            {
+                Style exclusivity = App.Current.FindResource("CancelIcon") as Style; 
+                switch (device.CurrentExclusiveStatus)
+                {
+                    case DS4Device.ExclusiveStatus.Exclusive:
+                        exclusivity = App.Current.FindResource("CheckIcon") as Style;
+                        break;
+                    case DS4Device.ExclusiveStatus.HidHideAffected:
+                    case DS4Device.ExclusiveStatus.HidGuardAffected:
+                        exclusivity = App.Current.FindResource("KeyIcon") as Style;
+                        break;
+                    default:
+                        break;
+                }
+                return exclusivity;
+            }
+        }
 
         public string ExclusiveSource
         {
@@ -321,7 +350,8 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         }
 
         public int DevIndex { get => devIndex; }
-        public int DisplayDevIndex { get => devIndex + 1; }
+        //public int DisplayDevIndex { get => devIndex + 1; }
+        public int DisplayDevIndex { get => devIndex + 1; set => devIndex = value; }
 
         public string TooltipIDText
         {
@@ -342,8 +372,14 @@ namespace DS4WinWPF.DS4Forms.ViewModels
 
         public string IdText
         {
-            get => $"{device.DisplayName} ({device.MacAddress})";
+            //get => $"{device.DisplayName} ({device.MacAddress})";
+            get => device.DisplayName;
         }
+        public string IdText_2
+        {
+            get => device.MacAddress;
+        }
+
         public event EventHandler IdTextChanged;
 
         public string IsExclusiveText
@@ -377,6 +413,8 @@ namespace DS4WinWPF.DS4Forms.ViewModels
 
         public delegate void CustomColorHandler(CompositeDeviceModel sender);
         public event CustomColorHandler RequestColorPicker;
+
+        public CompositeDeviceModel() { }
 
         public CompositeDeviceModel(DS4Device device, int devIndex, string profile,
             ProfileList collection)
