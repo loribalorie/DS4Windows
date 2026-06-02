@@ -1419,6 +1419,7 @@ namespace DS4WinWPF.DS4Forms
             StartStopBtn.IsEnabled = false;
             //bool checkStatus = hideDS4ContCk.IsChecked == true;
             hideDS4ContCk.IsEnabled = false;
+            hideDS4ContCk_shortcut.IsEnabled = false;
             Task serviceTask = Task.Run(() =>
             {
                 App.rootHub.Stop();
@@ -1430,6 +1431,7 @@ namespace DS4WinWPF.DS4Forms
             await serviceTask;
 
             hideDS4ContCk.IsEnabled = true;
+            hideDS4ContCk_shortcut.IsEnabled = true;
             StartStopBtn.IsEnabled = true;
         }
 
