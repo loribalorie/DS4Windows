@@ -191,7 +191,19 @@
 
 	<ItemGroup>
 
+		<Resource Include="Resources\360-map-black.png" />
+
+		<Resource Include="Resources\360-map-white.png" />
+
+		<Resource Include="Resources\button-highlight.png" />
+
 		<Resource Include="Resources\DS4 Config_white.png" />
+
+		<Resource Include="Resources\DS4 Config_white_1.png" />
+
+		<Resource Include="Resources\Fonts\remixicon.ttf" />
+
+		<Resource Include="Resources\Fonts\Segoe Fluent Icons.ttf" />
 		<Resource Include="Resources\newprofile_white.png" />
 		<Resource Include="Resources\copy_white.png" />
 		<Resource Include="Resources\delete_white.png" />
@@ -402,5 +414,14 @@
 
 	<ItemGroup>
 		<Folder Remove="extras\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\360-map-black.png" />
+	  <None Remove="Resources\360-map-white.png" />
+	  <None Remove="Resources\button-highlight.png" />
+	  <None Remove="Resources\DS4 Config_white_1.png" />
+	  <None Remove="Resources\Fonts\remixicon.ttf" />
+	  <None Remove="Resources\Fonts\Segoe Fluent Icons.ttf" />
 	</ItemGroup>
 </Project>

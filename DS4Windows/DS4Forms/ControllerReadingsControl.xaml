@@ -24,7 +24,7 @@
                             <SolidColorBrush x:Name="inpuDelayBackBrush" Color="Transparent" />
                         </Label.Background>
                         <Label.Foreground>
-                            <SolidColorBrush x:Name="inpuDelayForeBrush" Color="Black"/>
+                            <SolidColorBrush x:Name="inpuDelayForeBrush" Color="White"/>
                         </Label.Foreground>
                     </Label>
                 </StackPanel>
@@ -323,7 +323,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Test" Grid.Row="1" Grid.Column="1" Margin="4 4 0 0">
+            <GroupBox Header="Test" Grid.Row="1" Grid.Column="1" Margin="4 4 0 0" Visibility="Hidden" d:Visibility="Visible">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Test"/>
                     <Slider Width="100" Style="{DynamicResource CustomSliderStyle}" IsHitTestVisible="False"/>

@@ -57,36 +57,40 @@
         </tb:TaskbarIcon>
 
         <!--Status Bar-->
-        <StatusBar DockPanel.Dock="Bottom" Height="40" Padding="8 0" Background="{DynamicResource AccentColor}">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="0" HorizontalAlignment="Left">
-                <TextBlock x:Name="lastMsgLb" d:Text="Sample Log Sample Log Sample samplesamedasd  adasd ad Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log "
-                           Text="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}" TextTrimming="CharacterEllipsis"/>
-                <!--<Label x:Name="lastMsgLb" d:Content="Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log "
-                       Content="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}"/>-->
-            </StatusBarItem>
-            <StatusBarItem Grid.Column="1" HorizontalAlignment="Right" Margin="4 0">
-                <Button x:Name="aboutBtn" BorderThickness="0" Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
-                    <TextBlock Text="{lex:Loc HotkeysAbout}" TextDecorations="Underline"
+        <Grid DockPanel.Dock="Bottom" Height="40" >
+            <Border Background="{DynamicResource AccentColor}" Opacity="0.9"/>
+
+
+            <StatusBar Background="Transparent" Padding="8 0">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+
+                <StatusBarItem Grid.Column="0" HorizontalAlignment="Left">
+                    <TextBlock x:Name="lastMsgLb" d:Text="Sample Log Sample Log Sample samplesamedasd  adasd ad Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log Sample Log "
+                           Text="{Binding Message}" ToolTip="{Binding Message}" Foreground="{DynamicResource AccentForeColor}" Opacity="0.9" TextTrimming="CharacterEllipsis"/>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="1" HorizontalAlignment="Right" Margin="8 0">
+                    <Button x:Name="aboutBtn" BorderThickness="0" Style="{StaticResource NoBGHoverBtn}" Click="AboutBtn_Click">
+                        <TextBlock Text="{lex:Loc HotkeysAbout}" TextDecorations="Underline"
                                Foreground="{DynamicResource AccentForeColor}"
                                Cursor="Hand" x:Uid="hotkeysText" Opacity="0.8"/>
-                </Button>
-            </StatusBarItem>
-            <StatusBarItem Grid.Column="3" HorizontalAlignment="Right" Margin="4 0 0 0">
-                <Button x:Name="StartStopBtn" Content="{lex:Loc StartText}" Click="StartStopBtn_Click"
-                        Width="100" Height="30" FontWeight="Medium"/>
-            </StatusBarItem>
-        </StatusBar>
+                    </Button>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="3" HorizontalAlignment="Right" Margin="4 0 0 0">
+                    <Button x:Name="StartStopBtn" Content="{lex:Loc StartText}" Click="StartStopBtn_Click"
+                        Width="120" Height="30" FontWeight="Medium" FontSize="14" Style="{DynamicResource ImportantButtonStyle}"/>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
 
         <!--Main Tab-->
         <Grid DockPanel.Dock="Top">
@@ -97,11 +101,13 @@
                     <DockPanel LastChildFill="True">
 
                         <!--Common Options-->
-                        <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Bottom" Margin="8 4 8 8">
-                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                                <Button x:Name="deviceOptionSettingsBtn_shortcut" Width="120" Margin="4 0" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click"/>
-                                <Button x:Name="switchGamepadListView" Margin="4 0 0 0" Click="switchGamepadListView_Click"
-                                    Content="&#xf2c7;" FontFamily="Segoe Fluent Icons" FontSize="16" Padding="4" ToolTip="Switch View"/>
+                        <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Bottom" Margin="8 0 8 8">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <StackPanel HorizontalAlignment="Left"/>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Button x:Name="deviceOptionSettingsBtn_shortcut" Width="120" Margin="4 0" Content="{lex:Loc DeviceOptions}" Click="DeviceOptionSettingsBtn_Click"/>
+                                    <Button x:Name="switchGamepadListView" Margin="4 0 0 0" Click="switchGamepadListView_Click" Content="&#xf2c7;" FontFamily="Segoe Fluent Icons" FontSize="16" Padding="4" ToolTip="Switch View"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 
@@ -218,10 +224,9 @@
                             <Grid x:Name="gamepadListView_New" DockPanel.Dock="Top" Visibility="Visible">
                                 <ListView x:Name="controllerLV_2" SelectionMode="Single" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                           ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ControllerCol}" SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}">
-
                                     <ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel Margin="8" ItemWidth="455"/>
+                                            <StackPanel Orientation="Vertical" Margin="24 16 24 0"/>
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
                                     
@@ -238,7 +243,7 @@
 
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Style="{DynamicResource BorderStyle}" Margin="0" CornerRadius="7" Padding="0">
+                                            <Border Style="{DynamicResource BorderStyle}" CornerRadius="14" Padding="0">
                                                 <Border.Resources>
                                                     <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
                                                         <Setter Property="FontSize" Value="18"/>
@@ -253,94 +258,93 @@
                                                         <Setter Property="VerticalAlignment" Value="Center"/>
                                                     </Style>
                                                 </Border.Resources>
-
-                                                <Grid>
+                                                
+                                                <DockPanel LastChildFill="True"  Margin="20 16">
                                                     <!--Disconnect Button-->
-                                                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right">
-                                                        <Button Tag="{Binding DevIndex}" ToolTip="Disconnect Controller" Click="DisconnectGamepadByTag" Style="{DynamicResource IconOnlyDisconnectButtonStyle}"
-                                                                Content="&#xe711;" FontFamily="Segoe Fluent Icons" FontSize="16"/>
+                                                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" >
+                                                        <Button Tag="{Binding DevIndex}" ToolTip="Disconnect Controller" Click="DisconnectGamepadByTag"
+                                                                Height="40" Width="40" Style="{DynamicResource IconOnlyDisconnectButtonStyle}"
+                                                                Content="&#xe711;" FontFamily="{DynamicResource FluentIcons}" FontSize="16"/>
                                                     </StackPanel>
 
-                                                    <DockPanel LastChildFill="True"  Margin="12 16">
-                                                        <!--Gamepad Icon-->
-                                                        <Button Style="{StaticResource NoBGHoverBtn}" Tag="{Binding DevIndex, Mode=OneTime}" Click="LightColorBtn_Click" DockPanel.Dock="Left">
-                                                            <Button.Content>
-                                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                                                    <Ellipse Effect="{DynamicResource GamepadShadow}" Tag="{Binding DevIndex, Mode=OneTime}" Stroke="{Binding LightColor, Mode=OneWay, FallbackValue=LimeGreen}" 
-                                                                     Height="70" Width="70" StrokeThickness="4"/>
-                                                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                                        <TextBlock Text="{Binding DisplayDevIndex, FallbackValue=8}" FontWeight="Bold" Margin="0" TextAlignment="Center"/>
-                                                                        <TextBlock Style="{DynamicResource GamepadIcon}" Margin="0" Padding="0" />
-                                                                    </StackPanel>
-                                                                </Grid>
-                                                            </Button.Content>
-                                                        </Button>
+                                                    <!--Gamepad Icon-->
+                                                    <Button Style="{StaticResource NoBGHoverBtn}" Tag="{Binding DevIndex, Mode=OneTime}" Click="LightColorBtn_Click" DockPanel.Dock="Left">
+                                                        <Button.Content>
+                                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                                                <Ellipse Effect="{DynamicResource GamepadShadow}" Tag="{Binding DevIndex, Mode=OneTime}" Stroke="{Binding LightColor, Mode=OneWay, FallbackValue=LimeGreen}" 
+                                                                    Height="70" Width="70" StrokeThickness="4"/>
+                                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                    <TextBlock Text="{Binding DisplayDevIndex, FallbackValue=8}" FontWeight="Bold" Margin="0" TextAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
+                                                                    <TextBlock Style="{DynamicResource GamepadIcon}" Margin="0" Padding="0" />
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Button.Content>
+                                                    </Button>
 
-                                                        <!--Content-->
-                                                        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10 0 0 0">
-                                                            <DockPanel LastChildFill="True">
-                                                                <DockPanel LastChildFill="True" DockPanel.Dock="Top" Margin="0 0 0 8">
-
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Right" >
-                                                                        <CheckBox IsChecked="{Binding LinkedProfile}" Style="{DynamicResource CheckBoxStyle_Default}" IsEnabled="{Binding PrimaryDevice}" Content="Link Profile"/>
-                                                                        <StackPanel Orientation="Horizontal" Margin="4 0 0 0">
-                                                                            <Button x:Name="ProfEditSBtn" Click="ProfEditSBtn_Click" Style="{DynamicResource IconOnlyButtonStyle}"
-                                                                                    ToolTip="Edit current profile" Tag="{Binding DevIndex}">
-                                                                                <Button.Content>
-                                                                                    <TextBlock Style="{DynamicResource EditIcon}" Margin="2"/>
-                                                                                </Button.Content>
-                                                                            </Button>
-                                                                            <Button x:Name="newProfBtn" Click="NewProfBtn_Click" Style="{DynamicResource IconOnlyButtonStyle}"
-                                                                                    ToolTip="Create new profile" Tag="{Binding DevIndex}">
-                                                                                <Button.Content>
-                                                                                    <TextBlock Style="{DynamicResource NewProfileIcon}" Margin="2"/>
-                                                                                </Button.Content>
-                                                                            </Button>
-                                                                        </StackPanel>
+                                                    <!--Content-->
+                                                    <StackPanel Orientation="Vertical" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20 0">
+                                                        <DockPanel LastChildFill="True">
+                                                            <DockPanel LastChildFill="True" DockPanel.Dock="Top" Margin="0 0 0 8">
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Right" >
+                                                                    <CheckBox IsChecked="{Binding LinkedProfile}" Style="{DynamicResource CheckBoxStyle_Default}" IsEnabled="{Binding PrimaryDevice}" Content="Link Profile"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
+                                                                        <Button x:Name="ProfEditSBtn" Click="ProfEditSBtn_Click"
+                                                                                Style="{DynamicResource IconOnlyButtonStyle}"
+                                                                                ToolTip="Edit current profile" Tag="{Binding DevIndex}" Margin="8 0">
+                                                                            <Button.Content>
+                                                                                <TextBlock Style="{DynamicResource EditIcon}" Margin="2"/>
+                                                                            </Button.Content>
+                                                                        </Button>
+                                                                        <Button x:Name="newProfBtn" Click="NewProfBtn_Click" Style="{DynamicResource IconOnlyButtonStyle}"
+                                                                                ToolTip="Create new profile" Tag="{Binding DevIndex}">
+                                                                            <Button.Content>
+                                                                                <TextBlock Style="{DynamicResource NewProfileIcon}" Margin="2"/>
+                                                                            </Button.Content>
+                                                                        </Button>
                                                                     </StackPanel>
+                                                                </StackPanel>
 
-                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
-                                                                        <TextBlock d:Text="DualSense Controller" Style="{StaticResource HeaderTextBlockStyle}"
-                                                                                Margin="0" Text="{Binding IdText, Mode=OneWay}" TextWrapping="Wrap" 
-                                                                                ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}">
-                                                                            <TextBlock.ToolTip>
-                                                                                <StackPanel Orientation="Vertical">
-                                                                                    <TextBlock Text="{Binding TooltipIDText, Mode=OneWay}"/>
-                                                                                    <TextBlock Text="{Binding IdText_2, Mode=OneWay}"/>
-                                                                                </StackPanel>
-                                                                            </TextBlock.ToolTip>
-                                                                        </TextBlock>
-                                                                    </StackPanel>
-
-                                                                </DockPanel>
-
-                                                                
-                                                                <DockPanel LastChildFill="False" DockPanel.Dock="Bottom">
-                                                                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                                                                        <TextBlock Margin="0 0 2 0" d:Style="{DynamicResource UsbWiredIcon}" Style="{Binding StatusSource_2}" Tag="{Binding DevIndex}"/>
-                                                                        <TextBlock Margin="2 0" d:Style="{DynamicResource CheckIcon}" Style="{Binding ExclusiveSource_2}" ToolTip="{Binding IsExclusiveText}"/>
-                                                                        <StackPanel Margin="2 0" Orientation="Horizontal">
-                                                                            <TextBlock Style="{DynamicResource BatteryIcon}" />
-                                                                            <TextBlock FontWeight="Medium" d:Text="100%" Text="{Binding BatteryState, Mode=OneWay}" Margin="2 0 0 0"/>
-                                                                        </StackPanel>
-                                                                    </StackPanel>
-                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
-                                                                        <ComboBox x:Name="selectProfCombo" ItemsSource="{Binding ProfileListCol}" SelectedIndex="{Binding SelectedIndex}"
-                                                                                  Tag="{Binding DevIndex, Mode=OneTime}" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                                                  SelectionChanged="SelectProfCombo_SelectionChanged" KeyDown="SelectProfCombo_KeyDown"
-                                                                                  Width="200" Height="30">
-                                                                            <ComboBox.ItemTemplate>
-                                                                                <DataTemplate>
-                                                                                    <TextBlock Text="{Binding Name,Mode=OneWay,FallbackValue=''}" d:Text="Sample Profile"/>
-                                                                                </DataTemplate>
-                                                                            </ComboBox.ItemTemplate>
-                                                                        </ComboBox>
-                                                                    </StackPanel>
-                                                                </DockPanel>
+                                                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" DockPanel.Dock="Left">
+                                                                    <TextBlock d:Text="DualSense Controller" Style="{StaticResource HeaderTextBlockStyle}"
+                                                                            Margin="0" Text="{Binding IdText, Mode=OneWay}" TextWrapping="Wrap" 
+                                                                            ToolTipOpening="IdColumnTxtB_ToolTipOpening" Tag="{Binding DevIndex, Mode=OneTime}">
+                                                                        <TextBlock.ToolTip>
+                                                                            <StackPanel Orientation="Vertical">
+                                                                                <TextBlock Text="{Binding TooltipIDText, Mode=OneWay}"/>
+                                                                                <TextBlock Text="{Binding IdText_2, Mode=OneWay}"/>
+                                                                            </StackPanel>
+                                                                        </TextBlock.ToolTip>
+                                                                    </TextBlock>
+                                                                </StackPanel>
                                                             </DockPanel>
-                                                        </StackPanel>
-                                                    </DockPanel>
-                                                </Grid>
+    
+                                                            <DockPanel LastChildFill="False" DockPanel.Dock="Bottom">
+                                                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                                                                    <TextBlock Margin="0 0 4 0" d:Style="{DynamicResource UsbWiredIcon}" Style="{Binding StatusSource_2}" Tag="{Binding DevIndex}"/>
+                                                                    <TextBlock Margin="4 0" d:Style="{DynamicResource CheckIcon}" Style="{Binding ExclusiveSource_2}" ToolTip="{Binding IsExclusiveText}"/>
+                                                                    <StackPanel Margin="4 0" Orientation="Horizontal">
+                                                                        <TextBlock Style="{DynamicResource BatteryIcon}" />
+                                                                        <TextBlock FontWeight="Medium" d:Text="100%" Foreground="{DynamicResource ForegroundColor}" Text="{Binding BatteryState, Mode=OneWay}" Margin="2 0 0 0"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                                    
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right">
+                                                                    <ComboBox x:Name="selectProfCombo" ItemsSource="{Binding ProfileListCol}" SelectedIndex="{Binding SelectedIndex}"
+                                                                                Tag="{Binding DevIndex, Mode=OneTime}" Visibility="{Binding PrimaryDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                                                SelectionChanged="SelectProfCombo_SelectionChanged" KeyDown="SelectProfCombo_KeyDown"
+                                                                                d:Width="200" Width="200" Height="30">
+                                                                        <ComboBox.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <TextBlock Text="{Binding Name,Mode=OneWay,FallbackValue=''}" d:Text="Sample Profile"/>
+                                                                            </DataTemplate>
+                                                                        </ComboBox.ItemTemplate>
+                                                                    </ComboBox>
+                                                                </StackPanel>
+                                                            </DockPanel>
+                                                        </DockPanel>
+                                                    </StackPanel>
+                                                </DockPanel>
+                                                
                                             </Border>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -501,11 +505,12 @@
 
                                 <GroupBox Header="Controller" Margin="2" Width="400" VerticalAlignment="Top">
                                     <StackPanel>
-                                        <Button x:Name="deviceOptionSettingsBtn"
-                                                Width="200" Margin="0,0,0,4"
+                                        <Button x:Name="deviceOptionSettingsBtn" Style="{DynamicResource ImportantButtonStyle}"
+                                                Width="200" Height="30" Margin="0,0,0,4"
                                                 HorizontalAlignment="Center"
-                                                Content="{lex:Loc DeviceOptions}"
-                                                Click="DeviceOptionSettingsBtn_Click" />
+                                                Click="DeviceOptionSettingsBtn_Click">
+                                            <TextBlock Foreground="#010101" Text="{lex:Loc DeviceOptions}"/>
+                                        </Button>
 
                                         <CheckBox x:Name="hideDS4ContCk"
                                               Content="{lex:Loc HideDS4Controller}"
@@ -535,8 +540,8 @@
                                         <DockPanel IsEnabled="{Binding FlashHighLatency,FallbackValue='False'}">
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" 
                                                     Margin="15,0,0,0" DockPanel.Dock="Right">
-                                                <xctk:IntegerUpDown Value="{Binding FlashHighLatencyAt}" Width="70" ButtonSpinnerLocation="Right" Increment="1" Maximum="100" Minimum="10" />
-                                                <Label Content="ms" Margin="4 0 0 0"/>
+                                                <xctk:IntegerUpDown Value="{Binding FlashHighLatencyAt}" FormatString="{}{0} ms" Width="70" ButtonSpinnerLocation="Right" Increment="1" Maximum="100" Minimum="10" />
+                                                <!--<Label Content="ms" Margin="4 0 0 0"/>-->
                                             </StackPanel>
                                             <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="46 0 0 0">
                                                 <TextBlock Text="Lightbar turns red when input delay hits 100 milliseconds or below." TextWrapping="Wrap" TextAlignment="Left"/>

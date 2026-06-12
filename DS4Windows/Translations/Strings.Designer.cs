@@ -1393,7 +1393,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export actions.
+        ///   Looks up a localized string similar to Export Actions.
         /// </summary>
         public static string ExportSpecialActions {
             get {

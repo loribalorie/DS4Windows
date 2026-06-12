@@ -10,19 +10,21 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         UseLayoutRounding="True"
-        Title="Log" MinHeight="200" Height="200" Width="600" MinWidth="400" SizeToContent="Height"
+        Title="Log" MinHeight="200" Height="400" Width="600" MinWidth="400" SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}"
+        Background="{DynamicResource BackgroundColor}">
     
     <DockPanel Margin="8" LastChildFill="True">
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0 8 0 0">
-            <Button x:Name="okayButton" Content="OK" Click="OkayButton_Click" />
+            <Button x:Name="okayButton" Content="Close" Click="OkayButton_Click" Width="100"/>
         </StackPanel>
         <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top">
             <RichTextBox x:Name="richMessageBox" VerticalScrollBarVisibility="Auto"
                      IsReadOnly="True" IsDocumentEnabled="True"
                      BorderBrush="{x:Null}" BorderThickness="0"
-                     HorizontalContentAlignment="Stretch"/>
+                     HorizontalContentAlignment="Stretch"
+                         Background="Transparent"/>
         </Border>
     </DockPanel>
 </Window>

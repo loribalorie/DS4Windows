@@ -233,7 +233,6 @@ namespace DS4WinWPF.DS4Forms.ViewModels
                 {
                     color = Global.LightbarSettingsInfo[devIndex].ds4winSettings.m_Led;
                 }
-                AppLogger.LogToGui($"{color.red},{color.green},{color.blue}", false, false);
                 return $"#FF{color.red.ToString("X2")}{color.green.ToString("X2")}{color.blue.ToString("X2")}";
             }
         }

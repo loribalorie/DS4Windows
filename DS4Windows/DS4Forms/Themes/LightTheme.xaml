@@ -4,7 +4,10 @@
                     xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=DotNetProjects.Wpf.Extended.Toolkit"
                     xmlns:themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    <!--xmlns:local="clr-namespace:DS4WinWPF.DS4Forms.Themes"-->
+
+    <FontFamily x:Key="FluentIcons">pack://application:,,,/Resources/Fonts/#Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="RemixIcons">pack://application:,,,/Resources/Fonts/#remixicon</FontFamily>
+
     <!-- Brushes -->
     <SolidColorBrush x:Key="AccentColor" Color="#01579b" />
     <SolidColorBrush x:Key="AccentColorActive" Color="#0277bd"/>
@@ -20,6 +23,8 @@
     <!--<SolidColorBrush x:Key="BackgroundColor" Color="{x:Static SystemColors.WindowColor}"/>-->
 
     <BitmapImage x:Key="DS4ConfigPNG" UriSource="/Resources/DS4 Config.png"/>
+    <BitmapImage x:Key="Xbox360ConfigPNG" UriSource="/Resources/360-map-black.png"/>
+    <BitmapImage x:Key="ButtonHighlightPNG" UriSource="/Resources/button-highlight.png"/>
     <BitmapImage x:Key="BtImg_2" UriSource="/Resources/BT.png"/>
     <BitmapImage x:Key="UsbImg_2" UriSource="/Resources/USB.png"/>
     <BitmapImage x:Key="KeyImageImg_2" UriSource="/Resources/key-solid.png"/>
@@ -73,7 +78,7 @@
     <Style x:Key="GamepadIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="32"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xE7FC;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -188,6 +193,15 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
+    
+    <Style x:Key="MaintainWindowSizeIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe799;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
     <DataTemplate x:Key="IncreaseGlyphNormalKey">
         <Path Width="9"
@@ -240,9 +254,9 @@
                 <ControlTemplate>
                     <Rectangle Margin="0"
                                SnapsToDevicePixels="true"
-                               Stroke="{StaticResource AccentColorActive}"
+                               Stroke="Green"
                                StrokeDashArray="1 2"
-                               StrokeThickness="1" />
+                               StrokeThickness="4" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -433,20 +447,6 @@
         </Style.Resources>
     </Style>
 
-    <!--Style for Buttons, ComboBox, UpDownBox-->
-    <!--<Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Style.Resources>
-            <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="5"/>
-            </Style>
-        </Style.Resources>
-
-    </Style>-->
-
     <!--Button New Style-->
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
@@ -500,35 +500,55 @@
         </Setter>
     </Style>
 
-    <!--<Style TargetType="xctk:DoubleUpDown">
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
+    <!--Important Button Style-->
+    <Style x:Key="ImportantButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#8CC5EC"/>
+        <Setter Property="BorderBrush" Value="#79AACC"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12 4"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="Auto"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"                           
+                            SnapsToDevicePixels="true"
+                            CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" TargetName="border" Value="0.9"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Opacity" TargetName="border" Value="0.8"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.4"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DimGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-
-    <Style TargetType="xctk:DecimalUpDown">
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style TargetType="xctk:IntegerUpDown">
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style TargetType="{x:Type xctk:SByteUpDown}">
-        <Setter Property="Height" Value="24"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-
-    </Style>-->
-
 
     <!--CheckBox Default Style-->
     <ControlTemplate x:Key="CheckBoxControlTemplate1" TargetType="{x:Type CheckBox}">
@@ -881,7 +901,7 @@
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="Transparent"/>
-
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
@@ -1028,6 +1048,7 @@
     <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
@@ -1171,25 +1192,25 @@
     <Style TargetType="{x:Type Button}" x:Key="IconOnlyDisconnectButtonStyle">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Padding" Value="4 2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Name="border" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
-                            CornerRadius="6">
+                    <Grid Name="border" Background="{TemplateBinding Background}">
+                        <Ellipse Name="bgellipse" Fill="{StaticResource BackgroundColor}" Height="Auto" Width="Auto"/>
                         <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
                             <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#BF2525"/>
+                            <Setter Property="Fill" TargetName="bgellipse" Value="#BF2525"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#A31F1F"/>
+                            <Setter Property="Fill" TargetName="bgellipse" Value="#A31F1F"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -1197,7 +1218,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Icon Only Button Style-->
     <Style TargetType="{x:Type Button}" x:Key="IconOnlyButtonStyle">
         <Setter Property="Background" Value="Transparent" />
@@ -1558,9 +1579,10 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <!--TextBlock Style-->
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{StaticResource InterActionBox_Color}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType=Control}, Path=Foreground, FallbackValue={StaticResource ForegroundColor}, TargetNullValue={StaticResource ForegroundColor}}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -1588,6 +1610,10 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+    </Style>
+
     <Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />
     <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
     <Style BasedOn="{StaticResource TabControlStyle}" TargetType="{x:Type TabControl}" />
@@ -1607,6 +1633,7 @@
     <Style BasedOn="{StaticResource SByteUpDownStyle}" TargetType="{x:Type xctk:SByteUpDown}" />
     <Style BasedOn="{StaticResource IntegerDownStyle}" TargetType="{x:Type xctk:IntegerUpDown}" />
     <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}" />
+    <Style BasedOn="{StaticResource ExpanderStyle}" TargetType="{x:Type Expander}"/>
     <!--<Style BasedOn="{StaticResource TextBlockStyle}" TargetType="{x:Type TextBlock}"/>-->
     
 </ResourceDictionary>

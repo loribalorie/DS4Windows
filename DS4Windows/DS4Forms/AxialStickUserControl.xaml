@@ -10,7 +10,7 @@
              lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
              lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="400">
+             d:DesignWidth="400">
 
     <UserControl.Resources>
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter"/>
@@ -19,16 +19,14 @@
     </UserControl.Resources>
 
     <Grid x:Name="mainGrid" Background="{DynamicResource ContentBackgroundColor}">
-        <!--<Grid.Resources>
-            <Style BasedOn="{StaticResource DoubleUpDown}" TargetType="{x:Type xctk:DoubleUpDown}">
+        <Grid.Resources>
             
-            </Style>
 
-        </Grid.Resources>-->
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="165"/>
-            <ColumnDefinition Width="76"/>
-            <ColumnDefinition Width="76"/>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="85"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -39,10 +37,8 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Label Content="X-Axis" Grid.Column="1"
-               HorizontalAlignment="Center"/>
-        <Label Content="Y-Axis" Grid.Column="2"
-               HorizontalAlignment="Center"/>
+        <TextBlock Text="X-Axis" Grid.Column="1" Width="70" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Text="Y-Axis" Grid.Column="2" Width="70" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
         <Label Content="{lex:Loc DeadZone}"
                ContentStringFormat="{}{0}"

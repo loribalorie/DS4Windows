@@ -1001,6 +1001,37 @@ namespace DS4WinWPF.DS4Forms
             bindingVM.WriteBinds();
             UnregisterDataContext();
         }
+
+        private void RecordMacroTabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //TestTxt.Text = "got focused!";
+            RecordBox box = new RecordBox(bindingVM.DeviceNum, bindingVM.Settings, bindingVM.ActionBinding.IsShift());
+            box.Visibility = Visibility.Visible;
+            //mapBindingPanel.Visibility = Visibility.Collapsed;
+            //extrasSidePanel.Visibility = Visibility.Collapsed;
+            //fullPanel.Children.Add(box);
+            recordMacroTabItem.Children.Add(box);
+
+            box.Cancel += (sender2, args) =>
+            {
+                //box.Visibility = Visibility.Collapsed;
+                //fullPanel.Children.Remove(box);
+                box = null;
+                //mapBindingPanel.Visibility = Visibility.Visible;
+                //extrasSidePanel.Visibility = Visibility.Visible;
+            };
+
+            box.Save += (sender2, args) =>
+            {
+                box.Visibility = Visibility.Collapsed;
+                recordMacroTabItem.Children.Remove(box);
+                box = null;
+                //mapBindingPanel.Visibility = Visibility.Visible;
+                bindingVM.PrepareSaveMacro(bindingVM.ActionBinding, bindingVM.ActionBinding.IsShift());
+                Close();
+            };
+
+        }
     }
 
     public class BindingWinResourcePaths

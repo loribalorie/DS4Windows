@@ -1122,9 +1122,10 @@ namespace DS4WinWPF.DS4Forms
         private void KeepSizeBtn_Click(object sender, RoutedEventArgs e)
         {
             keepsize = true;
-            ImageSourceConverter c = new ImageSourceConverter();
-            sizeImage.Source =
-                c.ConvertFromString($"{Global.ASSEMBLY_RESOURCE_PREFIX}component/Resources/checked.png") as ImageSource;
+            //ImageSourceConverter c = new ImageSourceConverter();
+            //sizeImage.Source = c.ConvertFromString($"{Global.ASSEMBLY_RESOURCE_PREFIX}component/Resources/checked.png") as ImageSource;
+            keepWinSize.Style = App.Current.FindResource("CheckIcon") as Style;
+
         }
 
         public void Close()

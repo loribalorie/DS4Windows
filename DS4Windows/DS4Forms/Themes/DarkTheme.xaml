@@ -5,6 +5,9 @@
                     xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=DotNetProjects.Wpf.Extended.Toolkit"
                     xmlns:themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
+    <FontFamily x:Key="FluentIcons">pack://application:,,,/Resources/Fonts/#Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="RemixIcons">pack://application:,,,/Resources/Fonts/#remixicon</FontFamily>
+
     <!-- Brushes -->
     <SolidColorBrush x:Key="AccentColor" Color="#8e3ba5" />
     <SolidColorBrush x:Key="AccentColorActive" Color="#bc62ca"/>
@@ -30,6 +33,8 @@
     <SolidColorBrush x:Key="ScrollBar.Disabled.Glyph" Color="LightGray"/>
 
     <BitmapImage x:Key="DS4ConfigPNG" UriSource="/Resources/DS4 Config_white.png"/>
+    <BitmapImage x:Key="Xbox360ConfigPNG" UriSource="/Resources/360-map-white.png"/>
+    <BitmapImage x:Key="ButtonHighlightPNG" UriSource="/Resources/button-highlight.png"/>
     <BitmapImage x:Key="BtImg_2" UriSource="/Resources/BT_white.png"/>
     <BitmapImage x:Key="UsbImg_2" UriSource="/Resources/USB_white.png"/>
     <BitmapImage x:Key="KeyImageImg_2" UriSource="/Resources/key-solid_white.png"/>
@@ -67,11 +72,11 @@
     <Geometry x:Key="DownArrowGeometry">M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z</Geometry>
 
     <DropShadowEffect x:Key="GamepadShadow" BlurRadius="10" Opacity="0.5" ShadowDepth="1" Color="{Binding Color, Source={StaticResource BackgroundColor}}" RenderingBias="Quality"/>
-
+    
     <Style x:Key="GamepadIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="32"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xE7FC;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -181,26 +186,20 @@
     <Style x:Key="ThemeIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe790;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="FocusVisual">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Rectangle Margin="0"
-                               SnapsToDevicePixels="true"
-                               Stroke="{StaticResource AccentColorActive}"
-                               StrokeDashArray="1 2"
-                               StrokeThickness="1" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="MaintainWindowSizeIcon" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="Text" Value="&#xe799;"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
 
     <DataTemplate x:Key="IncreaseGlyphNormalKey">
         <Path Width="9"
@@ -245,23 +244,35 @@
                 VerticalAlignment="Center"
                 Focusable="False" />
     </DataTemplate>
-    
+
+    <!--  Focus Visual  -->
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="0"
+                               SnapsToDevicePixels="true"
+                               Stroke="Green"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="4" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Button Style -->
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}"/>-->
         <Setter Property="Background" Value="#373737"/>
         <Setter Property="BorderBrush" Value="#3F3F3F"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="12 4"/>
-
         <Setter Property="MinHeight" Value="24"/>
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <!--<Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>-->
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -298,7 +309,57 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!--Important Button Style-->
+    <Style x:Key="ImportantButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#D9A2E3"/>
+        <Setter Property="BorderBrush" Value="#BB8CC4"/>
+        <Setter Property="Foreground" Value="#362838"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12 4"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <!--<Setter Property="Effect" Value="{StaticResource DropShadowStyle}"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"                           
+                            SnapsToDevicePixels="true"
+                            CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" TargetName="border" Value="0.9"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Opacity" TargetName="border" Value="0.8"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.4"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DimGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!-- Repeat Button Style -->
     <Style x:Key="RepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -514,10 +575,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4" Padding="5 0"
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Padding="5 0"
                             Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" VerticalAlignment="Center" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" VerticalAlignment="Center" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                            
+                        </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -543,9 +605,9 @@
 
     <!--TextBlock Style-->
     <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-        <!--<Setter Property="Background" Value="{StaticResource BackgroundColor}" />-->
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />
-
+        <Setter Property="Background" Value="Transparent" />
+        <!--<Setter Property="Foreground" Value="{StaticResource ForegroundColor}" />-->
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType=Control}, Path=Foreground, FallbackValue={StaticResource ForegroundColor}, TargetNullValue={StaticResource ForegroundColor}}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5"/>
@@ -745,7 +807,7 @@
 
     <!-- TabControl style -->
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
-        
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
         <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}"/>
         <Setter Property="Template">
@@ -783,6 +845,7 @@
     <!--HiddenTabStyle-->
     <Style x:Key="HiddenTabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -818,7 +881,7 @@
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="Transparent"/>
-
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
@@ -858,6 +921,7 @@
     <!--TabControl Grouup button style-->
     <Style TargetType="{x:Type TabControl}" x:Key="TabButtonGroup_Style">
         <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -1020,18 +1084,16 @@
     <!-- ListView style -->
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
     
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
-        <!--<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>-->
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1048,7 +1110,6 @@
                             </VisualBrush>
                         </Border.OpacityMask>
                         <ScrollViewer >
-                        <!--<ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">-->
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </ScrollViewer>
                     </Border>
@@ -1063,9 +1124,9 @@
     </Style>
 
     <!-- ListViewItem style -->
-    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
+    <!--<Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="Padding" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -1088,11 +1149,51 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>-->
+
+    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Border x:Name="Bd"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
+                        <GridViewRowPresenter Margin="0,2,0,2" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentColorActive}" />
+                            <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{StaticResource ForegroundColor}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentColor}" />
+                            <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{StaticResource ForegroundColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{StaticResource DisabledColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- GridViewColumnHeader style -->
     <Style x:Key="GridViewColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Height" Value="22"/>
         <Setter Property="MinWidth" Value="30"/>
         <Setter Property="Template">
@@ -2456,6 +2557,7 @@
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
@@ -2596,21 +2698,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Name="border" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
-                            CornerRadius="6">
+                    <Grid Name="border" Background="{TemplateBinding Background}">
+                        <Ellipse Name="bgellipse" Fill="{StaticResource BackgroundColor}" Height="Auto" Width="Auto"/>
                         <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
                             <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#BF2525"/>
+                            <Setter Property="Fill" TargetName="bgellipse" Value="#BF2525"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#A31F1F"/>
+                            <Setter Property="Fill" TargetName="bgellipse" Value="#A31F1F"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -2649,6 +2751,9 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+    </Style>
 
     <!-- Now apply custom styles -->
     <Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />
@@ -2665,8 +2770,6 @@
     <Style BasedOn="{StaticResource ListBoxStyle}" TargetType="{x:Type ListBox}" />
     <Style BasedOn="{StaticResource ComboBox_NewStyle}" TargetType="{x:Type ComboBox}" />
     <Style BasedOn="{StaticResource ComboBoxItem_NewStyle}" TargetType="{x:Type ComboBoxItem}" />
-    <!--<Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type ListView}" />-->
-    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
     <Style BasedOn="{StaticResource GridViewColumnHeaderStyle}" TargetType="{x:Type GridViewColumnHeader}" />
     <Style BasedOn="{StaticResource DocumentStyleGithubLike}" TargetType="{x:Type FlowDocument}" />
     <Style BasedOn="{StaticResource ButtonSpinnerStyle}" TargetType="{x:Type xctk:ButtonSpinner}" />
@@ -2685,6 +2788,9 @@
     <Style BasedOn="{StaticResource ThumbStyle}" TargetType="{x:Type Thumb}" />
     <Style BasedOn="{StaticResource ScrollViewerStyle}" TargetType="{x:Type ScrollViewer}" />
     <Style BasedOn="{StaticResource ListBoxItemStyle}" TargetType="{x:Type ListBoxItem}" />
+    <Style BasedOn="{StaticResource ExpanderStyle}" TargetType="{x:Type Expander}"/>
+    <!--<Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type ListView}" />-->
+    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
 </ResourceDictionary>
     
     

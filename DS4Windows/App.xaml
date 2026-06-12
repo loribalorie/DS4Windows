@@ -34,7 +34,7 @@
                 <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
                 <Setter Property="TextOptions.TextHintingMode" Value="Fixed" />
             </Style>
-
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

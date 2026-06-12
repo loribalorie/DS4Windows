@@ -749,7 +749,7 @@ Public License instead of this License.  But first, please read
                                     </Style>
                                 </WrapPanel.Resources>
                                 <!-- <TextBlock><Hyperlink x:Name="siteLink" Click="SiteLink_Click" Foreground="{DynamicResource AccentColor}">Site</Hyperlink></TextBlock> -->
-                                <TextBlock Margin="10,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click">Source</Hyperlink></TextBlock>
+                                <TextBlock Margin="10,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click">loribalorie</Hyperlink></TextBlock>
                                 <TextBlock Margin="10,0"><Hyperlink Click="Ryochan7Link_Click" >Ryochan7</Hyperlink></TextBlock>
                                 <TextBlock Margin="10,0"><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" >Jays2Kings</Hyperlink></TextBlock>
                                 <TextBlock Margin="10,0"><Hyperlink x:Name="schmaldeoLink" Click="schmaldeoLink_Click" >schmaldeo</Hyperlink></TextBlock>

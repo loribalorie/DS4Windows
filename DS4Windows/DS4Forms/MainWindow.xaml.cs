@@ -92,7 +92,7 @@ namespace DS4WinWPF.DS4Forms
         public MainWindow(ArgumentParser parser)
         {
             InitializeComponent();
-
+            Title = "DS4Windows " + (DS4Windows.Global.exeversion as String);
             mainWinVM = new MainWindowsViewModel();
             DataContext = mainWinVM;
 

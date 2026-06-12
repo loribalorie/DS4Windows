@@ -24,7 +24,7 @@
         <local:IntToBoolConverter x:Key="IntToBoolConverter" />
     </Window.Resources>
     
-    <StackPanel x:Name="fullPanel" Orientation="Horizontal"  Margin="8">
+    <StackPanel x:Name="fullPanel" Orientation="Horizontal"  Margin="8 16 8 8">
         
         <DockPanel x:Name="mapBindingPanel" Width="820" >
 
@@ -34,52 +34,70 @@
 
             <StackPanel x:Name="modePanel" DockPanel.Dock="Top" Margin="0" Orientation="Vertical">
                 <Border Style="{DynamicResource BorderStyle}" Margin="0">
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton x:Name="regBindRadio" Content="{lex:Loc Regular}" VerticalContentAlignment="Center" GroupName="bindModeGroup" IsChecked="True" Click="RegBindRadio_Click" />
-                        <RadioButton x:Name="shiftBindRadio" Content="{lex:Loc ShiftModifier}" VerticalContentAlignment="Center" GroupName="bindModeGroup" Click="ShiftBindRadio_Click" />
+                    <DockPanel LastChildFill="False" Margin="8 0">
+                        <UniformGrid Rows="2" DockPanel.Dock="Left">
 
-                        <ComboBox x:Name="shiftTriggerCombo" Width="170" HorizontalAlignment="Stretch" SelectedIndex="{Binding ShiftTrigger,FallbackValue=0}">
-                            <ComboBoxItem Content="{lex:Loc BindingWin.SelectShiftTrigger}"/>
-                            <ComboBoxItem Content="Cross"/>
-                            <ComboBoxItem Content="Circle"/>
-                            <ComboBoxItem Content="Square"/>
-                            <ComboBoxItem Content="Triangle"/>
-                            <ComboBoxItem Content="Options"/>
-                            <ComboBoxItem Content="Share"/>
-                            <ComboBoxItem Content="Up"/>
-                            <ComboBoxItem Content="Down"/>
-                            <ComboBoxItem Content="Left"/>
-                            <ComboBoxItem Content="Right"/>
-                            <ComboBoxItem Content="PS"/>
-                            <ComboBoxItem Content="L1"/>
-                            <ComboBoxItem Content="R1"/>
-                            <ComboBoxItem Content="L2"/>
-                            <ComboBoxItem Content="R2"/>
-                            <ComboBoxItem Content="L3"/>
-                            <ComboBoxItem Content="R3"/>
-                            <ComboBoxItem Content="Left Touch"/>
-                            <ComboBoxItem Content="Upper Touch"/>
-                            <ComboBoxItem Content="Multitouch"/>
-                            <ComboBoxItem Content="Right Touch"/>
-                            <ComboBoxItem Content="Sixaxis Up"/>
-                            <ComboBoxItem Content="Sixaxis Down"/>
-                            <ComboBoxItem Content="Sixaxis Left"/>
-                            <ComboBoxItem Content="Sixaxis Right"/>
-                            <ComboBoxItem Content="Finger on Touchpad"/>
-                            <ComboBoxItem Content="Mute"/>
-                            <ComboBoxItem Content="DSE Function Left"/>
-                            <ComboBoxItem Content="DSE Function Right"/>
-                            <ComboBoxItem Content="DSE Left Paddle"/>
-                            <ComboBoxItem Content="DSE Right Paddle"/>
-                            <ComboBoxItem Content="Capture" />
-                            <ComboBoxItem Content="Side L" />
-                            <ComboBoxItem Content="Side R" />
-                        </ComboBox>
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <RadioButton x:Name="regBindRadio" Content="{lex:Loc Regular}" VerticalAlignment="Center" GroupName="bindModeGroup" IsChecked="True" Click="RegBindRadio_Click" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="30">
+                                <RadioButton x:Name="shiftBindRadio" Content="{lex:Loc ShiftModifier}" VerticalContentAlignment="Center" GroupName="bindModeGroup" Click="ShiftBindRadio_Click"
+                                             Margin="0 0 16 0"/>
+                                <ComboBox x:Name="shiftTriggerCombo" Width="200" HorizontalAlignment="Stretch" SelectedIndex="{Binding ShiftTrigger,FallbackValue=0}">
+                                    <ComboBoxItem Content="{lex:Loc BindingWin.SelectShiftTrigger}"/>
+                                    <ComboBoxItem Content="Cross"/>
+                                    <ComboBoxItem Content="Circle"/>
+                                    <ComboBoxItem Content="Square"/>
+                                    <ComboBoxItem Content="Triangle"/>
+                                    <ComboBoxItem Content="Options"/>
+                                    <ComboBoxItem Content="Share"/>
+                                    <ComboBoxItem Content="Up"/>
+                                    <ComboBoxItem Content="Down"/>
+                                    <ComboBoxItem Content="Left"/>
+                                    <ComboBoxItem Content="Right"/>
+                                    <ComboBoxItem Content="PS"/>
+                                    <ComboBoxItem Content="L1"/>
+                                    <ComboBoxItem Content="R1"/>
+                                    <ComboBoxItem Content="L2"/>
+                                    <ComboBoxItem Content="R2"/>
+                                    <ComboBoxItem Content="L3"/>
+                                    <ComboBoxItem Content="R3"/>
+                                    <ComboBoxItem Content="Left Touch"/>
+                                    <ComboBoxItem Content="Upper Touch"/>
+                                    <ComboBoxItem Content="Multitouch"/>
+                                    <ComboBoxItem Content="Right Touch"/>
+                                    <ComboBoxItem Content="Sixaxis Up"/>
+                                    <ComboBoxItem Content="Sixaxis Down"/>
+                                    <ComboBoxItem Content="Sixaxis Left"/>
+                                    <ComboBoxItem Content="Sixaxis Right"/>
+                                    <ComboBoxItem Content="Finger on Touchpad"/>
+                                    <ComboBoxItem Content="Mute"/>
+                                    <ComboBoxItem Content="DSE Function Left"/>
+                                    <ComboBoxItem Content="DSE Function Right"/>
+                                    <ComboBoxItem Content="DSE Left Paddle"/>
+                                    <ComboBoxItem Content="DSE Right Paddle"/>
+                                    <ComboBoxItem Content="Capture" />
+                                    <ComboBoxItem Content="Side L" />
+                                    <ComboBoxItem Content="Side R" />
+                                </ComboBox>
+                            </StackPanel>
+                            
+                        </UniformGrid>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button x:Name="defaultBtn" Content="{Binding DefaultBtnString,FallbackValue={lex:Loc Default}}"
+                                    Background="{Binding DefaultColor,FallbackValue={StaticResource SecondaryColor}}"
+                                    BorderBrush="{Binding DefaultColor,FallbackValue={StaticResource SecondaryColor}}"
+                                    Click="DefaultBtn_Click"
+                                    Width="100"/>
+                            
+                            <Button x:Name="unboundBtn" Content="{lex:Loc Unbound}"
+                                    Background="{Binding UnboundColor,FallbackValue={StaticResource SecondaryColor}}"
+                                    BorderBrush="{Binding DefaultColor,FallbackValue={StaticResource SecondaryColor}}"
+                                    Click="UnboundBtn_Click"
+                                    Width="100" Margin="8 0 0 0"/>
+                        </StackPanel>
 
-                        <Button x:Name="defaultBtn" Content="{Binding DefaultBtnString,FallbackValue={lex:Loc Default}}" Background="{Binding DefaultColor,FallbackValue={StaticResource SecondaryColor}}" Click="DefaultBtn_Click" />
-                        <Button x:Name="unboundBtn" Content="{lex:Loc Unbound}" Background="{Binding UnboundColor,FallbackValue={StaticResource SecondaryColor}}" Click="UnboundBtn_Click" />
-
-                    </StackPanel>
+                    </DockPanel>
                 </Border>
             </StackPanel>
 
@@ -91,15 +109,15 @@
 
                 <!--Keyboard Mouse-->
                 <TabItem Header="{lex:Loc BindingWin.KeyAndRelMouse}">
-                    <DockPanel Margin="0 4 0 0" LastChildFill="False">
+                    <DockPanel Margin="0" LastChildFill="False">
                         <Grid x:Name="topGrid" DockPanel.Dock="Top" Margin="4 8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
-                                <Label x:Name="macroOnLb" Content="{lex:Loc BindingWin.MacroOn}" Visibility="{Binding MacroLbVisible}" />
+                            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Label x:Name="macroOnLb" Content="{lex:Loc BindingWin.MacroOn}" Visibility="{Binding MacroLbVisible}"/>
                             </StackPanel>
                             <!--<StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBlock x:Name="keyMouseTopTxt" Text="{lex:Loc BindingWin.KeyboardAndMouse}" TextWrapping="Wrap" TextAlignment="Center" 
@@ -107,15 +125,16 @@
                             </StackPanel>-->
                             <StackPanel x:Name="topOptsPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <CheckBox Content="{lex:Loc Toggle}" IsChecked="{Binding Toggle}" Style="{DynamicResource CheckBoxStyle_Default}"/>
-                                <CheckBox Content="{lex:Loc ScanCode}" IsChecked="{Binding HasScanCode}" Margin="20,0,0,0" Style="{DynamicResource CheckBoxStyle_Default}"/>
+                                <CheckBox Content="{lex:Loc ScanCode}" IsChecked="{Binding HasScanCode}" Style="{DynamicResource CheckBoxStyle_Default}" Margin="16 0 0 0"/>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Button x:Name="recordMacroBtn" Content="{lex:Loc BindingWin.RecordAMacro}" Click="RecordMacroBtn_Click" />
+                            <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button x:Name="recordMacroBtn" Content="{lex:Loc BindingWin.RecordAMacro}" Click="RecordMacroBtn_Click"
+                                        Width="160" Style="{DynamicResource ImportantButtonStyle}"/>
                             </StackPanel>
                         </Grid>
 
-                        <Border Style="{DynamicResource BorderStyle}" DockPanel.Dock="Top" Padding="4 8" Height="200">
+                        <Border Style="{DynamicResource BorderStyle}" CornerRadius="10" DockPanel.Dock="Top" Padding="4 8" Height="200">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
@@ -504,10 +523,11 @@
                 <TabItem Header="Gamepad">
                     <Border Style="{DynamicResource BorderStyle}" Margin="0 8 0 0">
                         <DockPanel x:Name="bottomPanel">
-                            <StackPanel x:Name="outConPanel" Width="630" Orientation="Vertical" HorizontalAlignment="Center">
+                            <StackPanel x:Name="outConPanel" Width="630" Orientation="Vertical" HorizontalAlignment="Center" Margin="0 20 0 0">
                                 <Canvas Height="247">
                                     <Canvas.Background>
-                                        <ImageBrush x:Name="conImageBrush" ImageSource="{Binding Source={StaticResource resourcePaths}, Path=Xbox360MapPNG}" Stretch="Uniform"/>
+                                        <!--<ImageBrush x:Name="conImageBrush" ImageSource="{Binding Source={StaticResource resourcePaths}, Path=Xbox360MapPNG}" Stretch="Uniform"/>-->
+                                        <ImageBrush x:Name="conImageBrush" ImageSource="{DynamicResource Xbox360ConfigPNG}" Stretch="Uniform"/>
                                     </Canvas.Background>
 
                                     <Canvas.Resources>
@@ -525,17 +545,15 @@
                                         </Style>
                                     </Canvas.Resources>
 
-                                    <Image x:Name="highlightImg" Width="30" Height="30" 
-                            Source="{Binding Source={StaticResource resourcePaths}, Path=Xbox360HighlightPNG}" 
-                            Canvas.Left="622" Canvas.Top="11" IsEnabled="True"
-                            Visibility="Hidden"/>
-                                    <Label x:Name="highlightLb" Content="A" 
-                            Background="{StaticResource AccentColor}"
-                            Foreground="White" 
-                            IsEnabled="True"
-                            Visibility="Hidden"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center" />
+                                    <!--<Image x:Name="highlightImg" Width="30" Height="30" 
+                                           Source="{Binding Source={StaticResource resourcePaths}, Path=Xbox360HighlightPNG}" 
+                                           Canvas.Left="622" Canvas.Top="11" IsEnabled="True"
+                                           Visibility="Hidden" d:Visibility="Visible"/>-->
+                                    <Label x:Name="highlightLb" Content="A" Background="{StaticResource AccentColor}"
+                                           Foreground="White" IsEnabled="True" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+                                    <Image x:Name="highlightImg" Width="30" Height="30" Visibility="Hidden" d:Visibility="Visible"
+                                           Source="{DynamicResource ButtonHighlightPNG}" Canvas.Left="650" Canvas.Top="0" IsEnabled="True"/>
 
                                     <!--<Button x:Name="guideBtn2" Width="16" Height="30" Tag="Ni" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="212" Canvas.Top="112"  />-->
                                     <Button x:Name="guideBtn" Width="26" Height="20" Tag="Guide" Style="{StaticResource NoBGHoverBtn}" Canvas.Left="303" Canvas.Top="87" MouseEnter="OutConBtn_MouseEnter" MouseLeave="OutConBtn_MouseLeave"  />
@@ -589,7 +607,10 @@
                 </TabItem>
 
                 <!--Record Macro-->
-                <TabItem Header="{lex:Loc BindingWin.RecordAMacro}" x:Name="RecordMacroTabItem">
+                <TabItem Header="{lex:Loc BindingWin.RecordAMacro}" x:Name="RecordMacroTabItem" GotFocus="RecordMacroTabItem_GotFocus" d:Visibility="Visible" Visibility="Hidden">
+                    <Grid x:Name="recordMacroTabItem">
+                        <TextBlock x:Name="TestTxt" Text="Disabled for now"/>
+                    </Grid>
 
                 </TabItem>
 
@@ -611,8 +632,8 @@
                         </StackPanel>
 
                         <UniformGrid Rows="2" Columns="2">
-                            <Label Grid.Column="0" Content="{lex:Loc Heavy}" Width="50" />
-                            <Label Grid.Column="1" Content="{lex:Loc Light}" Width="50" />
+                            <Label Grid.Column="0" Content="{lex:Loc Heavy}" Width="50" HorizontalContentAlignment="Center"/>
+                            <Label Grid.Column="1" Content="{lex:Loc Light}" Width="50" HorizontalContentAlignment="Center"/>
 
                             <xctk:IntegerUpDown Grid.Row="1"
                                                 Value="{Binding HeavyRumble}" Minimum="0" Maximum="255" />
@@ -625,14 +646,14 @@
 
                 <GroupBox Header="{lex:Loc LightbarMode}" Margin="0 0 0 4">
                     <!--<Label Content="{lex:Loc LightbarMode}" />-->
-                    <ComboBox x:Name="LightbarModeCombo" SelectedIndex="{Binding Path=LightbarMacro.Active, Converter={StaticResource IntToBoolConverter}}" Width="Auto" Margin="8 0">
+                    <ComboBox x:Name="LightbarModeCombo" SelectedIndex="{Binding Path=LightbarMacro.Active, Converter={StaticResource IntToBoolConverter}}" Width="200" Margin="8 0">
                         <ComboBoxItem Content="{lex:Loc SolidColor}" />
                         <ComboBoxItem Content="{lex:Loc Macro}" />
                     </ComboBox>
                 </GroupBox>
 
                 <TabControl SelectedIndex="{Binding ElementName=LightbarModeCombo, Path=SelectedIndex, FallbackValue=0}" Style="{DynamicResource HiddenTabControlStyle}" Margin="0 0 0 4">
-                    <TabItem Header="{lex:Loc SolidColor}" Visibility="Collapsed">
+                    <TabItem Header="{lex:Loc SolidColor}" Visibility="Collapsed" d:Visibility="Visible">
                         <GroupBox Header="{lex:Loc SolidColor}">
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
@@ -642,7 +663,7 @@
                                             Click="ExtrasColorChoosebtn_Click"/>
                                 </StackPanel>
 
-                                <Border Style="{DynamicResource BorderStyle}" Margin="0 4 0 0" Background="{DynamicResource BackgroundColor}">
+                                <Border Margin="8 8 8 0" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="4" Padding="8">
                                     <StackPanel >
                                         <StackPanel Orientation="Horizontal">
                                             <Label Content="Red" Width="45"/>
@@ -668,9 +689,9 @@
                         </GroupBox>
                     </TabItem>
                     
-                    <TabItem Header="{lex:Loc Macro}" Visibility="Collapsed">
+                    <TabItem Header="{lex:Loc Macro}" Visibility="Collapsed" d:Visibility="Visible"> 
                         <GroupBox Header="{lex:Loc Macro}">
-                            <Button Content="{lex:Loc CreateLightbarMacro}" Click="CreateLightbarMacro_Click" Width="Auto"/>
+                            <Button Content="{lex:Loc CreateLightbarMacro}" Click="CreateLightbarMacro_Click" Width="Auto" Style="{DynamicResource ImportantButtonStyle}"/>
                         </GroupBox>
                     </TabItem>
                 </TabControl>
@@ -678,8 +699,8 @@
                 <GroupBox Header="Light Flashing" Margin="0 0 0 4">
                     <StackPanel Orientation="Horizontal" >
                         <Label Content="{lex:Loc FlashRate}"/>
-                        <xctk:IntegerUpDown MinWidth="50" Value="{Binding FlashRate}" Minimum="0" Maximum="20" />
-                        <Label Content="/sec"/>
+                        <xctk:IntegerUpDown MinWidth="50" Value="{Binding FlashRate}" Minimum="0" Maximum="20" FormatString="{}{0}/sec." Margin="8 0 0 0"/>
+                        <!--<Label Content="/sec"/>-->
                     </StackPanel>
                 </GroupBox>
 
