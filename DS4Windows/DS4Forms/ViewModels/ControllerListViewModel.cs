@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using DS4Windows;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using DS4Windows;
 
 namespace DS4WinWPF.DS4Forms.ViewModels
 {
@@ -233,7 +233,27 @@ namespace DS4WinWPF.DS4Forms.ViewModels
                 {
                     color = Global.LightbarSettingsInfo[devIndex].ds4winSettings.m_Led;
                 }
+                color = LightColor_MaxBrightness(color);
                 return $"#FF{color.red.ToString("X2")}{color.green.ToString("X2")}{color.blue.ToString("X2")}";
+            }
+        }
+
+        public DS4Color LightColor_MaxBrightness(DS4Color gamepadLightbarColor)
+        {
+            byte highestChannel = Math.Max(gamepadLightbarColor.red, Math.Max(gamepadLightbarColor.green, gamepadLightbarColor.blue));
+            if (highestChannel == 0)
+            {
+                return new DS4Color(0,0,0);
+            }
+            else
+            {   
+                double multiplier = 255.0 / highestChannel;
+                return new DS4Color
+                (
+                    (byte)(gamepadLightbarColor.red * multiplier),
+                    (byte)(gamepadLightbarColor.green * multiplier),
+                    (byte)(gamepadLightbarColor.blue * multiplier)
+                );
             }
         }
 
