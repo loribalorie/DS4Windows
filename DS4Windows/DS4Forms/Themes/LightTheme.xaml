@@ -86,16 +86,16 @@
 
     <Style x:Key="BatteryIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xf5f2;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    
+
     <Style x:Key="BatteryCharging" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xebb5;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -104,7 +104,7 @@
 
     <Style x:Key="LinkedProfileIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xe71b;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -113,7 +113,7 @@
 
     <Style x:Key="KeyIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xe8d7;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -122,17 +122,17 @@
 
     <Style x:Key="BTIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xec41;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="ToolTip" Value="Connected via Bluetooth"/>
     </Style>
-    
+
     <Style x:Key="UsbWiredIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xecf0;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -142,7 +142,7 @@
 
     <Style x:Key="EditIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xe70f;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -151,7 +151,7 @@
 
     <Style x:Key="CautionIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xe7ba;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -160,7 +160,7 @@
 
     <Style x:Key="NewProfileIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xed0e;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -176,24 +176,24 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="CheckIcon" TargetType="TextBlock">
+    <Style x:Key="StarIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
         <Setter Property="Text" Value="&#xe734;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-   
+
     <Style x:Key="ThemeIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe790;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    
+
     <Style x:Key="MaintainWindowSizeIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="16"/>
@@ -1227,7 +1227,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Name="border" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                    <Border Name="border" BorderThickness="0" CornerRadius="7" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
                         <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
 
@@ -1236,11 +1236,14 @@
                             <!--<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#D0D0D0"/>
+                            <!--<Setter Property="Background" TargetName="border" Value="#404040"/>-->
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource AccentColor}"/>
                             <!--<Setter Property="Foreground" Value="White"/>-->
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#ADADAD"/>
+                            <!--<Setter Property="Background" TargetName="border" Value="#171717"/>-->
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource AccentColor}"/>
+                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
                             <!--<Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>-->
                         </Trigger>
                     </ControlTemplate.Triggers>

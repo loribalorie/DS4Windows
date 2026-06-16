@@ -817,7 +817,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Controls.
+        ///   Looks up a localized string similar to Controls/Bindings.
         /// </summary>
         public static string Controls {
             get {

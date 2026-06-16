@@ -428,9 +428,8 @@
                                                                 <Label Content="{lex:Loc DeadZone}"
                                                             ContentStringFormat="{}{0}" Grid.Row="0" Grid.Column="0" />
                                                                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                                                                    <xctk:DoubleUpDown   Value="{Binding LSDeadZone,UpdateSourceTrigger=LostFocus}"
-                                                                            FormatString="F2"
-                                                                            Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                                                    <xctk:DoubleUpDown   Value="{Binding LSDeadZone,UpdateSourceTrigger=PropertyChanged}"
+                                                                            FormatString="F2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
                                                                     <Label Content="1.0 max" Margin="8 0 0 0"/>
                                                                 </StackPanel>
 
@@ -769,7 +768,8 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition/>
-                                                        <RowDefinition />
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
                                                         <RowDefinition />
                                                         <RowDefinition />
                                                     </Grid.RowDefinitions>
@@ -780,29 +780,22 @@
                                                         ContentStringFormat="{}{0} / Center Calibration"
                                                         HorizontalContentAlignment="Left"/>
 
-                                                    <Label Content="{lex:Loc XAxisOffset}"
-                                                        Grid.Row="1" Grid.Column="0" />
-                                                    <xctk:SByteUpDown Grid.Row="1" Grid.Column="1"
-                                                                        Value="{Binding LeftStickDriftXAxis,UpdateSourceTrigger=LostFocus}" 
-                                                                        Maximum="127" Minimum="-127"
-                                                                        HorizontalAlignment="Left"
-                                                                        Increment="1"/>
+                                                    <Label Content="{lex:Loc XAxisOffset}" Grid.Row="1" Grid.Column="0" />
+                                                        <xctk:SByteUpDown Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
+                                                                        Value="{Binding LeftStickDriftXAxis,UpdateSourceTrigger=PropertyChanged}" 
+                                                                        Maximum="127" Minimum="-127" Increment="1"/>
 
-                                                    <Label Content="{lex:Loc YAxisOffset}"
-                                                        Grid.Row="2" Grid.Column="0" />
-                                                    <xctk:SByteUpDown  Grid.Row="2" Grid.Column="1"
-                                                                    HorizontalAlignment="Left"
-                                                                        Value="{Binding LeftStickDriftYAxis,UpdateSourceTrigger=LostFocus}" MinWidth="50" Maximum="127" Minimum="-127" Increment="1" />
+                                                        <Label Content="{lex:Loc YAxisOffset}" Grid.Row="2" Grid.Column="0" />
+                                                    <xctk:SByteUpDown Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"
+                                                                      Value="{Binding LeftStickDriftYAxis,UpdateSourceTrigger=PropertyChanged}"
+                                                                      MinWidth="50" Maximum="127" Minimum="-127" Increment="1" />
 
-                                                    <Label Content="Automatic Calibration"
-                                                        Grid.Row="3" Grid.Column="0"/>
-                                                    <Button Grid.Row="3"
-                                                        Grid.Column="1"
-                                                        HorizontalAlignment="Left"
-                                                        Content="{lex:Loc AutomaticallyRecalibrateStick}"
-                                                        Click="CalibrateStick_OnClick"
-                                                            Tag="0" />
-                                                </Grid>
+                                                    <Label Content="Automatic Calibration" Grid.Row="3" Grid.Column="0"/>
+                                                    <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                                                            Content="{lex:Loc AutomaticallyRecalibrateStick}" Click="CalibrateStick_OnClick" Tag="0" />
+
+                                                        <Label Content="Tip: Open [Controller Readings] tab to see changes." Grid.Row="4" Grid.ColumnSpan="2" Foreground="{DynamicResource AccentColorActive}"/>
+                                                    </Grid>
                                             </Border>
 
                                             <!--Left Stick
@@ -1047,9 +1040,8 @@
                                                                         Grid.Row="0" Grid.Column="0" />
                                                                     <StackPanel Grid.Row="0" Grid.Column="1" 
                                                                             Orientation="Horizontal">
-                                                                        <xctk:DoubleUpDown Value="{Binding RSDeadZone,UpdateSourceTrigger=LostFocus}"
-                                                                                FormatString="F2"
-                                                                                Maximum="1.0" Minimum="0.0" Increment="0.1"/>
+                                                                        <xctk:DoubleUpDown Value="{Binding RSDeadZone,UpdateSourceTrigger=PropertyChanged}"
+                                                                                FormatString="F2" Maximum="1.0" Minimum="0.0" Increment="0.1"/>
                                                                         <Label Content="1.0 max" Margin="8 0 0 0"/>
                                                                     </StackPanel>
 
@@ -1389,38 +1381,28 @@
                                                             <RowDefinition />
                                                             <RowDefinition />
                                                             <RowDefinition />
+                                                            <RowDefinition />
                                                         </Grid.RowDefinitions>
 
+                                                        <Label Grid.Row="0" Grid.ColumnSpan="2"  Content="{lex:Loc StickCalibration}"
+                                                            ContentStringFormat="{}{0} / Center Calibration" HorizontalContentAlignment="Left"/>
 
-                                                        <Label Grid.Row="0" Grid.ColumnSpan="2" 
-                                                            Content="{lex:Loc StickCalibration}"
-                                                            ContentStringFormat="{}{0} / Center Calibration"
-                                                            HorizontalContentAlignment="Left"/>
-
-                                                        <Label Content="{lex:Loc XAxisOffset}"
-                                                            Grid.Row="1" Grid.Column="0" />
+                                                        <Label Content="{lex:Loc XAxisOffset}" Grid.Row="1" Grid.Column="0" />
                                                         <xctk:SByteUpDown Grid.Row="1" Grid.Column="1"
-                                                                        Value="{Binding RightStickDriftXAxis,UpdateSourceTrigger=LostFocus}" 
-                                                                        Maximum="127" Minimum="-127"
-                                                                        HorizontalAlignment="Left"
-                                                                        Increment="1"/>
+                                                                        Value="{Binding RightStickDriftXAxis,UpdateSourceTrigger=PropertyChanged}" 
+                                                                        Maximum="127" Minimum="-127" HorizontalAlignment="Left" Increment="1"/>
 
-                                                        <Label Content="{lex:Loc YAxisOffset}"
-                                                            Grid.Row="2" Grid.Column="0" />
-                                                        <xctk:SByteUpDown Grid.Row="2" Grid.Column="1"
-                                                                        HorizontalAlignment="Left"
-                                                                        Value="{Binding RightStickDriftYAxis,UpdateSourceTrigger=LostFocus}"
+                                                        <Label Content="{lex:Loc YAxisOffset}" Grid.Row="2" Grid.Column="0" />
+                                                        <xctk:SByteUpDown Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"
+                                                                        Value="{Binding RightStickDriftYAxis,UpdateSourceTrigger=PropertyChanged}"
                                                                         MinWidth="50" Maximum="127" Minimum="-127" Increment="1" />
 
-                                                        <Label Content="Automatic Calibration"
-                                                            Grid.Row="3" Grid.Column="0"/>
-                                                        <Button Grid.Row="3"
-                                                            Grid.Column="1"
-                                                            HorizontalAlignment="Left"
-                                                            Content="{lex:Loc AutomaticallyRecalibrateStick}"
-                                                            Click="CalibrateStick_OnClick"
-                                                            Tag="1" />
+                                                        <Label Content="Automatic Calibration" Grid.Row="3" Grid.Column="0"/>
+                                                        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                                                            Content="{lex:Loc AutomaticallyRecalibrateStick}" Click="CalibrateStick_OnClick" Tag="1" />
                                                         <!--Tag (0 = Left Stick) (1 = Right Stick)-->
+
+                                                        <Label Content="Tip: Open [Controller Readings] tab to see changes." Grid.Row="4" Grid.ColumnSpan="2" Foreground="{DynamicResource AccentColorActive}"/>
                                                     </Grid>
                                                 </Border>
 
@@ -1639,6 +1621,7 @@
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
                                                 <RowDefinition Height="30"/>
+                                                <RowDefinition MinHeight="30"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
@@ -1700,6 +1683,10 @@
                                             Tag="R2" 
                                             Click="CustomEditorBtn_Click"
                                                 Width="130"/>
+
+                                            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 8 0 0" Foreground="{DynamicResource AccentColorActive}"
+                                                       Text="Custom Curve: Open bezier (browser) then set your desire curve, then copy-paste the values in the textbox above."
+                                                       TextWrapping="Wrap"/>
 
 
                                         </Grid>
@@ -1873,6 +1860,7 @@
                                             <RowDefinition Height="30"/>
                                             <RowDefinition Height="30"/>
                                             <RowDefinition Height="30"/>
+                                            <RowDefinition MinHeight="30"/>
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
@@ -1985,6 +1973,11 @@
                                                     IsEnabled="{Binding SZCustomCurveSelected}"
                                                     VerticalContentAlignment="Center"
                                                     Height="24" Width="130"/>
+
+                                        <TextBlock Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 8 0 0" Foreground="{DynamicResource AccentColorActive}"
+                                                       Text="Custom Curve: Open bezier (browser) then set your desire curve, then copy-paste the values in the textbox above."
+                                                       TextWrapping="Wrap"/>
+
 
                                     </Grid>
                                 </Border>

@@ -833,7 +833,7 @@ Be careful when using DS4Windows with other controller remapper running at the s
     <value>Axis Config</value>
   </data>
   <data name="Controls" xml:space="preserve">
-    <value>Controls</value>
+    <value>Controls/Bindings</value>
   </data>
   <data name="Cubic" xml:space="preserve">
     <value>Cubic</value>

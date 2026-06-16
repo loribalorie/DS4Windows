@@ -37,19 +37,19 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="X-Axis" Grid.Column="1" Width="70" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock Text="Y-Axis" Grid.Column="2" Width="70" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Label Content="X-Axis" Grid.Column="1" Width="70" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        <Label Content="Y-Axis" Grid.Column="2" Width="70" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
 
         <Label Content="{lex:Loc DeadZone}"
                ContentStringFormat="{}{0}"
                Grid.Row="1" Grid.Column="0" />
-        <xctk:DoubleUpDown Value="{Binding DeadZoneX,UpdateSourceTrigger=LostFocus}"
+        <xctk:DoubleUpDown Value="{Binding DeadZoneX,UpdateSourceTrigger=PropertyChanged}"
                    FormatString="F2" 
                    Grid.Row="1" Grid.Column="1" 
                    Maximum="1.0"
                    Minimum="0.0" Increment="0.1"
                    Width="70" HorizontalAlignment="Left"/>
-        <xctk:DoubleUpDown Value="{Binding DeadZoneY,UpdateSourceTrigger=LostFocus}"
+        <xctk:DoubleUpDown Value="{Binding DeadZoneY,UpdateSourceTrigger=PropertyChanged}"
                    FormatString="F2" 
                    Grid.Row="1" Grid.Column="2"
                    Maximum="1.0"
@@ -92,43 +92,5 @@
                    Maximum="1.0" Minimum="0.0" Increment="0.1"
                    Width="70" HorizontalAlignment="Left"/>
 
-        <!--<TextBlock Text="X" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,8" />
-        <TextBlock Text="Y" Grid.Column="2"  FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,8" />
-
-
-        
-        <Label Content="{lex:Loc DeadZone}"
-               ContentStringFormat="{}{0}:"
-               Grid.Row="1" Grid.Column="0" />
-        
-        <xctk:DoubleUpDown Value="{Binding DeadZoneX,UpdateSourceTrigger=LostFocus}"
-                           FormatString="F2" MinWidth="50"
-                           Grid.Row="1" Grid.Column="1"
-                           Maximum="1.0" Minimum="0.0" Increment="0.1"
-                           Margin="{StaticResource spaceMargin}" />
-        
-        <xctk:DoubleUpDown Value="{Binding DeadZoneY,UpdateSourceTrigger=LostFocus}"
-                           FormatString="F2" MinWidth="50"
-                           Grid.Row="1" Grid.Column="2"
-                           Maximum="1.0" Minimum="0.0" Increment="0.1"
-                           Margin="{StaticResource spaceMargin}" />
-
-        <Label Content="{lex:Loc MaxZone}" ContentStringFormat="{}{0}:" Grid.Row="2" Grid.Column="0" />
-        <xctk:DoubleUpDown   Value="{Binding MaxZoneX}" FormatString="F2" MinWidth="50" Grid.Row="2" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />
-        <xctk:DoubleUpDown   Value="{Binding MaxZoneY}" FormatString="F2" MinWidth="50" Grid.Row="2" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />
-
-        <Label Content="{lex:Loc AntiDeadZone}" ContentStringFormat="{}{0}:" Grid.Row="3" Grid.Column="0" />
-        <xctk:DoubleUpDown   Value="{Binding AntiDeadZoneX}" FormatString="F2" MinWidth="50" Grid.Row="3" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />
-        <xctk:DoubleUpDown   Value="{Binding AntiDeadZoneY}" FormatString="F2" MinWidth="50" Grid.Row="3" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />
-
-        <Label Content="{lex:Loc MaxOutput}" ContentStringFormat="{}{0}:" Grid.Row="4" Grid.Column="0" />
-        <xctk:DoubleUpDown   Value="{Binding MaxOutputX}" FormatString="F2" MinWidth="50" Grid.Row="4" Grid.Column="1" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />
-        <xctk:DoubleUpDown   Value="{Binding MaxOutputY}" FormatString="F2" MinWidth="50" Grid.Row="4" Grid.Column="2" Maximum="1.0" Minimum="0.0" Increment="0.1"
-                                                   Margin="{StaticResource spaceMargin}" />-->
     </Grid>
 </UserControl>
