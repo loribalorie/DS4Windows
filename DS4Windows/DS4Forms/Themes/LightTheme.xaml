@@ -87,7 +87,7 @@
     <Style x:Key="BatteryIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xf5f2;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -96,7 +96,7 @@
     <Style x:Key="BatteryCharging" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xebb5;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -105,7 +105,7 @@
     <Style x:Key="LinkedProfileIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe71b;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -114,7 +114,7 @@
     <Style x:Key="KeyIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe8d7;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -123,7 +123,7 @@
     <Style x:Key="BTIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xec41;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -133,7 +133,7 @@
     <Style x:Key="UsbWiredIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xecf0;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -143,7 +143,7 @@
     <Style x:Key="EditIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe70f;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -152,7 +152,7 @@
     <Style x:Key="CautionIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe7ba;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -161,7 +161,7 @@
     <Style x:Key="NewProfileIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xed0e;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -170,7 +170,7 @@
     <Style x:Key="ClearIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe894;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -179,7 +179,7 @@
     <Style x:Key="StarIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe734;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -197,12 +197,11 @@
     <Style x:Key="MaintainWindowSizeIcon" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        <Setter Property="FontFamily" Value="{StaticResource FluentIcons}"/>
         <Setter Property="Text" Value="&#xe799;"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
     <DataTemplate x:Key="IncreaseGlyphNormalKey">
         <Path Width="9"
               Height="5"
