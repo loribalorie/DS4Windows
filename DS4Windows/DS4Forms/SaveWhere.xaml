@@ -30,7 +30,7 @@
         </Border>
 
         <StackPanel>
-            <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}"
+            <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}" Foreground="{DynamicResource ForegroundColor}"
                    TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"
                        FontWeight="Medium" FontSize="15"/> 
         </StackPanel>
@@ -42,7 +42,7 @@
                     <Button x:Name="progFolderBtn" Content="{lex:Loc ProgramFolder}" Click="ProgFolderBtn_Click"
                             Height="30" Width="130" Margin="0 15 0 0"/>
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{lex:Loc SaveWhere.ProgramFolderDescText}"
-                               Margin="8"/>
+                               Margin="8" Foreground="{DynamicResource ForegroundColor}" Opacity="0.8"/>
                 </StackPanel>
             </Border>
 
@@ -50,8 +50,8 @@
                 <StackPanel DockPanel.Dock="Right" Margin="0 15 0 0">
                     <Button x:Name="appdataBtn" Content="{lex:Loc Appdata}" Click="AppdataBtn_Click"
                             Height="30" Width="130"/>
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
-                               Text="{lex:Loc SaveWhere.AppDataDescText}"
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" Foreground="{DynamicResource ForegroundColor}"
+                               Text="{lex:Loc SaveWhere.AppDataDescText}" Opacity="0.8"
                                Margin="8"/>
                 </StackPanel>
             </Border>

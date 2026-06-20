@@ -34,9 +34,7 @@
                
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <GroupBox Header="{lex:Loc Trigger}" x:Name="triggersListView">
-                        <ListView Width="140" Height="Auto" BorderThickness="0"
-                                    Tag="{Binding TriggerError, ValidatesOnNotifyDataErrors=True}"
-                                    Background="{DynamicResource ContentBackgroundColor}">
+                        <ListView Width="140" Height="Auto" BorderThickness="0" Tag="{Binding TriggerError, ValidatesOnNotifyDataErrors=True}" Background="{DynamicResource ContentBackgroundColor}">
                             <!--<ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -60,7 +58,6 @@
                                     <Setter Property="Margin" Value="0"/>
                                 </Style>
                             </ListView.ItemContainerStyle>
-
 
                             <ListViewItem>
                                 <CheckBox x:Name="crossTrigCk" Content="Cross" Tag="Cross" Click="ControlTriggerCheckBox_Click" />
@@ -219,9 +216,8 @@
                         </ListView>
                     </GroupBox>
 
-                    <GroupBox Header="{lex:Loc UnloadTrigger}" x:Name="unloadTriggersListView">
-                        <ListView Width="140" BorderThickness="0" Visibility="Collapsed" d:Visibility="Visible"
-                                    Background="{DynamicResource ContentBackgroundColor}" >
+                    <GroupBox Header="{lex:Loc UnloadTrigger}" x:Name="unloadTriggersListView" Visibility="Collapsed" d:Visibility="Visible">
+                        <ListView Width="140" BorderThickness="0" Background="{DynamicResource ContentBackgroundColor}" >
                             <!--<ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -636,7 +632,7 @@
                             <Border Style="{DynamicResource BorderStyle}">
                                 <StackPanel Orientation="Horizontal" MinHeight="30" HorizontalAlignment="Center">
                                     <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="4,0" Width="100"/>
-                                    <Button x:Name="saveBtn" Content="{lex:Loc Save}" Click="SaveBtn_Click" Margin="4,0" Width="100"/>
+                                    <Button x:Name="saveBtn" Content="{lex:Loc Save}" Click="SaveBtn_Click" Margin="4,0" Width="100" Style="{DynamicResource ImportantButtonStyle}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>

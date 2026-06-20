@@ -351,20 +351,19 @@
 
                                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                                     <CheckBox IsChecked="{Binding LinkedProfile}" Style="{DynamicResource CheckBoxStyle_Default}"
-                                                                              FontSize="16"
+                                                                              FontSize="14"
                                                                               IsEnabled="{Binding PrimaryDevice}" Content="Link Profile"/>
                                                                     <StackPanel Orientation="Horizontal" Margin="16 0 0 0">
-                                                                        <Button x:Name="ProfEditSBtn" Click="ProfEditSBtn_Click"
-                                                                                Style="{DynamicResource IconOnlyButtonStyle}"
-                                                                                ToolTip="Edit current profile" Tag="{Binding DevIndex}" Margin="8 0">
+                                                                        <Button x:Name="ProfEditSBtn" Click="ProfEditSBtn_Click" Style="{DynamicResource IconOnlyButtonStyle}"
+                                                                                ToolTip="Edit current profile" Tag="{Binding DevIndex}">
                                                                             <Button.Content>
-                                                                                <TextBlock Style="{DynamicResource EditIcon}" Margin="2"/>
+                                                                                <TextBlock Style="{DynamicResource EditIcon}" Margin="4 0" FontSize="20"/>
                                                                             </Button.Content>
                                                                         </Button>
                                                                         <Button x:Name="newProfBtn" Click="NewProfBtn_Click" Style="{DynamicResource IconOnlyButtonStyle}"
                                                                                 ToolTip="Create new profile" Tag="{Binding DevIndex}">
                                                                             <Button.Content>
-                                                                                <TextBlock Style="{DynamicResource NewProfileIcon}" Margin="2"/>
+                                                                                <TextBlock Style="{DynamicResource NewProfileIcon}" Margin="4 0" FontSize="20"/>
                                                                             </Button.Content>
                                                                         </Button>
                                                                     </StackPanel>
@@ -962,9 +961,10 @@
 
             <!--Theme Changer Button-->
             <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 10 0">
-                <Button x:Name="ChangeThemeButton" Style="{DynamicResource IconOnlyButtonStyle}"
-                        Click="ChangeThemeButton_Click">
-                    <TextBlock Style="{DynamicResource ThemeIcon}" Margin="4"/>
+                <Button x:Name="ChangeThemeButton" Style="{DynamicResource IconOnlyButtonStyle}" Click="ChangeThemeButton_Click">
+                    <Button.Content>
+                        <TextBlock Style="{DynamicResource ThemeIcon}" Margin="4"/>
+                    </Button.Content>
                 </Button>
             </DockPanel>
         </Grid>

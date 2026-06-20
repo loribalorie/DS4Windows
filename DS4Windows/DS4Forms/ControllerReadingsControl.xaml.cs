@@ -385,30 +385,36 @@ namespace DS4WinWPF.DS4Forms
                     l2ValLbTrans.Y = Math.Min(interState.L2, Math.Max(0, 255)) / 255.0 * -70.0 + TRIG_LB_TRANSFORM_OFFSETY;
                     if (interState.L2 >= 255)
                     {
-                        l2ValLbBrush.Color = Colors.Green;
+                        //r2ValLbBrush.Color = Colors.Green;
+                        l2ValLb.Foreground = App.Current.TryFindResource("SecondaryColor") as SolidColorBrush;
                     }
                     else if (interState.L2 == 0)
                     {
-                        l2ValLbBrush.Color = Colors.Red;
+                        //r2ValLbBrush.Color = Colors.Red;
+                        l2ValLb.Foreground = Brushes.Red;
                     }
                     else
                     {
-                        l2ValLbBrush.Color = Colors.Black;
+                        //r2ValLbBrush.Color = Colors.Black;
+                        l2ValLb.Foreground = App.Current.TryFindResource("ForegroundColor") as SolidColorBrush;
                     }
 
                     r2Slider.Value = baseState.R2;
                     r2ValLbTrans.Y = Math.Min(interState.R2, Math.Max(0, 255)) / 255.0 * -70.0 + TRIG_LB_TRANSFORM_OFFSETY;
                     if (interState.R2 >= 255)
                     {
-                        r2ValLbBrush.Color = Colors.Green;
+                        //r2ValLbBrush.Color = Colors.Green;
+                        r2ValLb.Foreground = App.Current.TryFindResource("SecondaryColor") as SolidColorBrush;
                     }
                     else if (interState.R2 == 0)
                     {
-                        r2ValLbBrush.Color = Colors.Red;
+                        //r2ValLbBrush.Color = Colors.Red;
+                        r2ValLb.Foreground = Brushes.Red;
                     }
                     else
                     {
-                        r2ValLbBrush.Color = Colors.Black;
+                        //r2ValLbBrush.Color = Colors.Black;
+                        r2ValLb.Foreground = App.Current.TryFindResource("ForegroundColor") as SolidColorBrush;
                     }
 
                     gyroYawSlider.Value = baseState.Motion.gyroYawFull;
@@ -424,26 +430,30 @@ namespace DS4WinWPF.DS4Forms
 
                     double latency = ds.Latency;
                     int warnInterval = ds.getWarnInterval();
-                    inputDelayLb.Content = string.Format(Properties.Resources.InputDelay,
-                        latency.ToString());
+                    inputDelayLb.Content = string.Format(Properties.Resources.InputDelay,latency.ToString());
 
                     if (latency > warnInterval)
                     {
                         warnMode = LatencyWarnMode.Warn;
-                        inpuDelayBackBrush.Color = Colors.Red;
-                        inpuDelayForeBrush.Color = Colors.White;
+                        //inpuDelayBackBrush.Color = Colors.Red;
+                        //inpuDelayForeBrush.Color = Colors.White;
+                        inputDelayLb.Background = Brushes.Red;
+                        inputDelayLb.Foreground = Brushes.White;
                     }
                     else if (latency > (warnInterval * 0.5))
                     {
                         warnMode = LatencyWarnMode.Caution;
-                        inpuDelayBackBrush.Color = Colors.Yellow;
-                        inpuDelayForeBrush.Color = Colors.Black;
+                        //inpuDelayBackBrush.Color = Colors.Yellow;
+                        //inpuDelayForeBrush.Color = Colors.Black;
+                        inputDelayLb.Background = Brushes.Yellow;
+                        inputDelayLb.Foreground = Brushes.Black;
                     }
                     else
                     {
                         warnMode = LatencyWarnMode.None;
-                        inpuDelayBackBrush.Color = Colors.Transparent;
-                        inpuDelayForeBrush.Color = SystemColors.WindowTextColor;
+                        //inpuDelayBackBrush.Color = Colors.Transparent;
+                        inputDelayLb.Background = Brushes.Transparent;
+                        inputDelayLb.Foreground = App.Current.TryFindResource("ForegroundColor") as SolidColorBrush;
                     }
 
                     prevWarnMode = warnMode;
